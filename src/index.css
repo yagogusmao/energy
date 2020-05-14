@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+textarea, input, body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.p-growl.p-growl-topright {
+top: 80px !important;
+}
+
+.p-growl-message-error{
+background-color: #FF5C5C !important;
+color: #fff !important;
+text-align: left;
+}
+
+.p-growl-message-success{
+/* background-color: #66CC9D !important; */
+background-color: #7d8df5 !important;
+color: #fff !important;
+text-align: left;
+}
+
+.p-growl-icon-close.p-link {
+color: #fff !important;
+}
+.p-growl-image {
+color: #fff !important;
+}
+
+@keyframes fadeIn {
+0%{
+  opacity: 0;
+}
+100%{
+  opacity: 100%;
+}
+}
