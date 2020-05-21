@@ -3,14 +3,14 @@ import { Switch, Route } from "react-router-dom";
 
 import './App.css';
 
-//import Navbar from './controllers/navbars/NavbarController';
-//import RegisterController from './controllers/user/RegisterController';
-//import LoginController from './controllers/user/LoginController';
+import HomePage from './controller/user/HomePage';
+import Atividade from './controller/AtividadeController';
 
 const App = () =>
   <div className="App">
     <Switch>
-      <Route exact path="/" component={LoginController} />
+      <Route exact path="/" component={HomePage} />
+      <Route path="/atividade" component={Atividade} />
     </Switch>
   </div>
 

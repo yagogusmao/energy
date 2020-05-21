@@ -2,7 +2,7 @@ import axios from "axios";
 //import { getToken, getAuthenticate } from "./LocalAuth";
 
 const [localhost,server] = [
-  "http://192.168.15.46:8080",
+  "http://localhost:8080",
   ""
 ]
 
