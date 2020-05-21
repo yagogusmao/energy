@@ -10,10 +10,13 @@ export default class HomePageController extends Component {
 
         }
     }
+
+    goTo = (path) => this.props.history.push(path);
+    //this.props.history.goBack()
+    
     render() {
         return (
-            <HomePageView message={"topperson"}/>
-               
+            <HomePageView goTo={this.goTo}/>
         );
     }
 }
