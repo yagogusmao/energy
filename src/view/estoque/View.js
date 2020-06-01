@@ -1,30 +1,105 @@
 import React from 'react';
-import  InputFloat  from '../../component/input/InputFloat';
-import { Container, ContainerInsideUp, ContainerInsideDown } from './styles/Style';
+import InputFloat from '../../component/input/InputFloat';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Container, ContainerMudarEstoque, ContainerEstoque, ContainerSuperior, ContainerPesquisa } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, material, quantidade, handleInputChange, submit } = props;
+    const { materiais, material, quantidade, handleInputChange, adicionarEstoque, retirarEstoque,
+        _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados } = props;
     return (
         <Container>
-            <ContainerInsideUp>
-                <InputFloat name="material" label="material" value={material} onChange={handleInputChange} />
-                <InputFloat name="quantidade" label="quantidade" value={quantidade} onChange={handleInputChange} />
-                <button onClick={submit}>Adicionar Estoque</button>
-            </ContainerInsideUp>
-            <ContainerInsideDown>
-                {materiais.length === 0 ?
-                    <h1>Não existem materiais neste almoxarifado</h1>
-                    :
-                    materiais.map(material =>
-                        (
-                            <div>
-                                <p><bold>_id: </bold>{material._id}</p>
-                                <p><bold>Descrição: </bold>{material.descricao}</p>
-                                <p><bold>Quantidade: </bold>{material.quantidade} {material.unidadeMedida}</p>
-                            </div>
-                        )
-                    )
-                }
-            </ContainerInsideDown>
+            <ContainerPesquisa>
+                <div className="titulo">
+                    <h1>Pesquisar materiais</h1>
+                </div>
+                <div className="inputs">
+                    <InputFloat name="_id" label="_id" value={_id} onChange={handleInputChange} />
+                    <InputFloat name="unidadeMedida" label="Unidade de Medida" value={unidadeMedida} onChange={handleInputChange} />
+                    <InputFloat name="descricao" label="Descrição" value={descricao} onChange={handleInputChange} />
+                    <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
+                    <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
+                    <button onClick={pesquisarMateriais}>Pesquisar</button>
+                </div>
+                <div className="tabela">
+                    <DataTable
+                        value={materiaisPesquisados}
+                        paginator={materiaisPesquisados.length > 10}
+                        rows={10}
+                        emptyMessage={"Materiais pesquisados."}
+                    >
+                        <Column
+                            filter={true}
+                            field="_id"
+                            header="_id"
+                        />
+                        <Column
+                            filter={true}
+                            field="unidadeMedida"
+                            header="Unidade de Medida"
+                        />
+                        <Column
+                            filter={true}
+                            field="descricao"
+                            header="Descrição"
+                        />
+                        <Column
+                            filter={true}
+                            field="codigoClasse"
+                            header="Codigo de Descrição"
+                        />
+                        <Column
+                            filter={true}
+                            field="descricaoClasse"
+                            header="Descrição de Classe"
+                        />
+                    </DataTable>
+                </div>
+            </ContainerPesquisa>
+            <ContainerSuperior>
+                <div>
+                    <h1>Gerenciador de estoque</h1>
+                </div>
+                <ContainerMudarEstoque>
+                    <InputFloat name="material" label="Material" value={material} onChange={handleInputChange} />
+                    <InputFloat name="quantidade" label="Quantidade" type="number" value={quantidade} onChange={handleInputChange} />
+                    <div>
+                        <button onClick={adicionarEstoque}>Adicionar Estoque</button>
+                        <button onClick={retirarEstoque}>Retirar Estoque</button>
+                    </div>
+                </ContainerMudarEstoque>
+            </ContainerSuperior>
+            <ContainerEstoque>
+                <div>
+                    <h1>Estoque</h1>
+                </div>
+                <DataTable
+                    value={materiais}
+                    paginator={materiais.length > 10}
+                    rows={10}
+                    emptyMessage={"Nenhum estoque no almoxarifado."}
+                >
+                    <Column
+                        filter={true}
+                        field="_id"
+                        header="_id"
+                    />
+                    <Column
+                        filter={true}
+                        field="descricao"
+                        header="Descrição"
+                    />
+                    <Column
+                        filter={true}
+                        field="quantidade"
+                        header="Quantidade"
+                    />
+                    <Column
+                        filter={true}
+                        field="unidadeMedida"
+                        header="Unidade de Medida"
+                    />
+                </DataTable>
+            </ContainerEstoque>
         </Container>
     )
 }

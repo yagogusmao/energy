@@ -1,6 +1,10 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 import './App.css';
 
 import HomePage from './controller/user/HomePage';
