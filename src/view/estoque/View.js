@@ -2,10 +2,10 @@ import React from 'react';
 import InputFloat from '../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ContainerMudarEstoque, ContainerEstoque, ContainerSuperior, ContainerPesquisa } from './styles/Style';
+import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, material, quantidade, handleInputChange, adicionarEstoque, retirarEstoque,
-        _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados } = props;
+    const { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, handleInputChange, adicionarEstoque, retirarEstoque,
+        _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto } = props;
     return (
         <>
             <ContainerPesquisa>
@@ -57,19 +57,36 @@ const EstoqueView = props => {
                     </DataTable>
                 </div>
             </ContainerPesquisa>
-            <ContainerSuperior>
-                <div>
-                    <h1>Gerenciador de estoque</h1>
+            <ContainerGerenciador>
+                <div className="titulo">
+                    <h1>Gerenciador de entradas</h1>
                 </div>
                 <ContainerMudarEstoque>
-                    <InputFloat name="material" label="Material" value={material} onChange={handleInputChange} />
-                    <InputFloat name="quantidade" label="Quantidade" type="number" value={quantidade} onChange={handleInputChange} />
+                    <InputFloat name="materialAdicionar" label="Material" value={materialAdicionar} onChange={handleInputChange} />
+                    <InputFloat name="quantidadeAdicionar" label="Quantidade" type="number" value={quantidadeAdicionar} onChange={handleInputChange} />
+                    <InputFloat name="vemDe" label="Local de onde vem" type="text" value={vemDe} onChange={handleInputChange} />
                     <div>
-                        <button onClick={adicionarEstoque}>Adicionar Estoque</button>
-                        <button onClick={retirarEstoque}>Retirar Estoque</button>
+                        <button onClick={adicionarEstoque}>Adicionar ao estoque</button>
+                        <button onClick={() => goto("entrada")}>Relatório de entradas</button>
                     </div>
                 </ContainerMudarEstoque>
-            </ContainerSuperior>
+            </ContainerGerenciador>
+            <ContainerGerenciador>
+                <div className="titulo">
+                    <h1>Gerenciador de saídas</h1>
+                </div>
+                <ContainerMudarEstoque>
+                    <InputFloat name="materialRetirar" label="Material" value={materialRetirar} onChange={handleInputChange} />
+                    <InputFloat name="quantidadeRetirar" label="Quantidade" type="number" value={quantidadeRetirar} onChange={handleInputChange} />
+                    <InputFloat name="vaiPara" label="Local para onde vai" value={vaiPara} onChange={handleInputChange} />
+                    <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
+                    <InputFloat name="equipe" label="Equipe que executou" value={equipe} onChange={handleInputChange} />
+                    <div>
+                        <button onClick={retirarEstoque}>Retirar do estoque</button>
+                        <button onClick={() => goto("saida")}>Relatório de saídas</button>
+                    </div>
+                </ContainerMudarEstoque>
+            </ContainerGerenciador>
             <ContainerEstoque>
                 <div className="titulo">
                     <h1>Estoque</h1>

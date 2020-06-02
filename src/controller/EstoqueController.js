@@ -12,6 +12,10 @@ export default class EstoqueController extends Component {
             quantidadeAdicionar: "",
             materialRetirar: "",
             quantidadeRetirar: "",
+            vemDe: "",
+            vaiPara: "",
+            servico: "",
+            equipe: "",
             materiais: [],
             materiaisPesquisados: [],
             quantidadeMateriaisPesquisados: "",
@@ -33,23 +37,22 @@ export default class EstoqueController extends Component {
 
     handleInputChange = (e) => {
         const { name, value } = e.target;
-        console.log(value)
         this.setState({ [name]: value })
     }
 
     adicionarEstoque = () => {
-        const { material, quantidade } = this.state;
+        const { materialAdicionar, quantidadeAdicionar, vemDe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        Api.adicionarEstoque({ _id, material, quantidade: Number(quantidade) }).then(res => {
+        Api.adicionarEstoque({ _id, material: materialAdicionar, quantidade: Number(quantidadeAdicionar), vemDe }).then(res => {
             const materiais = res.data.materiais;
             this.setState({ materiais: materiais })
         })
     }
 
     retirarEstoque = () => {
-        const { material, quantidade } = this.state;
+        const { materialRetirar, quantidadeRetirar, vaiPara, servico, equipe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        Api.retirarEstoque(_id, material, quantidade).then(res => {
+        Api.retirarEstoque(_id, materialRetirar, quantidadeRetirar, vaiPara, servico, equipe ).then(res => {
             const materiais = res.data.materiais;
             this.setState({ materiais: materiais })
         })
@@ -63,17 +66,30 @@ export default class EstoqueController extends Component {
         })
     }
 
+    goto = (opcao) => {
+        const _id = this.props.location.search.split("=")[1];
+        this.props.history.push(`/relatorio?_id=${_id}&opcao=${opcao}`);
+    }
+
     render() {
-        let { materiais, material, quantidade, _id, unidadeMedida, descricao, 
-            codigoClasse, descricaoClasse, materiaisPesquisados, quantidadeMateriaisPesquisados } = this.state;
+        let { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, vemDe, vaiPara, 
+            servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados, 
+            quantidadeMateriaisPesquisados } = this.state;
         return (
             <EstoqueView
                 materiais={materiais}
-                material={material}
-                quantidade={quantidade}
+                materialAdicionar={materialAdicionar}
+                quantidadeAdicionar={quantidadeAdicionar}
+                materialRetirar={materialRetirar}
+                quantidadeRetirar={quantidadeRetirar}
                 handleInputChange={this.handleInputChange}
                 adicionarEstoque={this.adicionarEstoque}
                 retirarEstoque={this.retirarEstoque}
+                goto={this.goto}
+                vemDe={vemDe}
+                vaiPara={vaiPara}
+                servico={servico}
+                equipe={equipe}
                 _id={_id}
                 unidadeMedida={unidadeMedida}
                 descricao={descricao}

@@ -36,7 +36,7 @@ export const ContainerMudarEstoque = styled.div`
   }
 `;
 
-export const ContainerSuperior = styled.div`
+export const ContainerGerenciador = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;

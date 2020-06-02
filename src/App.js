@@ -11,6 +11,7 @@ import HomePage from './controller/user/HomePage';
 import Atividade from './controller/AtividadeController';
 import Almoxarifado from './controller/AlmoxarifadoController';
 import Estoque from './controller/EstoqueController';
+import Relatorio from './controller/RelatorioController'
 
 const App = () =>
   <div className="App">
@@ -20,6 +21,7 @@ const App = () =>
         <Route path="/atividade" component={Atividade} />
         <Route path="/almoxarifado" component={Almoxarifado} />
         <Route path="/estoque" component={Estoque} />
+        <Route path="/relatorio" component={Relatorio} />
       </Switch>
     </div>
   </div>
