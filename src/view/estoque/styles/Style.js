@@ -1,27 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items:center;
-  background: white;
-  padding: 10px;
-  width: 100%;
-  margin: 3vw 3vh; 
-  border-radius:5px;
-  animation-duration: 1.5s;
-  animation-name: fadeIn;
-  background: #d64f4f;
-`;
-
 export const ContainerEstoque = styled.div`
   border-radius:5px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  display: flex;
+  flex-direction: column;
   background: white;
+  align-items: left;
   padding: 20px;
   width: 100%;
   margin: 5px;
-  div {
+  .titulo {
     justify-content: center;
     align-items:center;
     display: flex;
@@ -46,6 +37,9 @@ export const ContainerMudarEstoque = styled.div`
 `;
 
 export const ContainerSuperior = styled.div`
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
   border-radius:5px;
   display: flex;
   flex-direction: column;
@@ -58,6 +52,9 @@ export const ContainerSuperior = styled.div`
 `;
 
 export const ContainerPesquisa = styled.div`
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
   border-radius:5px;
   display: flex;
   flex-direction: column;
@@ -68,10 +65,18 @@ export const ContainerPesquisa = styled.div`
   width: 100%;
   margin: 5px;
   .inputs {
-    display: flex;
-    flex-direction: row;
-  }
-  button {
-    padding: 3px;
+    display: grid;
+    width: 100%;
+    margin: 5px;
+    grid-template-columns: 17% 17% 17% 17% 17% 15%;
+    gap: 5px;
+    .botao {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        padding: 3px
+      }
+    }
   }
 `;

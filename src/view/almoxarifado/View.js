@@ -1,20 +1,23 @@
 import React from 'react';
-import { Container, ContainerInside } from './styles/Style';
+import { ContainerInside } from './styles/Style';
 const AlmoxarifadoView = props => {
-    const { almoxarifados, goTo} = props;
+    const { almoxarifados, goTo } = props;
     return (
-        <Container>
-            <ContainerInside>
-                {almoxarifados.map(almoxarifado => 
+        <ContainerInside>
+            <div className="titulo">
+                <h1>Almoxarifados</h1>
+            </div>
+            <div className="almoxarifados">
+                {almoxarifados.map(almoxarifado =>
                     (
-                        <div>
+                        <div className="almoxarifadosIndividuais">
                             <p>{almoxarifado._id}</p>
                             <button type="button" onClick={() => goTo(`/estoque?_id=${almoxarifado._id}`)}>Ver Estoque</button>
                         </div>
                     )
                 )}
-            </ContainerInside>
-        </Container>
+            </div>
+        </ContainerInside>
     )
 }
 export default AlmoxarifadoView;

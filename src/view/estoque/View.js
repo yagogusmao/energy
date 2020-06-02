@@ -2,12 +2,12 @@ import React from 'react';
 import InputFloat from '../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Container, ContainerMudarEstoque, ContainerEstoque, ContainerSuperior, ContainerPesquisa } from './styles/Style';
+import { ContainerMudarEstoque, ContainerEstoque, ContainerSuperior, ContainerPesquisa } from './styles/Style';
 const EstoqueView = props => {
     const { materiais, material, quantidade, handleInputChange, adicionarEstoque, retirarEstoque,
         _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados } = props;
     return (
-        <Container>
+        <>
             <ContainerPesquisa>
                 <div className="titulo">
                     <h1>Pesquisar materiais</h1>
@@ -18,7 +18,9 @@ const EstoqueView = props => {
                     <InputFloat name="descricao" label="Descrição" value={descricao} onChange={handleInputChange} />
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
-                    <button onClick={pesquisarMateriais}>Pesquisar</button>
+                    <div className="botao">
+                        <button onClick={pesquisarMateriais}>Pesquisar</button>
+                    </div>
                 </div>
                 <div className="tabela">
                     <DataTable
@@ -69,38 +71,40 @@ const EstoqueView = props => {
                 </ContainerMudarEstoque>
             </ContainerSuperior>
             <ContainerEstoque>
-                <div>
+                <div className="titulo">
                     <h1>Estoque</h1>
                 </div>
-                <DataTable
-                    value={materiais}
-                    paginator={materiais.length > 10}
-                    rows={10}
-                    emptyMessage={"Nenhum estoque no almoxarifado."}
-                >
-                    <Column
-                        filter={true}
-                        field="_id"
-                        header="_id"
-                    />
-                    <Column
-                        filter={true}
-                        field="descricao"
-                        header="Descrição"
-                    />
-                    <Column
-                        filter={true}
-                        field="quantidade"
-                        header="Quantidade"
-                    />
-                    <Column
-                        filter={true}
-                        field="unidadeMedida"
-                        header="Unidade de Medida"
-                    />
-                </DataTable>
+                <div className="tabela">
+                    <DataTable
+                        value={materiais}
+                        paginator={materiais.length > 10}
+                        rows={10}
+                        emptyMessage={"Nenhum estoque no almoxarifado."}
+                    >
+                        <Column
+                            filter={true}
+                            field="_id"
+                            header="_id"
+                        />
+                        <Column
+                            filter={true}
+                            field="descricao"
+                            header="Descrição"
+                        />
+                        <Column
+                            filter={true}
+                            field="quantidade"
+                            header="Quantidade"
+                        />
+                        <Column
+                            filter={true}
+                            field="unidadeMedida"
+                            header="Unidade de Medida"
+                        />
+                    </DataTable>
+                </div>
             </ContainerEstoque>
-        </Container>
+        </>
     )
 }
 export default EstoqueView;

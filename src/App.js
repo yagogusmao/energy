@@ -14,12 +14,14 @@ import Estoque from './controller/EstoqueController';
 
 const App = () =>
   <div className="App">
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/atividade" component={Atividade} />
-      <Route path="/almoxarifado" component={Almoxarifado} />
-      <Route path="/estoque" component={Estoque} />
-    </Switch>
+    <div className="Container">
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/atividade" component={Atividade} />
+        <Route path="/almoxarifado" component={Almoxarifado} />
+        <Route path="/estoque" component={Estoque} />
+      </Switch>
+    </div>
   </div>
 
 export default App;
