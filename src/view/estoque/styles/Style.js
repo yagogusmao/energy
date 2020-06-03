@@ -25,14 +25,14 @@ export const ContainerMudarEstoque = styled.div`
   background: white;
   padding: 20px;
   width: 100%;
-  div {  
+  .inputs {  
     margin: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
-  button {
-    padding: 3px;
+    button {
+      padding: 3px;
+    }
   }
 `;
 

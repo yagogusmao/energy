@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import EstoqueView from '../view/estoque/View';
 import Api from '../service/ApiBaseAlmoxarifado';
 import ApiMaterial from '../service/ApiBaseMaterial';
+import { Checkbox } from 'primereact/checkbox';
+import InputFloat from '../component/input/InputFloat';
 
 export default class EstoqueController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            materialAdicionar: "",
-            quantidadeAdicionar: "",
             materialRetirar: "",
             quantidadeRetirar: "",
             vemDe: "",
@@ -18,6 +18,7 @@ export default class EstoqueController extends Component {
             equipe: "",
             materiais: [],
             materiaisPesquisados: [],
+            materiaisSelecionados: [],
             quantidadeMateriaisPesquisados: "",
             _id: "",
             unidadeMedida: "",
@@ -41,9 +42,10 @@ export default class EstoqueController extends Component {
     }
 
     adicionarEstoque = () => {
-        const { materialAdicionar, quantidadeAdicionar, vemDe } = this.state;
+        const { materiaisSelecionados, vemDe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        Api.adicionarEstoque({ _id, material: materialAdicionar, quantidade: Number(quantidadeAdicionar), vemDe }).then(res => {
+        const newArray = materiaisSelecionados.map(material => {return {_id: String(material._id), quantidade: Number(material.quantidade)}});
+        Api.adicionarEstoque({ _id, newArray, vemDe }).then(res => {
             const materiais = res.data.materiais;
             this.setState({ materiais: materiais })
         })
@@ -52,7 +54,7 @@ export default class EstoqueController extends Component {
     retirarEstoque = () => {
         const { materialRetirar, quantidadeRetirar, vaiPara, servico, equipe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        Api.retirarEstoque(_id, materialRetirar, quantidadeRetirar, vaiPara, servico, equipe ).then(res => {
+        Api.retirarEstoque(_id, materialRetirar, quantidadeRetirar, vaiPara, servico, equipe).then(res => {
             const materiais = res.data.materiais;
             this.setState({ materiais: materiais })
         })
@@ -71,20 +73,67 @@ export default class EstoqueController extends Component {
         this.props.history.push(`/relatorio?_id=${_id}&opcao=${opcao}`);
     }
 
+    onChangeSelecteds = (material) => {
+        let { materiaisPesquisados, materiaisSelecionados } = this.state;
+        const materialData = material.target;
+        let newArray = materiaisSelecionados;
+        materiaisPesquisados.forEach(element => {
+            if (element._id === materialData.id) {
+                element.checked = materialData.checked
+                if (element.checked) materiaisSelecionados.push({
+                    _id: materialData.id,
+                    descricao: element.descricao,
+                    unidadeMedida: element.unidadeMedida,
+                    quantidade: ""
+                })
+            }
+        });
+        if (!materialData.checked) newArray = materiaisSelecionados.filter(material => material._id !== materialData.id)
+        this.setState({ materiaisSelecionados: newArray, materiaisPesquisados });
+    }
+
+    handleInputChangeTable = (e) => {
+        const { name, value } = e.target;
+        let newArray = this.state.materiaisSelecionados;
+        newArray.forEach((material, i) => {
+            if (material._id == name) newArray[i].quantidade = value;
+        })
+        this.setState({ materiaisSelecionados: newArray })
+    }
+
+    actionTemplate = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelecteds} checked={rowData.checked}></Checkbox>
+    
+    actionTemplateInput = (rowData) => {
+        return <InputFloat name={rowData._id} type="number" label="Quantidade"
+            value={this.state.materiaisSelecionados.filter(material => material._id === rowData._id)[0].quantidade}
+            onChange={this.handleInputChangeTable} />
+    }
+    
+    actionTemplateButton = (rowData) => <button onClick={() => {this.retirarMaterialTabela(rowData._id)}}>Retirar material</button>
+
+    retirarMaterialTabela = (material) => {
+        let newArray = [];
+        this.state.materiaisSelecionados.forEach(element => {
+            if (element._id !== material) newArray.push(element)
+        })
+        this.setState({ materiaisSelecionados: newArray })
+    }
+
     render() {
-        let { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, vemDe, vaiPara, 
-            servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados, 
-            quantidadeMateriaisPesquisados } = this.state;
+        let { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, vemDe, vaiPara,
+            servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados,
+            quantidadeMateriaisPesquisados, materiaisSelecionados } = this.state;
         return (
             <EstoqueView
                 materiais={materiais}
-                materialAdicionar={materialAdicionar}
-                quantidadeAdicionar={quantidadeAdicionar}
                 materialRetirar={materialRetirar}
                 quantidadeRetirar={quantidadeRetirar}
                 handleInputChange={this.handleInputChange}
                 adicionarEstoque={this.adicionarEstoque}
                 retirarEstoque={this.retirarEstoque}
+                actionTemplate={this.actionTemplate}
+                actionTemplateInput={this.actionTemplateInput}
+                actionTemplateButton={this.actionTemplateButton}
                 goto={this.goto}
                 vemDe={vemDe}
                 vaiPara={vaiPara}
@@ -96,6 +145,7 @@ export default class EstoqueController extends Component {
                 codigoClasse={codigoClasse}
                 descricaoClasse={descricaoClasse}
                 materiaisPesquisados={materiaisPesquisados}
+                materiaisSelecionados={materiaisSelecionados}
                 quantidadeMateriaisPesquisados={quantidadeMateriaisPesquisados}
                 pesquisarMateriais={this.pesquisarMateriais}
             />

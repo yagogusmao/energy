@@ -2,10 +2,11 @@ import React from 'react';
 import InputFloat from '../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa } from './styles/Style';
+import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerListaSelecionados } from './styles/Style';
 const EstoqueView = props => {
     const { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, handleInputChange, adicionarEstoque, retirarEstoque,
-        _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto } = props;
+        actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
+        materiaisSelecionados } = props;
     return (
         <>
             <ContainerPesquisa>
@@ -54,6 +55,10 @@ const EstoqueView = props => {
                             field="descricaoClasse"
                             header="Descrição de Classe"
                         />
+                        <Column
+                            field="checked"
+                            body={actionTemplate.bind(this)}
+                        />
                     </DataTable>
                 </div>
             </ContainerPesquisa>
@@ -62,10 +67,32 @@ const EstoqueView = props => {
                     <h1>Gerenciador de entradas</h1>
                 </div>
                 <ContainerMudarEstoque>
-                    <InputFloat name="materialAdicionar" label="Material" value={materialAdicionar} onChange={handleInputChange} />
-                    <InputFloat name="quantidadeAdicionar" label="Quantidade" type="number" value={quantidadeAdicionar} onChange={handleInputChange} />
                     <InputFloat name="vemDe" label="Local de onde vem" type="text" value={vemDe} onChange={handleInputChange} />
-                    <div>
+                    <div className="tabela">
+                        <DataTable
+                            value={materiaisSelecionados}
+                            paginator={materiaisSelecionados.length > 10}
+                            rows={10}
+                            emptyMessage={"Materiais selecionados."}
+                        >
+                            <Column
+                                field="_id"
+                                header="_id"
+                            />
+                            <Column
+                                field="descricao"
+                                header="Descrição"
+                            />
+                            <Column
+                                header="Quantidade"
+                                body={actionTemplateInput.bind(this)}
+                            />
+                            <Column
+                                body={actionTemplateButton.bind(this)}
+                            />
+                        </DataTable>
+                    </div>
+                    <div className="inputs">
                         <button onClick={adicionarEstoque}>Adicionar ao estoque</button>
                         <button onClick={() => goto("entrada")}>Relatório de entradas</button>
                     </div>
