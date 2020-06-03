@@ -19,6 +19,7 @@ export default class EstoqueController extends Component {
             materiais: [],
             materiaisPesquisados: [],
             materiaisSelecionados: [],
+            materiaisSelecionadosRetirar: [],
             quantidadeMateriaisPesquisados: "",
             _id: "",
             unidadeMedida: "",
@@ -92,6 +93,25 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionados: newArray, materiaisPesquisados });
     }
 
+    onChangeSelectedsRetirar = (material) => {
+        let { materiais, materiaisSelecionadosRetirar } = this.state;
+        const materialData = material.target;
+        let newArray = materiaisSelecionadosRetirar;
+        materiais.forEach(element => {
+            if (element._id === materialData.id) {
+                element.checked = materialData.checked
+                if (element.checked) materiaisSelecionadosRetirar.push({
+                    _id: materialData.id,
+                    descricao: element.descricao,
+                    unidadeMedida: element.unidadeMedida,
+                    quantidade: element.quantidade
+                })
+            }
+        });
+        if (!materialData.checked) newArray = materiaisSelecionadosRetirar.filter(material => material._id !== materialData.id)
+        this.setState({ materiaisSelecionadosRetirar: newArray, materiais });
+    }
+
     handleInputChangeTable = (e) => {
         const { name, value } = e.target;
         let newArray = this.state.materiaisSelecionados;
@@ -101,7 +121,24 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionados: newArray })
     }
 
+    handleInputChangeTableRetirar = (e) => {
+        const { name, value } = e.target;
+        let newArray = this.state.materiaisSelecionadosRetirar;
+        newArray.forEach((material, i) => {
+            if (material._id == name) newArray[i].quantidadeRetirar = value;
+        })
+        this.setState({ materiaisSelecionadosRetirar: newArray })
+    }
+
     actionTemplate = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelecteds} checked={rowData.checked}></Checkbox>
+
+    actionTemplateRetirar = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelectedsRetirar} checked={rowData.checked}></Checkbox>
+
+    actionTemplateInputRetirar = (rowData) => {
+        return <InputFloat name={rowData._id} type="number" label="Quantidade"
+            value={this.state.materiaisSelecionadosRetirar.filter(material => material._id === rowData._id)[0].quantidadeRetirar}
+            onChange={this.handleInputChangeTableRetirar} />
+    }
     
     actionTemplateInput = (rowData) => {
         return <InputFloat name={rowData._id} type="number" label="Quantidade"
@@ -111,6 +148,8 @@ export default class EstoqueController extends Component {
     
     actionTemplateButton = (rowData) => <button onClick={() => {this.retirarMaterialTabela(rowData._id)}}>Retirar material</button>
 
+    actionTemplateButtonRetirar = (rowData) => <button onClick={() => {this.retirarMaterialTabelaRetirar(rowData._id)}}>Retirar material</button>
+
     retirarMaterialTabela = (material) => {
         let newArray = [];
         this.state.materiaisSelecionados.forEach(element => {
@@ -119,21 +158,33 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionados: newArray })
     }
 
+    retirarMaterialTabelaRetirar = (material) => {
+        let newArray = [];
+        this.state.materiaisSelecionadosRetirar.forEach(element => {
+            if (element._id !== material) newArray.push(element)
+        })
+        this.setState({ materiaisSelecionadosRetirar: newArray })
+    }
+
     render() {
-        let { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, vemDe, vaiPara,
+        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara,
             servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados,
-            quantidadeMateriaisPesquisados, materiaisSelecionados } = this.state;
+            quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
         return (
             <EstoqueView
                 materiais={materiais}
                 materialRetirar={materialRetirar}
                 quantidadeRetirar={quantidadeRetirar}
+                materiaisSelecionadosRetirar={materiaisSelecionadosRetirar}
                 handleInputChange={this.handleInputChange}
                 adicionarEstoque={this.adicionarEstoque}
                 retirarEstoque={this.retirarEstoque}
                 actionTemplate={this.actionTemplate}
                 actionTemplateInput={this.actionTemplateInput}
                 actionTemplateButton={this.actionTemplateButton}
+                actionTemplateRetirar={this.actionTemplateRetirar}
+                actionTemplateInputRetirar={this.actionTemplateInputRetirar}
+                actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
                 goto={this.goto}
                 vemDe={vemDe}
                 vaiPara={vaiPara}

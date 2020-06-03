@@ -2,16 +2,16 @@ import React from 'react';
 import InputFloat from '../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerListaSelecionados } from './styles/Style';
+import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, materialAdicionar, quantidadeAdicionar, materialRetirar, quantidadeRetirar, handleInputChange, adicionarEstoque, retirarEstoque,
+    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
-        materiaisSelecionados } = props;
+        materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar } = props;
     return (
         <>
             <ContainerPesquisa>
                 <div className="titulo">
-                    <h1>Pesquisar materiais</h1>
+                    <h1>Pesquisar materiais para adicionar</h1>
                 </div>
                 <div className="inputs">
                     <InputFloat name="_id" label="_id" value={_id} onChange={handleInputChange} />
@@ -100,20 +100,92 @@ const EstoqueView = props => {
             </ContainerGerenciador>
             <ContainerGerenciador>
                 <div className="titulo">
-                    <h1>Gerenciador de saídas</h1>
+                    <h1>Pesquisar materiais para retirar</h1>
                 </div>
                 <ContainerMudarEstoque>
-                    <InputFloat name="materialRetirar" label="Material" value={materialRetirar} onChange={handleInputChange} />
-                    <InputFloat name="quantidadeRetirar" label="Quantidade" type="number" value={quantidadeRetirar} onChange={handleInputChange} />
-                    <InputFloat name="vaiPara" label="Local para onde vai" value={vaiPara} onChange={handleInputChange} />
-                    <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
-                    <InputFloat name="equipe" label="Equipe que executou" value={equipe} onChange={handleInputChange} />
-                    <div>
-                        <button onClick={retirarEstoque}>Retirar do estoque</button>
-                        <button onClick={() => goto("saida")}>Relatório de saídas</button>
+                    <div className="tabela">
+                        <DataTable
+                            value={materiais}
+                            paginator={materiais.length > 10}
+                            rows={10}
+                            emptyMessage={"Materiais para retirar."}
+                        >
+                            <Column
+                                filter={true}
+                                field="_id"
+                                header="_id"
+                            />
+                            <Column
+                                filter={true}
+                                field="descricao"
+                                header="Descrição"
+                            />
+                            <Column
+                                filter={true}
+                                field="quantidade"
+                                header="Quantidade"
+                            />
+                            <Column
+                                filter={true}
+                                field="unidadeMedida"
+                                header="Unidade de Medida"
+                            />
+                            <Column
+                                field="checked"
+                                body={actionTemplateRetirar.bind(this)}
+                            />
+                        </DataTable>
                     </div>
                 </ContainerMudarEstoque>
             </ContainerGerenciador>
+            <ContainerEstoqueRetirar>
+                <div className="titulo">
+                    <h1>Gerenciador de saídas</h1>
+                </div>
+                <InputFloat name="vaiPara" label="Local para onde vai" value={vaiPara} onChange={handleInputChange} />
+                <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
+                <InputFloat name="equipe" label="Equipe que executou" value={equipe} onChange={handleInputChange} />
+                <div className="tabela">
+                    <DataTable
+                        value={materiaisSelecionadosRetirar}
+                        paginator={materiaisSelecionadosRetirar.length > 10}
+                        rows={10}
+                        emptyMessage={"Nenhum estoque no almoxarifado."}
+                    >
+                        <Column
+                            filter={true}
+                            field="_id"
+                            header="_id"
+                        />
+                        <Column
+                            filter={true}
+                            field="descricao"
+                            header="Descrição"
+                        />
+                        <Column
+                            filter={true}
+                            field="quantidade"
+                            header="Quantidade disponível"
+                        />
+                        <Column
+                            filter={true}
+                            field="unidadeMedida"
+                            header="Unidade de Medida"
+                        />
+                        <Column
+                            header="Quantidade a retirar"
+                            body={actionTemplateInputRetirar.bind(this)}
+                        />
+                        <Column
+                            body={actionTemplateButtonRetirar.bind(this)}
+                        />
+                    </DataTable>
+                </div>
+                <div className="inputs">
+                    <button onClick={retirarEstoque}>Retirar do estoque</button>
+                    <button onClick={() => goto("saida")}>Relatório de saídas</button>
+                </div>
+            </ContainerEstoqueRetirar>
             <ContainerEstoque>
                 <div className="titulo">
                     <h1>Estoque</h1>

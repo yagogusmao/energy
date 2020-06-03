@@ -51,6 +51,33 @@ export const ContainerGerenciador = styled.div`
   margin: 5px;
 `;
 
+export const ContainerEstoqueRetirar = styled.div`
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  border-radius:5px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  width: 100%;
+  .titulo {
+    justify-content: center;
+    align-items:center;
+    display: flex;
+    margin: 10px;
+  }
+  .inputs {  
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      padding: 3px;
+    }
+  }
+`;
+
 export const ContainerPesquisa = styled.div`
   border: 3px;
   border-left-style: solid;
