@@ -9,7 +9,8 @@ const HomePageView = props => {
             <button type="button" onClick={() => goTo("/funcionario")}>Funcionário</button> 
             <button type="button" onClick={() => goTo("/veiculo")}>Veículo</button> 
             <button type="button" onClick={() => goTo("/apontamento")}>Apontamento</button> 
-            <button type="button" onClick={() => goTo("/almoxarifado")}>Almoxarifado</button> 
+            <button type="button" onClick={() => goTo("/almoxarifado")}>Almoxarifado</button>
+            <button type="button" onClick={() => goTo("/material")}>Material</button> 
         </Container>
     )
 }

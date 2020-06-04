@@ -1,7 +1,9 @@
 import ApiBase from './ApiBase';
 
 const ApiBaseMaterial = {
-    listar: (_id, unidadeMedida, descricao, codigoClasse, descricaoClasse) => ApiBase.get(`/material?_id=${_id}&unidadeMedida=${unidadeMedida}&descricao=${descricao}&codigoClasse=${codigoClasse}&descricaoClasse=${descricaoClasse}`)
+    listar: (_id, unidadeMedida, descricao, codigoClasse, descricaoClasse) => ApiBase.get(`/material?_id=${_id}&unidadeMedida=${unidadeMedida}&descricao=${descricao}&codigoClasse=${codigoClasse}&descricaoClasse=${descricaoClasse}`),
+    criar: (payload) => ApiBase.post('/material', payload)
+
 }
 
 export default ApiBaseMaterial;
