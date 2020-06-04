@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import RelatorioView from '../view/relatorio/View';
-import Api from '../service/ApiBaseAlmoxarifado';
-import ApiMaterial from '../service/ApiBaseMaterial';
+import RelatorioView from '../../view/almoxarifado/relatorio/View';
+import Api from '../../service/ApiBaseAlmoxarifado';
+import ApiMaterial from '../../service/ApiBaseMaterial';
 
 
 export default class EstoqueController extends Component {

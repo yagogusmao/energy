@@ -1,5 +1,5 @@
 import React from 'react';
-import InputFloat from '../../component/input/InputFloat';
+import InputFloat from '../../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContainerRelatorio, ContainerPesquisa } from './styles/Style';

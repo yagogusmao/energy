@@ -8,10 +8,10 @@ import 'primeicons/primeicons.css';
 import './App.css';
 
 import HomePage from './controller/user/HomePage';
-import Atividade from './controller/AtividadeController';
-import Almoxarifado from './controller/AlmoxarifadoController';
-import Estoque from './controller/EstoqueController';
-import Relatorio from './controller/RelatorioController'
+import Atividade from './controller/atividade/AtividadeController';
+import Almoxarifado from './controller/almoxarifado/AlmoxarifadoController';
+import Estoque from './controller/almoxarifado/EstoqueController';
+import Relatorio from './controller/almoxarifado/RelatorioController'
 
 const App = () =>
   <div className="App">

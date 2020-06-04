@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import EstoqueView from '../view/estoque/View';
-import Api from '../service/ApiBaseAlmoxarifado';
-import ApiMaterial from '../service/ApiBaseMaterial';
+import EstoqueView from '../../view/almoxarifado/estoque/View';
+import Api from '../../service/ApiBaseAlmoxarifado';
+import ApiMaterial from '../../service/ApiBaseMaterial';
 import { Checkbox } from 'primereact/checkbox';
-import InputFloat from '../component/input/InputFloat';
+import InputFloat from '../../component/input/InputFloat';
 
 export default class EstoqueController extends Component {
     constructor(props) {

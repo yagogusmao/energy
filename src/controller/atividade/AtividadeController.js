@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 
-import AlmoxarifadoView from '../view/almoxarifado/View';
-import Api from '../service/ApiBaseAlmoxarifado';
+import AtividadeView from '../../view/atividade/View';
+import Api from '../../service/ApiBaseAtividade';
 
-export default class AlmoxarifadoController extends Component {
+export default class AtividadeController extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            almoxarifados: []
+            _id: "",
+            nome: "",
+            valor: "",
+            tipo: "",
+            atividades: []
         }
     }
 
     componentDidMount = () => {
-        Api.listar().then(res => this.setState({ almoxarifados: res.data.almoxarifados }));
+        Api.listarAtividades().then(res => this.setState({ atividades: res.data.atividades }));
     }
 
-    goTo = (path) => {
-        this.props.history.push(path);
-    }
-
-    /*
     handleInputChange = (e) => {
         const { name, value } = e.target;
         this.setState({ [name]: value })
@@ -49,16 +48,6 @@ export default class AlmoxarifadoController extends Component {
                 submit={this.submit}
                 handleInputChange={this.handleInputChange} />
         );
-    }
-    */
-    render() {
-        let { almoxarifados } = this.state;
-        return (
-            <AlmoxarifadoView
-                almoxarifados={almoxarifados}
-                goTo={this.goTo}
-            />
-        )
     }
 }
 
