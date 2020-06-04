@@ -2,9 +2,10 @@ import React from 'react';
 import InputFloat from '../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Dropdown } from 'primereact/dropdown';
 import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque,
+    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChange,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
         materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar } = props;
     return (
@@ -28,7 +29,7 @@ const EstoqueView = props => {
                         value={materiaisPesquisados}
                         paginator={materiaisPesquisados.length > 10}
                         rows={10}
-                        emptyMessage={"Materiais pesquisados."}
+                        emptyMessage={"Nenhum material pesquisado."}
                     >
                         <Column
                             filter={true}
@@ -67,13 +68,17 @@ const EstoqueView = props => {
                     <h1>Gerenciador de entradas</h1>
                 </div>
                 <ContainerMudarEstoque>
-                    <InputFloat name="vemDe" label="Local de onde vem" type="text" value={vemDe} onChange={handleInputChange} />
+                    <Dropdown optionLabel="vemDe" value={vemDe} options={[
+                        { vemDe: 'ENERGISA' },
+                        { vemDe: 'ALMOXARIFADO' }
+                    ]} placeholder="Local de onde vem" onChange={handleDropDownChange} />
+                    <InputFloat name="vemDe" type="text" value={vemDe} onChange={handleInputChange} />
                     <div className="tabela">
                         <DataTable
                             value={materiaisSelecionados}
                             paginator={materiaisSelecionados.length > 10}
                             rows={10}
-                            emptyMessage={"Materiais selecionados."}
+                            emptyMessage={"Nenhum material selecionado para adicionar."}
                         >
                             <Column
                                 field="_id"
@@ -142,15 +147,40 @@ const EstoqueView = props => {
                 <div className="titulo">
                     <h1>Gerenciador de saídas</h1>
                 </div>
-                <InputFloat name="vaiPara" label="Local para onde vai" value={vaiPara} onChange={handleInputChange} />
-                <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
-                <InputFloat name="equipe" label="Equipe que executou" value={equipe} onChange={handleInputChange} />
+
+                <Dropdown optionLabel="vaiPara" value={vaiPara} options={[
+                        { vaiPara: 'CAMPINA GRANDE' },
+                        { vaiPara: 'SOLEDADE'},
+                        { vaiPara: 'ESPERANÇA'},
+                        { vaiPara: 'POCINHOS'},
+                        { vaiPara: 'AREIAL'},
+                        { vaiPara: 'RIACHÃO'},
+                        { vaiPara: 'ALAGOA GRANDE'},
+                        { vaiPara: 'ALAGOA NOVA'},
+                        { vaiPara: 'LAGOA DE ROÇA'}
+                    ]} placeholder="Local para onde vai" onChange={handleDropDownChange} />
+                <InputFloat name="vaiPara" value={vaiPara} onChange={handleInputChange} />
+                <div className="inputSozinho">
+                    <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
+                </div>
+                <Dropdown optionLabel="equipe" value={equipe} options={[
+                        { equipe: 'ENPB-001' },
+                        { equipe: 'ENPB-002' },
+                        { equipe: 'ENPB-003' },
+                        { equipe: 'ENPB-004' },
+                        { equipe: 'ENPB-005' },
+                        { equipe: 'ENPB-006' },
+                        { equipe: 'ENPB-007' },
+                        { equipe: 'ENPB-008' },
+                    ]} placeholder="Equipe que executou" onChange={handleDropDownChange} />
+                <InputFloat name="equipe" value={equipe} onChange={handleInputChange} />
+                
                 <div className="tabela">
                     <DataTable
                         value={materiaisSelecionadosRetirar}
                         paginator={materiaisSelecionadosRetirar.length > 10}
                         rows={10}
-                        emptyMessage={"Nenhum estoque no almoxarifado."}
+                        emptyMessage={"Nenhum material selecionado para retirar."}
                     >
                         <Column
                             filter={true}

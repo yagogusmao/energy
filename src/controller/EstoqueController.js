@@ -10,8 +10,6 @@ export default class EstoqueController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            materialRetirar: "",
-            quantidadeRetirar: "",
             vemDe: "",
             vaiPara: "",
             servico: "",
@@ -31,10 +29,7 @@ export default class EstoqueController extends Component {
 
     componentDidMount = () => {
         const _id = this.props.location.search.split("=")[1];
-        Api.listarEstoque(_id).then(res => {
-            this.setState({ materiais: res.data.materiais })
-        }
-        );
+        Api.listarEstoque(_id).then(res => this.setState({ materiais: res.data.materiais }));
     }
 
     handleInputChange = (e) => {
@@ -42,22 +37,35 @@ export default class EstoqueController extends Component {
         this.setState({ [name]: value })
     }
 
+    handleDropDownChange = (e) => {
+        const { value } = e.target;
+        this.setState(value)
+    }
+
+    limparDadosSelecionadosAdicionar = () => {
+        this.setState({ vemDe: "", materiaisSelecionados: [], materiaisPesquisados: [] })
+    }
+    limparDadosSelecionadosRetirar = () => {
+        this.setState({ vaiPara: "", equipe: "", servico: "", materiaisSelecionadosRetirar: [] })
+    }
+
     adicionarEstoque = () => {
         const { materiaisSelecionados, vemDe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        const newArray = materiaisSelecionados.map(material => {return {_id: String(material._id), quantidade: Number(material.quantidade)}});
+        const newArray = materiaisSelecionados.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidade) } });
         Api.adicionarEstoque({ _id, newArray, vemDe }).then(res => {
-            const materiais = res.data.materiais;
-            this.setState({ materiais: materiais })
+            this.setState({ materiais: res.data.materiais });
+            this.limparDadosSelecionadosAdicionar();
         })
     }
 
     retirarEstoque = () => {
-        const { materialRetirar, quantidadeRetirar, vaiPara, servico, equipe } = this.state;
+        const { materiaisSelecionadosRetirar, vaiPara, servico, equipe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        Api.retirarEstoque(_id, materialRetirar, quantidadeRetirar, vaiPara, servico, equipe).then(res => {
-            const materiais = res.data.materiais;
-            this.setState({ materiais: materiais })
+        const newArray = materiaisSelecionadosRetirar.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidade) } });
+        Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe }).then(res => {
+            this.setState({ materiais: res.data.materiais });
+            this.limparDadosSelecionadosRetirar();
         })
     }
 
@@ -139,16 +147,16 @@ export default class EstoqueController extends Component {
             value={this.state.materiaisSelecionadosRetirar.filter(material => material._id === rowData._id)[0].quantidadeRetirar}
             onChange={this.handleInputChangeTableRetirar} />
     }
-    
+
     actionTemplateInput = (rowData) => {
         return <InputFloat name={rowData._id} type="number" label="Quantidade"
             value={this.state.materiaisSelecionados.filter(material => material._id === rowData._id)[0].quantidade}
             onChange={this.handleInputChangeTable} />
     }
-    
-    actionTemplateButton = (rowData) => <button onClick={() => {this.retirarMaterialTabela(rowData._id)}}>Retirar material</button>
 
-    actionTemplateButtonRetirar = (rowData) => <button onClick={() => {this.retirarMaterialTabelaRetirar(rowData._id)}}>Retirar material</button>
+    actionTemplateButton = (rowData) => <button onClick={() => { this.retirarMaterialTabela(rowData._id) }}>Retirar material</button>
+
+    actionTemplateButtonRetirar = (rowData) => <button onClick={() => { this.retirarMaterialTabelaRetirar(rowData._id) }}>Retirar material</button>
 
     retirarMaterialTabela = (material) => {
         let newArray = [];
@@ -185,6 +193,7 @@ export default class EstoqueController extends Component {
                 actionTemplateRetirar={this.actionTemplateRetirar}
                 actionTemplateInputRetirar={this.actionTemplateInputRetirar}
                 actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
+                handleDropDownChange={this.handleDropDownChange}
                 goto={this.goto}
                 vemDe={vemDe}
                 vaiPara={vaiPara}

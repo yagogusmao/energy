@@ -9,7 +9,7 @@ export const ContainerEstoque = styled.div`
   flex-direction: column;
   background: white;
   align-items: left;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   margin: 5px;
   .titulo {
@@ -23,7 +23,7 @@ export const ContainerMudarEstoque = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   .inputs {  
     margin: 5px;
@@ -47,7 +47,7 @@ export const ContainerGerenciador = styled.div`
   align-items: center;
   background: white;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   margin: 5px;
 `;
 
@@ -57,10 +57,13 @@ export const ContainerEstoqueRetirar = styled.div`
   border-color: red;
   border-radius:5px;
   display: flex;
+  margin: 5px;
   flex-direction: column;
   background: white;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
+  .inputSozinho {
+  }
   .titulo {
     justify-content: center;
     align-items:center;
@@ -85,7 +88,7 @@ export const ContainerPesquisa = styled.div`
   border-radius:5px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   justify-content: space-between;
   align-items: center;
   background: white;
