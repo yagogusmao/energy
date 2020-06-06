@@ -184,7 +184,7 @@ const RelatorioView = props => {
                         </ContainerRelatorio>
                         <ContainerRelatorio>
                             <div className="titulo">
-                                <h1>Relatório de saída de Transformadores</h1>
+                                <h1>Relatório de saída dos transformadores</h1>
                             </div>
                             <div className="tabela">
                                 <DataTable
