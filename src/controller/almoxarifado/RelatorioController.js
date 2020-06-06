@@ -9,7 +9,9 @@ export default class EstoqueController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            relatorio: [],
+            saidas: [],
+            saidasTransformadores: [],
+            saidasMedidores: [],
             opcao: "",
             _id: "",
             unidadeMedida: "",
@@ -17,14 +19,21 @@ export default class EstoqueController extends Component {
             codigoClasse: "",
             descricaoClasse: "",
             materiaisPesquisados: [],
+            entradas: []
         }
     }
 
     componentDidMount = () => {
         const _id = this.props.location.search.split("=")[1].split("&")[0];
         const opcao = this.props.location.search.split("=")[2];
-        Api.verRelatorio(_id, opcao).then(res => this.setState({
-            relatorio: res.data.relatorio,
+        if (opcao === "entrada") Api.verRelatorio(_id, opcao).then(res => this.setState({
+            entradas: res.data.relatorio.entradas,
+            opcao: opcao
+        }));
+        else if (opcao === "saida") Api.verRelatorio(_id, opcao).then(res => this.setState({
+            saidas: res.data.relatorio.saidas,
+            saidasMedidores: res.data.relatorio.saidasMedidores,
+            saidasTransformadores: res.data.relatorio.saidasTransformadores,
             opcao: opcao
         }));
     }
@@ -51,10 +60,14 @@ export default class EstoqueController extends Component {
     }
     
     render() {
-        let { relatorio, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados } = this.state;
+        let { saidas, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, 
+            materiaisPesquisados, saidasTransformadores, saidasMedidores, entradas } = this.state;
         return (
             <RelatorioView
-                relatorio={relatorio}
+                entradas={entradas}
+                saidas={saidas}
+                saidasTransformadores={saidasTransformadores}
+                saidasMedidores={saidasMedidores}
                 opcao={opcao}
                 handleInputChange={this.handleInputChange}
                 pesquisarMateriais={this.pesquisarMateriais}

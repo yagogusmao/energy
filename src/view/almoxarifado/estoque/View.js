@@ -3,11 +3,12 @@ import InputFloat from '../../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Dropdown } from 'primereact/dropdown';
-import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
+import { ContainerGerenciadorSaidaTransfMedid, ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChange,
+    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChange, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
-        materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar } = props;
+        materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar,
+        numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor } = props;
     return (
         <>
             <ContainerPesquisa>
@@ -72,7 +73,7 @@ const EstoqueView = props => {
                         { vemDe: 'ENERGISA' },
                         { vemDe: 'ALMOXARIFADO' }
                     ]} placeholder="Local de onde vem" onChange={handleDropDownChange} />
-                    <InputFloat name="vemDe" type="text" value={vemDe} onChange={handleInputChange} />
+                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{vemDe ? 'Local de onde vem: ' + vemDe : 'Selecione o local de onde vem.'}</div>
                     <div className="tabela">
                         <DataTable
                             value={materiaisSelecionados}
@@ -147,34 +148,32 @@ const EstoqueView = props => {
                 <div className="titulo">
                     <h1>Gerenciador de saídas</h1>
                 </div>
-
                 <Dropdown optionLabel="vaiPara" value={vaiPara} options={[
-                        { vaiPara: 'CAMPINA GRANDE' },
-                        { vaiPara: 'SOLEDADE'},
-                        { vaiPara: 'ESPERANÇA'},
-                        { vaiPara: 'POCINHOS'},
-                        { vaiPara: 'AREIAL'},
-                        { vaiPara: 'RIACHÃO'},
-                        { vaiPara: 'ALAGOA GRANDE'},
-                        { vaiPara: 'ALAGOA NOVA'},
-                        { vaiPara: 'LAGOA DE ROÇA'}
-                    ]} placeholder="Local para onde vai" onChange={handleDropDownChange} />
-                <InputFloat name="vaiPara" value={vaiPara} onChange={handleInputChange} />
+                    { vaiPara: 'CAMPINA GRANDE' },
+                    { vaiPara: 'SOLEDADE' },
+                    { vaiPara: 'ESPERANÇA' },
+                    { vaiPara: 'POCINHOS' },
+                    { vaiPara: 'AREIAL' },
+                    { vaiPara: 'RIACHÃO' },
+                    { vaiPara: 'ALAGOA GRANDE' },
+                    { vaiPara: 'ALAGOA NOVA' },
+                    { vaiPara: 'LAGOA DE ROÇA' }
+                ]} placeholder="Local para onde vai" onChange={handleDropDownChange} />
+                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{vaiPara ? 'Local para onde vai: ' + vaiPara : 'Selecione o local para onde vai.'}</div>
                 <div className="inputSozinho">
                     <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
                 </div>
                 <Dropdown optionLabel="equipe" value={equipe} options={[
-                        { equipe: 'ENPB-001' },
-                        { equipe: 'ENPB-002' },
-                        { equipe: 'ENPB-003' },
-                        { equipe: 'ENPB-004' },
-                        { equipe: 'ENPB-005' },
-                        { equipe: 'ENPB-006' },
-                        { equipe: 'ENPB-007' },
-                        { equipe: 'ENPB-008' },
-                    ]} placeholder="Equipe que executou" onChange={handleDropDownChange} />
-                <InputFloat name="equipe" value={equipe} onChange={handleInputChange} />
-                
+                    { equipe: 'ENPB-001' },
+                    { equipe: 'ENPB-002' },
+                    { equipe: 'ENPB-003' },
+                    { equipe: 'ENPB-004' },
+                    { equipe: 'ENPB-005' },
+                    { equipe: 'ENPB-006' },
+                    { equipe: 'ENPB-007' },
+                    { equipe: 'ENPB-008' },
+                ]} placeholder="Equipe que executou" onChange={handleDropDownChange} />
+                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{equipe ? 'Equipe que executou: ' + equipe : 'Selecione a equipe que executou.'}</div>
                 <div className="tabela">
                     <DataTable
                         value={materiaisSelecionadosRetirar}
@@ -215,7 +214,35 @@ const EstoqueView = props => {
                     <button onClick={retirarEstoque}>Retirar do estoque</button>
                     <button onClick={() => goto("saida")}>Relatório de saídas</button>
                 </div>
+                <div className="gerenciadores">
+                    <div className="transformadores">
+                        <div className="titulo">
+                            <h3>Transformadores</h3>
+                        </div>
+                        <InputFloat name="_idTransformador" label="_id do Transformador" value={_idTransformador} onChange={handleInputChange} />
+                        <InputFloat name="numeroSerie" label="Número de série" value={numeroSerie} onChange={handleInputChange} />
+                        <InputFloat name="tombamento" label="Tombamento" value={tombamento} onChange={handleInputChange} />
+                        <InputFloat name="impedancia" label="Impedância" value={impedancia} onChange={handleInputChange} />
+                        <InputFloat name="dataFabricacao" label="Data de Fabricação" value={dataFabricacao} onChange={handleInputChange} />
+                        <div className="botao">
+                            <button onClick={retirarTransformador}>Retirar Transformador</button>
+                        </div>
+                    </div>
+                    <div className="transformadores">
+                        <div className="titulo">
+                            <h3>Medidores</h3>
+                        </div>
+                        <InputFloat name="_idMedidor" label="_id do Medidor" value={_idMedidor} onChange={handleInputChange} />
+                        <InputFloat name="numero" label="Número" value={numero} onChange={handleInputChange} />
+                        <InputFloat name="nSeloCaixa" label="Nº selo caixa" value={nSeloCaixa} onChange={handleInputChange} />
+                        <InputFloat name="nSeloBorn" label="Nº selo born" value={nSeloBorn} onChange={handleInputChange} />
+                        <div className="botao">
+                            <button onClick={retirarMedidor}>Retirar Medidor</button>
+                        </div>
+                    </div>
+                </div>
             </ContainerEstoqueRetirar>
+
             <ContainerEstoque>
                 <div className="titulo">
                     <h1>Estoque</h1>

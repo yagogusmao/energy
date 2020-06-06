@@ -51,18 +51,50 @@ export const ContainerGerenciador = styled.div`
   margin: 5px;
 `;
 
+export const ContainerGerenciadorSaidaTransfMedid = styled.div`
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  border-radius:5px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  .titulo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    display: flex;
+    margin: 10px;
+  }
+`;
+
 export const ContainerEstoqueRetirar = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
   border-radius:5px;
   display: flex;
-  margin: 5px;
   flex-direction: column;
+  margin: 5px;
   background: white;
   padding: 10px;
   width: 100%;
+  .gerenciadores {
+    display: flex;
+    flex-direction: row;
+    .transformadores {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 20px;
+    }
+  }
   .inputSozinho {
+    margin-bottom: 5px;
   }
   .titulo {
     justify-content: center;

@@ -23,7 +23,16 @@ export default class EstoqueController extends Component {
             unidadeMedida: "",
             descricao: "",
             codigoClasse: "",
-            descricaoClasse: ""
+            descricaoClasse: "",
+            numeroSerie: "",
+            tombamento: "",
+            impedancia: "",
+            dataFabricacao: "",
+            numero: "",
+            nSeloCaixa: "",
+            nSeloBorn: "",
+            _idMedidor: "",
+            _idTransformador: ""
         }
     }
 
@@ -138,9 +147,32 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionadosRetirar: newArray })
     }
 
+    retirarTransformador = () => {
+        const _id = this.props.location.search.split("=")[1];
+        const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara } = this.state;
+        Api.retirarTransformador({_id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara}).then(res => {
+            this.setState({ materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "", 
+                numeroSerie: "", dataFabricacao: "" });
+        })
+    }
+
+    retirarMedidor = () => {
+        const _id = this.props.location.search.split("=")[1];
+        const { _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara } = this.state;
+        Api.retirarMedidor({_id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara}).then(res => {
+            this.setState({ materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "", 
+                nSeloBorn: ""});
+        })
+    }
+
     actionTemplate = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelecteds} checked={rowData.checked}></Checkbox>
 
-    actionTemplateRetirar = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelectedsRetirar} checked={rowData.checked}></Checkbox>
+    actionTemplateRetirar = (rowData) => {
+        if (rowData.codigoClasse !== 74 && rowData.codigoClasse !== 75 &&
+            rowData.codigoClasse !== 76 && rowData.codigoClasse !== 174 &&
+            rowData.codigoClasse !== 147)
+            return <Checkbox id={rowData._id} onChange={this.onChangeSelectedsRetirar} checked={rowData.checked}></Checkbox>
+    }
 
     actionTemplateInputRetirar = (rowData) => {
         return <InputFloat name={rowData._id} type="number" label="Quantidade"
@@ -175,11 +207,14 @@ export default class EstoqueController extends Component {
     }
 
     render() {
-        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara,
+        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento,
+            impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor,
             servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados,
             quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
         return (
             <EstoqueView
+                _idTransformador={_idTransformador}
+                _idMedidor={_idMedidor}
                 materiais={materiais}
                 materialRetirar={materialRetirar}
                 quantidadeRetirar={quantidadeRetirar}
@@ -194,6 +229,8 @@ export default class EstoqueController extends Component {
                 actionTemplateInputRetirar={this.actionTemplateInputRetirar}
                 actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
                 handleDropDownChange={this.handleDropDownChange}
+                retirarTransformador={this.retirarTransformador}
+                retirarMedidor={this.retirarMedidor}
                 goto={this.goto}
                 vemDe={vemDe}
                 vaiPara={vaiPara}
@@ -208,6 +245,13 @@ export default class EstoqueController extends Component {
                 materiaisSelecionados={materiaisSelecionados}
                 quantidadeMateriaisPesquisados={quantidadeMateriaisPesquisados}
                 pesquisarMateriais={this.pesquisarMateriais}
+                numeroSerie={numeroSerie}
+                tombamento={tombamento}
+                impedancia={impedancia}
+                dataFabricacao={dataFabricacao}
+                numero={numero}
+                nSeloCaixa={nSeloCaixa}
+                nSeloBorn={nSeloBorn}
             />
         )
     }

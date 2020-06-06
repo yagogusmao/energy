@@ -7,7 +7,8 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 const RelatorioView = props => {
-    const { relatorio, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, handleInputChange } = props;
+    const { saidas, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, entradas,
+        pesquisarMateriais, materiaisPesquisados, handleInputChange, saidasMedidores, saidasTransformadores } = props;
     return (
         <>{console.log(materiaisPesquisados)}
             <ContainerPesquisa>
@@ -64,18 +65,20 @@ const RelatorioView = props => {
                     <ContainerRelatorio>
                         <div className="titulo">
                             <h1>Relatório de entrada</h1>
-                        </div> 
+                        </div>
                         <div className="tabela">
                             <DataTable
-                                value={relatorio.map(pagina => {return {
-                                    _id: pagina._id, 
-                                    descricao: pagina.descricao,
-                                    unidadeMedida: pagina.unidadeMedida,
-                                    quantidade: pagina.quantidade,
-                                    vemDe: pagina.vemDe,
-                                    data: moment(pagina.data).format('DD/MM/YYYY')}
+                                value={entradas.map(pagina => {
+                                    return {
+                                        _id: pagina._id,
+                                        descricao: pagina.descricao,
+                                        unidadeMedida: pagina.unidadeMedida,
+                                        quantidade: pagina.quantidade,
+                                        vemDe: pagina.vemDe,
+                                        data: moment(pagina.data).format('DD/MM/YYYY')
+                                    }
                                 })}
-                                paginator={relatorio.length > 10}
+                                paginator={entradas.length > 10}
                                 rows={10}
                                 emptyMessage={"Nenhum relatório no almoxarifado."}
                             >
@@ -113,69 +116,245 @@ const RelatorioView = props => {
                         </div>
                     </ContainerRelatorio>
                     :
-                    <ContainerRelatorio>
-                        <div className="titulo">
-                            <h1>Relatório de saída</h1>
-                        </div> 
-                        <div className="tabela">
-                            <DataTable
-                                value={relatorio.map(pagina => {return {
-                                    _id: pagina._id, 
-                                    descricao: pagina.descricao,
-                                    unidadeMedida: pagina.unidadeMedida,
-                                    quantidade: pagina.quantidade,
-                                    vaiPara: pagina.vaiPara,
-                                    data: moment(pagina.data).format('DD/MM/YYYY'),
-                                    servico: pagina.servico,
-                                    equipe: pagina.equipe
-                                }})}
-                                paginator={relatorio.length > 10}
-                                rows={10}
-                                emptyMessage={"Nenhum relatório no almoxarifado."}
-                            >
-                                <Column
-                                    filter={true}
-                                    field="_id"
-                                    header="_id"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="descricao"
-                                    header="Descrição"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="quantidade"
-                                    header="Quantidade"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="unidadeMedida"
-                                    header="Unidade de Medida"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="vaiPara"
-                                    header="Local para onde foi"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="equipe"
-                                    header="Equipe que utilizou"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="servico"
-                                    header="Código do serviço"
-                                />
-                                <Column
-                                    filter={true}
-                                    field="data"
-                                    header="Data da retirada"
-                                />
-                            </DataTable>
-                        </div>
-                    </ContainerRelatorio>
+                    <>
+                        <ContainerRelatorio>
+                            <div className="titulo">
+                                <h1>Relatório de saída</h1>
+                            </div>
+                            <div className="tabela">
+                                <DataTable
+                                    value={saidas.map(pagina => {
+                                        return {
+                                            _id: pagina._id,
+                                            descricao: pagina.descricao,
+                                            unidadeMedida: pagina.unidadeMedida,
+                                            quantidade: pagina.quantidade,
+                                            vaiPara: pagina.vaiPara,
+                                            data: moment(pagina.data).format('DD/MM/YYYY'),
+                                            servico: pagina.servico,
+                                            equipe: pagina.equipe
+                                        }
+                                    })}
+                                    paginator={saidas.length > 10}
+                                    rows={10}
+                                    emptyMessage={"Nenhum relatório no almoxarifado."}
+                                >
+                                    <Column
+                                        filter={true}
+                                        field="_id"
+                                        header="_id"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="descricao"
+                                        header="Descrição"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="quantidade"
+                                        header="Quantidade"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="unidadeMedida"
+                                        header="Unidade de Medida"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="vaiPara"
+                                        header="Local para onde foi"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="equipe"
+                                        header="Equipe que utilizou"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="servico"
+                                        header="Código do serviço"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="data"
+                                        header="Data da retirada"
+                                    />
+                                </DataTable>
+                            </div>
+                        </ContainerRelatorio>
+                        <ContainerRelatorio>
+                            <div className="titulo">
+                                <h1>Relatório de saída de Transformadores</h1>
+                            </div>
+                            <div className="tabela">
+                                <DataTable
+                                    value={saidasTransformadores.map(pagina => {
+                                        return {
+                                            _id: pagina._id,
+                                            descricao: pagina.descricao,
+                                            unidadeMedida: pagina.unidadeMedida,
+                                            quantidade: pagina.quantidade,
+                                            vaiPara: pagina.vaiPara,
+                                            data: moment(pagina.data).format('DD/MM/YYYY'),
+                                            servico: pagina.servico,
+                                            equipe: pagina.equipe,
+                                            tombamento: pagina.tombamento,
+                                            impedancia: pagina.impedancia,
+                                            numeroSerie: pagina.numeroSerie,
+                                            dataFabricacao: pagina.dataFabricacao
+                                        }
+                                    })}
+                                    paginator={saidas.length > 10}
+                                    rows={10}
+                                    emptyMessage={"Nenhum relatório no almoxarifado."}
+                                >
+                                    <Column
+                                        filter={true}
+                                        field="_id"
+                                        header="_id"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="descricao"
+                                        header="Descrição"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="quantidade"
+                                        header="Quantidade"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="unidadeMedida"
+                                        header="Unidade de Medida"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="vaiPara"
+                                        header="Local para onde foi"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="equipe"
+                                        header="Equipe que utilizou"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="servico"
+                                        header="Código do serviço"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="data"
+                                        header="Data da retirada"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="numeroSerie"
+                                        header="Número de série"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="tombamento"
+                                        header="Tombamento"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="impedancia"
+                                        header="Impedância"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="dataFabricacao"
+                                        header="Data de fabricacao"
+                                    />
+                                </DataTable>
+                            </div>
+                        </ContainerRelatorio>
+                        <ContainerRelatorio>
+                            <div className="titulo">
+                                <h1>Relatório de saída dos medidores</h1>
+                            </div>
+                            <div className="tabela">
+                                <DataTable
+                                    value={saidasMedidores.map(pagina => {
+                                        return {
+                                            _id: pagina._id,
+                                            descricao: pagina.descricao,
+                                            unidadeMedida: pagina.unidadeMedida,
+                                            quantidade: pagina.quantidade,
+                                            vaiPara: pagina.vaiPara,
+                                            data: moment(pagina.data).format('DD/MM/YYYY'),
+                                            servico: pagina.servico,
+                                            equipe: pagina.equipe,
+                                            numero: pagina.numero,
+                                            nSeloCaixa: pagina.nSeloCaixa,
+                                            nSeloBorn: pagina.nSeloBorn
+                                        }
+                                    })}
+                                    paginator={saidasMedidores.length > 10}
+                                    rows={10}
+                                    emptyMessage={"Nenhum relatório no almoxarifado."}
+                                >
+                                    <Column
+                                        filter={true}
+                                        field="_id"
+                                        header="_id"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="descricao"
+                                        header="Descrição"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="quantidade"
+                                        header="Quantidade"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="unidadeMedida"
+                                        header="Unidade de Medida"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="vaiPara"
+                                        header="Local para onde foi"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="equipe"
+                                        header="Equipe que utilizou"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="servico"
+                                        header="Código do serviço"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="data"
+                                        header="Data da retirada"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="numero"
+                                        header="Número"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="nSeloCaixa"
+                                        header="Número Selo Caixa"
+                                    />
+                                    <Column
+                                        filter={true}
+                                        field="nSeloBorn"
+                                        header="Número Selo Born"
+                                    />
+                                </DataTable>
+                            </div>
+                        </ContainerRelatorio>
+                    </>
             }
         </>
     )

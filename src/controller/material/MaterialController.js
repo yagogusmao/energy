@@ -18,13 +18,24 @@ export default class MaterialController extends Component {
             descricao: "",
             codigoClasse: "",
             descricaoClasse: "",
-            materiais: []
+            materiais: [],
+            opcoesCodigos: []
         }
+    }
+    componentDidMount = () => {
+        Api.listarCodigos().then(res => 
+            this.setState({ opcoesCodigos: res.data.map(codigo => { return { codigoClasseCriar: codigo._id, descricaoClasseCriar: codigo.descricaoClasse } }) })
+        )
     }
 
     handleInputChange = (e) => {
         const { name, value } = e.target;
         this.setState({ [name]: value })
+    }
+
+    handleDropDownChange = (e) => {
+        const { value } = e.target;
+        this.setState(value)
     }
 
     submit = () => {
@@ -46,7 +57,7 @@ export default class MaterialController extends Component {
     }
 
     render() {
-        let { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiais,
+        let { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiais, opcoesCodigos,
             _idCriar, unidadeMedidaCriar, descricaoCriar, codigoClasseCriar, descricaoClasseCriar } = this.state;
         return (
             <MaterialView
@@ -61,8 +72,10 @@ export default class MaterialController extends Component {
                 codigoClasseCriar={codigoClasseCriar}
                 descricaoClasseCriar={descricaoClasseCriar}
                 materiais={materiais}
+                opcoesCodigos={opcoesCodigos}
                 submit={this.submit}
                 handleInputChange={this.handleInputChange}
+                handleDropDownChange={this.handleDropDownChange}
                 pesquisarMateriais={this.pesquisarMateriais}
             />
         );
