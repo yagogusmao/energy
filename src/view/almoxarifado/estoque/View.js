@@ -73,6 +73,10 @@ const EstoqueView = props => {
                         { label: 'ENERGISA', value: 'ENERGISA' },
                         { label: 'ALMOXARIFADO', value: 'ALMOXARIFADO' }
                     ]} placeholder="Local de onde vem" onChange={handleDropDownChangeVemDe} />
+                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                        {vemDe ? <p style={{ fontSize: '12px' }}>{'Local de onde vem: ' + vemDe}</p> :
+                            <p style={{ fontSize: '12px' }}>{'Selecione o local de onde vem.'}</p>}
+                    </div>
                     <div className="tabela">
                         <DataTable
                             value={materiaisSelecionados}
@@ -147,30 +151,38 @@ const EstoqueView = props => {
                 <div className="titulo">
                     <h1>Gerenciador de saídas</h1>
                 </div>
-                <Dropdown optionLabel="vaiPara" value={vaiPara} options={[
-                    { vaiPara: 'CAMPINA GRANDE' },
-                    { vaiPara: 'SOLEDADE' },
-                    { vaiPara: 'ESPERANÇA' },
-                    { vaiPara: 'POCINHOS' },
-                    { vaiPara: 'AREIAL' },
-                    { vaiPara: 'RIACHÃO' },
-                    { vaiPara: 'ALAGOA GRANDE' },
-                    { vaiPara: 'ALAGOA NOVA' },
-                    { vaiPara: 'LAGOA DE ROÇA' }
+                <Dropdown value={vaiPara} options={[
+                    { label: 'CAMPINA GRANDE', value: 'CAMPINA GRANDE' },
+                    { label: 'SOLEDADE', value: 'SOLEDADE' },
+                    { label: 'ESPERANÇA', value: 'ESPERANÇA' },
+                    { label: 'POCINHOS', value: 'POCINHOS' },
+                    { label: 'AREIAL', value: 'AREIAL' },
+                    { label: 'RIACHÃO', value: 'RIACHÃO' },
+                    { label: 'ALAGOA GRANDE', value: 'ALAGOA GRANDE' },
+                    { label: 'ALAGOA NOVA', value: 'ALAGOA NOVA' },
+                    { label: 'LAGOA DE ROÇA', value: 'LAGOA DE ROÇA' }
                 ]} placeholder="Local para onde vai" onChange={handleDropDownChangeVaiPara} />
+                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                    {vaiPara ? <p style={{ fontSize: '12px' }}>{'Local para onde vai: ' + vaiPara}</p> :
+                        <p style={{ fontSize: '12px' }}>{'Selecione o local para onde vai.'}</p>}
+                </div>
                 <div className="inputSozinho">
                     <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
                 </div>
-                <Dropdown optionLabel="equipe" value={equipe} options={[
-                    { equipe: 'ENPB-001' },
-                    { equipe: 'ENPB-002' },
-                    { equipe: 'ENPB-003' },
-                    { equipe: 'ENPB-004' },
-                    { equipe: 'ENPB-005' },
-                    { equipe: 'ENPB-006' },
-                    { equipe: 'ENPB-007' },
-                    { equipe: 'ENPB-008' },
+                <Dropdown value={equipe} options={[
+                    { label: 'ENPB-001', value: 'ENPB-001' },
+                    { label: 'ENPB-002', value: 'ENPB-002' },
+                    { label: 'ENPB-003', value: 'ENPB-003' },
+                    { label: 'ENPB-004', value: 'ENPB-004' },
+                    { label: 'ENPB-005', value: 'ENPB-005' },
+                    { label: 'ENPB-006', value: 'ENPB-006' },
+                    { label: 'ENPB-007', value: 'ENPB-007' },
+                    { label: 'ENPB-008', value: 'ENPB-008' },
                 ]} placeholder="Equipe que executou" onChange={handleDropDownChangeEquipe} />
+                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                    {equipe ? <p style={{ fontSize: '12px' }}>{'Equipe que executou: ' + equipe}</p> :
+                        <p style={{ fontSize: '12px' }}>{'Selecione a equipe que executou.'}</p>}
+                </div>
                 <div className="tabela">
                     <DataTable
                         value={materiaisSelecionadosRetirar}
