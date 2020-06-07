@@ -46,9 +46,14 @@ export default class EstoqueController extends Component {
         this.setState({ [name]: value })
     }
 
-    handleDropDownChange = (e) => {
-        const { value } = e.target;
-        this.setState(value)
+    handleDropDownChangeVemDe = (e) => {
+        this.setState({vemDe: e.value})
+    }
+    handleDropDownChangeVaiPara = (e) => {
+        this.setState({vaiPara: e.value})
+    }
+    handleDropDownChangeEquipe = (e) => {
+        this.setState({equipe: e.value})
     }
 
     limparDadosSelecionadosAdicionar = () => {
@@ -228,7 +233,9 @@ export default class EstoqueController extends Component {
                 actionTemplateRetirar={this.actionTemplateRetirar}
                 actionTemplateInputRetirar={this.actionTemplateInputRetirar}
                 actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
-                handleDropDownChange={this.handleDropDownChange}
+                handleDropDownChangeVemDe={this.handleDropDownChangeVemDe}
+                handleDropDownChangeVaiPara={this.handleDropDownChangeVaiPara}
+                handleDropDownChangeEquipe={this.handleDropDownChangeEquipe}
                 retirarTransformador={this.retirarTransformador}
                 retirarMedidor={this.retirarMedidor}
                 goto={this.goto}

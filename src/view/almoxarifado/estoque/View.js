@@ -5,7 +5,7 @@ import { Column } from 'primereact/column';
 import { Dropdown } from 'primereact/dropdown';
 import { ContainerGerenciadorSaidaTransfMedid, ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
-    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChange, _idTransformador, _idMedidor,
+    const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChangeVaiPara, handleDropDownChangeVemDe, handleDropDownChangeEquipe, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
         materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar,
         numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor } = props;
@@ -69,11 +69,10 @@ const EstoqueView = props => {
                     <h1>Gerenciador de entradas</h1>
                 </div>
                 <ContainerMudarEstoque>
-                    <Dropdown optionLabel="vemDe" value={vemDe} options={[
-                        { vemDe: 'ENERGISA' },
-                        { vemDe: 'ALMOXARIFADO' }
-                    ]} placeholder="Local de onde vem" onChange={handleDropDownChange} />
-                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{vemDe ? 'Local de onde vem: ' + vemDe : 'Selecione o local de onde vem.'}</div>
+                    <Dropdown value={vemDe} options={[
+                        { label: 'ENERGISA', value: 'ENERGISA' },
+                        { label: 'ALMOXARIFADO', value: 'ALMOXARIFADO' }
+                    ]} placeholder="Local de onde vem" onChange={handleDropDownChangeVemDe} />
                     <div className="tabela">
                         <DataTable
                             value={materiaisSelecionados}
@@ -158,8 +157,7 @@ const EstoqueView = props => {
                     { vaiPara: 'ALAGOA GRANDE' },
                     { vaiPara: 'ALAGOA NOVA' },
                     { vaiPara: 'LAGOA DE ROÇA' }
-                ]} placeholder="Local para onde vai" onChange={handleDropDownChange} />
-                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{vaiPara ? 'Local para onde vai: ' + vaiPara : 'Selecione o local para onde vai.'}</div>
+                ]} placeholder="Local para onde vai" onChange={handleDropDownChangeVaiPara} />
                 <div className="inputSozinho">
                     <InputFloat name="servico" label="Código do serviço" value={servico} onChange={handleInputChange} />
                 </div>
@@ -172,8 +170,7 @@ const EstoqueView = props => {
                     { equipe: 'ENPB-006' },
                     { equipe: 'ENPB-007' },
                     { equipe: 'ENPB-008' },
-                ]} placeholder="Equipe que executou" onChange={handleDropDownChange} />
-                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>{equipe ? 'Equipe que executou: ' + equipe : 'Selecione a equipe que executou.'}</div>
+                ]} placeholder="Equipe que executou" onChange={handleDropDownChangeEquipe} />
                 <div className="tabela">
                     <DataTable
                         value={materiaisSelecionadosRetirar}
