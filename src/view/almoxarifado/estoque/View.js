@@ -3,7 +3,7 @@ import InputFloat from '../../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Dropdown } from 'primereact/dropdown';
-import { ContainerGerenciadorSaidaTransfMedid, ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
+import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
     const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChangeVaiPara, handleDropDownChangeVemDe, handleDropDownChangeEquipe, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,

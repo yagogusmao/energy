@@ -76,7 +76,7 @@ export default class EstoqueController extends Component {
     retirarEstoque = () => {
         const { materiaisSelecionadosRetirar, vaiPara, servico, equipe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        const newArray = materiaisSelecionadosRetirar.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidade) } });
+        const newArray = materiaisSelecionadosRetirar.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidadeRetirar) } });
         Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe }).then(res => {
             this.setState({ materiais: res.data.materiais });
             this.limparDadosSelecionadosRetirar();
