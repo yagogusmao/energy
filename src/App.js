@@ -7,23 +7,25 @@ import 'primeicons/primeicons.css';
 
 import './App.css';
 
-import HomePage from './controller/user/HomePage';
+import HomePage from './controller/usuario/HomePage';
 import Atividade from './controller/atividade/AtividadeController';
 import Almoxarifado from './controller/almoxarifado/AlmoxarifadoController';
 import Estoque from './controller/almoxarifado/EstoqueController';
 import Relatorio from './controller/almoxarifado/RelatorioController';
 import Material from './controller/material/MaterialController';
+import Usuario from './controller/usuario/UsuarioController';
 
 const App = () =>
   <div className="App">
     <div className="Container">
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route path="/homepage" component={HomePage} />
         <Route path="/atividade" component={Atividade} />
         <Route path="/almoxarifado" component={Almoxarifado} />
         <Route path="/estoque" component={Estoque} />
         <Route path="/relatorio" component={Relatorio} />
         <Route path="/material" component={Material} />
+        <Route exact path="/" component={Usuario} />
       </Switch>
     </div>
   </div>

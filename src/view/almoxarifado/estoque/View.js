@@ -2,13 +2,14 @@ import React from 'react';
 import InputFloat from '../../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { Dropdown } from 'primereact/dropdown';
 import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar } from './styles/Style';
 const EstoqueView = props => {
     const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChangeVaiPara, handleDropDownChangeVemDe, handleDropDownChangeEquipe, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
         materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar,
-        numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor } = props;
+        numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor, carregandoPesquisar } = props;
     return (
         <>
             <ContainerPesquisa>
@@ -23,6 +24,7 @@ const EstoqueView = props => {
                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                     <div className="botao">
                         <button onClick={pesquisarMateriais}>Pesquisar</button>
+                        {carregandoPesquisar ? <ProgressSpinner /> : <></>}
                     </div>
                 </div>
                 <div className="tabela">

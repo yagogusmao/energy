@@ -1,5 +1,5 @@
 import axios from "axios";
-//import { getToken, getAuthenticate } from "./LocalAuth";
+import { getToken, getAuthenticate } from "./LocalAuth";
 
 const [localhost,server] = [
   "http://localhost:8080",
@@ -10,7 +10,7 @@ const ApiBase = axios.create({
   baseURL: localhost
 });
 
-/*
+
 export const authorization = ApiBase.interceptors.request.use(async config => {
   
   if (getAuthenticate()) {
@@ -19,6 +19,6 @@ export const authorization = ApiBase.interceptors.request.use(async config => {
   }
   return config;
 });
-*/
+
 
 export default ApiBase;

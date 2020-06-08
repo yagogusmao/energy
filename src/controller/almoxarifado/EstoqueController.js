@@ -5,6 +5,7 @@ import Api from '../../service/ApiBaseAlmoxarifado';
 import ApiMaterial from '../../service/ApiBaseMaterial';
 import { Checkbox } from 'primereact/checkbox';
 import InputFloat from '../../component/input/InputFloat';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 export default class EstoqueController extends Component {
     constructor(props) {
@@ -32,13 +33,19 @@ export default class EstoqueController extends Component {
             nSeloCaixa: "",
             nSeloBorn: "",
             _idMedidor: "",
-            _idTransformador: ""
+            _idTransformador: "",
+            carregando: false,
+            carregandoPesquisar: false
         }
     }
 
     componentDidMount = () => {
         const _id = this.props.location.search.split("=")[1];
-        Api.listarEstoque(_id).then(res => this.setState({ materiais: res.data.materiais }));
+        this.setState({ carregando: true }, () =>
+            Api.listarEstoque(_id).then(res =>
+                this.setState({ materiais: res.data.materiais, carregando: false })
+            )
+        )
     }
 
     handleInputChange = (e) => {
@@ -47,13 +54,13 @@ export default class EstoqueController extends Component {
     }
 
     handleDropDownChangeVemDe = (e) => {
-        this.setState({vemDe: e.value})
+        this.setState({ vemDe: e.value })
     }
     handleDropDownChangeVaiPara = (e) => {
-        this.setState({vaiPara: e.value})
+        this.setState({ vaiPara: e.value })
     }
     handleDropDownChangeEquipe = (e) => {
-        this.setState({equipe: e.value})
+        this.setState({ equipe: e.value })
     }
 
     limparDadosSelecionadosAdicionar = () => {
@@ -85,10 +92,12 @@ export default class EstoqueController extends Component {
 
     pesquisarMateriais = () => {
         const { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse } = this.state;
-        ApiMaterial.listar(_id, unidadeMedida, descricao, codigoClasse, descricaoClasse).then(res => {
-            const materiais = res.data.materiais;
-            this.setState({ materiaisPesquisados: materiais })
-        })
+        this.setState({ carregandoPesquisar: true }, () =>
+            ApiMaterial.listar(_id, unidadeMedida, descricao, codigoClasse, descricaoClasse).then(res => {
+                const materiais = res.data.materiais;
+                this.setState({ materiaisPesquisados: materiais, carregandoPesquisar: false })
+            }))
+
     }
 
     goto = (opcao) => {
@@ -155,18 +164,22 @@ export default class EstoqueController extends Component {
     retirarTransformador = () => {
         const _id = this.props.location.search.split("=")[1];
         const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara } = this.state;
-        Api.retirarTransformador({_id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara}).then(res => {
-            this.setState({ materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "", 
-                numeroSerie: "", dataFabricacao: "" });
+        Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara }).then(res => {
+            this.setState({
+                materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
+                numeroSerie: "", dataFabricacao: ""
+            });
         })
     }
 
     retirarMedidor = () => {
         const _id = this.props.location.search.split("=")[1];
         const { _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara } = this.state;
-        Api.retirarMedidor({_id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara}).then(res => {
-            this.setState({ materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "", 
-                nSeloBorn: ""});
+        Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara }).then(res => {
+            this.setState({
+                materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
+                nSeloBorn: ""
+            });
         })
     }
 
@@ -212,54 +225,62 @@ export default class EstoqueController extends Component {
     }
 
     render() {
-        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento,
-            impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor,
+        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando,
+            impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor, carregandoPesquisar,
             servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados,
             quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
         return (
-            <EstoqueView
-                _idTransformador={_idTransformador}
-                _idMedidor={_idMedidor}
-                materiais={materiais}
-                materialRetirar={materialRetirar}
-                quantidadeRetirar={quantidadeRetirar}
-                materiaisSelecionadosRetirar={materiaisSelecionadosRetirar}
-                handleInputChange={this.handleInputChange}
-                adicionarEstoque={this.adicionarEstoque}
-                retirarEstoque={this.retirarEstoque}
-                actionTemplate={this.actionTemplate}
-                actionTemplateInput={this.actionTemplateInput}
-                actionTemplateButton={this.actionTemplateButton}
-                actionTemplateRetirar={this.actionTemplateRetirar}
-                actionTemplateInputRetirar={this.actionTemplateInputRetirar}
-                actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
-                handleDropDownChangeVemDe={this.handleDropDownChangeVemDe}
-                handleDropDownChangeVaiPara={this.handleDropDownChangeVaiPara}
-                handleDropDownChangeEquipe={this.handleDropDownChangeEquipe}
-                retirarTransformador={this.retirarTransformador}
-                retirarMedidor={this.retirarMedidor}
-                goto={this.goto}
-                vemDe={vemDe}
-                vaiPara={vaiPara}
-                servico={servico}
-                equipe={equipe}
-                _id={_id}
-                unidadeMedida={unidadeMedida}
-                descricao={descricao}
-                codigoClasse={codigoClasse}
-                descricaoClasse={descricaoClasse}
-                materiaisPesquisados={materiaisPesquisados}
-                materiaisSelecionados={materiaisSelecionados}
-                quantidadeMateriaisPesquisados={quantidadeMateriaisPesquisados}
-                pesquisarMateriais={this.pesquisarMateriais}
-                numeroSerie={numeroSerie}
-                tombamento={tombamento}
-                impedancia={impedancia}
-                dataFabricacao={dataFabricacao}
-                numero={numero}
-                nSeloCaixa={nSeloCaixa}
-                nSeloBorn={nSeloBorn}
-            />
+            <>
+                {carregando ? <ProgressSpinner />
+                    :
+                    <>
+                        <EstoqueView
+                            carregandoPesquisar={carregandoPesquisar}
+                            _idTransformador={_idTransformador}
+                            _idMedidor={_idMedidor}
+                            materiais={materiais}
+                            materialRetirar={materialRetirar}
+                            quantidadeRetirar={quantidadeRetirar}
+                            materiaisSelecionadosRetirar={materiaisSelecionadosRetirar}
+                            handleInputChange={this.handleInputChange}
+                            adicionarEstoque={this.adicionarEstoque}
+                            retirarEstoque={this.retirarEstoque}
+                            actionTemplate={this.actionTemplate}
+                            actionTemplateInput={this.actionTemplateInput}
+                            actionTemplateButton={this.actionTemplateButton}
+                            actionTemplateRetirar={this.actionTemplateRetirar}
+                            actionTemplateInputRetirar={this.actionTemplateInputRetirar}
+                            actionTemplateButtonRetirar={this.actionTemplateButtonRetirar}
+                            handleDropDownChangeVemDe={this.handleDropDownChangeVemDe}
+                            handleDropDownChangeVaiPara={this.handleDropDownChangeVaiPara}
+                            handleDropDownChangeEquipe={this.handleDropDownChangeEquipe}
+                            retirarTransformador={this.retirarTransformador}
+                            retirarMedidor={this.retirarMedidor}
+                            goto={this.goto}
+                            vemDe={vemDe}
+                            vaiPara={vaiPara}
+                            servico={servico}
+                            equipe={equipe}
+                            _id={_id}
+                            unidadeMedida={unidadeMedida}
+                            descricao={descricao}
+                            codigoClasse={codigoClasse}
+                            descricaoClasse={descricaoClasse}
+                            materiaisPesquisados={materiaisPesquisados}
+                            materiaisSelecionados={materiaisSelecionados}
+                            quantidadeMateriaisPesquisados={quantidadeMateriaisPesquisados}
+                            pesquisarMateriais={this.pesquisarMateriais}
+                            numeroSerie={numeroSerie}
+                            tombamento={tombamento}
+                            impedancia={impedancia}
+                            dataFabricacao={dataFabricacao}
+                            numero={numero}
+                            nSeloCaixa={nSeloCaixa}
+                            nSeloBorn={nSeloBorn}
+                        />
+                    </>
+                }
+            </>
         )
     }
 }

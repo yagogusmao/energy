@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerEstoque = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -37,6 +39,8 @@ export const ContainerMudarEstoque = styled.div`
 `;
 
 export const ContainerGerenciador = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -51,28 +55,9 @@ export const ContainerGerenciador = styled.div`
   margin: 5px;
 `;
 
-export const ContainerGerenciadorSaidaTransfMedid = styled.div`
-  border: 3px;
-  border-left-style: solid;
-  border-color: red;
-  border-radius:5px;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  width: 100%;
-  padding: 10px;
-  margin: 10px;
-  .titulo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-    display: flex;
-    margin: 10px;
-  }
-`;
-
 export const ContainerEstoqueRetirar = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -114,6 +99,8 @@ export const ContainerEstoqueRetirar = styled.div`
 `;
 
 export const ContainerPesquisa = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -130,10 +117,12 @@ export const ContainerPesquisa = styled.div`
     display: grid;
     width: 100%;
     margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 15%;
+    grid-template-columns: 17% 17% 17% 17% 17% 140px;
     gap: 5px;
     .botao {
       display: flex;
+      max-height: 25px;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
       button {

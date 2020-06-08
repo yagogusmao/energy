@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerInside = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;

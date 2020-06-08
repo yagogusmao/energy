@@ -2,18 +2,24 @@ import React, { Component } from 'react';
 
 import AlmoxarifadoView from '../../view/almoxarifado/View';
 import Api from '../../service/ApiBaseAlmoxarifado';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 export default class AlmoxarifadoController extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            almoxarifados: []
+            almoxarifados: [],
+            carregando: false
         }
     }
 
     componentDidMount = () => {
-        Api.listar().then(res => this.setState({ almoxarifados: res.data.almoxarifados }));
+        this.setState({ carregando: true }, () =>
+            Api.listar().then(res =>
+                this.setState({ almoxarifados: res.data.almoxarifados, carregando: false })
+            )
+        )
     }
 
     goTo = (path) => {
@@ -21,12 +27,18 @@ export default class AlmoxarifadoController extends Component {
     }
 
     render() {
-        let { almoxarifados } = this.state;
+        let { almoxarifados, carregando } = this.state;
         return (
-            <AlmoxarifadoView
-                almoxarifados={almoxarifados}
-                goTo={this.goTo}
-            />
+            <>
+                {carregando ? <ProgressSpinner />
+                    :
+                    <>
+                        <AlmoxarifadoView
+                            almoxarifados={almoxarifados}
+                            goTo={this.goTo}
+                        />
+                    </>}
+            </>
         )
     }
 }

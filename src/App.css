@@ -14,7 +14,7 @@
   width: 100%;
   margin: 3vh ; 
   border-radius:5px;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-name: fadeIn;
   background: #e5e5e5;
 }
