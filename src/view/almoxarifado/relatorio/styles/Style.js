@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerRelatorio = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -21,6 +23,8 @@ export const ContainerRelatorio = styled.div`
 `;
 
 export const ContainerPesquisa = styled.div`
+  animation-duration: 1s;
+  animation-name: fadeIn;
   border: 3px;
   border-left-style: solid;
   border-color: red;

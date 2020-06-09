@@ -14,7 +14,6 @@ export const signout = () => {
 
 export const authenticate = (token) => {
     localStorage.setItem("token", token);
-    console.log(token)
 };
 export const getToken = () => {
     return localStorage.getItem("token")

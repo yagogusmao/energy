@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import RelatorioView from '../../view/almoxarifado/relatorio/View';
 import Api from '../../service/ApiBaseAlmoxarifado';
 import ApiMaterial from '../../service/ApiBaseMaterial';
-
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 export default class EstoqueController extends Component {
     constructor(props) {
@@ -19,23 +19,29 @@ export default class EstoqueController extends Component {
             codigoClasse: "",
             descricaoClasse: "",
             materiaisPesquisados: [],
-            entradas: []
+            entradas: [],
+            carregando: false
         }
     }
 
     componentDidMount = () => {
         const _id = this.props.location.search.split("=")[1].split("&")[0];
         const opcao = this.props.location.search.split("=")[2];
-        if (opcao === "entrada") Api.verRelatorio(_id, opcao).then(res => this.setState({
-            entradas: res.data.relatorio.entradas,
-            opcao: opcao
-        }));
-        else if (opcao === "saida") Api.verRelatorio(_id, opcao).then(res => this.setState({
-            saidas: res.data.relatorio.saidas,
-            saidasMedidores: res.data.relatorio.saidasMedidores,
-            saidasTransformadores: res.data.relatorio.saidasTransformadores,
-            opcao: opcao
-        }));
+        this.setState({ carregando: true }, () => {
+            if (opcao === "entrada") Api.verRelatorio(_id, opcao).then(res => this.setState({
+                entradas: res.data.relatorio.entradas,
+                opcao: opcao,
+                carregando: false
+            }));
+            else if (opcao === "saida") Api.verRelatorio(_id, opcao).then(res => this.setState({
+                saidas: res.data.relatorio.saidas,
+                saidasMedidores: res.data.relatorio.saidasMedidores,
+                saidasTransformadores: res.data.relatorio.saidasTransformadores,
+                opcao: opcao,
+                carregando: false
+            }));
+        })
+
     }
 
     pesquisarMateriais = () => {
@@ -58,26 +64,33 @@ export default class EstoqueController extends Component {
             this.setState({ materiaisPesquisados: materiais })
         })
     }
-    
+
     render() {
-        let { saidas, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, 
-            materiaisPesquisados, saidasTransformadores, saidasMedidores, entradas } = this.state;
+        let { saidas, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse,
+            materiaisPesquisados, saidasTransformadores, saidasMedidores, entradas, carregando } = this.state;
         return (
-            <RelatorioView
-                entradas={entradas}
-                saidas={saidas}
-                saidasTransformadores={saidasTransformadores}
-                saidasMedidores={saidasMedidores}
-                opcao={opcao}
-                handleInputChange={this.handleInputChange}
-                pesquisarMateriais={this.pesquisarMateriais}
-                _id={_id}
-                unidadeMedida={unidadeMedida}
-                descricao={descricao}
-                codigoClasse={codigoClasse}
-                descricaoClasse={descricaoClasse}
-                materiaisPesquisados={materiaisPesquisados}
-            />
+            <>
+                {carregando ? <ProgressSpinner />
+                    :
+                    <>
+                        <RelatorioView
+                            entradas={entradas}
+                            saidas={saidas}
+                            saidasTransformadores={saidasTransformadores}
+                            saidasMedidores={saidasMedidores}
+                            opcao={opcao}
+                            handleInputChange={this.handleInputChange}
+                            pesquisarMateriais={this.pesquisarMateriais}
+                            _id={_id}
+                            unidadeMedida={unidadeMedida}
+                            descricao={descricao}
+                            codigoClasse={codigoClasse}
+                            descricaoClasse={descricaoClasse}
+                            materiaisPesquisados={materiaisPesquisados}
+                        />
+                    </>
+                }
+            </>
         )
     }
 }

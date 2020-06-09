@@ -38,11 +38,13 @@ const EstoqueView = props => {
                             filter={true}
                             field="_id"
                             header="_id"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
                             field="unidadeMedida"
                             header="Unidade de Medida"
+                            style={{textAlign: 'center', width: '120px'}}
                         />
                         <Column
                             filter={true}
@@ -53,6 +55,7 @@ const EstoqueView = props => {
                             filter={true}
                             field="codigoClasse"
                             header="Codigo de Descrição"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
@@ -62,6 +65,7 @@ const EstoqueView = props => {
                         <Column
                             field="checked"
                             body={actionTemplate.bind(this)}
+                            style={{textAlign: 'center', width: '50px'}}
                         />
                     </DataTable>
                 </div>
@@ -89,6 +93,7 @@ const EstoqueView = props => {
                             <Column
                                 field="_id"
                                 header="_id"
+                                style={{textAlign: 'center', width: '100px'}}
                             />
                             <Column
                                 field="descricao"
@@ -97,9 +102,16 @@ const EstoqueView = props => {
                             <Column
                                 header="Quantidade"
                                 body={actionTemplateInput.bind(this)}
+                                style={{textAlign: 'center', width: '120px'}}
+                            />
+                            <Column
+                                field="unidadeMedida"
+                                header="Unidade de Medida"
+                                style={{textAlign: 'center', width: '120px'}}
                             />
                             <Column
                                 body={actionTemplateButton.bind(this)}
+                                style={{textAlign: 'center', width: '100px'}}
                             />
                         </DataTable>
                     </div>
@@ -125,6 +137,7 @@ const EstoqueView = props => {
                                 filter={true}
                                 field="_id"
                                 header="_id"
+                                style={{textAlign: 'center', width: '100px'}}
                             />
                             <Column
                                 filter={true}
@@ -134,16 +147,19 @@ const EstoqueView = props => {
                             <Column
                                 filter={true}
                                 field="quantidade"
-                                header="Quantidade"
+                                header="Quantidade disponível"
+                                style={{textAlign: 'center', width: '100px'}}
                             />
                             <Column
                                 filter={true}
                                 field="unidadeMedida"
                                 header="Unidade de Medida"
+                                style={{textAlign: 'center', width: '120px'}}
                             />
                             <Column
                                 field="checked"
                                 body={actionTemplateRetirar.bind(this)}
+                                style={{textAlign: 'center', width: '50px'}}
                             />
                         </DataTable>
                     </div>
@@ -196,6 +212,7 @@ const EstoqueView = props => {
                             filter={true}
                             field="_id"
                             header="_id"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
@@ -206,18 +223,22 @@ const EstoqueView = props => {
                             filter={true}
                             field="quantidade"
                             header="Quantidade disponível"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
                             field="unidadeMedida"
                             header="Unidade de Medida"
+                            style={{textAlign: 'center', width: '120px'}}
                         />
                         <Column
                             header="Quantidade a retirar"
                             body={actionTemplateInputRetirar.bind(this)}
+                            style={{textAlign: 'center', width: '120px'}}
                         />
                         <Column
                             body={actionTemplateButtonRetirar.bind(this)}
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                     </DataTable>
                 </div>
@@ -269,6 +290,7 @@ const EstoqueView = props => {
                             filter={true}
                             field="_id"
                             header="_id"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
@@ -279,11 +301,13 @@ const EstoqueView = props => {
                             filter={true}
                             field="quantidade"
                             header="Quantidade"
+                            style={{textAlign: 'center', width: '100px'}}
                         />
                         <Column
                             filter={true}
                             field="unidadeMedida"
                             header="Unidade de Medida"
+                            style={{textAlign: 'center', width: '120px'}}
                         />
                     </DataTable>
                 </div>

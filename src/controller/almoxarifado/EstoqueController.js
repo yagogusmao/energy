@@ -4,6 +4,7 @@ import EstoqueView from '../../view/almoxarifado/estoque/View';
 import Api from '../../service/ApiBaseAlmoxarifado';
 import ApiMaterial from '../../service/ApiBaseMaterial';
 import { Checkbox } from 'primereact/checkbox';
+import { Growl } from 'primereact/growl';
 import InputFloat from '../../component/input/InputFloat';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
@@ -73,21 +74,43 @@ export default class EstoqueController extends Component {
     adicionarEstoque = () => {
         const { materiaisSelecionados, vemDe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        const newArray = materiaisSelecionados.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidade) } });
-        Api.adicionarEstoque({ _id, newArray, vemDe }).then(res => {
-            this.setState({ materiais: res.data.materiais });
-            this.limparDadosSelecionadosAdicionar();
+        let flag = true;
+        materiaisSelecionados.forEach(element => {
+            if (element.quantidade <= 0) flag = false;
         })
+        if (flag) {
+            const newArray = materiaisSelecionados.map(material => {
+                return { _id: String(material._id), quantidade: Number(material.quantidade) }
+            });
+            if (this.validarInputs([vemDe]) && newArray.length > 0) {
+                Api.adicionarEstoque({ _id, newArray, vemDe }).then(res => {
+                    this.setState({ materiais: res.data.materiais },
+                        () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                    this.limparDadosSelecionadosAdicionar();
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }));
+            } else this.growl.show({ severity: 'error', summary: 'Selecione todos os campos.' })
+        } else this.growl.show({ severity: 'error', summary: 'Coloque as quantidades em todos os materiais.' })
     }
 
     retirarEstoque = () => {
         const { materiaisSelecionadosRetirar, vaiPara, servico, equipe } = this.state;
         const _id = this.props.location.search.split("=")[1];
-        const newArray = materiaisSelecionadosRetirar.map(material => { return { _id: String(material._id), quantidade: Number(material.quantidadeRetirar) } });
-        Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe }).then(res => {
-            this.setState({ materiais: res.data.materiais });
-            this.limparDadosSelecionadosRetirar();
+        let flag = true;
+        materiaisSelecionadosRetirar.forEach(element => {
+            if (element.quantidadeRetirar === undefined) flag = false;
         })
+        if (flag) {
+            const newArray = materiaisSelecionadosRetirar.map(material => {
+                return { _id: String(material._id), quantidade: Number(material.quantidadeRetirar) }
+            });
+            if (this.validarInputs([servico, equipe, vaiPara]) && newArray.length > 0) {
+                Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe }).then(res => {
+                    this.setState({ materiais: res.data.materiais },
+                        () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                    this.limparDadosSelecionadosRetirar();
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }));
+            } else this.growl.show({ severity: 'error', summary: 'Selecione todos os campos.' })
+        } else this.growl.show({ severity: 'error', summary: 'Coloque as quantidades em todos os materiais.' })
     }
 
     pesquisarMateriais = () => {
@@ -95,9 +118,8 @@ export default class EstoqueController extends Component {
         this.setState({ carregandoPesquisar: true }, () =>
             ApiMaterial.listar(_id, unidadeMedida, descricao, codigoClasse, descricaoClasse).then(res => {
                 const materiais = res.data.materiais;
-                this.setState({ materiaisPesquisados: materiais, carregandoPesquisar: false })
+                this.setState({ materiaisPesquisados: materiais, carregandoPesquisar: false }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
             }))
-
     }
 
     goto = (opcao) => {
@@ -164,23 +186,35 @@ export default class EstoqueController extends Component {
     retirarTransformador = () => {
         const _id = this.props.location.search.split("=")[1];
         const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara } = this.state;
-        Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara }).then(res => {
-            this.setState({
-                materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
-                numeroSerie: "", dataFabricacao: ""
-            });
-        })
+        if (this.validarInputs([_idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara])) {
+            Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara }).then(res => {
+                this.setState({
+                    materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
+                    numeroSerie: "", dataFabricacao: ""
+                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+            }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+        } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
     }
 
     retirarMedidor = () => {
         const _id = this.props.location.search.split("=")[1];
         const { _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara } = this.state;
-        Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara }).then(res => {
-            this.setState({
-                materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
-                nSeloBorn: ""
-            });
+        if (this.validarInputs([_idMedidor, numero, nSeloCaixa, nSeloBorn, servico, servico, equipe, vaiPara])) {
+            Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara }).then(res => {
+                this.setState({
+                    materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
+                    nSeloBorn: ""
+                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+            }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+        } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+    }
+
+    validarInputs = (inputs) => {
+        let flag = true;
+        inputs.forEach(input => {
+            if (input === "") flag = false;
         })
+        return flag;
     }
 
     actionTemplate = (rowData) => <Checkbox id={rowData._id} onChange={this.onChangeSelecteds} checked={rowData.checked}></Checkbox>
@@ -231,6 +265,7 @@ export default class EstoqueController extends Component {
             quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
         return (
             <>
+                <Growl ref={(el) => this.growl = el} />
                 {carregando ? <ProgressSpinner />
                     :
                     <>

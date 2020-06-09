@@ -10,7 +10,7 @@ const RelatorioView = props => {
     const { saidas, opcao, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, entradas,
         pesquisarMateriais, materiaisPesquisados, handleInputChange, saidasMedidores, saidasTransformadores } = props;
     return (
-        <>{console.log(materiaisPesquisados)}
+        <>
             <ContainerPesquisa>
                 <div className="titulo">
                     <h1>Pesquisar materiais</h1>
@@ -36,11 +36,13 @@ const RelatorioView = props => {
                             filter={true}
                             field="_id"
                             header="_id"
+                            style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column
                             filter={true}
                             field="unidadeMedida"
                             header="Unidade de Medida"
+                            style={{ textAlign: 'center', width: '120px' }}
                         />
                         <Column
                             filter={true}
@@ -51,6 +53,7 @@ const RelatorioView = props => {
                             filter={true}
                             field="codigoClasse"
                             header="Codigo de Descrição"
+                            style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column
                             filter={true}
@@ -86,6 +89,7 @@ const RelatorioView = props => {
                                     filter={true}
                                     field="_id"
                                     header="_id"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     filter={true}
@@ -96,21 +100,25 @@ const RelatorioView = props => {
                                     filter={true}
                                     field="quantidade"
                                     header="Quantidade"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="unidadeMedida"
                                     header="Unidade de Medida"
+                                    style={{ textAlign: 'center', width: '120px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="vemDe"
                                     header="Local de onde veio"
+                                    style={{ textAlign: 'center', width: '200px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="data"
                                     header="Data de recebimento"
+                                    style={{ textAlign: 'center', width: '120px' }}
                                 />
                             </DataTable>
                         </div>
@@ -143,6 +151,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="_id"
                                         header="_id"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -153,31 +162,37 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="quantidade"
                                         header="Quantidade"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="unidadeMedida"
                                         header="Unidade de Medida"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="vaiPara"
                                         header="Local para onde foi"
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="equipe"
                                         header="Equipe que utilizou"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="servico"
                                         header="Código do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="data"
                                         header="Data da retirada"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                 </DataTable>
                             </div>
@@ -212,6 +227,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="_id"
                                         header="_id"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -222,51 +238,61 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="quantidade"
                                         header="Quantidade"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="unidadeMedida"
                                         header="Unidade de Medida"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="vaiPara"
                                         header="Local para onde foi"
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="equipe"
                                         header="Equipe que utilizou"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="servico"
                                         header="Código do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="data"
                                         header="Data da retirada"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="numeroSerie"
                                         header="Número de série"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="tombamento"
                                         header="Tombamento"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="impedancia"
                                         header="Impedância"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="dataFabricacao"
                                         header="Data de fabricacao"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                 </DataTable>
                             </div>
@@ -300,6 +326,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="_id"
                                         header="_id"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -310,46 +337,55 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="quantidade"
                                         header="Quantidade"
+                                        style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="unidadeMedida"
                                         header="Unidade de Medida"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="vaiPara"
                                         header="Local para onde foi"
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="equipe"
                                         header="Equipe que utilizou"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="servico"
                                         header="Código do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="data"
                                         header="Data da retirada"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="numero"
                                         header="Número"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="nSeloCaixa"
                                         header="Número Selo Caixa"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="nSeloBorn"
                                         header="Número Selo Born"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                 </DataTable>
                             </div>
