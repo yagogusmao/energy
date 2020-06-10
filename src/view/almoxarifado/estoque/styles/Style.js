@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+export const MenuTab = styled.div`
+  animation: fadeIn 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
 export const ContainerEstoque = styled.div`
   animation: fadeIn 1s;
   border-radius:5px;
@@ -13,6 +29,9 @@ export const ContainerEstoque = styled.div`
   padding: 10px;
   width: 100%;
   margin: 5px;
+  .tabela {
+    overflow-x: scroll;
+  }
   .titulo {
     justify-content: center;
     align-items:center;
@@ -34,6 +53,9 @@ export const ContainerMudarEstoque = styled.div`
   background: white;
   padding: 10px;
   width: 100%;
+  .tabela {
+    overflow-x: scroll;
+  }
   .inputs {  
     margin: 5px;
     display: flex;
@@ -59,6 +81,9 @@ export const ContainerGerenciador = styled.div`
   width: 100%;
   padding: 10px;
   margin: 5px;
+  .tabela {
+    overflow-x: scroll;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -81,6 +106,20 @@ export const ContainerEstoqueRetirar = styled.div`
   background: white;
   padding: 10px;
   width: 100%;
+  .tabela {
+    overflow-x: scroll;
+  }
+  .entradas {
+    display: grid;
+    margin: 5px;
+    grid-template-columns: 50% 50%;
+    gap: 5px;
+    .checkbox {
+      display: flex;
+      justify-content: center;
+      align-items:center;
+    }
+  }
   .gerenciadores {
     display: flex;
     flex-direction: row;
@@ -90,9 +129,6 @@ export const ContainerEstoqueRetirar = styled.div`
       width: 100%;
       margin: 20px;
     }
-  }
-  .inputSozinho {
-    margin-bottom: 5px;
   }
   .titulo {
     justify-content: center;
@@ -133,6 +169,9 @@ export const ContainerPesquisa = styled.div`
   background: white;
   width: 100%;
   margin: 5px;
+  .tabela {
+    overflow-x: scroll;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

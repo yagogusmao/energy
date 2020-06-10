@@ -48,6 +48,7 @@ const RelatorioView = props => {
                             filter={true}
                             field="descricao"
                             header="Descrição"
+                            style={{ textAlign: 'center', width: '300px' }}
                         />
                         <Column
                             filter={true}
@@ -95,6 +96,7 @@ const RelatorioView = props => {
                                     filter={true}
                                     field="descricao"
                                     header="Descrição"
+                                    style={{ textAlign: 'center', width: '300px' }}
                                 />
                                 <Column
                                     filter={true}
@@ -157,6 +159,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="descricao"
                                         header="Descrição"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -233,6 +236,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="descricao"
                                         header="Descrição"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -332,6 +336,7 @@ const RelatorioView = props => {
                                         filter={true}
                                         field="descricao"
                                         header="Descrição"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         filter={true}

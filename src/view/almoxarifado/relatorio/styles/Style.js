@@ -11,8 +11,11 @@ export const ContainerRelatorio = styled.div`
   background: white;
   align-items: left;
   padding: 20px;
-  width: 100%;
   margin: 5px;
+  width:100%;
+  .tabela {
+    overflow-x: scroll;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

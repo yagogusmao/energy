@@ -7,6 +7,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { Growl } from 'primereact/growl';
 import InputFloat from '../../component/input/InputFloat';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import queryString from 'query-string';
 
 export default class EstoqueController extends Component {
     constructor(props) {
@@ -36,12 +37,14 @@ export default class EstoqueController extends Component {
             _idMedidor: "",
             _idTransformador: "",
             carregando: false,
-            carregandoPesquisar: false
+            carregandoPesquisar: false,
+            sairAlmoxarifado: false,
+            itemAtivo: "estoque"
         }
     }
 
     componentDidMount = () => {
-        const _id = this.props.location.search.split("=")[1];
+        const { _id } = queryString.parse(this.props.location.search);
         this.setState({ carregando: true }, () =>
             Api.listarEstoque(_id).then(res =>
                 this.setState({ materiais: res.data.materiais, carregando: false })
@@ -73,7 +76,7 @@ export default class EstoqueController extends Component {
 
     adicionarEstoque = () => {
         const { materiaisSelecionados, vemDe } = this.state;
-        const _id = this.props.location.search.split("=")[1];
+        const { _id } = queryString.parse(this.props.location.search);
         let flag = true;
         materiaisSelecionados.forEach(element => {
             if (element.quantidade <= 0) flag = false;
@@ -93,8 +96,8 @@ export default class EstoqueController extends Component {
     }
 
     retirarEstoque = () => {
-        const { materiaisSelecionadosRetirar, vaiPara, servico, equipe } = this.state;
-        const _id = this.props.location.search.split("=")[1];
+        const { materiaisSelecionadosRetirar, vaiPara, servico, equipe, sairAlmoxarifado } = this.state;
+        const { _id } = queryString.parse(this.props.location.search);
         let flag = true;
         materiaisSelecionadosRetirar.forEach(element => {
             if (element.quantidadeRetirar === undefined) flag = false;
@@ -103,13 +106,23 @@ export default class EstoqueController extends Component {
             const newArray = materiaisSelecionadosRetirar.map(material => {
                 return { _id: String(material._id), quantidade: Number(material.quantidadeRetirar) }
             });
-            if (this.validarInputs([servico, equipe, vaiPara]) && newArray.length > 0) {
-                Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe }).then(res => {
-                    this.setState({ materiais: res.data.materiais },
-                        () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
-                    this.limparDadosSelecionadosRetirar();
-                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }));
-            } else this.growl.show({ severity: 'error', summary: 'Selecione todos os campos.' })
+            if (!sairAlmoxarifado) {
+                if (this.validarInputs([servico, equipe, vaiPara]) && newArray.length > 0) {
+                    Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe, sairAlmoxarifado }).then(res => {
+                        this.setState({ materiais: res.data.materiais },
+                            () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                        this.limparDadosSelecionadosRetirar();
+                    }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }));
+                } else this.growl.show({ severity: 'error', summary: 'Selecione todos os campos.' })
+            } else {
+                if (this.validarInputs([vaiPara]) && newArray.length > 0) {
+                    Api.retirarEstoque({ _id, newArray, vaiPara, servico, equipe, sairAlmoxarifado }).then(res => {
+                        this.setState({ materiais: res.data.materiais },
+                            () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                        this.limparDadosSelecionadosRetirar();
+                    }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }));
+                } else this.growl.show({ severity: 'error', summary: 'Selecione todos os campos.' })
+            }
         } else this.growl.show({ severity: 'error', summary: 'Coloque as quantidades em todos os materiais.' })
     }
 
@@ -123,7 +136,7 @@ export default class EstoqueController extends Component {
     }
 
     goto = (opcao) => {
-        const _id = this.props.location.search.split("=")[1];
+        const { _id } = queryString.parse(this.props.location.search);
         this.props.history.push(`/relatorio?_id=${_id}&opcao=${opcao}`);
     }
 
@@ -183,30 +196,56 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionadosRetirar: newArray })
     }
 
+    onChangeItemAtivo = (e) => {
+        this.setState({ itemAtivo: e.value.value })
+    }
+    
     retirarTransformador = () => {
-        const _id = this.props.location.search.split("=")[1];
-        const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara } = this.state;
-        if (this.validarInputs([_idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara])) {
-            Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara }).then(res => {
-                this.setState({
-                    materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
-                    numeroSerie: "", dataFabricacao: ""
-                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
-            }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
-        } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        const { _id } = queryString.parse(this.props.location.search);
+        const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara, sairAlmoxarifado } = this.state;
+        if (!sairAlmoxarifado) {
+            if (this.validarInputs([_idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara])) {
+                Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara, sairAlmoxarifado }).then(res => {
+                    this.setState({
+                        materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
+                        numeroSerie: "", dataFabricacao: ""
+                    }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        } else {
+            if (this.validarInputs([_idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, vaiPara])) {
+                Api.retirarTransformador({ _id, _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara, sairAlmoxarifado }).then(res => {
+                    this.setState({
+                        materiais: res.data.materiais, _idTransformador: "", tombamento: "", impedancia: "",
+                        numeroSerie: "", dataFabricacao: ""
+                    }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        }
     }
 
     retirarMedidor = () => {
-        const _id = this.props.location.search.split("=")[1];
-        const { _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara } = this.state;
-        if (this.validarInputs([_idMedidor, numero, nSeloCaixa, nSeloBorn, servico, servico, equipe, vaiPara])) {
-            Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara }).then(res => {
-                this.setState({
-                    materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
-                    nSeloBorn: ""
-                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
-            }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
-        } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        const { _id } = queryString.parse(this.props.location.search);
+        const { _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara, sairAlmoxarifado } = this.state;
+        if (!sairAlmoxarifado) {
+            if (this.validarInputs([_idMedidor, numero, nSeloCaixa, nSeloBorn, servico, servico, equipe, vaiPara])) {
+                Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara, sairAlmoxarifado }).then(res => {
+                    this.setState({
+                        materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
+                        nSeloBorn: ""
+                    }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        } else {
+            if (this.validarInputs([_idMedidor, numero, nSeloCaixa, nSeloBorn, servico, vaiPara])) {
+                Api.retirarMedidor({ _id, _idMedidor, numero, nSeloCaixa, nSeloBorn, servico, equipe, vaiPara, sairAlmoxarifado }).then(res => {
+                    this.setState({
+                        materiais: res.data.materiais, _idMedidor: "", numero: "", nSeloCaixa: "",
+                        nSeloBorn: ""
+                    }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Selecione todos os campos." })
+        }
     }
 
     validarInputs = (inputs) => {
@@ -250,6 +289,11 @@ export default class EstoqueController extends Component {
         this.setState({ materiaisSelecionados: newArray })
     }
 
+    onChangeCheckBox = () => {
+        if (this.state.sairAlmoxarifado) this.setState({ sairAlmoxarifado: false, vaiPara: "", equipe: "", servico: "" });
+        else this.setState({ sairAlmoxarifado: true, vaiPara: "", equipe: "", servico: "" });
+    }
+
     retirarMaterialTabelaRetirar = (material) => {
         let newArray = [];
         this.state.materiaisSelecionadosRetirar.forEach(element => {
@@ -259,9 +303,9 @@ export default class EstoqueController extends Component {
     }
 
     render() {
-        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando,
+        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando, sairAlmoxarifado,
             impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor, carregandoPesquisar,
-            servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados,
+            servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados, itemAtivo,
             quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
         return (
             <>
@@ -270,6 +314,10 @@ export default class EstoqueController extends Component {
                     :
                     <>
                         <EstoqueView
+                            onChangeItemAtivo={this.onChangeItemAtivo}
+                            itemAtivo={itemAtivo}
+                            onChangeCheckBox={this.onChangeCheckBox}
+                            sairAlmoxarifado={sairAlmoxarifado}
                             carregandoPesquisar={carregandoPesquisar}
                             _idTransformador={_idTransformador}
                             _idMedidor={_idMedidor}
