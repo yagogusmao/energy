@@ -4,10 +4,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items:center;
-  background:#444444;
+  background: white;
   padding: 40px;
   width: 100%;
-  margin:  5vw 5vh; 
+  margin: 5vw 5vh; 
   border-radius:5px;
   animation: fadeIn 1s;
   @keyframes fadeIn {
