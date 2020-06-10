@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerRelatorio = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -14,6 +13,14 @@ export const ContainerRelatorio = styled.div`
   padding: 20px;
   width: 100%;
   margin: 5px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .titulo {
     justify-content: center;
     align-items:center;
@@ -23,8 +30,7 @@ export const ContainerRelatorio = styled.div`
 `;
 
 export const ContainerPesquisa = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border: 3px;
   border-left-style: solid;
   border-color: red;

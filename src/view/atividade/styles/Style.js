@@ -10,8 +10,15 @@ export const Container = styled.div`
   width: 100%;
   margin:  5vw 5vh; 
   border-radius:5px;
-  animation-duration: 1.5s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const ContainerInsideUp = styled.div`

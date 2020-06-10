@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerEstoque = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -19,6 +18,14 @@ export const ContainerEstoque = styled.div`
     align-items:center;
     display: flex;
     margin: 10px;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 export const ContainerMudarEstoque = styled.div`
@@ -39,8 +46,7 @@ export const ContainerMudarEstoque = styled.div`
 `;
 
 export const ContainerGerenciador = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -53,11 +59,18 @@ export const ContainerGerenciador = styled.div`
   width: 100%;
   padding: 10px;
   margin: 5px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const ContainerEstoqueRetirar = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -96,11 +109,18 @@ export const ContainerEstoqueRetirar = styled.div`
       padding: 3px;
     }
   }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const ContainerPesquisa = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border: 3px;
   border-left-style: solid;
   border-color: red;
@@ -113,6 +133,14 @@ export const ContainerPesquisa = styled.div`
   background: white;
   width: 100%;
   margin: 5px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .inputs {
     display: grid;
     width: 100%;

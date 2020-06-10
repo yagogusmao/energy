@@ -14,7 +14,15 @@
   width: 100%;
   margin: 3vh ; 
   border-radius:5px;
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   background: #e5e5e5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

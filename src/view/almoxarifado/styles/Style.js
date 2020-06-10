@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerInside = styled.div`
-  animation-duration: 1s;
-  animation-name: fadeIn;
+  animation: fadeIn 1s;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -12,6 +11,14 @@ export const ContainerInside = styled.div`
   background: white;
   padding: 20px;
   width: 100%;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .titulo {
     display: flex;
     margin: 5px;

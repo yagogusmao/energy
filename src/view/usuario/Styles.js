@@ -13,4 +13,13 @@ export const Container = styled.div`
   padding: 20px;
   width: 100%;
   max-width: 400px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
+
