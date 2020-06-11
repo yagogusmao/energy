@@ -37,11 +37,10 @@ export const ContainerInside = styled.div`
   }
   .almoxarifadosIndividuais {
     padding-left: 17px;
+    padding-right: 17px;
     border-radius: 5px;
-    border: 2px;
-    border-color: #ffeded;
+    background-color: #E5E5E5;
     display: grid;
-    border-style: solid;
     grid-template-columns: 70% 30%;
     justify-content: center;
     align-items: center;
