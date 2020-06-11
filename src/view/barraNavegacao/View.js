@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { RotasUsuario } from '../../Router'
 import { signout } from '../../service/LocalAuth';
+import { Button } from 'primereact/button'
 
 const UserNavbarHomeView = props => {
 
@@ -22,10 +23,10 @@ const UserNavbarHomeView = props => {
                     <Link to="/usuario/atividade" >Atividades</Link>
                 </NavbarList>
                 <ButtonArea className="ButtonArea">
-                    <button style={{padding: '5px'}} onClick={() => {
+                    <Button style={{ backgroundColor: '#780000' }} label="Sair" onClick={() => {
                         signout();
                         goTo("/")
-                    }}>Sair</button>
+                    }} className="p-button-raised" />
                 </ButtonArea>
             </NavbarContainer>
             <RotasUsuario />

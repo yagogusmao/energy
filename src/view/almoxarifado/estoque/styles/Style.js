@@ -26,7 +26,7 @@ export const ContainerEstoque = styled.div`
   flex-direction: column;
   background: white;
   align-items: left;
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
   .tabela {
     overflow-x: scroll;
@@ -35,7 +35,7 @@ export const ContainerEstoque = styled.div`
     justify-content: center;
     align-items:center;
     display: flex;
-    margin: 10px;
+    margin-bottom: 10px;
   }
   @keyframes fadeIn {
     from {
@@ -50,18 +50,10 @@ export const ContainerMudarEstoque = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  padding: 10px;
-  .tabela {
-    overflow-x: scroll;
-  }
   .inputs {  
-    margin: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    button {
-      padding: 3px;
-    }
   }
 `;
 
@@ -76,10 +68,16 @@ export const ContainerGerenciador = styled.div`
   justify-content: center;
   align-items: center;
   background: white;
-  padding: 10px;
+  padding: 20px;
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  .titulo {
+    justify-content: center;
+    align-items:center;
+    display: flex;
+    margin-bottom: 10px;
+  }
   .tabela {
     overflow-x: scroll;
   }
@@ -103,7 +101,7 @@ export const ContainerEstoqueRetirar = styled.div`
   flex-direction: column;
   margin: 10px;
   background: white;
-  padding: 10px;
+  padding: 20px;
   .tabela {
     overflow-x: scroll;
   }
@@ -125,23 +123,30 @@ export const ContainerEstoqueRetirar = styled.div`
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin: 20px;
+      padding: 20px;
+      border: 3px;
+      margin-top: 10px;
+      border-left-style: solid;
+      background-color: #E5E5E5;
+      border-color: red;
+      border-radius:5px;
+      .botao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
   .titulo {
     justify-content: center;
     align-items:center;
     display: flex;
-    margin: 10px;
+    margin-bottom: 10px;
   }
   .inputs {  
-    margin: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    button {
-      padding: 3px;
-    }
   }
   @keyframes fadeIn {
     from {
@@ -161,13 +166,18 @@ export const ContainerPesquisa = styled.div`
   border-radius:5px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  justify-content: space-between;
+  padding: 20px;
   align-items: center;
   background: white;
   margin-top: 10px;
   margin-right: 10px;
   margin-left: 10px;
+  .titulo {
+    justify-content: center;
+    align-items:center;
+    display: flex;
+    margin-bottom: 10px;
+  }
   .tabela {
     overflow-x: scroll;
   }
@@ -182,18 +192,13 @@ export const ContainerPesquisa = styled.div`
   .inputs {
     display: grid;
     margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 100px;
-    width: 100%;
+    grid-template-columns: 17% 17% 17% 17% 17% 15%;
     gap: 5px;
     .botao {
       display: flex;
-      max-height: 25px;
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      button {
-        padding: 3px
-      }
     }
   }
 `;

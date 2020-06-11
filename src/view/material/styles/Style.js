@@ -27,7 +27,6 @@ export const ContainerInside = styled.div`
   }
   .inputs {
     display: grid;
-    width: 100%;
     margin: 5px;
     grid-template-columns: 17% 17% 17% 17% 17% 15%;
     gap: 5px;
@@ -66,7 +65,6 @@ export const ContainerPesquisa = styled.div`
   }
   .inputs {
     display: grid;
-    width: 100%;
     margin: 5px;
     grid-template-columns: 17% 17% 17% 17% 17% 15%;
     gap: 5px;

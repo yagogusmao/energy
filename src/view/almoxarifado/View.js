@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContainerInside } from './styles/Style';
+import { Button } from 'primereact/button'
 const AlmoxarifadoView = props => {
     const { almoxarifados, goTo } = props;
     return (
@@ -12,7 +13,7 @@ const AlmoxarifadoView = props => {
                     (
                         <div className="almoxarifadosIndividuais">
                             <p>{almoxarifado._id}</p>
-                            <button type="button" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)}>Ver Estoque</button>
+                            <Button style={{backgroundColor: '#ce5f52'}} label="Ver Estoque" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)} className="p-button-raised p-button-rounded" />
                         </div>
                     )
                 )}

@@ -7,6 +7,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar, MenuTab } from './styles/Style';
 import { Checkbox } from 'primereact/checkbox';
 import { TabMenu } from 'primereact/tabmenu';
+import { Button } from 'primereact/button'
 const EstoqueView = props => {
     const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChangeVaiPara, handleDropDownChangeVemDe, handleDropDownChangeEquipe, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
@@ -74,7 +75,7 @@ const EstoqueView = props => {
                                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                                     <div className="botao">
-                                        <button onClick={pesquisarMateriais}>Pesquisar</button>
+                                        <Button style={{ backgroundColor: '#ce5f52' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                                         {carregandoPesquisar ? <ProgressSpinner /> : <></>}
                                     </div>
                                 </div>
@@ -166,8 +167,8 @@ const EstoqueView = props => {
                                         </DataTable>
                                     </div>
                                     <div className="inputs">
-                                        <button onClick={adicionarEstoque}>Adicionar ao estoque</button>
-                                        <button onClick={() => goto("entrada")}>Relatório de entradas</button>
+                                        <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Adicionar ao estoque" onClick={adicionarEstoque} className="p-button-raised p-button-rounded" />
+                                        <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Relatório de entradas" onClick={() => goto("entrada")} className="p-button-raised p-button-rounded" />
                                     </div>
                                 </ContainerMudarEstoque>
                             </ContainerGerenciador>
@@ -323,8 +324,8 @@ const EstoqueView = props => {
                                     </DataTable>
                                 </div>
                                 <div className="inputs">
-                                    <button onClick={retirarEstoque}>Retirar do estoque</button>
-                                    <button onClick={() => goto("saida")}>Relatório de saídas</button>
+                                    <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar do estoque" onClick={retirarEstoque} className="p-button-raised p-button-rounded" />
+                                    <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Relatório de saídas" onClick={() => goto("saida")} className="p-button-raised p-button-rounded" />
                                 </div>
                                 <div className="gerenciadores">
                                     <div className="transformadores">
@@ -337,10 +338,10 @@ const EstoqueView = props => {
                                         <InputFloat name="impedancia" label="Impedância" value={impedancia} onChange={handleInputChange} />
                                         <InputFloat name="dataFabricacao" label="Data de Fabricação" value={dataFabricacao} onChange={handleInputChange} />
                                         <div className="botao">
-                                            <button onClick={retirarTransformador}>Retirar Transformador</button>
+                                            <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar Transformador" onClick={retirarTransformador} className="p-button-raised p-button-rounded" />
                                         </div>
                                     </div>
-                                    <div className="transformadores">
+                                    <div style={{marginLeft: '20px'}} className="transformadores">
                                         <div className="titulo">
                                             <h3>Medidores</h3>
                                         </div>
@@ -349,7 +350,7 @@ const EstoqueView = props => {
                                         <InputFloat name="nSeloCaixa" label="Nº selo caixa" value={nSeloCaixa} onChange={handleInputChange} />
                                         <InputFloat name="nSeloBorn" label="Nº selo born" value={nSeloBorn} onChange={handleInputChange} />
                                         <div className="botao">
-                                            <button onClick={retirarMedidor}>Retirar Medidor</button>
+                                            <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar Medidor" onClick={retirarMedidor} className="p-button-raised p-button-rounded" />
                                         </div>
                                     </div>
                                 </div>

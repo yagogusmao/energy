@@ -4,8 +4,9 @@ import { Column } from 'primereact/column';
 import InputFloat from '../../component/input/InputFloat';
 import { Dropdown } from 'primereact/dropdown';
 import { ContainerInside, ContainerPesquisa } from './styles/Style';
+import { Button } from 'primereact/button'
 const MaterialView = props => {
-    const { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, submit, handleInputChange, materiais, handleDropDownChange, 
+    const { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, submit, handleInputChange, materiais, handleDropDownChange,
         pesquisarMateriais, _idCriar, unidadeMedidaCriar, descricaoCriar, codigoClasseCriar, descricaoClasseCriar, opcoesCodigos } = props;
     return (
         <>
@@ -14,7 +15,7 @@ const MaterialView = props => {
                     <h1>Criar material</h1>
                 </div>
                 <Dropdown title="titulo" optionLabel="descricaoClasseCriar" value={descricaoClasseCriar} options={opcoesCodigos} placeholder="Código da Classe" onChange={handleDropDownChange} />
-                <div style={{marginTop: '.5em'}}>{descricaoClasseCriar ? 'Código selecionado: ' + descricaoClasseCriar : 'Nenhum código selecionado.'}</div>
+                <div style={{ marginTop: '.5em' }}>{descricaoClasseCriar ? 'Código selecionado: ' + descricaoClasseCriar : 'Nenhum código selecionado.'}</div>
                 <div className="inputs">
                     <InputFloat name="_idCriar" label="_id" value={_idCriar} onChange={handleInputChange} />
                     <InputFloat name="unidadeMedidaCriar" label="Unidade de Medida" value={unidadeMedidaCriar} onChange={handleInputChange} />
@@ -22,7 +23,7 @@ const MaterialView = props => {
                     <InputFloat name="codigoClasseCriar" label="Código de Classe" type="number" value={codigoClasseCriar} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasseCriar" label="Descrição da Classe" value={descricaoClasseCriar} onChange={handleInputChange} />
                     <div className="botao">
-                        <button onClick={submit}>Criar</button>
+                        <Button style={{ backgroundColor: '#ce5f52' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
             </ContainerInside>
@@ -37,7 +38,7 @@ const MaterialView = props => {
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                     <div className="botao">
-                        <button onClick={pesquisarMateriais}>Pesquisar</button>
+                        <Button style={{ backgroundColor: '#ce5f52' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
                 <div className="tabela">

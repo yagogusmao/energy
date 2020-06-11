@@ -29,21 +29,20 @@ export const ContainerInside = styled.div`
     display: grid;
     grid-template-columns: 50% 50%;
     grid-auto-rows: 50px;
-    gap: 5px;
+    gap: 10px;
     p {
       font-size: 20px;
       font-weight: bold
-    }
-    button {
-      max-width: 100px;
     }
   }
   .almoxarifadosIndividuais {
     padding-left: 17px;
     border-radius: 5px;
-    background: #ffeded;
+    border: 2px;
+    border-color: #ffeded;
     display: grid;
-    grid-template-columns: 85% 15%;
+    border-style: solid;
+    grid-template-columns: 70% 30%;
     justify-content: center;
     align-items: center;
   }

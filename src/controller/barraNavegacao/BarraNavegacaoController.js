@@ -25,7 +25,6 @@ class UserNavbarController extends Component {
                 <UserNavbar
                     goTo={this.goTo}
                 />
-
             </>
         );
 
