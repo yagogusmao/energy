@@ -12,7 +12,7 @@ const AlmoxarifadoView = props => {
                     (
                         <div className="almoxarifadosIndividuais">
                             <p>{almoxarifado._id}</p>
-                            <button type="button" onClick={() => goTo(`/estoque?_id=${almoxarifado._id}`)}>Ver Estoque</button>
+                            <button type="button" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)}>Ver Estoque</button>
                         </div>
                     )
                 )}

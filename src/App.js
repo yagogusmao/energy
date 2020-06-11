@@ -14,17 +14,13 @@ import Estoque from './controller/almoxarifado/EstoqueController';
 import Relatorio from './controller/almoxarifado/RelatorioController';
 import Material from './controller/material/MaterialController';
 import Usuario from './controller/usuario/UsuarioController';
+import BarraNavegacao from './controller/barraNavegacao/BarraNavegacaoController';
 
 const App = () =>
   <div className="App">
     <div className="Container">
       <Switch>
-        <Route path="/homepage" component={HomePage} />
-        <Route path="/atividade" component={Atividade} />
-        <Route path="/almoxarifado" component={Almoxarifado} />
-        <Route path="/estoque" component={Estoque} />
-        <Route path="/relatorio" component={Relatorio} />
-        <Route path="/material" component={Material} />
+        <Route path="/usuario" component={BarraNavegacao} />
         <Route exact path="/" component={Usuario} />
       </Switch>
     </div>

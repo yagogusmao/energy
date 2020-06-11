@@ -5,7 +5,7 @@ export const MenuTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  margin-top: 10px;
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -27,8 +27,7 @@ export const ContainerEstoque = styled.div`
   background: white;
   align-items: left;
   padding: 10px;
-  width: 100%;
-  margin: 5px;
+  margin: 10px;
   .tabela {
     overflow-x: scroll;
   }
@@ -52,7 +51,6 @@ export const ContainerMudarEstoque = styled.div`
   flex-direction: column;
   background: white;
   padding: 10px;
-  width: 100%;
   .tabela {
     overflow-x: scroll;
   }
@@ -78,9 +76,10 @@ export const ContainerGerenciador = styled.div`
   justify-content: center;
   align-items: center;
   background: white;
-  width: 100%;
   padding: 10px;
-  margin: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   .tabela {
     overflow-x: scroll;
   }
@@ -102,10 +101,9 @@ export const ContainerEstoqueRetirar = styled.div`
   border-radius:5px;
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  margin: 10px;
   background: white;
   padding: 10px;
-  width: 100%;
   .tabela {
     overflow-x: scroll;
   }
@@ -167,8 +165,9 @@ export const ContainerPesquisa = styled.div`
   justify-content: space-between;
   align-items: center;
   background: white;
-  width: 100%;
-  margin: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
   .tabela {
     overflow-x: scroll;
   }
@@ -182,9 +181,9 @@ export const ContainerPesquisa = styled.div`
   }
   .inputs {
     display: grid;
-    width: 100%;
     margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 140px;
+    grid-template-columns: 17% 17% 17% 17% 17% 100px;
+    width: 100%;
     gap: 5px;
     .botao {
       display: flex;

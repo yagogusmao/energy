@@ -9,10 +9,19 @@ export const ContainerInside = styled.div`
   flex-direction: column;
   background: white;
   padding: 20px;
-  width: 100%;
+  margin: 10px;
+  animation: fadeIn 1s;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .titulo {
     display: flex;
-    margin: 5px;
+    margin-bottom: 5px;
     flex-direction: row;
     justify-content: center;
   }
@@ -44,8 +53,17 @@ export const ContainerPesquisa = styled.div`
   justify-content: space-between;
   align-items: center;
   background: white;
-  width: 100%;
-  margin: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  animation: fadeIn 1s;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .inputs {
     display: grid;
     width: 100%;

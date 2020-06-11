@@ -7,7 +7,8 @@ export const Container = styled.div`
   background: white;
   padding: 40px;
   width: 100%;
-  margin: 5vw 5vh; 
+  position: relative;
+  margin-top: 0px;
   border-radius:5px;
   animation: fadeIn 1s;
   @keyframes fadeIn {

@@ -137,7 +137,7 @@ export default class EstoqueController extends Component {
 
     goto = (opcao) => {
         const { _id } = queryString.parse(this.props.location.search);
-        this.props.history.push(`/relatorio?_id=${_id}&opcao=${opcao}`);
+        this.props.history.push(`/usuario/relatorio?_id=${_id}&opcao=${opcao}`);
     }
 
     onChangeSelecteds = (material) => {

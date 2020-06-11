@@ -8,9 +8,9 @@ export const ContainerInside = styled.div`
   border-color: red;
   display: flex;
   flex-direction: column;
+  margin: 10px;
   background: white;
   padding: 20px;
-  width: 100%;
   @keyframes fadeIn {
     from {
       opacity: 0;

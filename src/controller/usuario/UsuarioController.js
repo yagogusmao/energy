@@ -27,7 +27,7 @@ export default class UsuarioController extends Component {
             Api.login({ _id, senha }).then(res => {
                 const { token } = res.data;
                 authenticate(token)
-                this.props.history.push("/homepage");
+                this.props.history.push("/usuario");
             }, erro => {
                 const { mensagem } = erro.response.data;
                 this.setState({ carregando: false }, () => this.growl.show({ severity: 'error', summary: mensagem }))

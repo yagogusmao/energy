@@ -11,8 +11,9 @@ export const ContainerRelatorio = styled.div`
   background: white;
   align-items: left;
   padding: 20px;
-  margin: 5px;
-  width:100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   .tabela {
     overflow-x: scroll;
   }
@@ -44,8 +45,7 @@ export const ContainerPesquisa = styled.div`
   justify-content: space-between;
   align-items: center;
   background: white;
-  width: 100%;
-  margin: 5px;
+  margin: 10px;
   .inputs {
     display: grid;
     width: 100%;
