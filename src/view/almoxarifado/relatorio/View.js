@@ -3,6 +3,7 @@ import InputFloat from '../../../component/input/InputFloat';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContainerRelatorio, ContainerPesquisa } from './styles/Style';
+import { Button } from 'primereact/button';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -22,7 +23,7 @@ const RelatorioView = props => {
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                     <div className="botao">
-                        <button onClick={pesquisarMateriais}>Pesquisar</button>
+                        <Button style={{ backgroundColor: '#ce5f52', width: '100px' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
                 <div className="tabela">

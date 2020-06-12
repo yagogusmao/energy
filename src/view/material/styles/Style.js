@@ -48,7 +48,7 @@ export const ContainerPesquisa = styled.div`
   border-radius:5px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
   justify-content: space-between;
   align-items: center;
   background: white;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import AtividadeView from '../../view/atividade/View';
 import Api from '../../service/ApiBaseAtividade';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { Growl } from 'primereact/growl';
 
 export default class AtividadeController extends Component {
 
@@ -12,12 +14,15 @@ export default class AtividadeController extends Component {
             nome: "",
             valor: "",
             tipo: "",
-            atividades: []
+            atividades: [],
+            carregando: false
         }
     }
 
     componentDidMount = () => {
-        Api.listarAtividades().then(res => this.setState({ atividades: res.data.atividades }));
+        this.setState({ carregando: true }, () =>
+            Api.listarAtividades().then(res =>
+                this.setState({ atividades: res.data.atividades, carregando: false })))
     }
 
     handleInputChange = (e) => {
@@ -25,28 +30,37 @@ export default class AtividadeController extends Component {
         this.setState({ [name]: value })
     }
 
-    submit = () => {
-        const { _id, valor, nome, tipo, atividades } = this.state;
-        Api.criarAtividade({ _id, valor: Number(valor), nome, tipo }).then(res => {
-            atividades.push(res.data.atividade);
-            this.setState({ atividades: atividades })
-        })
+    handleDropDown = (e) => {
+        this.setState({ tipo: e.value })
     }
 
-    //goTo = (path) => this.props.history.push(path);
-    //this.props.history.goBack()
+    submit = () => {
+        let { _id, valor, nome, tipo, atividades } = this.state;
+        Api.criarAtividade({ _id, valor: Number(valor), nome, tipo }).then(res => {
+            atividades.push(res.data.atividade);
+            this.setState({ atividades: atividades }, () =>
+                this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+        }, (erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })))
+    }
 
     render() {
-        let { _id, valor, nome, tipo, atividades } = this.state;
+        const { _id, valor, nome, tipo, atividades, carregando } = this.state;
         return (
-            <AtividadeView
-                _id={_id}
-                valor={valor}
-                nome={nome}
-                tipo={tipo}
-                atividades={atividades}
-                submit={this.submit}
-                handleInputChange={this.handleInputChange} />
+            <>
+                <Growl ref={(el) => this.growl = el} />
+                {carregando ? <ProgressSpinner />
+                    :
+                    <AtividadeView
+                        handleDropDown={this.handleDropDown}
+                        _id={_id}
+                        valor={valor}
+                        nome={nome}
+                        tipo={tipo}
+                        atividades={atividades}
+                        submit={this.submit}
+                        handleInputChange={this.handleInputChange} />
+                }
+            </>
         );
     }
 }

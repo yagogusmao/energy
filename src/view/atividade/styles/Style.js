@@ -1,16 +1,32 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items:center;
-  background: white;
-  padding: 20px;
-  width: 100%;
-  margin:  5vw 5vh; 
-  border-radius:5px;
+export const ContainerCriar = styled.div`
   animation: fadeIn 1s;
+  border-radius:5px;
+  margin: 10px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  
+  background-color: white;
+  padding: 20px;
+  .titulo {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    justify-content: space-between;
+    .botao {
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    } 
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -21,31 +37,29 @@ export const Container = styled.div`
   }
 `;
 
-export const ContainerInsideUp = styled.div`
+export const ContainerTabela = styled.div`
+  animation: fadeIn 1s;
   border-radius:5px;
-  display: grid;
-  margin-bottom: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  background: #d64f4f;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  background-color: white;
   padding: 20px;
-  width: 100%;
-  p {
-      font-size: 20px
+  .titulo {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
-export const ContainerInsideDown = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #d64f4f;
-  padding: 40px;
-  width: 100%;
-  p {  
-      margin: 5px;
-      background: #d64f4f;
-  }
-`;

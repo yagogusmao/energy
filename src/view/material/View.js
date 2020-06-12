@@ -20,8 +20,8 @@ const MaterialView = props => {
                     <InputFloat name="_idCriar" label="_id" value={_idCriar} onChange={handleInputChange} />
                     <InputFloat name="unidadeMedidaCriar" label="Unidade de Medida" value={unidadeMedidaCriar} onChange={handleInputChange} />
                     <InputFloat name="descricaoCriar" label="Descrição" value={descricaoCriar} onChange={handleInputChange} />
-                    <InputFloat name="codigoClasseCriar" label="Código de Classe" type="number" value={codigoClasseCriar} onChange={handleInputChange} />
-                    <InputFloat name="descricaoClasseCriar" label="Descrição da Classe" value={descricaoClasseCriar} onChange={handleInputChange} />
+                    <InputFloat name="codigoClasseCriar" disabled={true} label="Código de Classe" type="number" value={codigoClasseCriar} onChange={handleInputChange} />
+                    <InputFloat name="descricaoClasseCriar" disabled={true} label="Descrição da Classe" value={descricaoClasseCriar} onChange={handleInputChange} />
                     <div className="botao">
                         <Button style={{ backgroundColor: '#ce5f52' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
                     </div>

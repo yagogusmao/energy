@@ -12,8 +12,12 @@ const AlmoxarifadoView = props => {
                 {almoxarifados.map(almoxarifado =>
                     (
                         <div className="almoxarifadosIndividuais">
-                            <p>{almoxarifado._id}</p>
-                            <Button style={{backgroundColor: '#ce5f52'}} label="Ver Estoque" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)} className="p-button-raised p-button-rounded" />
+                            <div class="apresentacao">
+                                <strong style={{marginTop: '5px'}}>{almoxarifado._id}</strong>
+                                <p>Status: OK</p>
+                                <p style={{marginBottom: '5px'}}>Quantidade de Itens: {almoxarifado.quantidade}</p>
+                            </div>
+                            <Button style={{ backgroundColor: '#ce5f52' }} label="Ver Estoque" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)} className="p-button-raised p-button-rounded" />
                         </div>
                     )
                 )}

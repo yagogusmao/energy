@@ -122,7 +122,7 @@ const EstoqueView = props => {
                                     </DataTable>
                                 </div>
                             </ContainerPesquisa>
-                            <ContainerGerenciador>
+                            <ContainerGerenciador style={{marginBottom: '10px'}}>
                                 <div className="titulo">
                                     <h1>Gerenciador de entradas</h1>
                                 </div>

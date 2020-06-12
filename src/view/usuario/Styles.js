@@ -11,8 +11,18 @@ export const Container = styled.div`
   flex-direction: column;
   background: white;
   padding: 20px;
+  max-width: 700px;
   width: 100%;
-  max-width: 400px;
+  .titulo {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .botao {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

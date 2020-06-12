@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import MaterialView from '../../view/material/View';
 import Api from '../../service/ApiBaseMaterial';
+import { Growl } from 'primereact/growl';
 
 export default class MaterialController extends Component {
 
@@ -23,7 +24,7 @@ export default class MaterialController extends Component {
         }
     }
     componentDidMount = () => {
-        Api.listarCodigos().then(res => 
+        Api.listarCodigos().then(res =>
             this.setState({ opcoesCodigos: res.data.map(codigo => { return { codigoClasseCriar: codigo._id, descricaoClasseCriar: codigo.descricaoClasse } }) })
         )
     }
@@ -46,8 +47,8 @@ export default class MaterialController extends Component {
             codigoClasse: codigoClasseCriar, descricaoClasse: descricaoClasseCriar
         }).then(res => {
             materiais.push(res.data.material);
-            this.setState({ materiais })
-        })
+            this.setState({ materiais }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+        }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
     }
 
     pesquisarMateriais = () => {
@@ -60,24 +61,27 @@ export default class MaterialController extends Component {
         let { _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiais, opcoesCodigos,
             _idCriar, unidadeMedidaCriar, descricaoCriar, codigoClasseCriar, descricaoClasseCriar } = this.state;
         return (
-            <MaterialView
-                _id={_id}
-                unidadeMedida={unidadeMedida}
-                descricao={descricao}
-                codigoClasse={codigoClasse}
-                descricaoClasse={descricaoClasse}
-                _idCriar={_idCriar}
-                unidadeMedidaCriar={unidadeMedidaCriar}
-                descricaoCriar={descricaoCriar}
-                codigoClasseCriar={codigoClasseCriar}
-                descricaoClasseCriar={descricaoClasseCriar}
-                materiais={materiais}
-                opcoesCodigos={opcoesCodigos}
-                submit={this.submit}
-                handleInputChange={this.handleInputChange}
-                handleDropDownChange={this.handleDropDownChange}
-                pesquisarMateriais={this.pesquisarMateriais}
-            />
+            <>
+                <Growl ref={(el) => this.growl = el} />
+                <MaterialView
+                    _id={_id}
+                    unidadeMedida={unidadeMedida}
+                    descricao={descricao}
+                    codigoClasse={codigoClasse}
+                    descricaoClasse={descricaoClasse}
+                    _idCriar={_idCriar}
+                    unidadeMedidaCriar={unidadeMedidaCriar}
+                    descricaoCriar={descricaoCriar}
+                    codigoClasseCriar={codigoClasseCriar}
+                    descricaoClasseCriar={descricaoClasseCriar}
+                    materiais={materiais}
+                    opcoesCodigos={opcoesCodigos}
+                    submit={this.submit}
+                    handleInputChange={this.handleInputChange}
+                    handleDropDownChange={this.handleDropDownChange}
+                    pesquisarMateriais={this.pesquisarMateriais}
+                />
+            </>
         );
     }
 }

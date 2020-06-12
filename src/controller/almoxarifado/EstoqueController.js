@@ -303,7 +303,7 @@ export default class EstoqueController extends Component {
     }
 
     render() {
-        let { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando, sairAlmoxarifado,
+        const { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando, sairAlmoxarifado,
             impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor, carregandoPesquisar,
             servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados, itemAtivo,
             quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;

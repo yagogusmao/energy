@@ -10,6 +10,7 @@ export const ContainerInside = styled.div`
   flex-direction: column;
   margin: 10px;
   background: white;
+  
   padding: 20px;
   @keyframes fadeIn {
     from {
@@ -26,23 +27,34 @@ export const ContainerInside = styled.div`
     justify-content: center;
   }
   .almoxarifados {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: 50px;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    strong {
+      font-size: 18px;
+    }
     p {
-      font-size: 20px;
-      font-weight: bold
+      font-size: 14px;
+    }
+    .almoxarifadosIndividuais {
+      border: 3px;
+      border-left-style: solid;
+      border-color: red;
+      padding-left: 17px;
+      margin: 5px;
+      min-height: 50px;
+      padding-right: 17px;
+      border-radius: 5px;
+      background-color: #E5E5E5;
+      display: grid;
+      grid-template-columns: 85% 15%;
+      justify-content: center;
+      align-items: center;
+      .apresentacao {
+        display:grid;
+        flex-direction: column;
+        gap: 5px;
+      }
     }
   }
-  .almoxarifadosIndividuais {
-    padding-left: 17px;
-    padding-right: 17px;
-    border-radius: 5px;
-    background-color: #E5E5E5;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    justify-content: center;
-    align-items: center;
-  }
+  
 `;
