@@ -7,6 +7,10 @@ import AtividadeController from './controller/atividade/AtividadeController';
 import MaterialController from './controller/material/MaterialController';
 import RelatorioController from './controller/almoxarifado/RelatorioController';
 import EstoqueController from './controller/almoxarifado/EstoqueController';
+import FuncionarioController from './controller/funcionario/FuncionarioController';
+import EquipeController from './controller/equipe/EquipeController';
+import GerenciadorEquipeController from './controller/equipe/GerenciadorController';
+import VeiculoController from './controller/veiculo/VeiculoController';
 
 const RotaPrivada = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -27,6 +31,10 @@ export const RotasUsuario = () => (
         <RotaPrivada exact path="/usuario/material" component={MaterialController} />
         <RotaPrivada exact path="/usuario/estoque" component={EstoqueController} />
         <RotaPrivada exact path="/usuario/relatorio" component={RelatorioController} />
+        <RotaPrivada exact path="/usuario/funcionario" component={FuncionarioController} />
+        <RotaPrivada exact path="/usuario/equipe" component={EquipeController} />
+        <RotaPrivada exact path="/usuario/equipe/gerenciar" component={GerenciadorEquipeController} />
+        <RotaPrivada exact path="/usuario/veiculo" component={VeiculoController} />
     </Switch>
 
 )

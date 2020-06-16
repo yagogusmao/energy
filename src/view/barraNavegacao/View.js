@@ -21,6 +21,9 @@ const UserNavbarHomeView = props => {
                     <Link to="/usuario/almoxarifado" >Almoxarifados</Link>
                     <Link to="/usuario/material" >Materiais</Link>
                     <Link to="/usuario/atividade" >Atividades</Link>
+                    <Link to="/usuario/funcionario" >Funcionários</Link>
+                    <Link to="/usuario/equipe" >Equipes</Link>
+                    <Link to="/usuario/veiculo" >Veículos</Link>
                 </NavbarList>
                 <ButtonArea className="ButtonArea">
                     <Button style={{ backgroundColor: '#780000' }} label="Sair" onClick={() => {
