@@ -49,7 +49,7 @@ export const Container = styled.div`
 
 export const NavbarList = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, auto);
+  grid-template-columns: repeat(7, auto);
   width: calc(100% - 200px);
   align-items: center;
   justify-content: center;
