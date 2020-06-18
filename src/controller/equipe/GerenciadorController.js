@@ -20,6 +20,15 @@ export default class GerenciadorController extends Component {
             tipo: "",
             status: "",
             apontamentos: [],
+            lucro: 0,
+            lucroHoje: 0,
+            lucroMes: 0,
+            lucroSemana: 0,
+            lucroAno: 0,
+            apontamentosHoje: [],
+            apontamentosSemana: [],
+            apontamentosMes: [],
+            apontamentosAno: [],
             carregando: false,
             itemAtivo: "faturamento",
             modelo: "",
@@ -36,22 +45,36 @@ export default class GerenciadorController extends Component {
             Api.listarFuncionariosSemEquipe(),
             Api.listarFuncionarios(_id),
             Api.verVeiculo(_id),
-            Api.listarVeiculosSemEquipe()
+            Api.listarVeiculosSemEquipe(),
+            Api.verFaturamento(_id)
             ]).then(res => {
-                const { _id, tipo, status, veiculo, local, apontamentos } = res[0].data.equipe;
+                const { _id, tipo, status, veiculo, local } = res[0].data.equipe;
                 const funcionarios = res[2].data.funcionarios;
                 const funcionariosSemEquipe = res[1].data.funcionarios;
+                const apontamentos = res[5].data.faturamento.apontamentos;
+                const lucro = res[5].data.faturamento.lucro;
+                const apontamentosHoje = res[5].data.faturamento.apontamentosHoje;
+                const lucroHoje = res[5].data.faturamento.lucroHoje;
+                const apontamentosSemana = res[5].data.faturamento.apontamentosSemana;
+                const lucroSemana = res[5].data.faturamento.lucroSemana;
+                const apontamentosMes = res[5].data.faturamento.apontamentosMes;
+                const lucroMes = res[5].data.faturamento.lucroMes;
+                const apontamentosAno = res[5].data.faturamento.apontamentosAno;
+                const lucroAno = res[5].data.faturamento.lucroAno;
                 if (res[3].data.veiculo === {}) {
                     this.setState({
                         _id, tipo, status, veiculo, local, apontamentos, funcionarios,
-                        funcionariosSemEquipe, carregando: false, veiculos: res[4].data.veiculos
+                        funcionariosSemEquipe, carregando: false, veiculos: res[4].data.veiculos,
+                        apontamentosHoje, apontamentosSemana, apontamentosMes, apontamentosAno,
+                        lucro, lucroHoje, lucroMes, lucroSemana, lucroAno
                     })
                 } else {
                     const { modelo, numeracao, kilometragem } = res[3].data.veiculo;
                     this.setState({
                         _id, modelo, numeracao, kilometragem, tipo, status, veiculo, local,
                         apontamentos, funcionarios, funcionariosSemEquipe, carregando: false,
-                        veiculos: res[4].data.veiculos
+                        veiculos: res[4].data.veiculos, apontamentosHoje, apontamentosSemana, apontamentosMes,
+                        apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno
                     })
                 }
             })
@@ -137,7 +160,8 @@ export default class GerenciadorController extends Component {
 
     render() {
         const { carregando, _id, veiculo, tipo, local, status, apontamentos, funcionarios, funcionariosSemEquipe,
-            itemAtivo, modelo, numeracao, kilometragem, veiculos } = this.state;
+            itemAtivo, modelo, numeracao, kilometragem, veiculos, apontamentosHoje, apontamentosSemana, apontamentosMes,
+            apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -145,6 +169,11 @@ export default class GerenciadorController extends Component {
                     :
                     <>
                         <EquipeGerenciadorView
+                            lucro={lucro}
+                            lucroHoje={lucroHoje}
+                            lucroMes={lucroMes}
+                            lucroSemana={lucroSemana}
+                            lucroAno={lucroAno}
                             retirarVeiculo={this.retirarVeiculo}
                             actionTemplateButtonVeiculo={this.actionTemplateButtonVeiculo}
                             veiculos={veiculos}
@@ -163,6 +192,10 @@ export default class GerenciadorController extends Component {
                             local={local}
                             status={status}
                             apontamentos={apontamentos}
+                            apontamentosHoje={apontamentosHoje}
+                            apontamentosSemana={apontamentosSemana}
+                            apontamentosMes={apontamentosMes}
+                            apontamentosAno={apontamentosAno}
                             funcionarios={funcionarios}
                         />
                     </>}

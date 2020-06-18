@@ -148,3 +148,31 @@ export const ContainerVeiculos = styled.div`
     }
   }
 `;
+
+export const ContainerFaturamento = styled.div`
+  animation: fadeIn 1s;
+  .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  border-radius:5px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background: white;
+  padding: 20px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;

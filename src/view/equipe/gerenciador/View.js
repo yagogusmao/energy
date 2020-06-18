@@ -1,13 +1,17 @@
 import React from 'react';
-import { ContainerPropriedades, ContainerGerenciadorFuncionarios, MenuTab, ContainerGerenciadorVeiculos, ContainerVeiculos } from './Style';
+import {
+    ContainerPropriedades, ContainerGerenciadorFuncionarios, MenuTab,
+    ContainerGerenciadorVeiculos, ContainerVeiculos, ContainerFaturamento
+} from './Style';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button';
 const GerenciadorView = props => {
-    const { _id, veiculo, tipo, local, status, apontamentos, funcionarios, funcionariosSemEquipe, actionTemplateButtonVeiculo,
+    const { _id, veiculo, tipo, local, status, funcionarios, funcionariosSemEquipe, actionTemplateButtonVeiculo,
         actionTemplateButton, actionTemplateButtonAdicionar, itemAtivo, onChangeItemAtivo, numeracao, kilometragem,
-        modelo, veiculos, retirarVeiculo } = props;
+        modelo, veiculos, retirarVeiculo, apontamentos, apontamentosHoje, apontamentosSemana, apontamentosMes,
+        apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno } = props;
     return (
         <>
             <ContainerPropriedades>
@@ -28,6 +32,236 @@ const GerenciadorView = props => {
             </MenuTab>
             {itemAtivo === "faturamento" ?
                 <>
+                    <ContainerFaturamento>
+                        <div className="titulo">
+                            <h1>Faturamento diário: R$ {lucroHoje}</h1>
+                        </div>
+                        <div style={{ marginTop: '5px' }} className="tabela">
+                            <DataTable
+                                value={apontamentosHoje}
+                                paginator={apontamentosHoje.length > 10}
+                                rows={10}
+                                emptyMessage={"Nenhum veículo sem equipe."}
+                            >
+                                <Column
+                                    filter={true}
+                                    field="tipo"
+                                    header="Tipo do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="codigoObra"
+                                    header="Código do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.supervisor"
+                                    header="Supervisor"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.encarregado"
+                                    header="Encarregado"
+                                />
+                                <Column
+                                    field="cidade"
+                                    header="Cidade do serviço"
+                                />
+                                <Column
+                                    field="veiculo.placa"
+                                    header="Veículo"
+                                />
+                                <Column
+                                    field="lucro"
+                                    header="Lucro Total (R$)"
+                                />
+                            </DataTable>
+                        </div>
+                    </ContainerFaturamento>
+                    <ContainerFaturamento>
+                        <div className="titulo">
+                            <h1>Faturamento semanal: R$ {lucroSemana}</h1>
+                        </div>
+                        <div style={{ marginTop: '5px' }} className="tabela">
+                            <DataTable
+                                value={apontamentosSemana}
+                                paginator={apontamentosSemana.length > 10}
+                                rows={10}
+                                emptyMessage={"Nenhum veículo sem equipe."}
+                            >
+                                <Column
+                                    filter={true}
+                                    field="tipo"
+                                    header="Tipo do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="codigoObra"
+                                    header="Código do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.supervisor"
+                                    header="Supervisor"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.encarregado"
+                                    header="Encarregado"
+                                />
+                                <Column
+                                    field="cidade"
+                                    header="Cidade do serviço"
+                                />
+                                <Column
+                                    field="veiculo.placa"
+                                    header="Veículo"
+                                />
+                                <Column
+                                    field="lucro"
+                                    header="Lucro Total (R$)"
+                                />
+                            </DataTable>
+                        </div>
+                    </ContainerFaturamento>
+                    <ContainerFaturamento>
+                        <div className="titulo">
+                            <h1>Faturamento mensal: R$ {lucroMes}</h1>
+                        </div>
+                        <div style={{ marginTop: '5px' }} className="tabela">
+                            <DataTable
+                                value={apontamentosMes}
+                                paginator={apontamentosMes.length > 10}
+                                rows={10}
+                                emptyMessage={"Nenhum veículo sem equipe."}
+                            >
+                                <Column
+                                    filter={true}
+                                    field="tipo"
+                                    header="Tipo do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="codigoObra"
+                                    header="Código do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.supervisor"
+                                    header="Supervisor"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.encarregado"
+                                    header="Encarregado"
+                                />
+                                <Column
+                                    field="cidade"
+                                    header="Cidade do serviço"
+                                />
+                                <Column
+                                    field="veiculo.placa"
+                                    header="Veículo"
+                                />
+                                <Column
+                                    field="lucro"
+                                    header="Lucro Total (R$)"
+                                />
+                            </DataTable>
+                        </div>
+                    </ContainerFaturamento>
+                    <ContainerFaturamento>
+                        <div className="titulo">
+                            <h1>Faturamento anual: R$ {lucroAno}</h1>
+                        </div>
+                        <div style={{ marginTop: '5px' }} className="tabela">
+                            <DataTable
+                                value={apontamentosAno}
+                                paginator={apontamentosAno.length > 10}
+                                rows={10}
+                                emptyMessage={"Nenhum veículo sem equipe."}
+                            >
+                                <Column
+                                    filter={true}
+                                    field="tipo"
+                                    header="Tipo do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="codigoObra"
+                                    header="Código do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.supervisor"
+                                    header="Supervisor"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.encarregado"
+                                    header="Encarregado"
+                                />
+                                <Column
+                                    field="cidade"
+                                    header="Cidade do serviço"
+                                />
+                                <Column
+                                    field="veiculo.placa"
+                                    header="Veículo"
+                                />
+                                <Column
+                                    field="lucro"
+                                    header="Lucro Total (R$)"
+                                />
+                            </DataTable>
+                        </div>
+                    </ContainerFaturamento>
+                    <ContainerFaturamento>
+                        <div className="titulo">
+                            <h1>Faturamento em todos os tempos: R$ {lucro} </h1>
+                        </div>
+                        <div style={{ marginTop: '5px' }} className="tabela">
+                            <DataTable
+                                value={apontamentos}
+                                paginator={apontamentos.length > 10}
+                                rows={10}
+                                emptyMessage={"Nenhum veículo sem equipe."}
+                            >
+                                <Column
+                                    filter={true}
+                                    field="tipo"
+                                    header="Tipo do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="codigoObra"
+                                    header="Código do serviço"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.supervisor"
+                                    header="Supervisor"
+                                />
+                                <Column
+                                    filter={true}
+                                    field="pessoa.encarregado"
+                                    header="Encarregado"
+                                />
+                                <Column
+                                    field="cidade"
+                                    header="Cidade do serviço"
+                                />
+                                <Column
+                                    field="veiculo.placa"
+                                    header="Veículo"
+                                />
+                                <Column
+                                    field="lucro"
+                                    header="Lucro Total (R$)"
+                                />
+                            </DataTable>
+                        </div>
+                    </ContainerFaturamento>
                 </>
                 :
                 itemAtivo === "funcionarios" ?
