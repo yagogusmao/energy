@@ -134,8 +134,12 @@ export default class ApontamentoController extends Component {
         }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
     }
 
-    actionTemplateButtonFinalizar = (rowData) => <Button style={{ backgroundColor: '#ce5f52' }}
-        label="Finalizar" onClick={() => { this.finalizarApontamento(rowData._id) }}
+    actionTemplateButtonFinalizar = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Finalizar" onClick={() => { this.finalizarApontamento(rowData._id) }}
         className="p-button-raised p-button-rounded" />
 
     onChangeSelecteds = (atividade) => {
@@ -173,8 +177,12 @@ export default class ApontamentoController extends Component {
         this.setState({ atividadesSelecionadas: newArray })
     }
 
-    actionTemplateButton = (rowData) => <Button style={{ backgroundColor: '#ce5f52' }}
-        label="Retirar atividade" onClick={() => { this.retirarAtividadeTabela(rowData._id) }}
+    actionTemplateButton = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Retirar atividade" onClick={() => { this.retirarAtividadeTabela(rowData._id) }}
         className="p-button-raised p-button-rounded" />
 
     retirarAtividadeTabela = (material) => {

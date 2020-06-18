@@ -1,26 +1,42 @@
 import React from 'react';
 import { ContainerInside } from './styles/Style';
-import { Button } from 'primereact/button'
+import { Button } from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 const AlmoxarifadoView = props => {
-    const { almoxarifados, goTo } = props;
+    const { almoxarifados, actionTemplateButton } = props;
     return (
         <ContainerInside>
             <div className="titulo">
                 <h1>Almoxarifados</h1>
             </div>
-            <div className="almoxarifados">
-                {almoxarifados.map(almoxarifado =>
-                    (
-                        <div className="almoxarifadosIndividuais">
-                            <div class="apresentacao">
-                                <strong style={{marginTop: '5px'}}>{almoxarifado._id}</strong>
-                                <p>Status: OK</p>
-                                <p style={{marginBottom: '5px'}}>Quantidade de Itens: {almoxarifado.quantidade}</p>
-                            </div>
-                            <Button style={{ backgroundColor: '#ce5f52' }} label="Ver Estoque" onClick={() => goTo(`/usuario/estoque?_id=${almoxarifado._id}`)} className="p-button-raised p-button-rounded" />
-                        </div>
-                    )
-                )}
+            <div style={{ marginTop: '5px' }} className="tabela">
+                <DataTable
+                    value={almoxarifados}
+                    paginator={almoxarifados.length > 10}
+                    rows={10}
+                    emptyMessage={"Nenhuma equipe."}
+                >
+                    <Column
+                        field="_id"
+                        header="_id"
+                        style={{ textAlign: 'center', width: '100px' }}
+                    />
+                    <Column
+                        field="status"
+                        header="Status"
+                        style={{ textAlign: 'center', width: '100px' }}
+                    />
+                    <Column
+                        field="quantidade"
+                        header="Quantidade de Itens"
+                        style={{ textAlign: 'center', width: '100px' }}
+                    />
+                    <Column
+                        body={actionTemplateButton.bind(this)}
+                        style={{ textAlign: 'center', width: '100px' }}
+                    />
+                </DataTable>
             </div>
         </ContainerInside>
     )

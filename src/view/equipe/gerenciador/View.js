@@ -127,7 +127,12 @@ const GerenciadorView = props => {
                                     {veiculo !== "" ? <strong>Kilometragem: {kilometragem}</strong> : <strong>Kilometragem: -</strong>}
                                 </div>
                                 <div className="botao">
-                                    <Button style={{ backgroundColor: '#ce5f52' }} label="Retirar veículo da equipe" onClick={retirarVeiculo} className="p-button-raised p-button-rounded" />
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+                                    }} label="Retirar veículo da equipe" onClick={retirarVeiculo} className="p-button-raised p-button-rounded" />
                                 </div>
                             </div>
                         </ContainerGerenciadorVeiculos>

@@ -28,7 +28,10 @@ const AtividadeView = props => {
                         </div>
                     </div>
                     <div className="botao">
-                        <Button style={{ backgroundColor: '#ce5f52', minWidth: '100px' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
+                        <Button style={{ backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', minWidth: '100px' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
             </ContainerCriar>

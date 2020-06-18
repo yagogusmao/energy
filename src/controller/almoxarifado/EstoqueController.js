@@ -8,6 +8,7 @@ import { Growl } from 'primereact/growl';
 import InputFloat from '../../component/input/InputFloat';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import queryString from 'query-string';
+import { Button } from 'primereact/button';
 
 export default class EstoqueController extends Component {
     constructor(props) {
@@ -199,7 +200,7 @@ export default class EstoqueController extends Component {
     onChangeItemAtivo = (e) => {
         this.setState({ itemAtivo: e.value.value })
     }
-    
+
     retirarTransformador = () => {
         const { _id } = queryString.parse(this.props.location.search);
         const { _idTransformador, tombamento, impedancia, numeroSerie, dataFabricacao, servico, equipe, vaiPara, sairAlmoxarifado } = this.state;
@@ -277,9 +278,20 @@ export default class EstoqueController extends Component {
             onChange={this.handleInputChangeTable} />
     }
 
-    actionTemplateButton = (rowData) => <button onClick={() => { this.retirarMaterialTabela(rowData._id) }}>Retirar material</button>
+    actionTemplateButton = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Retirar material" onClick={() => { this.retirarMaterialTabela(rowData._id) }} className="p-button-raised p-button-rounded" />
 
-    actionTemplateButtonRetirar = (rowData) => <button onClick={() => { this.retirarMaterialTabelaRetirar(rowData._id) }}>Retirar material</button>
+
+    actionTemplateButtonRetirar = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Retirar material" onClick={() => { this.retirarMaterialTabelaRetirar(rowData._id) }} className="p-button-raised p-button-rounded" />
 
     retirarMaterialTabela = (material) => {
         let newArray = [];

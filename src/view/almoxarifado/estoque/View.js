@@ -75,7 +75,12 @@ const EstoqueView = props => {
                                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                                     <div className="botao">
-                                        <Button style={{ backgroundColor: '#ce5f52' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
+                                        <Button style={{
+                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+                                        }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                                         {carregandoPesquisar ? <ProgressSpinner /> : <></>}
                                     </div>
                                 </div>
@@ -122,7 +127,7 @@ const EstoqueView = props => {
                                     </DataTable>
                                 </div>
                             </ContainerPesquisa>
-                            <ContainerGerenciador style={{marginBottom: '10px'}}>
+                            <ContainerGerenciador style={{ marginBottom: '10px' }}>
                                 <div className="titulo">
                                     <h1>Gerenciador de entradas</h1>
                                 </div>
@@ -162,13 +167,23 @@ const EstoqueView = props => {
                                             />
                                             <Column
                                                 body={actionTemplateButton.bind(this)}
-                                                style={{ textAlign: 'center', width: '100px' }}
+                                                style={{ textAlign: 'center', width: '200px' }}
                                             />
                                         </DataTable>
                                     </div>
                                     <div className="inputs">
-                                        <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Adicionar ao estoque" onClick={adicionarEstoque} className="p-button-raised p-button-rounded" />
-                                        <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Relatório de entradas" onClick={() => goto("entrada")} className="p-button-raised p-button-rounded" />
+                                        <Button style={{
+                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                        }} label="Adicionar ao estoque" onClick={adicionarEstoque} className="p-button-raised p-button-rounded" />
+                                        <Button style={{
+                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                        }} label="Relatório de entradas" onClick={() => goto("entrada")} className="p-button-raised p-button-rounded" />
                                     </div>
                                 </ContainerMudarEstoque>
                             </ContainerGerenciador>
@@ -324,8 +339,18 @@ const EstoqueView = props => {
                                     </DataTable>
                                 </div>
                                 <div className="inputs">
-                                    <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar do estoque" onClick={retirarEstoque} className="p-button-raised p-button-rounded" />
-                                    <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Relatório de saídas" onClick={() => goto("saida")} className="p-button-raised p-button-rounded" />
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Retirar do estoque" onClick={retirarEstoque} className="p-button-raised p-button-rounded" />
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Relatório de saídas" onClick={() => goto("saida")} className="p-button-raised p-button-rounded" />
                                 </div>
                                 <div className="gerenciadores">
                                     <div className="transformadores">
@@ -338,10 +363,15 @@ const EstoqueView = props => {
                                         <InputFloat name="impedancia" label="Impedância" value={impedancia} onChange={handleInputChange} />
                                         <InputFloat name="dataFabricacao" label="Data de Fabricação" value={dataFabricacao} onChange={handleInputChange} />
                                         <div className="botao">
-                                            <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar Transformador" onClick={retirarTransformador} className="p-button-raised p-button-rounded" />
+                                            <Button style={{
+                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                            }} label="Retirar Transformador" onClick={retirarTransformador} className="p-button-raised p-button-rounded" />
                                         </div>
                                     </div>
-                                    <div style={{marginLeft: '20px'}} className="transformadores">
+                                    <div style={{ marginLeft: '20px' }} className="transformadores">
                                         <div className="titulo">
                                             <h3>Medidores</h3>
                                         </div>
@@ -350,7 +380,12 @@ const EstoqueView = props => {
                                         <InputFloat name="nSeloCaixa" label="Nº selo caixa" value={nSeloCaixa} onChange={handleInputChange} />
                                         <InputFloat name="nSeloBorn" label="Nº selo born" value={nSeloBorn} onChange={handleInputChange} />
                                         <div className="botao">
-                                            <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Retirar Medidor" onClick={retirarMedidor} className="p-button-raised p-button-rounded" />
+                                            <Button style={{
+                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                            }} label="Retirar Medidor" onClick={retirarMedidor} className="p-button-raised p-button-rounded" />
                                         </div>
                                     </div>
                                 </div>

@@ -23,7 +23,10 @@ const MaterialView = props => {
                     <InputFloat name="codigoClasseCriar" disabled={true} label="Código de Classe" type="number" value={codigoClasseCriar} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasseCriar" disabled={true} label="Descrição da Classe" value={descricaoClasseCriar} onChange={handleInputChange} />
                     <div className="botao">
-                        <Button style={{ backgroundColor: '#ce5f52' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
+                        <Button style={{ backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)' }} label="Criar" onClick={submit} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
             </ContainerInside>
@@ -38,7 +41,10 @@ const MaterialView = props => {
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
                     <InputFloat name="descricaoClasse" label="Descrição da Classe" value={descricaoClasse} onChange={handleInputChange} />
                     <div className="botao">
-                        <Button style={{ backgroundColor: '#ce5f52' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
+                        <Button style={{ backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
                 <div className="tabela">

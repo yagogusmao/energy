@@ -33,22 +33,26 @@ export default class GerenciadorController extends Component {
         const { _id } = queryString.parse(this.props.location.search);
         this.setState({ carregando: true }, () =>
             Promise.all([Api.listarEquipe(_id),
-                Api.listarFuncionariosSemEquipe(),
-                Api.listarFuncionarios(_id),
-                Api.verVeiculo(_id),
-                Api.listarVeiculosSemEquipe()
+            Api.listarFuncionariosSemEquipe(),
+            Api.listarFuncionarios(_id),
+            Api.verVeiculo(_id),
+            Api.listarVeiculosSemEquipe()
             ]).then(res => {
                 const { _id, tipo, status, veiculo, local, apontamentos } = res[0].data.equipe;
                 const funcionarios = res[2].data.funcionarios;
                 const funcionariosSemEquipe = res[1].data.funcionarios;
                 if (res[3].data.veiculo === {}) {
-                    this.setState({ _id, tipo, status, veiculo, local, apontamentos, funcionarios, 
-                        funcionariosSemEquipe, carregando: false, veiculos: res[4].data.veiculos })
+                    this.setState({
+                        _id, tipo, status, veiculo, local, apontamentos, funcionarios,
+                        funcionariosSemEquipe, carregando: false, veiculos: res[4].data.veiculos
+                    })
                 } else {
                     const { modelo, numeracao, kilometragem } = res[3].data.veiculo;
-                    this.setState({ _id, modelo, numeracao, kilometragem, tipo, status, veiculo, local, 
-                        apontamentos, funcionarios, funcionariosSemEquipe, carregando: false, 
-                        veiculos: res[4].data.veiculos })
+                    this.setState({
+                        _id, modelo, numeracao, kilometragem, tipo, status, veiculo, local,
+                        apontamentos, funcionarios, funcionariosSemEquipe, carregando: false,
+                        veiculos: res[4].data.veiculos
+                    })
                 }
             })
         )
@@ -61,7 +65,7 @@ export default class GerenciadorController extends Component {
     retirarFuncionario = (_idFuncionario) => {
         const { _id } = queryString.parse(this.props.location.search);
         Api.retirarFuncionario(_id, _idFuncionario).then(res => {
-            this.setState({ funcionarios: res.data.funcionarios, funcionariosSemEquipe: res.data.funcionariosSemEquipe },
+            this.setState({ funcionarios: res.data.funcionarios, status: res.data.equipe.status, funcionariosSemEquipe: res.data.funcionariosSemEquipe },
                 () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
         }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
         )
@@ -70,7 +74,7 @@ export default class GerenciadorController extends Component {
     adicionarFuncionario = (_idFuncionario) => {
         const { _id } = queryString.parse(this.props.location.search);
         Api.adicionarFuncionario({ _id, funcionario: _idFuncionario }).then(res => {
-            this.setState({ funcionarios: res.data.funcionarios, funcionariosSemEquipe: res.data.funcionariosSemEquipe },
+            this.setState({ funcionarios: res.data.funcionarios, status: res.data.equipe.status, funcionariosSemEquipe: res.data.funcionariosSemEquipe },
                 () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
         }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
         )
@@ -80,9 +84,11 @@ export default class GerenciadorController extends Component {
         const { _id } = queryString.parse(this.props.location.search);
         Api.definirVeiculo({ _id, veiculo: _idVeiculo }).then(res => {
             Api.verVeiculo(_id).then(res1 => {
-                this.setState({ veiculos: res.data.veiculos, veiculo: res1.data.veiculo._id, 
-                    modelo: res1.data.veiculo.modelo, numeracao: res1.data.veiculo.numeracao, 
-                    kilometragem: res1.data.veiculo.kilometragem, status: res.data.equipe.status },
+                this.setState({
+                    veiculos: res.data.veiculos, veiculo: res1.data.veiculo._id,
+                    modelo: res1.data.veiculo.modelo, numeracao: res1.data.veiculo.numeracao,
+                    kilometragem: res1.data.veiculo.kilometragem, status: res.data.equipe.status
+                },
                     () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
             })
         }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
@@ -92,23 +98,37 @@ export default class GerenciadorController extends Component {
     retirarVeiculo = () => {
         const { _id } = queryString.parse(this.props.location.search);
         Api.deletarVeiculo(_id).then(res => {
-            this.setState({ veiculos: res.data.veiculos, veiculo: "", modelo: "", numeracao: "", 
-                kilometragem: "", status: res.data.equipe.status },
+            this.setState({
+                veiculos: res.data.veiculos, veiculo: "", modelo: "", numeracao: "",
+                kilometragem: "", status: res.data.equipe.status
+            },
                 () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
         }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
         )
     }
 
-    actionTemplateButton = (rowData) => <Button style={{ backgroundColor: '#ce5f52' }} 
-        label="Retirar da equipe" onClick={() => { this.retirarFuncionario(rowData._id) }} 
+    actionTemplateButton = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Retirar da equipe" onClick={() => { this.retirarFuncionario(rowData._id) }}
         className="p-button-raised p-button-rounded" />
 
-    actionTemplateButtonAdicionar = (rowData) => <Button style={{ backgroundColor: '#ce5f52' }} 
-        label="Adicionar à equipe" onClick={() => { this.adicionarFuncionario(rowData._id) }} 
+    actionTemplateButtonAdicionar = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Adicionar à equipe" onClick={() => { this.adicionarFuncionario(rowData._id) }}
         className="p-button-raised p-button-rounded" />
 
-    actionTemplateButtonVeiculo = (rowData) => <Button style={{ backgroundColor: '#ce5f52' }} 
-        label="Definir veículo da equipe" onClick={() => { this.definirVeiculoEquipe(rowData._id) }} 
+    actionTemplateButtonVeiculo = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Definir veículo da equipe" onClick={() => { this.definirVeiculoEquipe(rowData._id) }}
         className="p-button-raised p-button-rounded" />
 
     onChangeItemAtivo = (e) => {

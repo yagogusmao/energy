@@ -122,7 +122,10 @@ const GerenciadorView = props => {
                             <InputFloat name="endereco" label="Endereço" value={endereco} onChange={handleInputChange} />
                             <InputFloat name="codigoObra" label="Código da Obra" value={codigoObra} onChange={handleInputChange} />
                         </div>
-                        <Button style={{ backgroundColor: '#ce5f52', marginTop: '10px' }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
+                        <Button style={{ backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px' }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
                     </ContainerCriar>
                 </>
                 :
