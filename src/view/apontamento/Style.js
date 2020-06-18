@@ -76,7 +76,7 @@ export const ContainerCriar = styled.div`
 `;
 
 export const ContainerApontamentosFinalizados = styled.div`
-animation: fadeIn 1s;
+  animation: fadeIn 1s;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;

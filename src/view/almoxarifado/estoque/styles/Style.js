@@ -25,7 +25,6 @@ export const ContainerEstoque = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  align-items: left;
   padding: 20px;
   margin: 10px;
   .tabela {
