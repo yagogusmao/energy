@@ -89,6 +89,42 @@ export const ContainerApontamentosFinalizados = styled.div`
   margin-right: 10px;
   background: white;
   padding: 20px;
+  .grafico {
+    display:grid;
+    min-width: 800px;
+    min-height: 400px;
+    margin-bottom: 10px;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+export const ContainerGrafico = styled.div`
+  animation: fadeIn 1s;
+  border-radius:5px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  display: grid;
+  grid-template-columns: 600px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 10px;
+  .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

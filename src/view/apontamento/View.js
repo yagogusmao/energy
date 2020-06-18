@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     ContainerPropriedades, MenuTab, ContainerCriar, ContainerTabelaFinalizar,
-    ContainerFomularioFinalizacao, ContainerInputs, ContainerApontamentosFinalizados
+    ContainerFomularioFinalizacao, ContainerInputs, ContainerApontamentosFinalizados,
+    ContainerGrafico
 } from './Style';
 import InputFloat from '../../component/input/InputFloat';
 import { Dropdown } from 'primereact/dropdown';
@@ -9,13 +10,30 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button';
+import { Chart } from 'primereact/chart';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
 const GerenciadorView = props => {
     const { itemAtivo, onChangeItemAtivo, handleInputChange, tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes,
         cidade, endereco, localSaida, codigoObra, equipesEscolher, handleDropDownChangeEquipe, handleDropDownChangeTipo,
         handleDropDownChangeSupervisor, handleDropDownChangeEncarregado, handleDropDownChangeCidade,
         handleDropDownChangeLocalSaida, iniciarApontamento, apontamentosIniciados, actionTemplateButtonFinalizar,
         atividades, actionTemplate, atividadesSelecionadas, actionTemplateInput, actionTemplateButton,
-        tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados } = props;
+        tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficos } = props;
+    const backgroundColor = [
+        "#780000",
+        "#CE5F52",
+        "#f79c91",
+        "#006858",
+        "#03ba9e",
+        "#00ffd8",
+        "#b7b7b7",
+        "#d6d6d6",
+        "#5e5e5e",
+        "#000000"
+    ];
     return (
         <>
             <ContainerPropriedades>
@@ -122,10 +140,12 @@ const GerenciadorView = props => {
                             <InputFloat name="endereco" label="Endereço" value={endereco} onChange={handleInputChange} />
                             <InputFloat name="codigoObra" label="Código da Obra" value={codigoObra} onChange={handleInputChange} />
                         </div>
-                        <Button style={{ backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px' }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
+                        <Button style={{
+                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                        }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
                     </ContainerCriar>
                 </>
                 :
@@ -268,6 +288,23 @@ const GerenciadorView = props => {
                     </>
                     :
                     <>
+                        {graficos.map((grafico, i) => (
+                            <ContainerGrafico>
+                                <div className="titulo">
+                                    {i === 0 ? <h1>Faturamento de Hoje</h1> :
+                                        i === 1 ? <h1>Faturamento da Semana</h1> :
+                                            i === 2 ? <h1>Faturamento do Mês</h1> :
+                                                i === 3 ? <h1>Faturamento do Ano</h1> :
+                                                    <h1>Faturamento de todos os tempos</h1>}
+                                </div>
+                                <Chart type="doughnut"
+                                    data={{
+                                        labels: grafico.labels, datasets: [
+                                            { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
+                                        ]
+                                    }} />
+                            </ContainerGrafico>
+                        ))}
                         <ContainerApontamentosFinalizados>
                             <div className="tabela">
                                 <DataTable

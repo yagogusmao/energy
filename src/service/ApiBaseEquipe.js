@@ -12,7 +12,8 @@ const ApiBaseEquipe = {
     listarVeiculosSemEquipe: () => ApiBase.get(`/equipe/verVeiculosSemEquipes`),
     definirVeiculo: (payload) => ApiBase.put('/equipe/veiculo', payload),
     deletarVeiculo: (_idEquipe) => ApiBase.delete(`/equipe/veiculo?_id=${_idEquipe}`),
-    verFaturamento: (_idEquipe) => ApiBase.get(`/equipe/faturamento?_id=${_idEquipe}`)
+    verFaturamento: (_idEquipe) => ApiBase.get(`/equipe/faturamento?_id=${_idEquipe}`),
+    graficos: () => ApiBase.get('/equipe/faturamentoTodasEquipes')
 }
 
 export default ApiBaseEquipe;

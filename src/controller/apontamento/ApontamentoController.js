@@ -34,7 +34,8 @@ export default class ApontamentoController extends Component {
             atividadesSelecionadas: [],
             tecnicoEnergisa: "",
             PgCp: "",
-            veiculoKmFim: ""
+            veiculoKmFim: "",
+            graficos: []
         }
     }
 
@@ -44,14 +45,16 @@ export default class ApontamentoController extends Component {
                 Api.listarApontamentosIniciados(),
                 Api.listarApontamentosFinalizados(),
                 ApiEquipe.listarEquipes(),
-                ApiAtividade.listarAtividades()
+                ApiAtividade.listarAtividades(),
+                ApiEquipe.graficos()
             ]).then(res => {
                 this.setState({
                     apontamentosIniciados: res[0].data.apontamentos,
                     apontamentosFinalizados: res[1].data.apontamentos,
                     equipesEscolher: res[2].data.equipes.map(equipe => { return { label: equipe._id, value: equipe._id } }),
                     carregando: false,
-                    atividades: res[3].data.atividades
+                    atividades: res[3].data.atividades,
+                    graficos: res[4].data.graficos
                 })
             })
         )
@@ -196,7 +199,7 @@ export default class ApontamentoController extends Component {
     render() {
         const { carregando, itemAtivo, tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes, cidade, endereco,
             localSaida, codigoObra, equipesEscolher, apontamentosIniciados, apontamentosFinalizados, atividades,
-            atividadesSelecionadas, tecnicoEnergisa, PgCp, veiculoKmFim } = this.state;
+            atividadesSelecionadas, tecnicoEnergisa, PgCp, veiculoKmFim, graficos } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -204,6 +207,7 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            graficos={graficos}
                             tecnicoEnergisa={tecnicoEnergisa}
                             PgCp={PgCp}
                             veiculoKmFim={veiculoKmFim}
