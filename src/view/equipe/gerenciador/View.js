@@ -34,7 +34,7 @@ const GerenciadorView = props => {
                 <>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento diário: R$ {lucroHoje}</h1>
+                            <h1>Faturamento do dia: R$ {lucroHoje.toFixed(2)}</h1>
                         </div>
                         <div style={{ marginTop: '5px' }} className="tabela">
                             <DataTable
@@ -80,7 +80,7 @@ const GerenciadorView = props => {
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento semanal: R$ {lucroSemana}</h1>
+                            <h1>Faturamento da semana: R$ {lucroSemana.toFixed(2)}</h1>
                         </div>
                         <div style={{ marginTop: '5px' }} className="tabela">
                             <DataTable
@@ -126,7 +126,7 @@ const GerenciadorView = props => {
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento mensal: R$ {lucroMes}</h1>
+                            <h1>Faturamento do mês: R$ {lucroMes.toFixed(2)}</h1>
                         </div>
                         <div style={{ marginTop: '5px' }} className="tabela">
                             <DataTable
@@ -172,7 +172,7 @@ const GerenciadorView = props => {
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento anual: R$ {lucroAno}</h1>
+                            <h1>Faturamento do ano: R$ {lucroAno.toFixed(2)}</h1>
                         </div>
                         <div style={{ marginTop: '5px' }} className="tabela">
                             <DataTable
@@ -218,7 +218,7 @@ const GerenciadorView = props => {
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento em todos os tempos: R$ {lucro} </h1>
+                            <h1>Faturamento de todos os tempos: R$ {lucro.toFixed(2)} </h1>
                         </div>
                         <div style={{ marginTop: '5px' }} className="tabela">
                             <DataTable

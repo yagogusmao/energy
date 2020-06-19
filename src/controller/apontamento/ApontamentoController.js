@@ -35,9 +35,20 @@ export default class ApontamentoController extends Component {
             tecnicoEnergisa: "",
             PgCp: "",
             veiculoKmFim: "",
-            graficos: [],
+            graficosConstrucao: [],
+            graficosManutencao: [],
+            graficosPoda: [],
+            graficosLinhaviva: [],
+            graficosDECP: [],
+            graficosDEOP: [],
             encarregados: [],
-            supervisores: []
+            supervisores: [],
+            faturamentoConstrucao: [],
+            faturamentoManutencao: [],
+            faturamentoLinhaviva: [],
+            faturamentoPoda: [],
+            faturamentoDEOP: [],
+            faturamentoDECP: [],
         }
     }
 
@@ -48,9 +59,14 @@ export default class ApontamentoController extends Component {
                 Api.listarApontamentosFinalizados(),
                 ApiEquipe.listarEquipes(),
                 ApiAtividade.listarAtividades(),
-                ApiEquipe.graficos(),
                 Api.listarEncarregados(),
-                Api.listarSupervisores()
+                Api.listarSupervisores(),
+                ApiEquipe.faturamentoConstrucao(),
+                ApiEquipe.faturamentoManutencao(),
+                ApiEquipe.faturamentoPoda(),
+                ApiEquipe.faturamentoLinhaviva(),
+                ApiEquipe.faturamentoDECP(),
+                ApiEquipe.faturamentoDEOP()
             ]).then(res => {
                 this.setState({
                     apontamentosIniciados: res[0].data.apontamentos,
@@ -58,9 +74,20 @@ export default class ApontamentoController extends Component {
                     equipesEscolher: res[2].data.equipes.map(equipe => { return { label: equipe._id, value: equipe._id } }),
                     carregando: false,
                     atividades: res[3].data.atividades,
-                    graficos: res[4].data.graficos,
-                    encarregados: res[5].data.funcionarios,
-                    supervisores: res[6].data.funcionarios,
+                    encarregados: res[4].data.funcionarios,
+                    supervisores: res[5].data.funcionarios,
+                    graficosConstrucao: res[6].data.graficos,
+                    graficosManutencao: res[7].data.graficos,
+                    graficosPoda: res[8].data.graficos,
+                    graficosLinhaviva: res[9].data.graficos,
+                    graficosDECP: res[10].data.graficos,
+                    graficosDEOP: res[11].data.graficos,
+                    faturamentoConstrucao: res[1].data.construcao,
+                    faturamentoManutencao: res[1].data.manutencao,
+                    faturamentoLinhaviva: res[1].data.linhaviva,
+                    faturamentoPoda: res[1].data.poda,
+                    faturamentoDEOP: res[1].data.deop,
+                    faturamentoDECP: res[1].data.decp,
                 })
             })
         )
@@ -124,23 +151,51 @@ export default class ApontamentoController extends Component {
 
     finalizarApontamento = (apontamento) => {
         const { atividadesSelecionadas, tecnicoEnergisa, veiculoKmFim, PgCp } = this.state;
-        Api.finalizarApontamento({
-            _id: apontamento, atividades: atividadesSelecionadas.map(atividade => {
-                return { _id: atividade._id, quantidade: Number(atividade.quantidade) }
-            }), tecnicoEnergisa, veiculoKmFim,
-            PgCp
-        }).then(res => {
-            this.setState({ tecnicoEnergisa: "", veiculoKmFim: "", PgCp: "", atividadesSelecionadas: [] }
-                , () =>
-                    Promise.all([Api.listarApontamentosIniciados(), Api.listarApontamentosFinalizados()]).then(res1 =>
-                        this.setState({
-                            apontamentosIniciados: res1[0].data.apontamentos,
-                            apontamentosFinalizados: res1[1].data.apontamentos
-                        }, () =>
-                            this.growl.show({ severity: 'success', summary: res.data.mensagem }))
-                    )
-            )
-        }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+        let flag = true;
+        atividadesSelecionadas.forEach(element => {
+            if (element.quantidade === "") flag = false;
+        })
+        if (flag) {
+            if (this.validarInputs([tecnicoEnergisa, veiculoKmFim, PgCp])) {
+                Api.finalizarApontamento({
+                    _id: apontamento, atividades: atividadesSelecionadas.map(atividade => {
+                        return { _id: atividade._id, quantidade: Number(atividade.quantidade) }
+                    }), tecnicoEnergisa, veiculoKmFim,
+                    PgCp
+                }).then(res =>
+                    this.setState({ tecnicoEnergisa: "", veiculoKmFim: "", PgCp: "", atividadesSelecionadas: [] }
+                        , () =>
+                            Promise.all([Api.listarApontamentosIniciados(),
+                            Api.listarApontamentosFinalizados(),
+                            ApiEquipe.faturamentoConstrucao(),
+                            ApiEquipe.faturamentoManutencao(),
+                            ApiEquipe.faturamentoPoda(),
+                            ApiEquipe.faturamentoLinhaviva(),
+                            ApiEquipe.faturamentoDECP(),
+                            ApiEquipe.faturamentoDEOP(),
+                            ApiAtividade.listarAtividades()]).then(async res1 =>
+                                this.setState({
+                                    apontamentosIniciados: res1[0].data.apontamentos,
+                                    apontamentosFinalizados: res1[1].data.apontamentos,
+                                    graficosConstrucao: res1[2].data.graficos,
+                                    graficosManutencao: res1[3].data.graficos,
+                                    graficosPoda: res1[4].data.graficos,
+                                    graficosLinhaviva: res1[5].data.graficos,
+                                    graficosDECP: res1[6].data.graficos,
+                                    graficosDEOP: res1[7].data.graficos,
+                                    faturamentoConstrucao: res1[1].data.construcao,
+                                    faturamentoManutencao: res1[1].data.manutencao,
+                                    faturamentoLinhaviva: res1[1].data.linhaviva,
+                                    faturamentoPoda: res1[1].data.poda,
+                                    faturamentoDEOP: res1[1].data.deop,
+                                    faturamentoDECP: res1[1].data.decp,
+                                    atividades: res1[8].data.atividades,
+                                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+                            )
+                    ), erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
+                )
+            } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
+        } else this.growl.show({ severity: 'error', summary: "Coloque todas as quantidades." })
     }
 
     actionTemplateButtonFinalizar = (rowData) => <Button style={{
@@ -205,7 +260,10 @@ export default class ApontamentoController extends Component {
     render() {
         const { carregando, itemAtivo, tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes, cidade, endereco,
             localSaida, codigoObra, equipesEscolher, apontamentosIniciados, apontamentosFinalizados, atividades,
-            atividadesSelecionadas, tecnicoEnergisa, PgCp, veiculoKmFim, graficos, supervisores, encarregados } = this.state;
+            atividadesSelecionadas, tecnicoEnergisa, PgCp, veiculoKmFim, graficosConstrucao,
+            graficosManutencao, graficosPoda, graficosLinhaviva, graficosDECP, graficosDEOP, supervisores, encarregados,
+            faturamentoConstrucao, faturamentoManutencao, faturamentoLinhaviva, faturamentoPoda, faturamentoDEOP,
+            faturamentoDECP } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -213,9 +271,20 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            faturamentoConstrucao={faturamentoConstrucao}
+                            faturamentoManutencao={faturamentoManutencao}
+                            faturamentoLinhaviva={faturamentoLinhaviva}
+                            faturamentoPoda={faturamentoPoda}
+                            faturamentoDEOP={faturamentoDEOP}
+                            faturamentoDECP={faturamentoDECP}
                             encarregados={encarregados}
                             supervisores={supervisores}
-                            graficos={graficos}
+                            graficosManutencao={graficosManutencao}
+                            graficosPoda={graficosPoda}
+                            graficosLinhaviva={graficosLinhaviva}
+                            graficosDECP={graficosDECP}
+                            graficosDEOP={graficosDEOP}
+                            graficosConstrucao={graficosConstrucao}
                             tecnicoEnergisa={tecnicoEnergisa}
                             PgCp={PgCp}
                             veiculoKmFim={veiculoKmFim}
