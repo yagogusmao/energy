@@ -2,7 +2,7 @@ import React from 'react';
 import {
     ContainerPropriedades, MenuTab, ContainerCriar, ContainerTabelaFinalizar,
     ContainerFomularioFinalizacao, ContainerInputs, ContainerApontamentosFinalizados,
-    ContainerGrafico
+    ContainerGrafico,Dropdowns,UltraCointainer,Graphics
 } from './Style';
 import InputFloat from '../../component/input/InputFloat';
 import { Dropdown } from 'primereact/dropdown';
@@ -35,7 +35,7 @@ const GerenciadorView = props => {
         "#000000"
     ];
     return (
-        <>
+        <UltraCointainer>
             <ContainerPropriedades>
                 <div className="titulo">
                     <h1>Apontamentos</h1>
@@ -50,7 +50,7 @@ const GerenciadorView = props => {
             {itemAtivo === "iniciar" ?
                 <>
                     <ContainerCriar>
-                        <div className="dropdowns">
+                        <Dropdowns>
                             <div>
                                 <Dropdown style={{ width: '100%' }} value={equipe} options={equipesEscolher} placeholder="Equipe"
                                     onChange={handleDropDownChangeEquipe} />
@@ -83,8 +83,8 @@ const GerenciadorView = props => {
                                         <p style={{ fontSize: '12px' }}>{'Selecione o encarregado.'}</p>}
                                 </div>
                             </div>
-                        </div>
-                        <div className="dropdowns">
+
+
                             <div>
                                 <Dropdown style={{ width: '100%' }} value={tipo} options={[
                                     { label: "MANUTENCAO", value: "MANUTENCAO" },
@@ -134,12 +134,12 @@ const GerenciadorView = props => {
                                         <p style={{ fontSize: '12px' }}>{'Selecione o local de saída da equipe.'}</p>}
                                 </div>
                             </div>
-                        </div>
-                        <div className="dropdowns">
+
+
                             <InputFloat name="pes" label="PES" value={pes} onChange={handleInputChange} />
                             <InputFloat name="endereco" label="Endereço" value={endereco} onChange={handleInputChange} />
                             <InputFloat name="codigoObra" label="Código da Obra" value={codigoObra} onChange={handleInputChange} />
-                        </div>
+                        </Dropdowns>
                         <Button style={{
                             backgroundColor: '#ce5f52', borderColor: '#e57164',
                             WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
@@ -288,16 +288,18 @@ const GerenciadorView = props => {
                     </>
                     :
                     <>
+                        <Graphics>
                         {graficos.map((grafico, i) => (
                             <ContainerGrafico>
-                                <div className="titulo">
+                              
                                     {i === 0 ? <h1>Faturamento de Hoje</h1> :
                                         i === 1 ? <h1>Faturamento da Semana</h1> :
                                             i === 2 ? <h1>Faturamento do Mês</h1> :
                                                 i === 3 ? <h1>Faturamento do Ano</h1> :
                                                     <h1>Faturamento de todos os tempos</h1>}
-                                </div>
+                             
                                 <Chart type="doughnut"
+
                                     data={{
                                         labels: grafico.labels, datasets: [
                                             { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
@@ -305,6 +307,7 @@ const GerenciadorView = props => {
                                     }} />
                             </ContainerGrafico>
                         ))}
+                        </Graphics>
                         <ContainerApontamentosFinalizados>
                             <div className="tabela">
                                 <DataTable
@@ -354,7 +357,7 @@ const GerenciadorView = props => {
                         </ContainerApontamentosFinalizados>
                     </>
             }
-        </>
+        </UltraCointainer>
     )
 }
 export default GerenciadorView;
