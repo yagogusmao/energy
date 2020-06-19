@@ -15,7 +15,7 @@ const AlmoxarifadoView = props => {
                     value={almoxarifados}
                     paginator={almoxarifados.length > 10}
                     rows={10}
-                    emptyMessage={"Nenhuma equipe."}
+                    emptyMessage={"Nenhum almoxarifado."}
                 >
                     <Column
                         field="_id"

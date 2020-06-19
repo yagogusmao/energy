@@ -21,7 +21,7 @@ const GerenciadorView = props => {
         handleDropDownChangeSupervisor, handleDropDownChangeEncarregado, handleDropDownChangeCidade,
         handleDropDownChangeLocalSaida, iniciarApontamento, apontamentosIniciados, actionTemplateButtonFinalizar,
         atividades, actionTemplate, atividadesSelecionadas, actionTemplateInput, actionTemplateButton,
-        tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficos } = props;
+        tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficos, encarregados, supervisores } = props;
     const backgroundColor = [
         "#780000",
         "#CE5F52",
@@ -60,11 +60,7 @@ const GerenciadorView = props => {
                                 </div>
                             </div>
                             <div>
-                                <Dropdown style={{ width: '100%' }} value={pessoaSupervisor} options={[
-                                    { label: "Leom Fábio", value: "Leom Fábio" },
-                                    { label: "Anderson Marques", value: "Anderson Marques" },
-                                    { label: "Alisson Sousa", value: "Alisson Sousa" }
-                                ]}
+                                <Dropdown style={{ width: '100%' }} value={pessoaSupervisor} options={supervisores}
                                     placeholder="Supervisor" onChange={handleDropDownChangeSupervisor} />
                                 <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
                                     {pessoaSupervisor ? <p style={{ fontSize: '12px' }}>{'Supervisor: ' + pessoaSupervisor}</p> :
@@ -72,11 +68,7 @@ const GerenciadorView = props => {
                                 </div>
                             </div>
                             <div>
-                                <Dropdown style={{ width: '100%' }} value={pessoaEncarregado} options={[
-                                    { label: "Yago Gusmão", value: "Yago Gusmão" },
-                                    { label: "Erik Sazio", value: "Erik Sazio" },
-                                    { label: "Pedro Borba", value: "Pedro Borba" }
-                                ]}
+                                <Dropdown style={{ width: '100%' }} value={pessoaEncarregado} options={encarregados}
                                     placeholder="Encarregado" onChange={handleDropDownChangeEncarregado} />
                                 <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
                                     {pessoaEncarregado ? <p style={{ fontSize: '12px' }}>{'Encarregado: ' + pessoaEncarregado}</p> :
@@ -89,7 +81,7 @@ const GerenciadorView = props => {
                                 <Dropdown style={{ width: '100%' }} value={tipo} options={[
                                     { label: "MANUTENCAO", value: "MANUTENCAO" },
                                     { label: "CONSTRUCAO", value: "CONSTRUCAO" },
-                                    { label: "PERDAS", value: "PERDAS" },
+                                    { label: "DECP", value: "DECP" },
                                     { label: "DEOP", value: "DEOP" },
                                     { label: "PODA", value: "PODA" },
                                     { label: "LINHAVIVA", value: "LINHAVIVA" }
