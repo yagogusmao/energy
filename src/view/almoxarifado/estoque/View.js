@@ -12,8 +12,11 @@ const EstoqueView = props => {
     const { materiais, handleInputChange, adicionarEstoque, retirarEstoque, handleDropDownChangeVaiPara, handleDropDownChangeVemDe, handleDropDownChangeEquipe, _idTransformador, _idMedidor,
         actionTemplate, actionTemplateInput, actionTemplateButton, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, pesquisarMateriais, materiaisPesquisados, vemDe, vaiPara, servico, equipe, goto,
         materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar, sairAlmoxarifado, onChangeCheckBox,
-        numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor, carregandoPesquisar, itemAtivo, onChangeItemAtivo } = props;
-    return (
+        numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor, carregandoPesquisar, itemAtivo, onChangeItemAtivo,
+        almoxarifados } = props;
+    
+    
+        return (
         <>
             <MenuTab>
                 <TabMenu model={[{ label: 'Ver Estoque', value: "estoque", icon: 'pi pi-fw pi-home' },
@@ -245,18 +248,10 @@ const EstoqueView = props => {
                                     </div>
                                     <div className="dropdown">
                                         <Dropdown value={vaiPara} style={{ width: '100%' }} options={sairAlmoxarifado ?
-                                            [{ label: '1952 - ENERGY - DCMD - ESP', value: '1952 - ENERGY - DCMD - ESP' },
-                                            { label: '1953 - ENERGY - DCMD - SLA', value: '1953 - ENERGY - DCMD - SLA' },
-                                            { label: '1954 - ENERGY - DCMD - GBA', value: '1954 - ENERGY - DCMD - GBA' },
-                                            { label: '1955 - ENERGY - DCMD - JZR', value: '1955 - ENERGY - DCMD - JZR' },
-                                            { label: '1956 - ENERGY - DCMD - SUM', value: '1956 - ENERGY - DCMD - SUM' },
-                                            { label: '2050 - ENERGY - DCMD - CAMPINA', value: '2050 - ENERGY - DCMD - CAMPINA' },
-                                            { label: '2020 - ENERGY - DSUI - CAMPINA', value: '2020 - ENERGY - DSUI - CAMPINA' },
-                                            { label: 'EBO - ENERGY - DECP - CAMPINA', value: 'EBO - ENERGY - DECP - CAMPINA' },
-                                            { label: 'EPB - ENERGY - DECP - CAMPINA', value: 'EPB - ENERGY - DECP - CAMPINA' },
-                                            { label: 'EBO - ENERGY - DCMD - CAMPINA', value: 'EBO - ENERGY - DCMD - CAMPINA' }]
-                                            :
-                                            [{ label: 'CAMPINA GRANDE', value: 'CAMPINA GRANDE' },
+                                            almoxarifados :
+                                            [{ label: 'PONTAPORA', value: 'PONTAPORA' },
+                                            { label: 'NAVIRAI', value: 'NAVIRAI' },
+                                            { label: 'CAMPINA GRANDE', value: 'CAMPINA GRANDE' },
                                             { label: 'SOLEDADE', value: 'SOLEDADE' },
                                             { label: 'ESPERANÇA', value: 'ESPERANÇA' },
                                             { label: 'POCINHOS', value: 'POCINHOS' },

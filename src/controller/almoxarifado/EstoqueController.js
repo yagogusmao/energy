@@ -40,15 +40,18 @@ export default class EstoqueController extends Component {
             carregando: false,
             carregandoPesquisar: false,
             sairAlmoxarifado: false,
-            itemAtivo: "estoque"
+            itemAtivo: "estoque",
+            almoxarifados: []
         }
     }
 
     componentDidMount = () => {
         const { _id } = queryString.parse(this.props.location.search);
         this.setState({ carregando: true }, () =>
-            Api.listarEstoque(_id).then(res =>
-                this.setState({ materiais: res.data.materiais, carregando: false })
+            Promise.all([Api.listarEstoque(_id), Api.listar()]).then(res =>
+                this.setState({ materiais: res[0].data.materiais, 
+                    almoxarifados: res[1].data.almoxarifados.map(almoxarifado => {return {label: almoxarifado._id, value: almoxarifado._id}}),
+                    carregando: false })
             )
         )
     }
@@ -318,7 +321,7 @@ export default class EstoqueController extends Component {
         const { materiais, materialRetirar, quantidadeRetirar, vemDe, vaiPara, numeroSerie, tombamento, carregando, sairAlmoxarifado,
             impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, _idTransformador, _idMedidor, carregandoPesquisar,
             servico, equipe, _id, unidadeMedida, descricao, codigoClasse, descricaoClasse, materiaisPesquisados, itemAtivo,
-            quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar } = this.state;
+            quantidadeMateriaisPesquisados, materiaisSelecionados, materiaisSelecionadosRetirar, almoxarifados } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -326,6 +329,7 @@ export default class EstoqueController extends Component {
                     :
                     <>
                         <EstoqueView
+                            almoxarifados={almoxarifados}
                             onChangeItemAtivo={this.onChangeItemAtivo}
                             itemAtivo={itemAtivo}
                             onChangeCheckBox={this.onChangeCheckBox}

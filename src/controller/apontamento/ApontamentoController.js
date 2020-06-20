@@ -49,6 +49,65 @@ export default class ApontamentoController extends Component {
             faturamentoPoda: [],
             faturamentoDEOP: [],
             faturamentoDECP: [],
+            construcaoHoje: [],
+            construcaoSemana: [],
+            construcaoMes: [],
+            construcaoAno: [],
+            manutencaoHoje: [],
+            manutencaoSemana: [],
+            manutencaoMes: [],
+            manutencaoAno: [],
+            linhavivaHoje: [],
+            linhavivaSemana: [],
+            inhavivaMes: [],
+            linhavivaAno: [],
+            podaHoje: [],
+            podaSemana: [],
+            podaMes: [],
+            podaAno: [],
+            decpHoje: [],
+            decpSemana: [],
+            decpMes: [],
+            decpAno: [],
+            deopHoje: [],
+            deopSemana: [],
+            deopMes: [],
+            deopAno: [],
+            mostrarFinalizadosConstrucaoHoje: false,
+            mostrarFinalizadosConstrucaoSemana: false,
+            mostrarFinalizadosConstrucaoMes: false,
+            mostrarFinalizadosConstrucaoAno: false,
+            mostrarFinalizadosConstrucao: false,
+
+            mostrarFinalizadosManutencaoHoje: false,
+            mostrarFinalizadosManutencaoSemana: false,
+            mostrarFinalizadosManutencaoMes: false,
+            mostrarFinalizadosManutencaoAno: false,
+            mostrarFinalizadosManutencao: false,
+
+            mostrarFinalizadosLinhavivaHoje: false,
+            mostrarFinalizadosLinhavivaSemana: false,
+            mostrarFinalizadosLinhavivaMes: false,
+            mostrarFinalizadosLinhavivaAno: false,
+            mostrarFinalizadosLinhaviva: false,
+
+            mostrarFinalizadosPodaHoje: false,
+            mostrarFinalizadosPodaSemana: false,
+            mostrarFinalizadosPodaMes: false,
+            mostrarFinalizadosPodaAno: false,
+            mostrarFinalizadosPoda: false,
+
+            mostrarFinalizadosDECPHoje: false,
+            mostrarFinalizadosDECPSemana: false,
+            mostrarFinalizadosDECPMes: false,
+            mostrarFinalizadosDECPAno: false,
+            mostrarFinalizadosDECP: false,
+
+            mostrarFinalizadosDEOPHoje: false,
+            mostrarFinalizadosDEOPSemana: false,
+            mostrarFinalizadosDEOPMes: false,
+            mostrarFinalizadosDEOPAno: false,
+            mostrarFinalizadosDEOP: false
         }
     }
 
@@ -88,6 +147,30 @@ export default class ApontamentoController extends Component {
                     faturamentoPoda: res[1].data.poda,
                     faturamentoDEOP: res[1].data.deop,
                     faturamentoDECP: res[1].data.decp,
+                    construcaoHoje: res[1].data.construcaoHoje,
+                    construcaoSemana: res[1].data.construcaoSemana,
+                    construcaoMes: res[1].data.construcaoMes,
+                    construcaoAno: res[1].data.construcaoAno,
+                    manutencaoHoje: res[1].data.manutencaoHoje,
+                    manutencaoSemana: res[1].data.manutencaoSemana,
+                    manutencaoMes: res[1].data.manutencaoMes,
+                    manutencaoAno: res[1].data.manutencaoAno,
+                    linhavivaHoje: res[1].data.linhavivaHoje,
+                    linhavivaSemana: res[1].data.linhavivaSemana,
+                    linhavivaMes: res[1].data.linhavivaMes,
+                    linhavivaAno: res[1].data.linhavivaAno,
+                    podaHoje: res[1].data.podaHoje,
+                    podaSemana: res[1].data.podaSemana,
+                    podaMes: res[1].data.podaMes,
+                    podaAno: res[1].data.podaAno,
+                    decpHoje: res[1].data.decpHoje,
+                    decpSemana: res[1].data.decpSemana,
+                    decpMes: res[1].data.decpMes,
+                    decpAno: res[1].data.decpAno,
+                    deopHoje: res[1].data.deopHoje,
+                    deopSemana: res[1].data.deopSemana,
+                    deopMes: res[1].data.deopMes,
+                    deopAno: res[1].data.deopAno
                 })
             })
         )
@@ -109,6 +192,75 @@ export default class ApontamentoController extends Component {
     onChangeItemAtivo = (e) => {
         this.setState({ itemAtivo: e.value.value })
     }
+
+    onChangeMostrarFinalizadosConstrucaoHoje = () =>
+        this.state.mostrarFinalizadosConstrucaoHoje ? this.setState({ mostrarFinalizadosConstrucaoHoje: false }) : this.setState({ mostrarFinalizadosConstrucaoHoje: true });
+    onChangeMostrarFinalizadosConstrucaoSemana = () => 
+        this.state.mostrarFinalizadosConstrucaoSemana ? this.setState({ mostrarFinalizadosConstrucaoSemana: false }) : this.setState({ mostrarFinalizadosConstrucaoSemana: true });
+    
+    onChangeMostrarFinalizadosConstrucaoMes = () => {
+        console.log(this.state.mostrarFinalizadosConstrucaoMes)
+        this.state.mostrarFinalizadosConstrucaoMes ? this.setState({ mostrarFinalizadosConstrucaoMes: false }) : this.setState({ mostrarFinalizadosConstrucaoMes: true });
+    }
+    onChangeMostrarFinalizadosConstrucaoAno = () =>
+        this.state.mostrarFinalizadosConstrucaoAno ? this.setState({ mostrarFinalizadosConstrucaoAno: false }) : this.setState({ mostrarFinalizadosConstrucaoAno: true });
+    onChangeMostrarFinalizadosConstrucao = () =>
+        this.state.mostrarFinalizadosConstrucao ? this.setState({ mostrarFinalizadosConstrucao: false }) : this.setState({ mostrarFinalizadosConstrucao: true });
+
+    onChangeMostrarFinalizadosManutencaoHoje = () =>
+        this.state.mostrarFinalizadosManutencaoHoje ? this.setState({ mostrarFinalizadosManutencaoHoje: false }) : this.setState({ mostrarFinalizadosManutencaoHoje: true });
+    onChangeMostrarFinalizadosManutencaoSemana = () =>
+        this.state.mostrarFinalizadosManutencaoSemana ? this.setState({ mostrarFinalizadosManutencaoSemana: false }) : this.setState({ mostrarFinalizadosManutencaoSemana: true });
+    onChangeMostrarFinalizadosManutencaoMes = () =>
+        this.state.mostrarFinalizadosManutencaoMes ? this.setState({ mostrarFinalizadosManutencaoMes: false }) : this.setState({ mostrarFinalizadosManutencaoMes: true });
+    onChangeMostrarFinalizadosManutencaoAno = () =>
+        this.state.mostrarFinalizadosManutencaoAno ? this.setState({ mostrarFinalizadosManutencaoAno: false }) : this.setState({ mostrarFinalizadosManutencaoAno: true });
+    onChangeMostrarFinalizadosManutencao = () =>
+        this.state.mostrarFinalizadosManutencao ? this.setState({ mostrarFinalizadosManutencao: false }) : this.setState({ mostrarFinalizadosManutencao: true });
+
+    onChangeMostrarFinalizadosLinhavivaHoje = () =>
+        this.state.mostrarFinalizadosLinhavivaHoje ? this.setState({ mostrarFinalizadosLinhavivaHoje: false }) : this.setState({ mostrarFinalizadosLinhavivaHoje: true });
+    onChangeMostrarFinalizadosLinhavivaSemana = () =>
+        this.state.mostrarFinalizadosLinhavivaSemana ? this.setState({ mostrarFinalizadosLinhavivaSemana: false }) : this.setState({ mostrarFinalizadosLinhavivaSemana: true });
+    onChangeMostrarFinalizadosLinhavivaMes = () =>
+        this.state.mostrarFinalizadosLinhavivaMes ? this.setState({ mostrarFinalizadosLinhavivaMes: false }) : this.setState({ mostrarFinalizadosLinhavivaMes: true });
+    onChangeMostrarFinalizadosLinhavivaAno = () =>
+        this.state.mostrarFinalizadosLinhavivaAno ? this.setState({ mostrarFinalizadosLinhavivaAno: false }) : this.setState({ mostrarFinalizadosLinhavivaAno: true });
+    onChangeMostrarFinalizadosLinhaviva = () =>
+        this.state.mostrarFinalizadosLinhaviva ? this.setState({ mostrarFinalizadosLinhaviva: false }) : this.setState({ mostrarFinalizadosLinhaviva: true });
+
+    onChangeMostrarFinalizadosPodaHoje = () =>
+        this.state.mostrarFinalizadosPodaHoje ? this.setState({ mostrarFinalizadosPodaHoje: false }) : this.setState({ mostrarFinalizadosPodaHoje: true });
+    onChangeMostrarFinalizadosPodaSemana = () =>
+        this.state.mostrarFinalizadosPodaSemana ? this.setState({ mostrarFinalizadosPodaSemana: false }) : this.setState({ mostrarFinalizadosPodaSemana: true });
+    onChangeMostrarFinalizadosPodaMes = () =>
+        this.state.mostrarFinalizadosPodaMes ? this.setState({ mostrarFinalizadosPodaMes: false }) : this.setState({ mostrarFinalizadosPodaMes: true });
+    onChangeMostrarFinalizadosPodaAno = () =>
+        this.state.mostrarFinalizadosPodaAno ? this.setState({ mostrarFinalizadosPodaAno: false }) : this.setState({ mostrarFinalizadosPodaAno: true });
+    onChangeMostrarFinalizadosPoda = () =>
+        this.state.mostrarFinalizadosPoda ? this.setState({ mostrarFinalizadosPoda: false }) : this.setState({ mostrarFinalizadosPoda: true });
+
+    onChangeMostrarFinalizadosDECPHoje = () =>
+        this.state.mostrarFinalizadosDECPHoje ? this.setState({ mostrarFinalizadosDECPHoje: false }) : this.setState({ mostrarFinalizadosDECPHoje: true });
+    onChangeMostrarFinalizadosDECPSemana = () =>
+        this.state.mostrarFinalizadosDECPSemana ? this.setState({ mostrarFinalizadosDECPSemana: false }) : this.setState({ mostrarFinalizadosDECPSemana: true });
+    onChangeMostrarFinalizadosDECPMes = () =>
+        this.state.mostrarFinalizadosDECPMes ? this.setState({ mostrarFinalizadosDECPMes: false }) : this.setState({ mostrarFinalizadosDECPMes: true });
+    onChangeMostrarFinalizadosDECPAno = () =>
+        this.state.mostrarFinalizadosDECPAno ? this.setState({ mostrarFinalizadosDECPAno: false }) : this.setState({ mostrarFinalizadosDECPAno: true });
+    onChangeMostrarFinalizadosDECP = () =>
+        this.state.mostrarFinalizadosDECP ? this.setState({ mostrarFinalizadosDECP: false }) : this.setState({ mostrarFinalizadosDECP: true });
+
+    onChangeMostrarFinalizadosDEOPHoje = () =>
+        this.state.mostrarFinalizadosDEOPHoje ? this.setState({ mostrarFinalizadosDEOPHoje: false }) : this.setState({ mostrarFinalizadosDEOPHoje: true });
+    onChangeMostrarFinalizadosDEOPSemana = () =>
+        this.state.mostrarFinalizadosDEOPSemana ? this.setState({ mostrarFinalizadosDEOPSemana: false }) : this.setState({ mostrarFinalizadosDEOPSemana: true });
+    onChangeMostrarFinalizadosDEOPMes = () =>
+        this.state.mostrarFinalizadosDEOPMes ? this.setState({ mostrarFinalizadosDEOPMes: false }) : this.setState({ mostrarFinalizadosDEOPMes: true });
+    onChangeMostrarFinalizadosDEOPAno = () =>
+        this.state.mostrarFinalizadosDEOPAno ? this.setState({ mostrarFinalizadosDEOPAno: false }) : this.setState({ mostrarFinalizadosDEOPAno: true });
+    onChangeMostrarFinalizadosDEOP = () =>
+        this.state.mostrarFinalizadosDEOP ? this.setState({ mostrarFinalizadosDEOP: false }) : this.setState({ mostrarFinalizadosDEOP: true });
 
     handleDropDownChangeEquipe = e => this.setState({ equipe: e.value })
     handleDropDownChangeTipo = e => this.setState({ tipo: e.value })
@@ -263,7 +415,24 @@ export default class ApontamentoController extends Component {
             atividadesSelecionadas, tecnicoEnergisa, PgCp, veiculoKmFim, graficosConstrucao,
             graficosManutencao, graficosPoda, graficosLinhaviva, graficosDECP, graficosDEOP, supervisores, encarregados,
             faturamentoConstrucao, faturamentoManutencao, faturamentoLinhaviva, faturamentoPoda, faturamentoDEOP,
-            faturamentoDECP } = this.state;
+            faturamentoDECP, construcaoHoje, construcaoSemana, construcaoMes, construcaoAno,
+            manutencaoHoje, manutencaoSemana, manutencaoMes, manutencaoAno,
+            linhavivaHoje, linhavivaSemana, linhavivaMes, linhavivaAno,
+            podaHoje, podaSemana, podaMes, podaAno,
+            decpHoje, decpSemana, decpMes, decpAno,
+            deopHoje, deopSemana, deopMes, deopAno,
+            mostrarFinalizadosConstrucaoHoje, mostrarFinalizadosConstrucaoSemana, mostrarFinalizadosConstrucaoMes,
+            mostrarFinalizadosConstrucaoAno, mostrarFinalizadosConstrucao,
+            mostrarFinalizadosManutencaoHoje, mostrarFinalizadosManutencaoSemana, mostrarFinalizadosManutencaoMes,
+            mostrarFinalizadosManutencaoAno, mostrarFinalizadosManutencao,
+            mostrarFinalizadosLinhavivaHoje, mostrarFinalizadosLinhavivaSemana, mostrarFinalizadosLinhavivaMes,
+            mostrarFinalizadosLinhavivaAno, mostrarFinalizadosLinhaviva,
+            mostrarFinalizadosPodaHoje, mostrarFinalizadosPodaSemana, mostrarFinalizadosPodaMes,
+            mostrarFinalizadosPodaAno, mostrarFinalizadosPoda,
+            mostrarFinalizadosDECPHoje, mostrarFinalizadosDECPSemana, mostrarFinalizadosDECPMes,
+            mostrarFinalizadosDECPAno, mostrarFinalizadosDECP,
+            mostrarFinalizadosDEOPHoje, mostrarFinalizadosDEOPSemana, mostrarFinalizadosDEOPMes,
+            mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -271,6 +440,92 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            onChangeMostrarFinalizadosConstrucaoHoje={this.onChangeMostrarFinalizadosConstrucaoHoje}
+                            mostrarFinalizadosConstrucaoHoje={mostrarFinalizadosConstrucaoHoje}
+                            onChangeMostrarFinalizadosConstrucaoSemana={this.onChangeMostrarFinalizadosConstrucaoSemana}
+                            mostrarFinalizadosConstrucaoSemana={mostrarFinalizadosConstrucaoSemana}
+
+                            onChangeMostrarFinalizadosConstrucaoMes={this.onChangeMostrarFinalizadosConstrucaoMes}
+                            mostrarFinalizadosConstrucaoMes={mostrarFinalizadosConstrucaoMes}
+
+                            onChangeMostrarFinalizadosConstrucaoAno={this.onChangeMostrarFinalizadosConstrucaoAno}
+                            mostrarFinalizadosConstrucaoAno={mostrarFinalizadosConstrucaoAno}
+                            onChangeMostrarFinalizadosConstrucao={this.onChangeMostrarFinalizadosConstrucao}
+                            mostrarFinalizadosConstrucao={mostrarFinalizadosConstrucao}
+                            onChangeMostrarFinalizadosManutencaoHoje={this.onChangeMostrarFinalizadosManutencaoHoje}
+                            mostrarFinalizadosManutencaoHoje={mostrarFinalizadosManutencaoHoje}
+                            onChangeMostrarFinalizadosManutencaoSemana={this.onChangeMostrarFinalizadosManutencaoSemana}
+                            mostrarFinalizadosManutencaoSemana={mostrarFinalizadosManutencaoSemana}
+                            onChangeMostrarFinalizadosManutencaoMes={this.onChangeMostrarFinalizadosManutencaoMes}
+                            mostrarFinalizadosManutencaoMes={mostrarFinalizadosManutencaoMes}
+                            onChangeMostrarFinalizadosManutencaoAno={this.onChangeMostrarFinalizadosManutencaoAno}
+                            mostrarFinalizadosManutencaoAno={mostrarFinalizadosManutencaoAno}
+                            onChangeMostrarFinalizadosManutencao={this.onChangeMostrarFinalizadosManutencao}
+                            mostrarFinalizadosManutencao={mostrarFinalizadosManutencao}
+                            onChangeMostrarFinalizadosLinhavivaHoje={this.onChangeMostrarFinalizadosLinhavivaHoje}
+                            mostrarFinalizadosLinhavivaHoje={mostrarFinalizadosLinhavivaHoje}
+                            onChangeMostrarFinalizadosLinhavivaSemana={this.onChangeMostrarFinalizadosLinhavivaSemana}
+                            mostrarFinalizadosLinhavivaSemana={mostrarFinalizadosLinhavivaSemana}
+                            onChangeMostrarFinalizadosLinhavivaMes={this.onChangeMostrarFinalizadosLinhavivaMes}
+                            mostrarFinalizadosLinhavivaMes={mostrarFinalizadosLinhavivaMes}
+                            onChangeMostrarFinalizadosLinhavivaAno={this.onChangeMostrarFinalizadosLinhavivaAno}
+                            mostrarFinalizadosLinhavivaAno={mostrarFinalizadosLinhavivaAno}
+                            onChangeMostrarFinalizadosLinhaviva={this.onChangeMostrarFinalizadosLinhaviva}
+                            mostrarFinalizadosLinhaviva={mostrarFinalizadosLinhaviva}
+                            onChangeMostrarFinalizadosPodaHoje={this.onChangeMostrarFinalizadosPodaHoje}
+                            mostrarFinalizadosPodaHoje={mostrarFinalizadosPodaHoje}
+                            onChangeMostrarFinalizadosPodaSemana={this.onChangeMostrarFinalizadosPodaSemana}
+                            mostrarFinalizadosPodaSemana={mostrarFinalizadosPodaSemana}
+                            onChangeMostrarFinalizadosConstrucaoMes={this.onChangeMostrarFinalizadosPodaMes}
+                            mostrarFinalizadosPodaMes={mostrarFinalizadosPodaMes}
+                            onChangeMostrarFinalizadosPodaAno={this.onChangeMostrarFinalizadosPodaAno}
+                            mostrarFinalizadosPodaAno={mostrarFinalizadosPodaAno}
+                            onChangeMostrarFinalizadosPoda={this.onChangeMostrarFinalizadosPoda}
+                            mostrarFinalizadosPoda={mostrarFinalizadosPoda}
+                            onChangeMostrarFinalizadosDECPHoje={this.onChangeMostrarFinalizadosDECPHoje}
+                            mostrarFinalizadosDECPHoje={mostrarFinalizadosDECPHoje}
+                            onChangeMostrarFinalizadosDECPSemana={this.onChangeMostrarFinalizadosDECPSemana}
+                            mostrarFinalizadosDECPSemana={mostrarFinalizadosDECPSemana}
+                            onChangeMostrarFinalizadosDECPMes={this.onChangeMostrarFinalizadosDECPMes}
+                            mostrarFinalizadosDECPMes={mostrarFinalizadosDECPMes}
+                            onChangeMostrarFinalizadosDECPAno={this.onChangeMostrarFinalizadosDECPAno}
+                            mostrarFinalizadosDECPAno={mostrarFinalizadosDECPAno}
+                            onChangeMostrarFinalizadosDECP={this.onChangeMostrarFinalizadosDECP}
+                            mostrarFinalizadosDECP={mostrarFinalizadosDECP}
+                            onChangeMostrarFinalizadosDEOPHoje={this.onChangeMostrarFinalizadosDEOPHoje}
+                            mostrarFinalizadosDEOPHoje={mostrarFinalizadosDEOPHoje}
+                            onChangeMostrarFinalizadosDEOPSemana={this.onChangeMostrarFinalizadosDEOPSemana}
+                            mostrarFinalizadosDEOPSemana={mostrarFinalizadosDEOPSemana}
+                            onChangeMostrarFinalizadosDEOPMes={this.onChangeMostrarFinalizadosDEOPMes}
+                            mostrarFinalizadosDEOPMes={mostrarFinalizadosDEOPMes}
+                            onChangeMostrarFinalizadosDEOPAno={this.onChangeMostrarFinalizadosDEOPAno}
+                            mostrarFinalizadosDEOPAno={mostrarFinalizadosDEOPAno}
+                            onChangeMostrarFinalizadosDEOP={this.onChangeMostrarFinalizadosDEOP}
+                            mostrarFinalizadosDEOP={mostrarFinalizadosDEOP}
+                            construcaoHoje={construcaoHoje}
+                            construcaoSemana={construcaoSemana}
+                            construcaoMes={construcaoMes}
+                            construcaoAno={construcaoAno}
+                            manutencaoHoje={manutencaoHoje}
+                            manutencaoSemana={manutencaoSemana}
+                            manutencaoMes={manutencaoMes}
+                            manutencaoAno={manutencaoAno}
+                            linhavivaHoje={linhavivaHoje}
+                            linhavivaSemana={linhavivaSemana}
+                            linhavivaMes={linhavivaMes}
+                            linhavivaAno={linhavivaAno}
+                            podaHoje={podaHoje}
+                            podaSemana={podaSemana}
+                            podaMes={podaMes}
+                            podaAno={podaAno}
+                            decpHoje={decpHoje}
+                            decpSemana={decpSemana}
+                            decpMes={decpMes}
+                            decpAno={decpAno}
+                            deopHoje={deopHoje}
+                            deopSemana={deopSemana}
+                            deopMes={deopMes}
+                            deopAno={deopAno}
                             faturamentoConstrucao={faturamentoConstrucao}
                             faturamentoManutencao={faturamentoManutencao}
                             faturamentoLinhaviva={faturamentoLinhaviva}
@@ -323,6 +578,6 @@ export default class ApontamentoController extends Component {
             </>
         )
     }
-}
 
+}
 

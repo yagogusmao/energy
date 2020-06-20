@@ -24,7 +24,48 @@ const GerenciadorView = props => {
         tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficosConstrucao,
         graficosManutencao, graficosPoda, graficosLinhaviva, graficosDECP, graficosDEOP, encarregados, supervisores,
         faturamentoConstrucao, faturamentoManutencao, faturamentoLinhaviva, faturamentoPoda, faturamentoDEOP,
-        faturamentoDECP } = props;
+        faturamentoDECP, construcaoHoje, construcaoSemana, construcaoMes, construcaoAno,
+        manutencaoHoje, manutencaoSemana, manutencaoMes, manutencaoAno,
+        linhavivaHoje, linhavivaSemana, linhavivaMes, linhavivaAno,
+        podaHoje, podaSemana, podaMes, podaAno,
+        decpHoje, decpSemana, decpMes, decpAno,
+        deopHoje, deopSemana, deopMes, deopAno,
+        mostrarFinalizadosConstrucaoHoje, onChangeMostrarFinalizadosConstrucaoHoje,
+        mostrarFinalizadosConstrucaoSemana, onChangeMostrarFinalizadosConstrucaoSemana,
+        mostrarFinalizadosConstrucaoMes, onChangeMostrarFinalizadosConstrucaoMes,
+        mostrarFinalizadosConstrucaoAno, onChangeMostrarFinalizadosConstrucaoAno,
+        mostrarFinalizadosConstrucao, onChangeMostrarFinalizadosConstrucao,
+
+        mostrarFinalizadosManutencaoHoje, onChangeMostrarFinalizadosManutencaoHoje,
+        mostrarFinalizadosManutencaoSemana, onChangeMostrarFinalizadosManutencaoSemana,
+        mostrarFinalizadosManutencaoMes, onChangeMostrarFinalizadosManutencaoMes,
+        mostrarFinalizadosManutencaoAno, onChangeMostrarFinalizadosManutencaoAno,
+        mostrarFinalizadosManutencao, onChangeMostrarFinalizadosManutencao,
+
+        mostrarFinalizadosLinhavivaHoje, onChangeMostrarFinalizadosLinhavivaHoje,
+        mostrarFinalizadosLinhavivaSemana, onChangeMostrarFinalizadosLinhavivaSemana,
+        mostrarFinalizadosLinhavivaMes, onChangeMostrarFinalizadosLinhavivaMes,
+        mostrarFinalizadosLinhavivaAno, onChangeMostrarFinalizadosLinhavivaAno,
+        mostrarFinalizadosLinhaviva, onChangeMostrarFinalizadosLinhaviva,
+
+        mostrarFinalizadosPodaHoje, onChangeMostrarFinalizadosPodaHoje,
+        mostrarFinalizadosPodaSemana, onChangeMostrarFinalizadosPodaSemana,
+        mostrarFinalizadosPodaMes, onChangeMostrarFinalizadosPodaMes,
+        mostrarFinalizadosPodaAno, onChangeMostrarFinalizadosPodaAno,
+        mostrarFinalizadosPoda, onChangeMostrarFinalizadosPoda,
+
+        mostrarFinalizadosDECPHoje, onChangeMostrarFinalizadosDECPHoje,
+        mostrarFinalizadosDECPSemana, onChangeMostrarFinalizadosDECPSemana,
+        mostrarFinalizadosDECPMes, onChangeMostrarFinalizadosDECPMes,
+        mostrarFinalizadosDECPAno, onChangeMostrarFinalizadosDECPAno,
+        mostrarFinalizadosDECP, onChangeMostrarFinalizadosDECP,
+
+        mostrarFinalizadosDEOPHoje, onChangeMostrarFinalizadosDEOPHoje,
+        mostrarFinalizadosDEOPSemana, onChangeMostrarFinalizadosDEOPSemana,
+        mostrarFinalizadosDEOPMes, onChangeMostrarFinalizadosDEOPMes,
+        mostrarFinalizadosDEOPAno, onChangeMostrarFinalizadosDEOPAno,
+        mostrarFinalizadosDEOP, onChangeMostrarFinalizadosDEOP
+    } = props;
     const backgroundColor = [
         "#780000",
         "#CE5F52",
@@ -291,74 +332,7 @@ const GerenciadorView = props => {
                     itemAtivo === "construcao" ?
                         <>
                             {graficosConstrucao.map((grafico, i) => (
-                                <ContainerGrafico>
-                                    <div className="titulo">
-                                        {i === 0 ? <h1>Faturamento de Hoje</h1> :
-                                            i === 1 ? <h1>Faturamento da Semana</h1> :
-                                                i === 2 ? <h1>Faturamento do Mês</h1> :
-                                                    i === 3 ? <h1>Faturamento do Ano</h1> :
-                                                        <h1>Faturamento de todos os tempos</h1>}
-                                    </div>
-                                    <Chart type="doughnut"
-                                        data={{
-                                            labels: grafico.labels, datasets: [
-                                                { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
-                                            ]
-                                        }} />
-                                </ContainerGrafico>
-                            ))}
-                            <ContainerApontamentosFinalizados>
-                                <div className="tabela">
-                                    <DataTable
-                                        value={faturamentoConstrucao}
-                                        paginator={faturamentoConstrucao.length > 10}
-                                        rows={10}
-                                        emptyMessage={"Nenhum apontamento Finalizado."}
-                                    >
-                                        <Column
-                                            filter={true}
-                                            field="tipo"
-                                            header="Tipo do serviço"
-                                        />
-                                        <Column
-                                            filter={true}
-                                            field="codigoObra"
-                                            header="Código do serviço"
-                                        />
-                                        <Column
-                                            filter={true}
-                                            field="pessoa.supervisor"
-                                            header="Supervisor"
-                                        />
-                                        <Column
-                                            filter={true}
-                                            field="pessoa.encarregado"
-                                            header="Encarregado"
-                                        />
-                                        <Column
-                                            field="cidade"
-                                            header="Cidade do serviço"
-                                        />
-                                        <Column
-                                            field="equipe"
-                                            header="Equipe"
-                                        />
-                                        <Column
-                                            field="veiculo.placa"
-                                            header="Veículo"
-                                        />
-                                        <Column
-                                            field="lucro"
-                                            header="Lucro (R$)"
-                                        />
-                                    </DataTable>
-                                </div>
-                            </ContainerApontamentosFinalizados>
-                        </>
-                        :
-                        itemAtivo === "manutencao" ?
-                            <>
-                                {graficosManutencao.map((grafico, i) => (
+                                <>
                                     <ContainerGrafico>
                                         <div className="titulo">
                                             {i === 0 ? <h1>Faturamento de Hoje</h1> :
@@ -373,60 +347,332 @@ const GerenciadorView = props => {
                                                     { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                 ]
                                             }} />
+                                        <Button style={{
+                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                        }} label="Ver Apontamentos" onClick={
+                                            i === 0 ? onChangeMostrarFinalizadosConstrucaoHoje :
+                                                i === 1 ? onChangeMostrarFinalizadosConstrucaoSemana :
+                                                    i === 2 ? onChangeMostrarFinalizadosConstrucaoMes :
+                                                        i === 3 ? onChangeMostrarFinalizadosConstrucaoAno :
+                                                        onChangeMostrarFinalizadosConstrucao} className="p-button-raised p-button-rounded" />
                                     </ContainerGrafico>
-                                ))}
-                                <ContainerApontamentosFinalizados>
-                                    <div className="tabela">
-                                        <DataTable
-                                            value={faturamentoManutencao}
-                                            paginator={faturamentoManutencao.length > 10}
-                                            rows={10}
-                                            emptyMessage={"Nenhum apontamento Finalizado."}
-                                        >
-                                            <Column
-                                                filter={true}
-                                                field="tipo"
-                                                header="Tipo do serviço"
-                                            />
-                                            <Column
-                                                filter={true}
-                                                field="codigoObra"
-                                                header="Código do serviço"
-                                            />
-                                            <Column
-                                                filter={true}
-                                                field="pessoa.supervisor"
-                                                header="Supervisor"
-                                            />
-                                            <Column
-                                                filter={true}
-                                                field="pessoa.encarregado"
-                                                header="Encarregado"
-                                            />
-                                            <Column
-                                                field="cidade"
-                                                header="Cidade do serviço"
-                                            />
-                                            <Column
-                                                field="equipe"
-                                                header="Equipe"
-                                            />
-                                            <Column
-                                                field="veiculo.placa"
-                                                header="Veículo"
-                                            />
-                                            <Column
-                                                field="lucro"
-                                                header="Lucro (R$)"
-                                            />
-                                        </DataTable>
-                                    </div>
-                                </ContainerApontamentosFinalizados>
-                            </>
-                            :
-                            itemAtivo === "linhaviva" ?
-                                <>
-                                    {graficosLinhaviva.map((grafico, i) => (
+                                    {i === 0 ? mostrarFinalizadosConstrucaoHoje ?
+                                        <>
+                                            <ContainerApontamentosFinalizados>
+                                                <div className="tabela">
+                                                    <DataTable
+                                                        value={i === 0 ? construcaoHoje :
+                                                            i === 1 ? construcaoSemana :
+                                                                i === 2 ? construcaoMes :
+                                                                    i === 3 ? construcaoAno :
+                                                                        faturamentoConstrucao}
+                                                        paginator={(i === 0 ? construcaoHoje :
+                                                            i === 1 ? construcaoSemana :
+                                                                i === 2 ? construcaoMes :
+                                                                    i === 3 ? construcaoAno :
+                                                                        faturamentoConstrucao).length > 10}
+                                                        rows={10}
+                                                        emptyMessage={"Nenhum apontamento Finalizado."}
+                                                    >
+                                                        <Column
+                                                            filter={true}
+                                                            field="tipo"
+                                                            header="Tipo do serviço"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="codigoObra"
+                                                            header="Código do serviço"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="pessoa.supervisor"
+                                                            header="Supervisor"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="pessoa.encarregado"
+                                                            header="Encarregado"
+                                                        />
+                                                        <Column
+                                                            field="cidade"
+                                                            header="Cidade do serviço"
+                                                        />
+                                                        <Column
+                                                            field="equipe"
+                                                            header="Equipe"
+                                                        />
+                                                        <Column
+                                                            field="veiculo.placa"
+                                                            header="Veículo"
+                                                        />
+                                                        <Column
+                                                            field="lucro"
+                                                            header="Lucro (R$)"
+                                                        />
+                                                    </DataTable>
+                                                </div>
+                                            </ContainerApontamentosFinalizados>
+                                        </>
+                                        :
+                                        <>
+                                        </>
+                                        : i === 1 ? mostrarFinalizadosConstrucaoSemana ?
+                                            <>
+                                                <ContainerApontamentosFinalizados>
+                                                    <div className="tabela">
+                                                        <DataTable
+                                                            value={i === 0 ? construcaoHoje :
+                                                                i === 1 ? construcaoSemana :
+                                                                    i === 2 ? construcaoMes :
+                                                                        i === 3 ? construcaoAno :
+                                                                            faturamentoConstrucao}
+                                                            paginator={(i === 0 ? construcaoHoje :
+                                                                i === 1 ? construcaoSemana :
+                                                                    i === 2 ? construcaoMes :
+                                                                        i === 3 ? construcaoAno :
+                                                                            faturamentoConstrucao).length > 10}
+                                                            rows={10}
+                                                            emptyMessage={"Nenhum apontamento Finalizado."}
+                                                        >
+                                                            <Column
+                                                                filter={true}
+                                                                field="tipo"
+                                                                header="Tipo do serviço"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="codigoObra"
+                                                                header="Código do serviço"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="pessoa.supervisor"
+                                                                header="Supervisor"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="pessoa.encarregado"
+                                                                header="Encarregado"
+                                                            />
+                                                            <Column
+                                                                field="cidade"
+                                                                header="Cidade do serviço"
+                                                            />
+                                                            <Column
+                                                                field="equipe"
+                                                                header="Equipe"
+                                                            />
+                                                            <Column
+                                                                field="veiculo.placa"
+                                                                header="Veículo"
+                                                            />
+                                                            <Column
+                                                                field="lucro"
+                                                                header="Lucro (R$)"
+                                                            />
+                                                        </DataTable>
+                                                    </div>
+                                                </ContainerApontamentosFinalizados>
+                                            </>
+                                            :
+                                            <>
+                                            </>
+                                            : i === 2 ? mostrarFinalizadosConstrucaoMes ?
+                                                <>
+                                                    <ContainerApontamentosFinalizados>
+                                                        <div className="tabela">
+                                                            <DataTable
+                                                                value={i === 0 ? construcaoHoje :
+                                                                    i === 1 ? construcaoSemana :
+                                                                        i === 2 ? construcaoMes :
+                                                                            i === 3 ? construcaoAno :
+                                                                                faturamentoConstrucao}
+                                                                paginator={(i === 0 ? construcaoHoje :
+                                                                    i === 1 ? construcaoSemana :
+                                                                        i === 2 ? construcaoMes :
+                                                                            i === 3 ? construcaoAno :
+                                                                                faturamentoConstrucao).length > 10}
+                                                                rows={10}
+                                                                emptyMessage={"Nenhum apontamento Finalizado."}
+                                                            >
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="tipo"
+                                                                    header="Tipo do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="codigoObra"
+                                                                    header="Código do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.supervisor"
+                                                                    header="Supervisor"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.encarregado"
+                                                                    header="Encarregado"
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                />
+                                                                <Column
+                                                                    field="veiculo.placa"
+                                                                    header="Veículo"
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                />
+                                                            </DataTable>
+                                                        </div>
+                                                    </ContainerApontamentosFinalizados>
+                                                </>
+                                                :
+                                                <>
+                                                </>
+                                                : i === 3 ? mostrarFinalizadosConstrucaoAno ?
+                                                    <>
+                                                        <ContainerApontamentosFinalizados>
+                                                            <div className="tabela">
+                                                                <DataTable
+                                                                    value={i === 0 ? construcaoHoje :
+                                                                        i === 1 ? construcaoSemana :
+                                                                            i === 2 ? construcaoMes :
+                                                                                i === 3 ? construcaoAno :
+                                                                                    faturamentoConstrucao}
+                                                                    paginator={(i === 0 ? construcaoHoje :
+                                                                        i === 1 ? construcaoSemana :
+                                                                            i === 2 ? construcaoMes :
+                                                                                i === 3 ? construcaoAno :
+                                                                                    faturamentoConstrucao).length > 10}
+                                                                    rows={10}
+                                                                    emptyMessage={"Nenhum apontamento Finalizado."}
+                                                                >
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="tipo"
+                                                                        header="Tipo do serviço"
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="codigoObra"
+                                                                        header="Código do serviço"
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="pessoa.supervisor"
+                                                                        header="Supervisor"
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="pessoa.encarregado"
+                                                                        header="Encarregado"
+                                                                    />
+                                                                    <Column
+                                                                        field="cidade"
+                                                                        header="Cidade do serviço"
+                                                                    />
+                                                                    <Column
+                                                                        field="equipe"
+                                                                        header="Equipe"
+                                                                    />
+                                                                    <Column
+                                                                        field="veiculo.placa"
+                                                                        header="Veículo"
+                                                                    />
+                                                                    <Column
+                                                                        field="lucro"
+                                                                        header="Lucro (R$)"
+                                                                    />
+                                                                </DataTable>
+                                                            </div>
+                                                        </ContainerApontamentosFinalizados>
+                                                    </>
+                                                    :
+                                                    <>
+                                                    </>
+                                                    : mostrarFinalizadosConstrucao ?
+                                                        <>
+                                                            <ContainerApontamentosFinalizados>
+                                                                <div className="tabela">
+                                                                    <DataTable
+                                                                        value={i === 0 ? construcaoHoje :
+                                                                            i === 1 ? construcaoSemana :
+                                                                                i === 2 ? construcaoMes :
+                                                                                    i === 3 ? construcaoAno :
+                                                                                        faturamentoConstrucao}
+                                                                        paginator={(i === 0 ? construcaoHoje :
+                                                                            i === 1 ? construcaoSemana :
+                                                                                i === 2 ? construcaoMes :
+                                                                                    i === 3 ? construcaoAno :
+                                                                                        faturamentoConstrucao).length > 10}
+                                                                        rows={10}
+                                                                        emptyMessage={"Nenhum apontamento Finalizado."}
+                                                                    >
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="tipo"
+                                                                            header="Tipo do serviço"
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="codigoObra"
+                                                                            header="Código do serviço"
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="pessoa.supervisor"
+                                                                            header="Supervisor"
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="pessoa.encarregado"
+                                                                            header="Encarregado"
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                        />
+                                                                        <Column
+                                                                            field="veiculo.placa"
+                                                                            header="Veículo"
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                        />
+                                                                    </DataTable>
+                                                                </div>
+                                                            </ContainerApontamentosFinalizados>
+                                                        </>
+                                                        :
+                                                        <>
+                                                        </>
+                                    }
+                                </>
+                            ))}
+                        </>
+                        :
+                        itemAtivo === "manutencao" ?
+                            <>
+                                {graficosManutencao.map((grafico, i) => (
+                                    <>
                                         <ContainerGrafico>
                                             <div className="titulo">
                                                 {i === 0 ? <h1>Faturamento de Hoje</h1> :
@@ -442,80 +688,19 @@ const GerenciadorView = props => {
                                                     ]
                                                 }} />
                                         </ContainerGrafico>
-                                    ))}
-                                    <ContainerApontamentosFinalizados>
-                                        <div className="tabela">
-                                            <DataTable
-                                                value={faturamentoLinhaviva}
-                                                paginator={faturamentoLinhaviva.length > 10}
-                                                rows={10}
-                                                emptyMessage={"Nenhum apontamento Finalizado."}
-                                            >
-                                                <Column
-                                                    filter={true}
-                                                    field="tipo"
-                                                    header="Tipo do serviço"
-                                                />
-                                                <Column
-                                                    filter={true}
-                                                    field="codigoObra"
-                                                    header="Código do serviço"
-                                                />
-                                                <Column
-                                                    filter={true}
-                                                    field="pessoa.supervisor"
-                                                    header="Supervisor"
-                                                />
-                                                <Column
-                                                    filter={true}
-                                                    field="pessoa.encarregado"
-                                                    header="Encarregado"
-                                                />
-                                                <Column
-                                                    field="cidade"
-                                                    header="Cidade do serviço"
-                                                />
-                                                <Column
-                                                    field="equipe"
-                                                    header="Equipe"
-                                                />
-                                                <Column
-                                                    field="veiculo.placa"
-                                                    header="Veículo"
-                                                />
-                                                <Column
-                                                    field="lucro"
-                                                    header="Lucro (R$)"
-                                                />
-                                            </DataTable>
-                                        </div>
-                                    </ContainerApontamentosFinalizados>
-                                </>
-                                :
-                                itemAtivo === "poda" ?
-                                    <>
-                                        {graficosPoda.map((grafico, i) => (
-                                            <ContainerGrafico>
-                                                <div className="titulo">
-                                                    {i === 0 ? <h1>Faturamento de Hoje</h1> :
-                                                        i === 1 ? <h1>Faturamento da Semana</h1> :
-                                                            i === 2 ? <h1>Faturamento do Mês</h1> :
-                                                                i === 3 ? <h1>Faturamento do Ano</h1> :
-                                                                    <h1>Faturamento de todos os tempos</h1>}
-                                                </div>
-                                                <Chart type="doughnut"
-                                                    data={{
-                                                        labels: grafico.labels, datasets: [
-                                                            { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
-                                                        ]
-                                                    }} />
-                                            </ContainerGrafico>
-                                        ))}
                                         <ContainerApontamentosFinalizados>
                                             <div className="tabela">
                                                 <DataTable
-                                                    value={faturamentoPoda}
-                                                    paginator={faturamentoPoda.length > 10}
+                                                    value={i === 0 ? manutencaoHoje :
+                                                        i === 1 ? manutencaoSemana :
+                                                            i === 2 ? manutencaoMes :
+                                                                i === 3 ? manutencaoAno :
+                                                                    faturamentoManutencao}
+                                                    paginator={(i === 0 ? manutencaoHoje :
+                                                        i === 1 ? manutencaoSemana :
+                                                            i === 2 ? manutencaoMes :
+                                                                i === 3 ? manutencaoAno :
+                                                                    faturamentoManutencao).length > 10}
                                                     rows={10}
                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                 >
@@ -557,140 +742,321 @@ const GerenciadorView = props => {
                                                     />
                                                 </DataTable>
                                             </div>
-                                        </ContainerApontamentosFinalizados></>
+                                        </ContainerApontamentosFinalizados>
+                                    </>
+                                ))}
+                            </>
+                            :
+                            itemAtivo === "linhaviva" ?
+                                <>
+                                    {graficosLinhaviva.map((grafico, i) => (
+                                        <>
+                                            <ContainerGrafico>
+                                                <div className="titulo">
+                                                    {i === 0 ? <h1>Faturamento de Hoje</h1> :
+                                                        i === 1 ? <h1>Faturamento da Semana</h1> :
+                                                            i === 2 ? <h1>Faturamento do Mês</h1> :
+                                                                i === 3 ? <h1>Faturamento do Ano</h1> :
+                                                                    <h1>Faturamento de todos os tempos</h1>}
+                                                </div>
+                                                <Chart type="doughnut"
+                                                    data={{
+                                                        labels: grafico.labels, datasets: [
+                                                            { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
+                                                        ]
+                                                    }} />
+                                            </ContainerGrafico>
+                                            <ContainerApontamentosFinalizados>
+                                                <div className="tabela">
+                                                    <DataTable
+                                                        value={i === 0 ? linhavivaHoje :
+                                                            i === 1 ? linhavivaSemana :
+                                                                i === 2 ? linhavivaMes :
+                                                                    i === 3 ? linhavivaAno :
+                                                                        faturamentoLinhaviva}
+                                                        paginator={(i === 0 ? linhavivaHoje :
+                                                            i === 1 ? linhavivaSemana :
+                                                                i === 2 ? linhavivaMes :
+                                                                    i === 3 ? linhavivaAno :
+                                                                        faturamentoLinhaviva).length > 10}
+                                                        rows={10}
+                                                        emptyMessage={"Nenhum apontamento Finalizado."}
+                                                    >
+                                                        <Column
+                                                            filter={true}
+                                                            field="tipo"
+                                                            header="Tipo do serviço"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="codigoObra"
+                                                            header="Código do serviço"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="pessoa.supervisor"
+                                                            header="Supervisor"
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="pessoa.encarregado"
+                                                            header="Encarregado"
+                                                        />
+                                                        <Column
+                                                            field="cidade"
+                                                            header="Cidade do serviço"
+                                                        />
+                                                        <Column
+                                                            field="equipe"
+                                                            header="Equipe"
+                                                        />
+                                                        <Column
+                                                            field="veiculo.placa"
+                                                            header="Veículo"
+                                                        />
+                                                        <Column
+                                                            field="lucro"
+                                                            header="Lucro (R$)"
+                                                        />
+                                                    </DataTable>
+                                                </div>
+                                            </ContainerApontamentosFinalizados>
+                                        </>
+                                    ))}
+                                </>
+                                :
+                                itemAtivo === "poda" ?
+                                    <>
+                                        {graficosPoda.map((grafico, i) => (
+                                            <>
+                                                <ContainerGrafico>
+                                                    <div className="titulo">
+                                                        {i === 0 ? <h1>Faturamento de Hoje</h1> :
+                                                            i === 1 ? <h1>Faturamento da Semana</h1> :
+                                                                i === 2 ? <h1>Faturamento do Mês</h1> :
+                                                                    i === 3 ? <h1>Faturamento do Ano</h1> :
+                                                                        <h1>Faturamento de todos os tempos</h1>}
+                                                    </div>
+                                                    <Chart type="doughnut"
+                                                        data={{
+                                                            labels: grafico.labels, datasets: [
+                                                                { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
+                                                            ]
+                                                        }} />
+                                                </ContainerGrafico>
+                                                <ContainerApontamentosFinalizados>
+                                                    <div className="tabela">
+                                                        <DataTable
+                                                            value={i === 0 ? podaHoje :
+                                                                i === 1 ? podaSemana :
+                                                                    i === 2 ? podaMes :
+                                                                        i === 3 ? podaAno :
+                                                                            faturamentoPoda}
+                                                            paginator={(i === 0 ? podaHoje :
+                                                                i === 1 ? podaSemana :
+                                                                    i === 2 ? podaMes :
+                                                                        i === 3 ? podaAno :
+                                                                            faturamentoPoda).length > 10}
+                                                            rows={10}
+                                                            emptyMessage={"Nenhum apontamento Finalizado."}
+                                                        >
+                                                            <Column
+                                                                filter={true}
+                                                                field="tipo"
+                                                                header="Tipo do serviço"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="codigoObra"
+                                                                header="Código do serviço"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="pessoa.supervisor"
+                                                                header="Supervisor"
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="pessoa.encarregado"
+                                                                header="Encarregado"
+                                                            />
+                                                            <Column
+                                                                field="cidade"
+                                                                header="Cidade do serviço"
+                                                            />
+                                                            <Column
+                                                                field="equipe"
+                                                                header="Equipe"
+                                                            />
+                                                            <Column
+                                                                field="veiculo.placa"
+                                                                header="Veículo"
+                                                            />
+                                                            <Column
+                                                                field="lucro"
+                                                                header="Lucro (R$)"
+                                                            />
+                                                        </DataTable>
+                                                    </div>
+                                                </ContainerApontamentosFinalizados>
+                                            </>
+                                        ))}
+                                    </>
                                     :
                                     itemAtivo === "decp" ?
                                         <>
                                             {graficosDECP.map((grafico, i) => (
-                                                <ContainerGrafico>
-                                                    <div className="titulo">
-                                                        {i === 0 ? <h1>Faturamento de Hoje</h1> :
-                                                            i === 1 ? <h1>Faturamento da Semana</h1> :
-                                                                i === 2 ? <h1>Faturamento do Mês</h1> :
-                                                                    i === 3 ? <h1>Faturamento do Ano</h1> :
-                                                                        <h1>Faturamento de todos os tempos</h1>}
-                                                    </div>
-                                                    <Chart type="doughnut"
-                                                        data={{
-                                                            labels: grafico.labels, datasets: [
-                                                                { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
-                                                            ]
-                                                        }} />
-                                                </ContainerGrafico>
+                                                <>
+                                                    <ContainerGrafico>
+                                                        <div className="titulo">
+                                                            {i === 0 ? <h1>Faturamento de Hoje</h1> :
+                                                                i === 1 ? <h1>Faturamento da Semana</h1> :
+                                                                    i === 2 ? <h1>Faturamento do Mês</h1> :
+                                                                        i === 3 ? <h1>Faturamento do Ano</h1> :
+                                                                            <h1>Faturamento de todos os tempos</h1>}
+                                                        </div>
+                                                        <Chart type="doughnut"
+                                                            data={{
+                                                                labels: grafico.labels, datasets: [
+                                                                    { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
+                                                                ]
+                                                            }} />
+                                                    </ContainerGrafico>
+                                                    <ContainerApontamentosFinalizados>
+                                                        <div className="tabela">
+                                                            <DataTable
+                                                                value={i === 0 ? decpHoje :
+                                                                    i === 1 ? decpSemana :
+                                                                        i === 2 ? decpMes :
+                                                                            i === 3 ? decpAno :
+                                                                                faturamentoDECP}
+                                                                paginator={(i === 0 ? decpHoje :
+                                                                    i === 1 ? decpSemana :
+                                                                        i === 2 ? decpMes :
+                                                                            i === 3 ? decpAno :
+                                                                                faturamentoDECP).length > 10}
+                                                                rows={10}
+                                                                emptyMessage={"Nenhum apontamento Finalizado."}
+                                                            >
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="tipo"
+                                                                    header="Tipo do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="codigoObra"
+                                                                    header="Código do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.supervisor"
+                                                                    header="Supervisor"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.encarregado"
+                                                                    header="Encarregado"
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                />
+                                                                <Column
+                                                                    field="veiculo.placa"
+                                                                    header="Veículo"
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                />
+                                                            </DataTable>
+                                                        </div>
+                                                    </ContainerApontamentosFinalizados>
+                                                </>
                                             ))}
-                                            <ContainerApontamentosFinalizados>
-                                                <div className="tabela">
-                                                    <DataTable
-                                                        value={faturamentoDECP}
-                                                        paginator={faturamentoDECP.length > 10}
-                                                        rows={10}
-                                                        emptyMessage={"Nenhum apontamento Finalizado."}
-                                                    >
-                                                        <Column
-                                                            filter={true}
-                                                            field="tipo"
-                                                            header="Tipo do serviço"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="codigoObra"
-                                                            header="Código do serviço"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="pessoa.supervisor"
-                                                            header="Supervisor"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="pessoa.encarregado"
-                                                            header="Encarregado"
-                                                        />
-                                                        <Column
-                                                            field="cidade"
-                                                            header="Cidade do serviço"
-                                                        />
-                                                        <Column
-                                                            field="equipe"
-                                                            header="Equipe"
-                                                        />
-                                                        <Column
-                                                            field="veiculo.placa"
-                                                            header="Veículo"
-                                                        />
-                                                        <Column
-                                                            field="lucro"
-                                                            header="Lucro (R$)"
-                                                        />
-                                                    </DataTable>
-                                                </div>
-                                            </ContainerApontamentosFinalizados></>
+                                        </>
                                         :
                                         <>
                                             {graficosDEOP.map((grafico, i) => (
-                                                <ContainerGrafico>
-                                                    <div className="titulo">
-                                                        {i === 0 ? <h1>Faturamento de Hoje</h1> :
-                                                            i === 1 ? <h1>Faturamento da Semana</h1> :
-                                                                i === 2 ? <h1>Faturamento do Mês</h1> :
-                                                                    i === 3 ? <h1>Faturamento do Ano</h1> :
-                                                                        <h1>Faturamento de todos os tempos</h1>}
-                                                    </div>
-                                                    <Chart type="doughnut"
-                                                        data={{
-                                                            labels: grafico.labels, datasets: [
-                                                                { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
-                                                            ]
-                                                        }} />
-                                                </ContainerGrafico>
+                                                <>
+                                                    <ContainerGrafico>
+                                                        <div className="titulo">
+                                                            {i === 0 ? <h1>Faturamento de Hoje</h1> :
+                                                                i === 1 ? <h1>Faturamento da Semana</h1> :
+                                                                    i === 2 ? <h1>Faturamento do Mês</h1> :
+                                                                        i === 3 ? <h1>Faturamento do Ano</h1> :
+                                                                            <h1>Faturamento de todos os tempos</h1>}
+                                                        </div>
+                                                        <Chart type="doughnut"
+                                                            data={{
+                                                                labels: grafico.labels, datasets: [
+                                                                    { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
+                                                                ]
+                                                            }} />
+                                                    </ContainerGrafico>
+                                                    <ContainerApontamentosFinalizados>
+                                                        <div className="tabela">
+                                                            <DataTable
+                                                                value={i === 0 ? deopHoje :
+                                                                    i === 1 ? deopSemana :
+                                                                        i === 2 ? deopMes :
+                                                                            i === 3 ? deopAno :
+                                                                                faturamentoDEOP}
+                                                                paginator={(i === 0 ? deopHoje :
+                                                                    i === 1 ? deopSemana :
+                                                                        i === 2 ? deopMes :
+                                                                            i === 3 ? deopAno :
+                                                                                faturamentoDEOP).length > 10}
+                                                                rows={10}
+                                                                emptyMessage={"Nenhum apontamento Finalizado."}
+                                                            >
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="tipo"
+                                                                    header="Tipo do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="codigoObra"
+                                                                    header="Código do serviço"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.supervisor"
+                                                                    header="Supervisor"
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="pessoa.encarregado"
+                                                                    header="Encarregado"
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                />
+                                                                <Column
+                                                                    field="veiculo.placa"
+                                                                    header="Veículo"
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                />
+                                                            </DataTable>
+                                                        </div>
+                                                    </ContainerApontamentosFinalizados>
+                                                </>
                                             ))}
-                                            <ContainerApontamentosFinalizados>
-                                                <div className="tabela">
-                                                    <DataTable
-                                                        value={faturamentoDEOP}
-                                                        paginator={faturamentoDEOP.length > 10}
-                                                        rows={10}
-                                                        emptyMessage={"Nenhum apontamento Finalizado."}
-                                                    >
-                                                        <Column
-                                                            filter={true}
-                                                            field="tipo"
-                                                            header="Tipo do serviço"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="codigoObra"
-                                                            header="Código do serviço"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="pessoa.supervisor"
-                                                            header="Supervisor"
-                                                        />
-                                                        <Column
-                                                            filter={true}
-                                                            field="pessoa.encarregado"
-                                                            header="Encarregado"
-                                                        />
-                                                        <Column
-                                                            field="cidade"
-                                                            header="Cidade do serviço"
-                                                        />
-                                                        <Column
-                                                            field="equipe"
-                                                            header="Equipe"
-                                                        />
-                                                        <Column
-                                                            field="veiculo.placa"
-                                                            header="Veículo"
-                                                        />
-                                                        <Column
-                                                            field="lucro"
-                                                            header="Lucro (R$)"
-                                                        />
-                                                    </DataTable>
-                                                </div>
-                                            </ContainerApontamentosFinalizados></>
+                                        </>
             }
         </>
     )

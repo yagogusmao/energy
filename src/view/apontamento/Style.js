@@ -87,6 +87,7 @@ export const ContainerApontamentosFinalizados = styled.div`
   align-items: center;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
   background: white;
   padding: 20px;
   .grafico {
