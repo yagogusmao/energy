@@ -19,6 +19,7 @@ const ApiBaseEquipe = {
     faturamentoLinhaviva: () => ApiBase.get('/equipe/faturamentoLinhaviva'),
     faturamentoDECP: () => ApiBase.get('/equipe/faturamentoDECP'),
     faturamentoDEOP: () => ApiBase.get('/equipe/faturamentoDEOP'),
+    atualizarMetas: (payload) => ApiBase.put('/equipe/meta', payload)
 }
 
 export default ApiBaseEquipe;

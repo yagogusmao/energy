@@ -122,6 +122,31 @@ export const ContainerGerenciadorVeiculos = styled.div`
   }
 `;
 
+export const ContainerMetas = styled.div`
+animation: fadeIn 1s;
+  border-radius:5px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  gap: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`
+
 export const ContainerVeiculos = styled.div`
   animation: fadeIn 1s;
   .titulo {
@@ -153,8 +178,9 @@ export const ContainerFaturamento = styled.div`
   animation: fadeIn 1s;
   .titulo {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: space-between;
   }
   border-radius:5px;
   border: 3px;

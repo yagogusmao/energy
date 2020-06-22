@@ -34,7 +34,11 @@ export default class GerenciadorController extends Component {
             modelo: "",
             numeracao: "",
             kilometragem: "",
-            veiculos: []
+            veiculos: [],
+            metaDiaria: "",
+            metaSemanal: "",
+            metaAnual: "",
+            metaMensal: ""
         }
     }
 
@@ -48,7 +52,7 @@ export default class GerenciadorController extends Component {
             Api.listarVeiculosSemEquipe(),
             Api.verFaturamento(_id)
             ]).then(res => {
-                const { _id, tipo, status, veiculo, local } = res[0].data.equipe;
+                const { _id, tipo, status, veiculo, local, metaDiaria, metaSemanal, metaMensal, metaAnual } = res[0].data.equipe;
                 const funcionarios = res[2].data.funcionarios;
                 const funcionariosSemEquipe = res[1].data.funcionarios;
                 const apontamentos = res[5].data.faturamento.apontamentos;
@@ -66,7 +70,8 @@ export default class GerenciadorController extends Component {
                         _id, tipo, status, veiculo, local, apontamentos, funcionarios,
                         funcionariosSemEquipe, carregando: false, veiculos: res[4].data.veiculos,
                         apontamentosHoje, apontamentosSemana, apontamentosMes, apontamentosAno,
-                        lucro, lucroHoje, lucroMes, lucroSemana, lucroAno
+                        lucro, lucroHoje, lucroMes, lucroSemana, lucroAno,
+                        metaDiaria, metaSemanal, metaMensal, metaAnual
                     })
                 } else {
                     const { modelo, numeracao, kilometragem } = res[3].data.veiculo;
@@ -74,7 +79,8 @@ export default class GerenciadorController extends Component {
                         _id, modelo, numeracao, kilometragem, tipo, status, veiculo, local,
                         apontamentos, funcionarios, funcionariosSemEquipe, carregando: false,
                         veiculos: res[4].data.veiculos, apontamentosHoje, apontamentosSemana, apontamentosMes,
-                        apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno
+                        apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno,
+                        metaDiaria, metaSemanal, metaMensal, metaAnual
                     })
                 }
             })
@@ -83,6 +89,21 @@ export default class GerenciadorController extends Component {
 
     goTo = (path) => {
         this.props.history.push(path);
+    }
+
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value })
+    }
+
+    atualizarMetas = () => {
+        const { _id } = queryString.parse(this.props.location.search);
+        const { metaDiaria, metaSemanal, metaMensal, metaAnual } = this.state;
+        Api.atualizarMetas({ _id, metaDiaria, metaSemanal, metaMensal, metaAnual }).then(res => {
+            this.setState({ metaDiaria, metaSemanal, metaMensal, metaAnual },
+                () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+        }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
+        )
     }
 
     retirarFuncionario = (_idFuncionario) => {
@@ -161,7 +182,8 @@ export default class GerenciadorController extends Component {
     render() {
         const { carregando, _id, veiculo, tipo, local, status, apontamentos, funcionarios, funcionariosSemEquipe,
             itemAtivo, modelo, numeracao, kilometragem, veiculos, apontamentosHoje, apontamentosSemana, apontamentosMes,
-            apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno } = this.state;
+            apontamentosAno, lucro, lucroHoje, lucroMes, lucroSemana, lucroAno,
+            metaDiaria, metaSemanal, metaMensal, metaAnual } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -169,6 +191,12 @@ export default class GerenciadorController extends Component {
                     :
                     <>
                         <EquipeGerenciadorView
+                            metaDiaria={metaDiaria}
+                            metaSemanal={metaSemanal}
+                            metaMensal={metaMensal}
+                            metaAnual={metaAnual}
+                            atualizarMetas={this.atualizarMetas}
+                            handleInputChange={this.handleInputChange}
                             lucro={lucro}
                             lucroHoje={lucroHoje}
                             lucroMes={lucroMes}

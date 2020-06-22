@@ -197,11 +197,8 @@ export default class ApontamentoController extends Component {
         this.state.mostrarFinalizadosConstrucaoHoje ? this.setState({ mostrarFinalizadosConstrucaoHoje: false }) : this.setState({ mostrarFinalizadosConstrucaoHoje: true });
     onChangeMostrarFinalizadosConstrucaoSemana = () => 
         this.state.mostrarFinalizadosConstrucaoSemana ? this.setState({ mostrarFinalizadosConstrucaoSemana: false }) : this.setState({ mostrarFinalizadosConstrucaoSemana: true });
-    
-    onChangeMostrarFinalizadosConstrucaoMes = () => {
-        console.log(this.state.mostrarFinalizadosConstrucaoMes)
+    onChangeMostrarFinalizadosConstrucaoMes = () => 
         this.state.mostrarFinalizadosConstrucaoMes ? this.setState({ mostrarFinalizadosConstrucaoMes: false }) : this.setState({ mostrarFinalizadosConstrucaoMes: true });
-    }
     onChangeMostrarFinalizadosConstrucaoAno = () =>
         this.state.mostrarFinalizadosConstrucaoAno ? this.setState({ mostrarFinalizadosConstrucaoAno: false }) : this.setState({ mostrarFinalizadosConstrucaoAno: true });
     onChangeMostrarFinalizadosConstrucao = () =>
@@ -444,10 +441,8 @@ export default class ApontamentoController extends Component {
                             mostrarFinalizadosConstrucaoHoje={mostrarFinalizadosConstrucaoHoje}
                             onChangeMostrarFinalizadosConstrucaoSemana={this.onChangeMostrarFinalizadosConstrucaoSemana}
                             mostrarFinalizadosConstrucaoSemana={mostrarFinalizadosConstrucaoSemana}
-
                             onChangeMostrarFinalizadosConstrucaoMes={this.onChangeMostrarFinalizadosConstrucaoMes}
                             mostrarFinalizadosConstrucaoMes={mostrarFinalizadosConstrucaoMes}
-
                             onChangeMostrarFinalizadosConstrucaoAno={this.onChangeMostrarFinalizadosConstrucaoAno}
                             mostrarFinalizadosConstrucaoAno={mostrarFinalizadosConstrucaoAno}
                             onChangeMostrarFinalizadosConstrucao={this.onChangeMostrarFinalizadosConstrucao}
@@ -476,7 +471,7 @@ export default class ApontamentoController extends Component {
                             mostrarFinalizadosPodaHoje={mostrarFinalizadosPodaHoje}
                             onChangeMostrarFinalizadosPodaSemana={this.onChangeMostrarFinalizadosPodaSemana}
                             mostrarFinalizadosPodaSemana={mostrarFinalizadosPodaSemana}
-                            onChangeMostrarFinalizadosConstrucaoMes={this.onChangeMostrarFinalizadosPodaMes}
+                            onChangeMostrarFinalizadosPodaMes={this.onChangeMostrarFinalizadosPodaMes}
                             mostrarFinalizadosPodaMes={mostrarFinalizadosPodaMes}
                             onChangeMostrarFinalizadosPodaAno={this.onChangeMostrarFinalizadosPodaAno}
                             mostrarFinalizadosPodaAno={mostrarFinalizadosPodaAno}
