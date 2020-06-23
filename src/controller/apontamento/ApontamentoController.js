@@ -195,9 +195,9 @@ export default class ApontamentoController extends Component {
 
     onChangeMostrarFinalizadosConstrucaoHoje = () =>
         this.state.mostrarFinalizadosConstrucaoHoje ? this.setState({ mostrarFinalizadosConstrucaoHoje: false }) : this.setState({ mostrarFinalizadosConstrucaoHoje: true });
-    onChangeMostrarFinalizadosConstrucaoSemana = () => 
+    onChangeMostrarFinalizadosConstrucaoSemana = () =>
         this.state.mostrarFinalizadosConstrucaoSemana ? this.setState({ mostrarFinalizadosConstrucaoSemana: false }) : this.setState({ mostrarFinalizadosConstrucaoSemana: true });
-    onChangeMostrarFinalizadosConstrucaoMes = () => 
+    onChangeMostrarFinalizadosConstrucaoMes = () =>
         this.state.mostrarFinalizadosConstrucaoMes ? this.setState({ mostrarFinalizadosConstrucaoMes: false }) : this.setState({ mostrarFinalizadosConstrucaoMes: true });
     onChangeMostrarFinalizadosConstrucaoAno = () =>
         this.state.mostrarFinalizadosConstrucaoAno ? this.setState({ mostrarFinalizadosConstrucaoAno: false }) : this.setState({ mostrarFinalizadosConstrucaoAno: true });
@@ -381,6 +381,14 @@ export default class ApontamentoController extends Component {
         value={this.state.atividadesSelecionadas.filter(atividade => atividade._id === rowData._id)[0].quantidade}
         onChange={this.handleInputChangeTable} />
 
+    actionTemplateButtonVer = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Ver apontamento" onClick={() => this.props.history.push(`/usuario/apontamento/ver?_id=${rowData._id}`)}
+        className="p-button-raised p-button-rounded" />
+
     handleInputChangeTable = (e) => {
         const { name, value } = e.target;
         let newArray = this.state.atividadesSelecionadas;
@@ -437,6 +445,7 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                        actionTemplateButtonVer={this.actionTemplateButtonVer}
                             onChangeMostrarFinalizadosConstrucaoHoje={this.onChangeMostrarFinalizadosConstrucaoHoje}
                             mostrarFinalizadosConstrucaoHoje={mostrarFinalizadosConstrucaoHoje}
                             onChangeMostrarFinalizadosConstrucaoSemana={this.onChangeMostrarFinalizadosConstrucaoSemana}

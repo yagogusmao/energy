@@ -20,7 +20,7 @@ const GerenciadorView = props => {
         cidade, endereco, localSaida, codigoObra, equipesEscolher, handleDropDownChangeEquipe, handleDropDownChangeTipo,
         handleDropDownChangeSupervisor, handleDropDownChangeEncarregado, handleDropDownChangeCidade,
         handleDropDownChangeLocalSaida, iniciarApontamento, apontamentosIniciados, actionTemplateButtonFinalizar,
-        atividades, actionTemplate, atividadesSelecionadas, actionTemplateInput, actionTemplateButton,
+        atividades, actionTemplate, atividadesSelecionadas, actionTemplateInput, actionTemplateButton, actionTemplateButtonVer,
         tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficosConstrucao,
         graficosManutencao, graficosPoda, graficosLinhaviva, graficosDECP, graficosDEOP, encarregados, supervisores,
         faturamentoConstrucao, faturamentoManutencao, faturamentoLinhaviva, faturamentoPoda, faturamentoDEOP,
@@ -421,6 +421,10 @@ const GerenciadorView = props => {
                                                             header="Lucro (R$)"
                                                             style={{ width: "100px" }}
                                                         />
+                                                        <Column
+                                                            body={actionTemplateButtonVer.bind(this)}
+                                                            style={{ textAlign: 'center', width: '200px' }}
+                                                        />
                                                     </DataTable>
                                                 </div>
                                             </ContainerApontamentosFinalizados>
@@ -489,6 +493,10 @@ const GerenciadorView = props => {
                                                                 field="lucro"
                                                                 header="Lucro (R$)"
                                                                 style={{ width: "100px" }}
+                                                            />
+                                                            <Column
+                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                style={{ textAlign: 'center', width: '200px' }}
                                                             />
                                                         </DataTable>
                                                     </div>
@@ -559,6 +567,10 @@ const GerenciadorView = props => {
                                                                     header="Lucro (R$)"
                                                                     style={{ width: "100px" }}
                                                                 />
+                                                                <Column
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '200px' }}
+                                                                />
                                                             </DataTable>
                                                         </div>
                                                     </ContainerApontamentosFinalizados>
@@ -628,6 +640,10 @@ const GerenciadorView = props => {
                                                                         header="Lucro (R$)"
                                                                         style={{ width: "100px" }}
                                                                     />
+                                                                    <Column
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '200px' }}
+                                                                    />
                                                                 </DataTable>
                                                             </div>
                                                         </ContainerApontamentosFinalizados>
@@ -696,6 +712,10 @@ const GerenciadorView = props => {
                                                                             field="lucro"
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -801,6 +821,10 @@ const GerenciadorView = props => {
                                                                 header="Lucro (R$)"
                                                                 style={{ width: "100px" }}
                                                             />
+                                                            <Column
+                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                style={{ textAlign: 'center', width: '200px' }}
+                                                            />
                                                         </DataTable>
                                                     </div>
                                                 </ContainerApontamentosFinalizados>
@@ -869,6 +893,10 @@ const GerenciadorView = props => {
                                                                     field="lucro"
                                                                     header="Lucro (R$)"
                                                                     style={{ width: "100px" }}
+                                                                />
+                                                                <Column
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                 />
                                                             </DataTable>
                                                         </div>
@@ -939,6 +967,10 @@ const GerenciadorView = props => {
                                                                         header="Lucro (R$)"
                                                                         style={{ width: "100px" }}
                                                                     />
+                                                                    <Column
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '200px' }}
+                                                                    />
                                                                 </DataTable>
                                                             </div>
                                                         </ContainerApontamentosFinalizados>
@@ -1008,6 +1040,10 @@ const GerenciadorView = props => {
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
                                                                         />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
+                                                                        />
                                                                     </DataTable>
                                                                 </div>
                                                             </ContainerApontamentosFinalizados>
@@ -1076,6 +1112,10 @@ const GerenciadorView = props => {
                                                                                 field="lucro"
                                                                                 header="Lucro (R$)"
                                                                                 style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -1181,6 +1221,10 @@ const GerenciadorView = props => {
                                                                     header="Lucro (R$)"
                                                                     style={{ width: "100px" }}
                                                                 />
+                                                                <Column
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '200px' }}
+                                                                />
                                                             </DataTable>
                                                         </div>
                                                     </ContainerApontamentosFinalizados>
@@ -1249,6 +1293,10 @@ const GerenciadorView = props => {
                                                                         field="lucro"
                                                                         header="Lucro (R$)"
                                                                         style={{ width: "100px" }}
+                                                                    />
+                                                                    <Column
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                     />
                                                                 </DataTable>
                                                             </div>
@@ -1319,6 +1367,10 @@ const GerenciadorView = props => {
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
                                                                         />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
+                                                                        />
                                                                     </DataTable>
                                                                 </div>
                                                             </ContainerApontamentosFinalizados>
@@ -1388,6 +1440,10 @@ const GerenciadorView = props => {
                                                                                 header="Lucro (R$)"
                                                                                 style={{ width: "100px" }}
                                                                             />
+                                                                            <Column
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '200px' }}
+                                                                            />
                                                                         </DataTable>
                                                                     </div>
                                                                 </ContainerApontamentosFinalizados>
@@ -1456,6 +1512,10 @@ const GerenciadorView = props => {
                                                                                     field="lucro"
                                                                                     header="Lucro (R$)"
                                                                                     style={{ width: "100px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                                 />
                                                                             </DataTable>
                                                                         </div>
@@ -1561,6 +1621,10 @@ const GerenciadorView = props => {
                                                                         header="Lucro (R$)"
                                                                         style={{ width: "100px" }}
                                                                     />
+                                                                    <Column
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '200px' }}
+                                                                    />
                                                                 </DataTable>
                                                             </div>
                                                         </ContainerApontamentosFinalizados>
@@ -1629,6 +1693,10 @@ const GerenciadorView = props => {
                                                                             field="lucro"
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -1699,6 +1767,10 @@ const GerenciadorView = props => {
                                                                                 header="Lucro (R$)"
                                                                                 style={{ width: "100px" }}
                                                                             />
+                                                                            <Column
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '200px' }}
+                                                                            />
                                                                         </DataTable>
                                                                     </div>
                                                                 </ContainerApontamentosFinalizados>
@@ -1768,6 +1840,10 @@ const GerenciadorView = props => {
                                                                                     header="Lucro (R$)"
                                                                                     style={{ width: "100px" }}
                                                                                 />
+                                                                                <Column
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '200px' }}
+                                                                                />
                                                                             </DataTable>
                                                                         </div>
                                                                     </ContainerApontamentosFinalizados>
@@ -1836,6 +1912,10 @@ const GerenciadorView = props => {
                                                                                         field="lucro"
                                                                                         header="Lucro (R$)"
                                                                                         style={{ width: "100px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                                     />
                                                                                 </DataTable>
                                                                             </div>
@@ -1941,6 +2021,10 @@ const GerenciadorView = props => {
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
                                                                         />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
+                                                                        />
                                                                     </DataTable>
                                                                 </div>
                                                             </ContainerApontamentosFinalizados>
@@ -2009,6 +2093,10 @@ const GerenciadorView = props => {
                                                                                 field="lucro"
                                                                                 header="Lucro (R$)"
                                                                                 style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -2079,6 +2167,10 @@ const GerenciadorView = props => {
                                                                                     header="Lucro (R$)"
                                                                                     style={{ width: "100px" }}
                                                                                 />
+                                                                                <Column
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '200px' }}
+                                                                                />
                                                                             </DataTable>
                                                                         </div>
                                                                     </ContainerApontamentosFinalizados>
@@ -2148,6 +2240,10 @@ const GerenciadorView = props => {
                                                                                         header="Lucro (R$)"
                                                                                         style={{ width: "100px" }}
                                                                                     />
+                                                                                    <Column
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '200px' }}
+                                                                                    />
                                                                                 </DataTable>
                                                                             </div>
                                                                         </ContainerApontamentosFinalizados>
@@ -2216,6 +2312,10 @@ const GerenciadorView = props => {
                                                                                             field="lucro"
                                                                                             header="Lucro (R$)"
                                                                                             style={{ width: "100px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                                         />
                                                                                     </DataTable>
                                                                                 </div>
@@ -2320,6 +2420,10 @@ const GerenciadorView = props => {
                                                                             header="Lucro (R$)"
                                                                             style={{ width: "100px" }}
                                                                         />
+                                                                        <Column
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '200px' }}
+                                                                        />
                                                                     </DataTable>
                                                                 </div>
                                                             </ContainerApontamentosFinalizados>
@@ -2388,6 +2492,10 @@ const GerenciadorView = props => {
                                                                                 field="lucro"
                                                                                 header="Lucro (R$)"
                                                                                 style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -2458,6 +2566,10 @@ const GerenciadorView = props => {
                                                                                     header="Lucro (R$)"
                                                                                     style={{ width: "100px" }}
                                                                                 />
+                                                                                <Column
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '200px' }}
+                                                                                />
                                                                             </DataTable>
                                                                         </div>
                                                                     </ContainerApontamentosFinalizados>
@@ -2527,6 +2639,10 @@ const GerenciadorView = props => {
                                                                                         header="Lucro (R$)"
                                                                                         style={{ width: "100px" }}
                                                                                     />
+                                                                                    <Column
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '200px' }}
+                                                                                    />
                                                                                 </DataTable>
                                                                             </div>
                                                                         </ContainerApontamentosFinalizados>
@@ -2595,6 +2711,10 @@ const GerenciadorView = props => {
                                                                                             field="lucro"
                                                                                             header="Lucro (R$)"
                                                                                             style={{ width: "100px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                                         />
                                                                                     </DataTable>
                                                                                 </div>

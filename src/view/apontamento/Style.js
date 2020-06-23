@@ -76,7 +76,7 @@ export const ContainerCriar = styled.div`
 `;
 
 export const ContainerApontamentosFinalizados = styled.div`
-  animation: fadeIn 1s;
+  animation: up_down 1s;
   border-radius:5px;
   border: 3px;
   border-left-style: solid;
@@ -96,14 +96,15 @@ export const ContainerApontamentosFinalizados = styled.div`
     min-height: 400px;
     margin-bottom: 10px;
   }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  @keyframes up_down{
+                from{
+                    opacity: 0;
+                }
+                to{
+                  opacity: 1;
+                }
+            }
+
 `;
 
 export const ContainerGrafico = styled.div`
