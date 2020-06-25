@@ -50,8 +50,6 @@ export const ContainerCriar = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
@@ -60,10 +58,15 @@ export const ContainerCriar = styled.div`
   padding: 20px;
   .dropdowns {
     display: grid;
-    grid-template-columns: repeat(3, 200px);
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+  .botao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @keyframes fadeIn {
     from {
@@ -169,17 +172,13 @@ export const ContainerTabelaFinalizar = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-left: 10px;
   margin-right: 10px;
   background: white;
   padding: 20px;
   .inputs {
     display: grid;
-    grid-template-columns: repeat(3, 200px);
+    grid-template-columns: repeat(auto-fit, 200px);
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -200,14 +199,28 @@ export const ContainerFomularioFinalizacao = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-left: 10px;
   margin-right: 10px;
   background: white;
   padding: 20px;
+  .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tabela {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

@@ -4,7 +4,10 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Dropdown } from 'primereact/dropdown';
-import { ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa, ContainerEstoqueRetirar, MenuTab } from './styles/Style';
+import {
+    ContainerMudarEstoque, ContainerEstoque, ContainerGerenciador, ContainerPesquisa,
+    ContainerEstoqueRetirar, MenuTab, ContainerPesquisa1
+} from './styles/Style';
 import { Checkbox } from 'primereact/checkbox';
 import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button'
@@ -14,9 +17,9 @@ const EstoqueView = props => {
         materiaisSelecionados, actionTemplateRetirar, materiaisSelecionadosRetirar, actionTemplateInputRetirar, actionTemplateButtonRetirar, sairAlmoxarifado, onChangeCheckBox,
         numeroSerie, tombamento, impedancia, dataFabricacao, numero, nSeloCaixa, nSeloBorn, retirarTransformador, retirarMedidor, carregandoPesquisar, itemAtivo, onChangeItemAtivo,
         almoxarifados } = props;
-    
-    
-        return (
+
+
+    return (
         <>
             <MenuTab>
                 <TabMenu model={[{ label: 'Ver Estoque', value: "estoque", icon: 'pi pi-fw pi-home' },
@@ -47,6 +50,7 @@ const EstoqueView = props => {
                                         filter={true}
                                         field="descricao"
                                         header="Descrição"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -67,7 +71,7 @@ const EstoqueView = props => {
                     :
                     itemAtivo === "adicionar" ?
                         <>
-                            <ContainerPesquisa>
+                            <ContainerPesquisa1>
                                 <div className="titulo">
                                     <h1>Pesquisar materiais para adicionar</h1>
                                 </div>
@@ -87,13 +91,18 @@ const EstoqueView = props => {
                                         {carregandoPesquisar ? <ProgressSpinner /> : <></>}
                                     </div>
                                 </div>
-                                <div className="tabela">
+                                <div className="tabela" style={{ marginTop: '10px' }}>
                                     <DataTable
                                         value={materiaisPesquisados}
                                         paginator={materiaisPesquisados.length > 10}
                                         rows={10}
                                         emptyMessage={"Nenhum material pesquisado."}
                                     >
+                                        <Column
+                                            field="checked"
+                                            body={actionTemplate.bind(this)}
+                                            style={{ textAlign: 'center', width: '50px' }}
+                                        />
                                         <Column
                                             filter={true}
                                             field="_id"
@@ -110,6 +119,7 @@ const EstoqueView = props => {
                                             filter={true}
                                             field="descricao"
                                             header="Descrição"
+                                            style={{ textAlign: 'center', width: '300px' }}
                                         />
                                         <Column
                                             filter={true}
@@ -121,74 +131,73 @@ const EstoqueView = props => {
                                             filter={true}
                                             field="descricaoClasse"
                                             header="Descrição de Classe"
-                                        />
-                                        <Column
-                                            field="checked"
-                                            body={actionTemplate.bind(this)}
-                                            style={{ textAlign: 'center', width: '50px' }}
+                                            style={{ textAlign: 'center', width: '300px' }}
                                         />
                                     </DataTable>
                                 </div>
-                            </ContainerPesquisa>
+                            </ContainerPesquisa1>
                             <ContainerGerenciador style={{ marginBottom: '10px' }}>
                                 <div className="titulo">
                                     <h1>Gerenciador de entradas</h1>
                                 </div>
-                                <ContainerMudarEstoque>
-                                    <Dropdown value={vemDe} options={[
-                                        { label: 'ENERGISA', value: 'ENERGISA' }
-                                    ]} placeholder="Local de onde vem" onChange={handleDropDownChangeVemDe} />
-                                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                        {vemDe ? <p style={{ fontSize: '12px' }}>{'Local de onde vem: ' + vemDe}</p> :
-                                            <p style={{ fontSize: '12px' }}>{'Selecione o local de onde vem.'}</p>}
+                                <div className="dropdown" style={{ minWidth: '300px', marginBottom: '10px' }}>
+                                    <div style={{ minWidth: '300px' }}>
+                                        <div style={{ minWidth: '300px', marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                            {vemDe ? <p style={{ fontSize: '12px' }}>{'Local de onde vem: '}</p> :
+                                                <p style={{ fontSize: '12px' }}>{'Selecione o local de onde vem.'}</p>}
+                                        </div>
+                                        <Dropdown style={{ minWidth: '300px' }} value={vemDe} options={[
+                                            { label: 'ENERGISA', value: 'ENERGISA' }
+                                        ]} placeholder="Local de onde vem" onChange={handleDropDownChangeVemDe} />
                                     </div>
-                                    <div className="tabela">
-                                        <DataTable
-                                            value={materiaisSelecionados}
-                                            paginator={materiaisSelecionados.length > 10}
-                                            rows={10}
-                                            emptyMessage={"Nenhum material selecionado para adicionar."}
-                                        >
-                                            <Column
-                                                field="_id"
-                                                header="_id"
-                                                style={{ textAlign: 'center', width: '100px' }}
-                                            />
-                                            <Column
-                                                field="descricao"
-                                                header="Descrição"
-                                            />
-                                            <Column
-                                                header="Quantidade"
-                                                body={actionTemplateInput.bind(this)}
-                                                style={{ textAlign: 'center', width: '120px' }}
-                                            />
-                                            <Column
-                                                field="unidadeMedida"
-                                                header="Unidade de Medida"
-                                                style={{ textAlign: 'center', width: '120px' }}
-                                            />
-                                            <Column
-                                                body={actionTemplateButton.bind(this)}
-                                                style={{ textAlign: 'center', width: '200px' }}
-                                            />
-                                        </DataTable>
-                                    </div>
-                                    <div className="inputs">
-                                        <Button style={{
-                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                        }} label="Adicionar ao estoque" onClick={adicionarEstoque} className="p-button-raised p-button-rounded" />
-                                        <Button style={{
-                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                        }} label="Relatório de entradas" onClick={() => goto("entrada")} className="p-button-raised p-button-rounded" />
-                                    </div>
-                                </ContainerMudarEstoque>
+                                </div>
+                                <div className="tabela">
+                                    <DataTable
+                                        value={materiaisSelecionados}
+                                        paginator={materiaisSelecionados.length > 10}
+                                        rows={10}
+                                        emptyMessage={"Nenhum material selecionado para adicionar."}
+                                    >
+                                        <Column
+                                            field="_id"
+                                            header="_id"
+                                            style={{ textAlign: 'center', width: '100px' }}
+                                        />
+                                        <Column
+                                            header="Quantidade"
+                                            body={actionTemplateInput.bind(this)}
+                                            style={{ textAlign: 'center', width: '120px' }}
+                                        />
+                                        <Column
+                                            body={actionTemplateButton.bind(this)}
+                                            style={{ textAlign: 'center', width: '150px' }}
+                                        />
+                                        <Column
+                                            field="descricao"
+                                            header="Descrição"
+                                            style={{ textAlign: 'center', width: '300px' }}
+                                        />
+                                        <Column
+                                            field="unidadeMedida"
+                                            header="Unidade de Medida"
+                                            style={{ textAlign: 'center', width: '120px' }}
+                                        />
+                                    </DataTable>
+                                </div>
+                                <div className="botoes">
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Adicionar ao estoque" onClick={adicionarEstoque} className="p-button-raised p-button-rounded" />
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Relatório de entradas" onClick={() => goto("entrada")} className="p-button-raised p-button-rounded" />
+                                </div>
                             </ContainerGerenciador>
                         </>
                         :
@@ -206,6 +215,11 @@ const EstoqueView = props => {
                                             emptyMessage={"Materiais para retirar."}
                                         >
                                             <Column
+                                                field="checked"
+                                                body={actionTemplateRetirar.bind(this)}
+                                                style={{ textAlign: 'center', width: '50px' }}
+                                            />
+                                            <Column
                                                 filter={true}
                                                 field="_id"
                                                 header="_id"
@@ -215,6 +229,7 @@ const EstoqueView = props => {
                                                 filter={true}
                                                 field="descricao"
                                                 header="Descrição"
+                                                style={{ textAlign: 'center', width: '300px' }}
                                             />
                                             <Column
                                                 filter={true}
@@ -227,11 +242,6 @@ const EstoqueView = props => {
                                                 field="unidadeMedida"
                                                 header="Unidade de Medida"
                                                 style={{ textAlign: 'center', width: '120px' }}
-                                            />
-                                            <Column
-                                                field="checked"
-                                                body={actionTemplateRetirar.bind(this)}
-                                                style={{ textAlign: 'center', width: '50px' }}
                                             />
                                         </DataTable>
                                     </div>
@@ -247,6 +257,10 @@ const EstoqueView = props => {
                                         <label htmlFor="checkbox" className="p-checkbox-label">Saída para outros almoxarifados?</label>
                                     </div>
                                     <div className="dropdown">
+                                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                            {vaiPara ? <p style={{ fontSize: '12px' }}>{'Local para onde vai: '}</p> :
+                                                <p style={{ fontSize: '12px' }}>{'Selecione o local para onde vai.'}</p>}
+                                        </div>
                                         <Dropdown value={vaiPara} style={{ width: '100%' }} options={sairAlmoxarifado ?
                                             almoxarifados :
                                             [{ label: 'PONTAPORA', value: 'PONTAPORA' },
@@ -261,10 +275,6 @@ const EstoqueView = props => {
                                             { label: 'ALAGOA NOVA', value: 'ALAGOA NOVA' },
                                             { label: 'LAGOA DE ROÇA', value: 'LAGOA DE ROÇA' }]
                                         } placeholder="Local para onde vai" onChange={handleDropDownChangeVaiPara} />
-                                        <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                            {vaiPara ? <p style={{ fontSize: '12px' }}>{'Local para onde vai: ' + vaiPara}</p> :
-                                                <p style={{ fontSize: '12px' }}>{'Selecione o local para onde vai.'}</p>}
-                                        </div>
                                     </div>
                                 </div>
                                 {sairAlmoxarifado ?
@@ -291,7 +301,6 @@ const EstoqueView = props => {
                                         </div>
                                     </>
                                 }
-
                                 <div className="tabela">
                                     <DataTable
                                         value={materiaisSelecionadosRetirar}
@@ -306,9 +315,19 @@ const EstoqueView = props => {
                                             style={{ textAlign: 'center', width: '100px' }}
                                         />
                                         <Column
+                                            header="Quantidade a retirar"
+                                            body={actionTemplateInputRetirar.bind(this)}
+                                            style={{ textAlign: 'center', width: '120px' }}
+                                        />
+                                        <Column
+                                            body={actionTemplateButtonRetirar.bind(this)}
+                                            style={{ textAlign: 'center', width: '100px' }}
+                                        />
+                                        <Column
                                             filter={true}
                                             field="descricao"
                                             header="Descrição"
+                                            style={{ textAlign: 'center', width: '300px' }}
                                         />
                                         <Column
                                             filter={true}
@@ -321,15 +340,6 @@ const EstoqueView = props => {
                                             field="unidadeMedida"
                                             header="Unidade de Medida"
                                             style={{ textAlign: 'center', width: '120px' }}
-                                        />
-                                        <Column
-                                            header="Quantidade a retirar"
-                                            body={actionTemplateInputRetirar.bind(this)}
-                                            style={{ textAlign: 'center', width: '120px' }}
-                                        />
-                                        <Column
-                                            body={actionTemplateButtonRetirar.bind(this)}
-                                            style={{ textAlign: 'center', width: '100px' }}
                                         />
                                     </DataTable>
                                 </div>
@@ -366,7 +376,7 @@ const EstoqueView = props => {
                                             }} label="Retirar Transformador" onClick={retirarTransformador} className="p-button-raised p-button-rounded" />
                                         </div>
                                     </div>
-                                    <div style={{ marginLeft: '20px' }} className="transformadores">
+                                    <div className="transformadores">
                                         <div className="titulo">
                                             <h3>Medidores</h3>
                                         </div>

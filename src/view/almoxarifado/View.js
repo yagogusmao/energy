@@ -10,7 +10,7 @@ const AlmoxarifadoView = props => {
             <div className="titulo">
                 <h1>Almoxarifados</h1>
             </div>
-            <div style={{ marginTop: '5px' }} className="tabela">
+            <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                 <DataTable
                     value={almoxarifados}
                     paginator={almoxarifados.length > 10}
@@ -28,12 +28,12 @@ const AlmoxarifadoView = props => {
                         style={{ textAlign: 'center', width: '100px' }}
                     />
                     <Column
-                        field="quantidade"
-                        header="Quantidade de Itens"
-                        style={{ textAlign: 'center', width: '100px' }}
+                        body={actionTemplateButton.bind(this)}
+                        style={{ textAlign: 'center', width: '130px' }}
                     />
                     <Column
-                        body={actionTemplateButton.bind(this)}
+                        field="quantidade"
+                        header="Quantidade de Itens"
                         style={{ textAlign: 'center', width: '100px' }}
                     />
                 </DataTable>

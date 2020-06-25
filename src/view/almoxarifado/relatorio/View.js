@@ -29,7 +29,7 @@ const RelatorioView = props => {
                                 boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', width: '100px' }} label="Pesquisar" onClick={pesquisarMateriais} className="p-button-raised p-button-rounded" />
                     </div>
                 </div>
-                <div className="tabela">
+                <div className="tabela" style={{marginTop: '10px'}}>
                     <DataTable
                         value={materiaisPesquisados}
                         paginator={materiaisPesquisados.length > 10}
@@ -64,6 +64,7 @@ const RelatorioView = props => {
                             filter={true}
                             field="descricaoClasse"
                             header="Descrição de Classe"
+                            style={{ textAlign: 'center', width: '300px' }}
                         />
                     </DataTable>
                 </div>

@@ -102,32 +102,18 @@ const GerenciadorView = props => {
                     <ContainerCriar>
                         <div className="dropdowns">
                             <div>
-                                <Dropdown style={{ width: '100%' }} value={equipe} options={equipesEscolher} placeholder="Equipe"
-                                    onChange={handleDropDownChangeEquipe} />
                                 <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {equipe ? <p style={{ fontSize: '12px' }}>{'Equipe: ' + equipe}</p> :
+                                    {equipe ? <p style={{ fontSize: '12px' }}>{'Equipe: '}</p> :
                                         <p style={{ fontSize: '12px' }}>{'Selecione a equipe.'}</p>}
                                 </div>
+                                <Dropdown style={{ width: '100%' }} value={equipe} options={equipesEscolher} placeholder="Equipe"
+                                    onChange={handleDropDownChangeEquipe} />
                             </div>
                             <div>
-                                <Dropdown style={{ width: '100%' }} value={pessoaSupervisor} options={supervisores}
-                                    placeholder="Supervisor" onChange={handleDropDownChangeSupervisor} />
                                 <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {pessoaSupervisor ? <p style={{ fontSize: '12px' }}>{'Supervisor: ' + pessoaSupervisor}</p> :
-                                        <p style={{ fontSize: '12px' }}>{'Selecione o supervisor.'}</p>}
+                                    {tipo ? <p style={{ fontSize: '12px' }}>{'Tipo do serviço: '}</p> :
+                                        <p style={{ fontSize: '12px' }}>{'Selecione o tipo do serviço.'}</p>}
                                 </div>
-                            </div>
-                            <div>
-                                <Dropdown style={{ width: '100%' }} value={pessoaEncarregado} options={encarregados}
-                                    placeholder="Encarregado" onChange={handleDropDownChangeEncarregado} />
-                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {pessoaEncarregado ? <p style={{ fontSize: '12px' }}>{'Encarregado: ' + pessoaEncarregado}</p> :
-                                        <p style={{ fontSize: '12px' }}>{'Selecione o encarregado.'}</p>}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="dropdowns">
-                            <div>
                                 <Dropdown style={{ width: '100%' }} value={tipo} options={[
                                     { label: "MANUTENCAO", value: "MANUTENCAO" },
                                     { label: "CONSTRUCAO", value: "CONSTRUCAO" },
@@ -137,12 +123,28 @@ const GerenciadorView = props => {
                                     { label: "LINHAVIVA", value: "LINHAVIVA" }
                                 ]}
                                     placeholder="Tipo do serviço" onChange={handleDropDownChangeTipo} />
-                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {tipo ? <p style={{ fontSize: '12px' }}>{'Tipo do serviço: ' + tipo}</p> :
-                                        <p style={{ fontSize: '12px' }}>{'Selecione o tipo do serviço.'}</p>}
-                                </div>
                             </div>
                             <div>
+                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                    {pessoaSupervisor ? <p style={{ fontSize: '12px' }}>{'Supervisor: '}</p> :
+                                        <p style={{ fontSize: '12px' }}>{'Selecione o supervisor.'}</p>}
+                                </div>
+                                <Dropdown style={{ width: '100%' }} value={pessoaSupervisor} options={supervisores}
+                                    placeholder="Supervisor" onChange={handleDropDownChangeSupervisor} />
+                            </div>
+                            <div>
+                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                    {pessoaEncarregado ? <p style={{ fontSize: '12px' }}>{'Encarregado: '}</p> :
+                                        <p style={{ fontSize: '12px' }}>{'Selecione o encarregado.'}</p>}
+                                </div>
+                                <Dropdown style={{ width: '100%' }} value={pessoaEncarregado} options={encarregados}
+                                    placeholder="Encarregado" onChange={handleDropDownChangeEncarregado} />
+                            </div>
+                            <div>
+                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                    {cidade ? <p style={{ fontSize: '12px' }}>{'Cidade do serviço: '}</p> :
+                                        <p style={{ fontSize: '12px' }}>{'Selecione a cidade do serviço.'}</p>}
+                                </div>
                                 <Dropdown style={{ width: '100%' }} value={cidade} options={[{ label: 'CAMPINA GRANDE', value: 'CAMPINA GRANDE' },
                                 { label: 'SOLEDADE', value: 'SOLEDADE' },
                                 { label: 'ESPERANÇA', value: 'ESPERANÇA' },
@@ -153,12 +155,12 @@ const GerenciadorView = props => {
                                 { label: 'ALAGOA NOVA', value: 'ALAGOA NOVA' },
                                 { label: 'LAGOA DE ROÇA', value: 'LAGOA DE ROÇA' }]}
                                     placeholder="Cidade do serviço" onChange={handleDropDownChangeCidade} />
-                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {cidade ? <p style={{ fontSize: '12px' }}>{'Cidade do serviço: ' + cidade}</p> :
-                                        <p style={{ fontSize: '12px' }}>{'Selecione a cidade do serviço.'}</p>}
-                                </div>
                             </div>
                             <div>
+                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                    {localSaida ? <p style={{ fontSize: '12px' }}>{'Local de saída da equipe: '}</p> :
+                                        <p style={{ fontSize: '12px' }}>{'Selecione o local de saída.'}</p>}
+                                </div>
                                 <Dropdown style={{ width: '100%' }} value={localSaida} options={[
                                     { label: 'ENERGY CG', value: 'ENERGY CG' },
                                     { label: 'CAMPINA GRANDE', value: 'CAMPINA GRANDE' },
@@ -171,23 +173,19 @@ const GerenciadorView = props => {
                                     { label: 'ALAGOA NOVA', value: 'ALAGOA NOVA' },
                                     { label: 'LAGOA DE ROÇA', value: 'LAGOA DE ROÇA' }]}
                                     placeholder="Local de saída da equipe" onChange={handleDropDownChangeLocalSaida} />
-                                <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
-                                    {localSaida ? <p style={{ fontSize: '12px' }}>{'Local de saída da equipe: ' + localSaida}</p> :
-                                        <p style={{ fontSize: '12px' }}>{'Selecione o local de saída da equipe.'}</p>}
-                                </div>
                             </div>
-                        </div>
-                        <div className="dropdowns">
                             <InputFloat name="pes" label="PES" value={pes} onChange={handleInputChange} />
                             <InputFloat name="endereco" label="Endereço" value={endereco} onChange={handleInputChange} />
                             <InputFloat name="codigoObra" label="Código da Obra" value={codigoObra} onChange={handleInputChange} />
                         </div>
-                        <Button style={{
-                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                        }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
+                        <div className="botao">
+                            <Button style={{
+                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                            }} label="Iniciar Apontamento" onClick={iniciarApontamento} className="p-button-raised p-button-rounded" />
+                        </div>
                     </ContainerCriar>
                 </>
                 :
@@ -197,7 +195,7 @@ const GerenciadorView = props => {
                             <div style={{ marginBottom: '10px' }} className="titulo">
                                 <h1>Atividades disponíveis</h1>
                             </div>
-                            <div className="tabela">
+                            <div className="tabela" style={{ overflowX: 'scroll' }}>
                                 <DataTable
                                     value={atividades}
                                     paginator={atividades.length > 10}
@@ -220,6 +218,7 @@ const GerenciadorView = props => {
                                         filter={true}
                                         field="nome"
                                         header="Nome"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         filter={true}
@@ -237,7 +236,7 @@ const GerenciadorView = props => {
                             <div style={{ marginTop: '10px', marginBottom: '10px' }} className="titulo">
                                 <h1>Atividades selecionadas</h1>
                             </div>
-                            <div className="tabela">
+                            <div className="tabela" style={{ overflowX: 'scroll' }}>
                                 <DataTable
                                     value={atividadesSelecionadas}
                                     paginator={atividadesSelecionadas.length > 10}
@@ -257,6 +256,7 @@ const GerenciadorView = props => {
                                     <Column
                                         field="nome"
                                         header="Nome"
+                                        style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
                                         field="tipo"
@@ -274,14 +274,17 @@ const GerenciadorView = props => {
                                     />
                                 </DataTable>
                             </div>
+                            <div className="inputs">
+                                <InputFloat name="tecnicoEnergisa" label="Técnico da Energisa" value={tecnicoEnergisa} onChange={handleInputChange} />
+                                <InputFloat name="veiculoKmFim" label="Kilometragem final do veículo" value={veiculoKmFim} onChange={handleInputChange} />
+                                <InputFloat name="PgCp" label="Componente" value={PgCp} onChange={handleInputChange} />
+                            </div>
                         </ContainerFomularioFinalizacao>
-                        <ContainerInputs>
-                            <InputFloat name="tecnicoEnergisa" label="Técnico da Energisa" value={tecnicoEnergisa} onChange={handleInputChange} />
-                            <InputFloat name="veiculoKmFim" label="Kilometragem final do veículo" value={veiculoKmFim} onChange={handleInputChange} />
-                            <InputFloat name="PgCp" label="Componente" value={PgCp} onChange={handleInputChange} />
-                        </ContainerInputs>
                         <ContainerTabelaFinalizar style={{ marginTop: '10px', marginBottom: '10px' }}>
-                            <div className="tabela">
+                            <div style={{ marginBottom: '10px' }} className="titulo">
+                                <h1>Apontamentos para finalizar</h1>
+                            </div>
+                            <div className="tabela" style={{ overflowX: 'scroll' }}>
                                 <DataTable
                                     value={apontamentosIniciados}
                                     paginator={apontamentosIniciados.length > 10}
@@ -292,33 +295,40 @@ const GerenciadorView = props => {
                                         filter={true}
                                         field="tipo"
                                         header="Tipo do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="codigoObra"
                                         header="Código do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="pessoa.supervisor"
                                         header="Supervisor"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="pessoa.encarregado"
                                         header="Encarregado"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         field="cidade"
                                         header="Cidade do serviço"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         field="equipe"
                                         header="Equipe"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         field="veiculo.placa"
                                         header="Veículo"
+                                        style={{ textAlign: 'center', width: '120px' }}
                                     />
                                     <Column
                                         body={actionTemplateButtonFinalizar.bind(this)}

@@ -39,18 +39,25 @@ export const ContainerPesquisa = styled.div`
   border-left-style: solid;
   border-color: red;
   border-radius:5px;
-  display: flex;
-  flex-direction: column;
   padding: 20px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: white;
   margin: 10px;
+  .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tabela {
+    overflow-x: scroll;
+  }
   .inputs {
+    justify-content: center;
+    align-items: center;
     display: grid;
-    width: 100%;
     margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 15%;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
     gap: 5px;
     .botao {
       display: flex;
