@@ -27,17 +27,15 @@ export const ContainerInside = styled.div`
   }
   .inputs {
     display: grid;
-    margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 15%;
-    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 175px));
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
     .botao {
-      display: flex;
       justify-content: center;
+      display: flex;
       align-items: center;
-      button {
-        padding: 3px
-      }
-    }
+    } 
   }
 `;
 
@@ -46,15 +44,19 @@ export const ContainerPesquisa = styled.div`
   border-left-style: solid;
   border-color: red;
   border-radius:5px;
-  display: flex;
-  flex-direction: column;
   padding: 20px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: white;
   margin-right: 10px;
   margin-left: 10px;
   animation: fadeIn 1s;
+  .titulo {
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: row;
+    justify-content: center;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -65,17 +67,15 @@ export const ContainerPesquisa = styled.div`
   }
   .inputs {
     display: grid;
-    margin: 5px;
-    grid-template-columns: 17% 17% 17% 17% 17% 15%;
-    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
     .botao {
-      display: flex;
       justify-content: center;
+      display: flex;
       align-items: center;
-      button {
-        padding: 3px
-      }
-    }
+    } 
   }
 `;
 

@@ -29,8 +29,10 @@ const VerApontamentoView = props => {
                 <InputFloat name="lucro" label="Lucro total" disabled={true} type="number" value={lucro} />
             </ContainerInformacoes>
             <ContainerTabela>
-                <h1>Atividades</h1>
-                <div className="tabela">
+                <div className="titulo">
+                    <h1>Atividades</h1>
+                </div>
+                <div className="tabela" style={{ overflowX: 'scroll' }}>
                     <DataTable
                         value={atividades}
                         paginator={atividades.length > 10}
@@ -49,14 +51,15 @@ const VerApontamentoView = props => {
                             style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column
+                            field="nome"
+                            header="Nome"
+                            style={{ textAlign: 'center', width: '300px' }}
+                        />
+                        <Column
                             field="valor"
                             header="Valor (R$)"
                             style={{ textAlign: 'center', width: '100px' }}
-                        />
-                        <Column
-                            field="nome"
-                            header="Nome"
-                        />
+                        />   
                         <Column
                             field="tipo"
                             header="Tipo"

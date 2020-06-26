@@ -10,7 +10,7 @@ const EquipeView = props => {
             <div className="titulo">
                 <h1>Equipes</h1>
             </div>
-            <div style={{ marginTop: '5px' }} className="tabela">
+            <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                 <DataTable
                     value={equipes}
                     paginator={equipes.length > 10}
@@ -20,22 +20,22 @@ const EquipeView = props => {
                     <Column
                         field="_id"
                         header="Código da equipe"
-                        style={{ textAlign: 'center', width: '100px' }}
+                        style={{ textAlign: 'center', width: '150px' }}
                     />
                     <Column
                         field="tipo"
                         header="Tipo"
-                        style={{ textAlign: 'center', width: '100px' }}
+                        style={{ textAlign: 'center', width: '150px' }}
                     />
                     <Column
                         field="local"
                         header="Local"
-                        style={{ textAlign: 'center', width: '100px' }}
+                        style={{ textAlign: 'center', width: '150px' }}
                     />
                     <Column
                         field="status"
                         header="Status"
-                        style={{ textAlign: 'center', width: '100px' }}
+                        style={{ textAlign: 'center', width: '150px' }}
                     />
                     <Column
                         body={actionTemplateButton.bind(this)}

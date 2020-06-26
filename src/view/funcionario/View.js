@@ -73,11 +73,11 @@ const FuncionarioView = props => {
                     </div>
                 </div>
             </ContainerCriar>
-            <ContainerTabela>
+            <ContainerTabela style={{marginBottom: '10px'}}>
                 <div className="titulo">
                     <h1>Funcionários</h1>
                 </div>
-                <div className="tabela">
+                <div className="tabela" style={{overflowX: 'scroll'}}>
                     <DataTable
                         value={funcionarios}
                         paginator={funcionarios.length > 10}
@@ -93,23 +93,23 @@ const FuncionarioView = props => {
                             filter={true}
                             field="nome"
                             header="Nome"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             filter={true}
                             field="cargo"
                             header="Cargo"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="equipe"
                             header="Equipe"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="telefone"
                             header="Telefone"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="data.inicio"
@@ -119,12 +119,12 @@ const FuncionarioView = props => {
                         <Column
                             field="lotacao"
                             header="Lotação"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="cpf"
                             header="CPF"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                     </DataTable>
                 </div>

@@ -37,11 +37,11 @@ const VeiculoView = props => {
                     </div>
                 </div>
             </ContainerCriar>
-            <ContainerTabela>
+            <ContainerTabela style={{marginBottom: '10px'}}>
                 <div className="titulo">
                     <h1>Veículos</h1>
                 </div>
-                <div className="tabela">
+                <div className="tabela" style={{overflowX: 'scroll'}}>
                     <DataTable
                         value={veiculos}
                         paginator={veiculos.length > 10}
@@ -61,12 +61,12 @@ const VeiculoView = props => {
                         <Column
                             field="equipe"
                             header="Equipe"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="kilometragem"
                             header="Kilometragem atual"
-                            style={{ textAlign: 'center', width: '100px' }}
+                            style={{ textAlign: 'center', width: '150px' }}
                         />
                         <Column
                             field="modelo"

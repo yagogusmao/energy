@@ -7,7 +7,6 @@ export const ContainerCriar = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  
   background-color: white;
   padding: 20px;
   .titulo {
@@ -18,9 +17,10 @@ export const ContainerCriar = styled.div`
   }
   .inputs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
     gap: 10px;
-    justify-content: space-between;
     .botao {
       justify-content: center;
       display: flex;

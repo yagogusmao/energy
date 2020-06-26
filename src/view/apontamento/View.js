@@ -80,11 +80,6 @@ const GerenciadorView = props => {
     ];
     return (
         <>
-            <ContainerPropriedades>
-                <div className="titulo">
-                    <h1>Apontamentos</h1>
-                </div>
-            </ContainerPropriedades>
             <MenuTab>
                 <TabMenu model={[{ label: 'Iniciar', value: "iniciar", icon: 'pi pi-fw pi-home' },
                 { label: 'Finalizar', value: "finalizar", icon: 'pi pi-fw pi-pencil' },
@@ -191,7 +186,7 @@ const GerenciadorView = props => {
                 :
                 itemAtivo === "finalizar" ?
                     <>
-                        <ContainerFomularioFinalizacao>
+                        <ContainerTabelaFinalizar>
                             <div style={{ marginBottom: '10px' }} className="titulo">
                                 <h1>Atividades disponíveis</h1>
                             </div>
@@ -202,6 +197,11 @@ const GerenciadorView = props => {
                                     rows={10}
                                     emptyMessage={"Nenhuma atividade cadastrada."}
                                 >
+                                    <Column
+                                        field="checked"
+                                        body={actionTemplate.bind(this)}
+                                        style={{ textAlign: 'center', width: '50px' }}
+                                    />
                                     <Column
                                         field="_id"
                                         header="_id"
@@ -226,17 +226,13 @@ const GerenciadorView = props => {
                                         header="Tipo"
                                         style={{ textAlign: 'center', width: '120px' }}
                                     />
-                                    <Column
-                                        field="checked"
-                                        body={actionTemplate.bind(this)}
-                                        style={{ textAlign: 'center', width: '50px' }}
-                                    />
+                                    
                                 </DataTable>
                             </div>
                             <div style={{ marginTop: '10px', marginBottom: '10px' }} className="titulo">
                                 <h1>Atividades selecionadas</h1>
                             </div>
-                            <div className="tabela" style={{ overflowX: 'scroll' }}>
+                            <div className="tabela" style={{ overflowX: 'scroll', marginBottom: '10px' }}>
                                 <DataTable
                                     value={atividadesSelecionadas}
                                     paginator={atividadesSelecionadas.length > 10}
@@ -249,8 +245,8 @@ const GerenciadorView = props => {
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
-                                        field="valor"
-                                        header="Valor (R$)"
+                                        header="Quantidade"
+                                        body={actionTemplateInput.bind(this)}
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
@@ -259,13 +255,13 @@ const GerenciadorView = props => {
                                         style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
-                                        field="tipo"
-                                        header="Tipo"
+                                        field="valor"
+                                        header="Valor (R$)"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
-                                        header="Quantidade"
-                                        body={actionTemplateInput.bind(this)}
+                                        field="tipo"
+                                        header="Tipo"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
@@ -279,8 +275,6 @@ const GerenciadorView = props => {
                                 <InputFloat name="veiculoKmFim" label="Kilometragem final do veículo" value={veiculoKmFim} onChange={handleInputChange} />
                                 <InputFloat name="PgCp" label="Componente" value={PgCp} onChange={handleInputChange} />
                             </div>
-                        </ContainerFomularioFinalizacao>
-                        <ContainerTabelaFinalizar style={{ marginTop: '10px', marginBottom: '10px' }}>
                             <div style={{ marginBottom: '10px' }} className="titulo">
                                 <h1>Apontamentos para finalizar</h1>
                             </div>
@@ -357,17 +351,20 @@ const GerenciadorView = props => {
                                                     { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                 ]
                                             }} />
-                                        <Button style={{
-                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                        }} label="Ver Apontamentos" onClick={
-                                            i === 0 ? onChangeMostrarFinalizadosConstrucaoHoje :
-                                                i === 1 ? onChangeMostrarFinalizadosConstrucaoSemana :
-                                                    i === 2 ? onChangeMostrarFinalizadosConstrucaoMes :
-                                                        i === 3 ? onChangeMostrarFinalizadosConstrucaoAno :
-                                                            onChangeMostrarFinalizadosConstrucao} className="p-button-raised p-button-rounded" />
+
+                                        <div className="titulo">
+                                            <Button style={{
+                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                            }} label="Ver Apontamentos" onClick={
+                                                i === 0 ? onChangeMostrarFinalizadosConstrucaoHoje :
+                                                    i === 1 ? onChangeMostrarFinalizadosConstrucaoSemana :
+                                                        i === 2 ? onChangeMostrarFinalizadosConstrucaoMes :
+                                                            i === 3 ? onChangeMostrarFinalizadosConstrucaoAno :
+                                                                onChangeMostrarFinalizadosConstrucao} className="p-button-raised p-button-rounded" />
+                                        </div>
                                     </ContainerGrafico>
                                     {i === 0 ? mostrarFinalizadosConstrucaoHoje ?
                                         <>
@@ -397,29 +394,35 @@ const GerenciadorView = props => {
                                                             filter={true}
                                                             field="tipo"
                                                             header="Tipo do serviço"
+                                                            style={{ width: "150px" }}
                                                         />
                                                         <Column
                                                             filter={true}
                                                             field="codigoObra"
                                                             header="Código do serviço"
+                                                            style={{ width: "150px" }}
                                                         />
                                                         <Column
                                                             filter={true}
                                                             field="pessoa.supervisor"
                                                             header="Supervisor"
+                                                            style={{ width: "150px" }}
                                                         />
                                                         <Column
                                                             filter={true}
                                                             field="pessoa.encarregado"
                                                             header="Encarregado"
+                                                            style={{ width: "150px" }}
                                                         />
                                                         <Column
                                                             field="cidade"
                                                             header="Cidade do serviço"
+                                                            style={{ width: "200px" }}
                                                         />
                                                         <Column
                                                             field="equipe"
                                                             header="Equipe"
+                                                            style={{ width: "150px" }}
                                                         />
                                                         <Column
                                                             field="veiculo.placa"
@@ -470,29 +473,35 @@ const GerenciadorView = props => {
                                                                 filter={true}
                                                                 field="tipo"
                                                                 header="Tipo do serviço"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="codigoObra"
                                                                 header="Código do serviço"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="pessoa.supervisor"
                                                                 header="Supervisor"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="pessoa.encarregado"
                                                                 header="Encarregado"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 field="cidade"
                                                                 header="Cidade do serviço"
+                                                                style={{ width: "200px" }}
                                                             />
                                                             <Column
                                                                 field="equipe"
                                                                 header="Equipe"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 field="veiculo.placa"
@@ -543,29 +552,35 @@ const GerenciadorView = props => {
                                                                     filter={true}
                                                                     field="tipo"
                                                                     header="Tipo do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.supervisor"
                                                                     header="Supervisor"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.encarregado"
                                                                     header="Encarregado"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="cidade"
                                                                     header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
                                                                 />
                                                                 <Column
                                                                     field="equipe"
                                                                     header="Equipe"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="veiculo.placa"
@@ -616,29 +631,35 @@ const GerenciadorView = props => {
                                                                         filter={true}
                                                                         field="tipo"
                                                                         header="Tipo do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.supervisor"
                                                                         header="Supervisor"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.encarregado"
                                                                         header="Encarregado"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="cidade"
                                                                         header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
                                                                     />
                                                                     <Column
                                                                         field="equipe"
                                                                         header="Equipe"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="veiculo.placa"
@@ -689,29 +710,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -757,17 +784,19 @@ const GerenciadorView = props => {
                                                         { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                     ]
                                                 }} />
-                                            <Button style={{
-                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                            }} label="Ver Apontamentos" onClick={
-                                                i === 0 ? onChangeMostrarFinalizadosManutencaoHoje :
-                                                    i === 1 ? onChangeMostrarFinalizadosManutencaoSemana :
-                                                        i === 2 ? onChangeMostrarFinalizadosManutencaoMes :
-                                                            i === 3 ? onChangeMostrarFinalizadosManutencaoAno :
-                                                                onChangeMostrarFinalizadosManutencao} className="p-button-raised p-button-rounded" />
+                                            <div className="titulo">
+                                                <Button style={{
+                                                    backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                    WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                    MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                    boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                                }} label="Ver Apontamentos" onClick={
+                                                    i === 0 ? onChangeMostrarFinalizadosManutencaoHoje :
+                                                        i === 1 ? onChangeMostrarFinalizadosManutencaoSemana :
+                                                            i === 2 ? onChangeMostrarFinalizadosManutencaoMes :
+                                                                i === 3 ? onChangeMostrarFinalizadosManutencaoAno :
+                                                                    onChangeMostrarFinalizadosManutencao} className="p-button-raised p-button-rounded" />
+                                            </div>
                                         </ContainerGrafico>
                                         {i === 0 ? mostrarFinalizadosManutencaoHoje ?
                                             <>
@@ -797,29 +826,35 @@ const GerenciadorView = props => {
                                                                 filter={true}
                                                                 field="tipo"
                                                                 header="Tipo do serviço"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="codigoObra"
                                                                 header="Código do serviço"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="pessoa.supervisor"
                                                                 header="Supervisor"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="pessoa.encarregado"
                                                                 header="Encarregado"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 field="cidade"
                                                                 header="Cidade do serviço"
+                                                                style={{ width: "200px" }}
                                                             />
                                                             <Column
                                                                 field="equipe"
                                                                 header="Equipe"
+                                                                style={{ width: "150px" }}
                                                             />
                                                             <Column
                                                                 field="veiculo.placa"
@@ -870,29 +905,35 @@ const GerenciadorView = props => {
                                                                     filter={true}
                                                                     field="tipo"
                                                                     header="Tipo do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.supervisor"
                                                                     header="Supervisor"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.encarregado"
                                                                     header="Encarregado"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="cidade"
                                                                     header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
                                                                 />
                                                                 <Column
                                                                     field="equipe"
                                                                     header="Equipe"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="veiculo.placa"
@@ -943,29 +984,35 @@ const GerenciadorView = props => {
                                                                         filter={true}
                                                                         field="tipo"
                                                                         header="Tipo do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.supervisor"
                                                                         header="Supervisor"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.encarregado"
                                                                         header="Encarregado"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="cidade"
                                                                         header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
                                                                     />
                                                                     <Column
                                                                         field="equipe"
                                                                         header="Equipe"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="veiculo.placa"
@@ -1005,8 +1052,7 @@ const GerenciadorView = props => {
                                                                                         faturamentoManutencao).length > 10}
                                                                         rows={10}
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
-                                                                    >
-                                                                        <Column
+                                                                    ><Column
                                                                             filter={true}
                                                                             field="dataFinal"
                                                                             header="Data"
@@ -1016,29 +1062,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -1089,29 +1141,35 @@ const GerenciadorView = props => {
                                                                                 filter={true}
                                                                                 field="tipo"
                                                                                 header="Tipo do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.supervisor"
                                                                                 header="Supervisor"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.encarregado"
                                                                                 header="Encarregado"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="cidade"
                                                                                 header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
                                                                             />
                                                                             <Column
                                                                                 field="equipe"
                                                                                 header="Equipe"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="veiculo.placa"
@@ -1157,17 +1215,19 @@ const GerenciadorView = props => {
                                                             { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                         ]
                                                     }} />
-                                                <Button style={{
-                                                    backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                                    WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                    MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                    boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                                }} label="Ver Apontamentos" onClick={
-                                                    i === 0 ? onChangeMostrarFinalizadosLinhavivaHoje :
-                                                        i === 1 ? onChangeMostrarFinalizadosLinhavivaSemana :
-                                                            i === 2 ? onChangeMostrarFinalizadosLinhavivaMes :
-                                                                i === 3 ? onChangeMostrarFinalizadosLinhavivaAno :
-                                                                    onChangeMostrarFinalizadosLinhaviva} className="p-button-raised p-button-rounded" />
+                                                <div className="titulo">
+                                                    <Button style={{
+                                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                                    }} label="Ver Apontamentos" onClick={
+                                                        i === 0 ? onChangeMostrarFinalizadosLinhavivaHoje :
+                                                            i === 1 ? onChangeMostrarFinalizadosLinhavivaSemana :
+                                                                i === 2 ? onChangeMostrarFinalizadosLinhavivaMes :
+                                                                    i === 3 ? onChangeMostrarFinalizadosLinhavivaAno :
+                                                                        onChangeMostrarFinalizadosLinhaviva} className="p-button-raised p-button-rounded" />
+                                                </div>
                                             </ContainerGrafico>
                                             {i === 0 ? mostrarFinalizadosLinhavivaHoje ?
                                                 <>
@@ -1197,29 +1257,35 @@ const GerenciadorView = props => {
                                                                     filter={true}
                                                                     field="tipo"
                                                                     header="Tipo do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.supervisor"
                                                                     header="Supervisor"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="pessoa.encarregado"
                                                                     header="Encarregado"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="cidade"
                                                                     header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
                                                                 />
                                                                 <Column
                                                                     field="equipe"
                                                                     header="Equipe"
+                                                                    style={{ width: "150px" }}
                                                                 />
                                                                 <Column
                                                                     field="veiculo.placa"
@@ -1270,29 +1336,35 @@ const GerenciadorView = props => {
                                                                         filter={true}
                                                                         field="tipo"
                                                                         header="Tipo do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.supervisor"
                                                                         header="Supervisor"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.encarregado"
                                                                         header="Encarregado"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="cidade"
                                                                         header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
                                                                     />
                                                                     <Column
                                                                         field="equipe"
                                                                         header="Equipe"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="veiculo.placa"
@@ -1343,29 +1415,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -1416,29 +1494,35 @@ const GerenciadorView = props => {
                                                                                 filter={true}
                                                                                 field="tipo"
                                                                                 header="Tipo do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.supervisor"
                                                                                 header="Supervisor"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.encarregado"
                                                                                 header="Encarregado"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="cidade"
                                                                                 header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
                                                                             />
                                                                             <Column
                                                                                 field="equipe"
                                                                                 header="Equipe"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="veiculo.placa"
@@ -1489,29 +1573,35 @@ const GerenciadorView = props => {
                                                                                     filter={true}
                                                                                     field="tipo"
                                                                                     header="Tipo do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.supervisor"
                                                                                     header="Supervisor"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.encarregado"
                                                                                     header="Encarregado"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="cidade"
                                                                                     header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="equipe"
                                                                                     header="Equipe"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="veiculo.placa"
@@ -1557,17 +1647,19 @@ const GerenciadorView = props => {
                                                                 { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                             ]
                                                         }} />
-                                                    <Button style={{
-                                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                                    }} label="Ver Apontamentos" onClick={
-                                                        i === 0 ? onChangeMostrarFinalizadosPodaHoje :
-                                                            i === 1 ? onChangeMostrarFinalizadosPodaSemana :
-                                                                i === 2 ? onChangeMostrarFinalizadosPodaMes :
-                                                                    i === 3 ? onChangeMostrarFinalizadosPodaAno :
-                                                                        onChangeMostrarFinalizadosPoda} className="p-button-raised p-button-rounded" />
+                                                    <div className="titulo">
+                                                        <Button style={{
+                                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                                        }} label="Ver Apontamentos" onClick={
+                                                            i === 0 ? onChangeMostrarFinalizadosPodaHoje :
+                                                                i === 1 ? onChangeMostrarFinalizadosPodaSemana :
+                                                                    i === 2 ? onChangeMostrarFinalizadosPodaMes :
+                                                                        i === 3 ? onChangeMostrarFinalizadosPodaAno :
+                                                                            onChangeMostrarFinalizadosPoda} className="p-button-raised p-button-rounded" />
+                                                    </div>
                                                 </ContainerGrafico>
                                                 {i === 0 ? mostrarFinalizadosPodaHoje ?
                                                     <>
@@ -1597,29 +1689,35 @@ const GerenciadorView = props => {
                                                                         filter={true}
                                                                         field="tipo"
                                                                         header="Tipo do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.supervisor"
                                                                         header="Supervisor"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="pessoa.encarregado"
                                                                         header="Encarregado"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="cidade"
                                                                         header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
                                                                     />
                                                                     <Column
                                                                         field="equipe"
                                                                         header="Equipe"
+                                                                        style={{ width: "150px" }}
                                                                     />
                                                                     <Column
                                                                         field="veiculo.placa"
@@ -1670,29 +1768,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -1743,29 +1847,35 @@ const GerenciadorView = props => {
                                                                                 filter={true}
                                                                                 field="tipo"
                                                                                 header="Tipo do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.supervisor"
                                                                                 header="Supervisor"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.encarregado"
                                                                                 header="Encarregado"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="cidade"
                                                                                 header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
                                                                             />
                                                                             <Column
                                                                                 field="equipe"
                                                                                 header="Equipe"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="veiculo.placa"
@@ -1816,29 +1926,35 @@ const GerenciadorView = props => {
                                                                                     filter={true}
                                                                                     field="tipo"
                                                                                     header="Tipo do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.supervisor"
                                                                                     header="Supervisor"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.encarregado"
                                                                                     header="Encarregado"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="cidade"
                                                                                     header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="equipe"
                                                                                     header="Equipe"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="veiculo.placa"
@@ -1889,29 +2005,35 @@ const GerenciadorView = props => {
                                                                                         filter={true}
                                                                                         field="tipo"
                                                                                         header="Tipo do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.supervisor"
                                                                                         header="Supervisor"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.encarregado"
                                                                                         header="Encarregado"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="cidade"
                                                                                         header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="equipe"
                                                                                         header="Equipe"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="veiculo.placa"
@@ -1957,17 +2079,19 @@ const GerenciadorView = props => {
                                                                     { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                                 ]
                                                             }} />
-                                                        <Button style={{
-                                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                                        }} label="Ver Apontamentos" onClick={
-                                                            i === 0 ? onChangeMostrarFinalizadosDECPHoje :
-                                                                i === 1 ? onChangeMostrarFinalizadosDECPSemana :
-                                                                    i === 2 ? onChangeMostrarFinalizadosDECPMes :
-                                                                        i === 3 ? onChangeMostrarFinalizadosDECPAno :
-                                                                            onChangeMostrarFinalizadosDECP} className="p-button-raised p-button-rounded" />
+                                                        <div className="titulo">
+                                                            <Button style={{
+                                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                                            }} label="Ver Apontamentos" onClick={
+                                                                i === 0 ? onChangeMostrarFinalizadosDECPHoje :
+                                                                    i === 1 ? onChangeMostrarFinalizadosDECPSemana :
+                                                                        i === 2 ? onChangeMostrarFinalizadosDECPMes :
+                                                                            i === 3 ? onChangeMostrarFinalizadosDECPAno :
+                                                                                onChangeMostrarFinalizadosDECP} className="p-button-raised p-button-rounded" />
+                                                        </div>
                                                     </ContainerGrafico>
                                                     {i === 0 ? mostrarFinalizadosDECPHoje ?
                                                         <>
@@ -1997,29 +2121,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -2070,29 +2200,35 @@ const GerenciadorView = props => {
                                                                                 filter={true}
                                                                                 field="tipo"
                                                                                 header="Tipo do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.supervisor"
                                                                                 header="Supervisor"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.encarregado"
                                                                                 header="Encarregado"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="cidade"
                                                                                 header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
                                                                             />
                                                                             <Column
                                                                                 field="equipe"
                                                                                 header="Equipe"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="veiculo.placa"
@@ -2143,29 +2279,35 @@ const GerenciadorView = props => {
                                                                                     filter={true}
                                                                                     field="tipo"
                                                                                     header="Tipo do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.supervisor"
                                                                                     header="Supervisor"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.encarregado"
                                                                                     header="Encarregado"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="cidade"
                                                                                     header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="equipe"
                                                                                     header="Equipe"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="veiculo.placa"
@@ -2216,29 +2358,35 @@ const GerenciadorView = props => {
                                                                                         filter={true}
                                                                                         field="tipo"
                                                                                         header="Tipo do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.supervisor"
                                                                                         header="Supervisor"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.encarregado"
                                                                                         header="Encarregado"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="cidade"
                                                                                         header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="equipe"
                                                                                         header="Equipe"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="veiculo.placa"
@@ -2289,29 +2437,35 @@ const GerenciadorView = props => {
                                                                                             filter={true}
                                                                                             field="tipo"
                                                                                             header="Tipo do serviço"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="codigoObra"
                                                                                             header="Código do serviço"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="pessoa.supervisor"
                                                                                             header="Supervisor"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="pessoa.encarregado"
                                                                                             header="Encarregado"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="cidade"
                                                                                             header="Cidade do serviço"
+                                                                                            style={{ width: "200px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="equipe"
                                                                                             header="Equipe"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="veiculo.placa"
@@ -2356,17 +2510,19 @@ const GerenciadorView = props => {
                                                                     { data: grafico.data, backgroundColor, hoverBackgroundColor: backgroundColor }
                                                                 ]
                                                             }} />
-                                                        <Button style={{
-                                                            backgroundColor: '#ce5f52', borderColor: '#e57164',
-                                                            WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                            MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
-                                                            boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
-                                                        }} label="Ver Apontamentos" onClick={
-                                                            i === 0 ? onChangeMostrarFinalizadosDEOPHoje :
-                                                                i === 1 ? onChangeMostrarFinalizadosDEOPSemana :
-                                                                    i === 2 ? onChangeMostrarFinalizadosDEOPMes :
-                                                                        i === 3 ? onChangeMostrarFinalizadosDEOPAno :
-                                                                            onChangeMostrarFinalizadosDEOP} className="p-button-raised p-button-rounded" />
+                                                        <div className="titulo">
+                                                            <Button style={{
+                                                                backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                                                WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                                MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                                                boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                                            }} label="Ver Apontamentos" onClick={
+                                                                i === 0 ? onChangeMostrarFinalizadosDEOPHoje :
+                                                                    i === 1 ? onChangeMostrarFinalizadosDEOPSemana :
+                                                                        i === 2 ? onChangeMostrarFinalizadosDEOPMes :
+                                                                            i === 3 ? onChangeMostrarFinalizadosDEOPAno :
+                                                                                onChangeMostrarFinalizadosDEOP} className="p-button-raised p-button-rounded" />
+                                                        </div>
                                                     </ContainerGrafico>
                                                     {i === 0 ? mostrarFinalizadosDEOPHoje ?
                                                         <>
@@ -2396,29 +2552,35 @@ const GerenciadorView = props => {
                                                                             filter={true}
                                                                             field="tipo"
                                                                             header="Tipo do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.supervisor"
                                                                             header="Supervisor"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="pessoa.encarregado"
                                                                             header="Encarregado"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="cidade"
                                                                             header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
                                                                         />
                                                                         <Column
                                                                             field="equipe"
                                                                             header="Equipe"
+                                                                            style={{ width: "150px" }}
                                                                         />
                                                                         <Column
                                                                             field="veiculo.placa"
@@ -2469,29 +2631,35 @@ const GerenciadorView = props => {
                                                                                 filter={true}
                                                                                 field="tipo"
                                                                                 header="Tipo do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.supervisor"
                                                                                 header="Supervisor"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="pessoa.encarregado"
                                                                                 header="Encarregado"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="cidade"
                                                                                 header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
                                                                             />
                                                                             <Column
                                                                                 field="equipe"
                                                                                 header="Equipe"
+                                                                                style={{ width: "150px" }}
                                                                             />
                                                                             <Column
                                                                                 field="veiculo.placa"
@@ -2542,29 +2710,35 @@ const GerenciadorView = props => {
                                                                                     filter={true}
                                                                                     field="tipo"
                                                                                     header="Tipo do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.supervisor"
                                                                                     header="Supervisor"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="pessoa.encarregado"
                                                                                     header="Encarregado"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="cidade"
                                                                                     header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="equipe"
                                                                                     header="Equipe"
+                                                                                    style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
                                                                                     field="veiculo.placa"
@@ -2615,29 +2789,35 @@ const GerenciadorView = props => {
                                                                                         filter={true}
                                                                                         field="tipo"
                                                                                         header="Tipo do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.supervisor"
                                                                                         header="Supervisor"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="pessoa.encarregado"
                                                                                         header="Encarregado"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="cidade"
                                                                                         header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="equipe"
                                                                                         header="Equipe"
+                                                                                        style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
                                                                                         field="veiculo.placa"
@@ -2688,29 +2868,35 @@ const GerenciadorView = props => {
                                                                                             filter={true}
                                                                                             field="tipo"
                                                                                             header="Tipo do serviço"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="codigoObra"
                                                                                             header="Código do serviço"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="pessoa.supervisor"
                                                                                             header="Supervisor"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="pessoa.encarregado"
                                                                                             header="Encarregado"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="cidade"
                                                                                             header="Cidade do serviço"
+                                                                                            style={{ width: "200px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="equipe"
                                                                                             header="Equipe"
+                                                                                            style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
                                                                                             field="veiculo.placa"

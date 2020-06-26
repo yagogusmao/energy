@@ -35,11 +35,11 @@ const AtividadeView = props => {
                     </div>
                 </div>
             </ContainerCriar>
-            <ContainerTabela>
+            <ContainerTabela style={{marginBottom: '10px'}}>
                 <div className="titulo">
                     <h1>Atividades</h1>
                 </div>
-                <div className="tabela">
+                <div className="tabela" style={{overflowX: 'scroll'}}>
                     <DataTable
                         value={atividades}
                         paginator={atividades.length > 10}
@@ -62,6 +62,7 @@ const AtividadeView = props => {
                             filter={true}
                             field="nome"
                             header="Nome"
+                            style={{ textAlign: 'center', width: '300px' }}
                         />
                         <Column
                             filter={true}

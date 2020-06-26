@@ -6,6 +6,8 @@ export const MenuTab = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   @keyframes fadeIn {
     from {
       opacity: 0;

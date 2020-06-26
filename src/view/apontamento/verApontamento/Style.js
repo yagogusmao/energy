@@ -29,16 +29,20 @@ export const ContainerInformacoes = styled.div`
 export const ContainerTabela = styled.div`
   animation: fadeIn 1s;
   border-radius:5px;
-  margin: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   background-color: white;
   padding: 20px;
+  .titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;
