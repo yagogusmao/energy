@@ -115,7 +115,7 @@ const GerenciadorView = props => {
                                     { label: "DECP", value: "DECP" },
                                     { label: "DEOP", value: "DEOP" },
                                     { label: "PODA", value: "PODA" },
-                                    { label: "LINHAVIVA", value: "LINHAVIVA" }
+                                    { label: "LINHA VIVA", value: "LINHA VIVA" }
                                 ]}
                                     placeholder="Tipo do serviço" onChange={handleDropDownChangeTipo} />
                             </div>
