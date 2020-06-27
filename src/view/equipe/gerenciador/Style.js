@@ -6,9 +6,10 @@ export const ContainerPropriedades = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 10px;
   background: white;
   padding: 20px;
@@ -39,6 +40,8 @@ export const MenuTab = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -88,9 +91,10 @@ export const ContainerGerenciadorVeiculos = styled.div`
   border: 3px;
   border-left-style: solid;
   border-color: red;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+      justify-content: center;
+      align-items: center;
   margin-left: 10px;
   margin-right: 10px;
   background: white;
@@ -102,8 +106,8 @@ export const ContainerGerenciadorVeiculos = styled.div`
   }
   .propriedades {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
     .dados {
       display: flex;
@@ -129,7 +133,7 @@ animation: fadeIn 1s;
   border-left-style: solid;
   border-color: red;
   display: grid;
-  grid-template-columns: repeat(5, 200px);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
   gap: 10px;
   margin-left: 10px;
   margin-right: 10px;

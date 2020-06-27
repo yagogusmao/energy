@@ -18,15 +18,11 @@ const GerenciadorView = props => {
     return (
         <>
             <ContainerPropriedades>
-                <div className="titulo">
-                    <h1>Equipe: {_id}</h1>
-                </div>
-                <div className="propriedades">
-                    <strong>Tipo: {tipo}</strong>
-                    <strong>Local: {local}</strong>
-                    <strong>Status: {status}</strong>
-                    {veiculo !== "" ? <strong>Veículo: {veiculo}</strong> : <strong>Veículo: Nenhum</strong>}
-                </div>
+                <h3>Equipe: {_id}</h3>
+                <strong>Tipo: {tipo}</strong>
+                <strong>Local: {local}</strong>
+                <strong>Status: {status}</strong>
+                {veiculo !== "" ? <strong>Veículo: {veiculo}</strong> : <strong>Veículo: Nenhum</strong>}
             </ContainerPropriedades>
             <MenuTab>
                 <TabMenu model={[{ label: 'Faturamento', value: "faturamento", icon: 'pi pi-fw pi-home' },
@@ -38,10 +34,10 @@ const GerenciadorView = props => {
                 <>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            {lucroHoje > metaDiaria ? <><h1 style={{ color: 'green' }}>Faturamento do dia: R$ {lucroHoje.toFixed(2)}</h1><h1>/Meta Diária: R$ {metaDiaria}</h1></>
-                                : <><h1 style={{ color: 'red' }}>Faturamento do dia: R$ {lucroHoje.toFixed(2)}</h1><h1>/Meta Diária: R$ {metaDiaria}</h1></>}
+                            {lucroHoje > metaDiaria ? <><h3 style={{ color: 'green' }}>Faturamento do dia: R$ {lucroHoje.toFixed(2)}</h3><h3>/Meta Diária: R$ {metaDiaria}</h3></>
+                                : <><h3 style={{ color: 'red' }}>Faturamento do dia: R$ {lucroHoje.toFixed(2)}</h3><h3>/Meta Diária: R$ {metaDiaria}</h3></>}
                         </div>
-                        <div style={{ marginTop: '5px' }} className="tabela">
+                        <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                             <DataTable
                                 value={apontamentosHoje}
                                 paginator={apontamentosHoje.length > 10}
@@ -52,43 +48,50 @@ const GerenciadorView = props => {
                                     filter={true}
                                     field="tipo"
                                     header="Tipo do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="codigoObra"
                                     header="Código do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.supervisor"
                                     header="Supervisor"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.encarregado"
                                     header="Encarregado"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="cidade"
                                     header="Cidade do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="veiculo.placa"
                                     header="Veículo"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     field="lucro"
                                     header="Lucro Total (R$)"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                             </DataTable>
                         </div>
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            {lucroSemana > metaSemanal ? <><h1 style={{ color: 'green' }}>Faturamento da Semana: R$ {lucroSemana.toFixed(2)}</h1><h1>/Meta Semanal: R$ {metaSemanal}</h1></>
-                                : <><h1 style={{ color: 'red' }}>Faturamento da Semana: R$ {lucroSemana.toFixed(2)}</h1><h1>/Meta Semanal: R$ {metaSemanal}</h1></>}
+                            {lucroSemana > metaSemanal ? <><h3 style={{ color: 'green' }}>Faturamento da Semana: R$ {lucroSemana.toFixed(2)}</h3><h3>/Meta Semanal: R$ {metaSemanal}</h3></>
+                                : <><h3 style={{ color: 'red' }}>Faturamento da Semana: R$ {lucroSemana.toFixed(2)}</h3><h3>/Meta Semanal: R$ {metaSemanal}</h3></>}
                         </div>
-                        <div style={{ marginTop: '5px' }} className="tabela">
+                        <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                             <DataTable
                                 value={apontamentosSemana}
                                 paginator={apontamentosSemana.length > 10}
@@ -99,43 +102,50 @@ const GerenciadorView = props => {
                                     filter={true}
                                     field="tipo"
                                     header="Tipo do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="codigoObra"
                                     header="Código do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.supervisor"
                                     header="Supervisor"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.encarregado"
                                     header="Encarregado"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="cidade"
                                     header="Cidade do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="veiculo.placa"
                                     header="Veículo"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     field="lucro"
                                     header="Lucro Total (R$)"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                             </DataTable>
                         </div>
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            {lucroMes > metaMensal ? <><h1 style={{ color: 'green' }}>Faturamento do Mês: R$ {lucroMes.toFixed(2)}</h1><h1>/Meta Mensal: R$ {metaMensal}</h1></>
-                                : <><h1 style={{ color: 'red' }}>Faturamento do Mês: R$ {lucroMes.toFixed(2)}</h1><h1>/Meta Mensal: R$ {metaMensal}</h1></>}
+                            {lucroMes > metaMensal ? <><h3 style={{ color: 'green' }}>Faturamento do Mês: R$ {lucroMes.toFixed(2)}</h3><h3>/Meta Mensal: R$ {metaMensal}</h3></>
+                                : <><h3 style={{ color: 'red' }}>Faturamento do Mês: R$ {lucroMes.toFixed(2)}</h3><h3>/Meta Mensal: R$ {metaMensal}</h3></>}
                         </div>
-                        <div style={{ marginTop: '5px' }} className="tabela">
+                        <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                             <DataTable
                                 value={apontamentosMes}
                                 paginator={apontamentosMes.length > 10}
@@ -146,43 +156,50 @@ const GerenciadorView = props => {
                                     filter={true}
                                     field="tipo"
                                     header="Tipo do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="codigoObra"
                                     header="Código do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.supervisor"
                                     header="Supervisor"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.encarregado"
                                     header="Encarregado"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="cidade"
                                     header="Cidade do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="veiculo.placa"
                                     header="Veículo"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     field="lucro"
                                     header="Lucro Total (R$)"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                             </DataTable>
                         </div>
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            {lucroAno > metaAnual ? <><h1 style={{ color: 'green' }}>Faturamento do Ano: R$ {lucroAno.toFixed(2)}</h1><h1>/Meta Anual: R$ {metaAnual}</h1></>
-                                : <><h1 style={{ color: 'red' }}>Faturamento do Ano: R$ {lucroAno.toFixed(2)}</h1><h1>/Meta Anual: R$ {metaAnual}</h1></>}
+                            {lucroAno > metaAnual ? <><h3 style={{ color: 'green' }}>Faturamento do Ano: R$ {lucroAno.toFixed(2)}</h3><h3>/Meta Anual: R$ {metaAnual}</h3></>
+                                : <><h3 style={{ color: 'red' }}>Faturamento do Ano: R$ {lucroAno.toFixed(2)}</h3><h3>/Meta Anual: R$ {metaAnual}</h3></>}
                         </div>
-                        <div style={{ marginTop: '5px' }} className="tabela">
+                        <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                             <DataTable
                                 value={apontamentosAno}
                                 paginator={apontamentosAno.length > 10}
@@ -193,42 +210,49 @@ const GerenciadorView = props => {
                                     filter={true}
                                     field="tipo"
                                     header="Tipo do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="codigoObra"
                                     header="Código do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.supervisor"
                                     header="Supervisor"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.encarregado"
                                     header="Encarregado"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="cidade"
                                     header="Cidade do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="veiculo.placa"
                                     header="Veículo"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     field="lucro"
                                     header="Lucro Total (R$)"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                             </DataTable>
                         </div>
                     </ContainerFaturamento>
                     <ContainerFaturamento>
                         <div className="titulo">
-                            <h1>Faturamento de todos os tempos: R$ {lucro.toFixed(2)} </h1>
+                            <h3>Faturamento de todos os tempos: R$ {lucro.toFixed(2)} </h3>
                         </div>
-                        <div style={{ marginTop: '5px' }} className="tabela">
+                        <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                             <DataTable
                                 value={apontamentos}
                                 paginator={apontamentos.length > 10}
@@ -239,33 +263,40 @@ const GerenciadorView = props => {
                                     filter={true}
                                     field="tipo"
                                     header="Tipo do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="codigoObra"
                                     header="Código do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.supervisor"
                                     header="Supervisor"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     filter={true}
                                     field="pessoa.encarregado"
                                     header="Encarregado"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="cidade"
                                     header="Cidade do serviço"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                                 <Column
                                     field="veiculo.placa"
                                     header="Veículo"
+                                    style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
                                     field="lucro"
                                     header="Lucro Total (R$)"
+                                    style={{ textAlign: 'center', width: '150px' }}
                                 />
                             </DataTable>
                         </div>
@@ -276,9 +307,9 @@ const GerenciadorView = props => {
                     <>
                         <ContainerGerenciadorFuncionarios>
                             <div className="titulo">
-                                <h1>Gerenciador de funcionários</h1>
+                                <h3>Gerenciador de funcionários</h3>
                             </div>
-                            <div style={{ marginTop: '5px' }} className="tabela">
+                            <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                                 <DataTable
                                     value={funcionarios}
                                     paginator={funcionarios.length > 10}
@@ -294,31 +325,32 @@ const GerenciadorView = props => {
                                         filter={true}
                                         field="nome"
                                         header="Nome"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="cargo"
                                         header="Cargo"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         field="cpf"
                                         header="CPF"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         body={actionTemplateButton.bind(this)}
-                                        style={{ textAlign: 'center', width: '100px' }}
-                                    />
+                                        style={{ textAlign: 'center', width: '200px' }}
+                                        />
+                                   
                                 </DataTable>
                             </div>
                         </ContainerGerenciadorFuncionarios>
-                        <ContainerGerenciadorFuncionarios style={{ marginTop: '10px' }}>
+                        <ContainerGerenciadorFuncionarios style={{ marginTop: '10px', marginBottom: '10px' }}>
                             <div className="titulo">
-                                <h1>Funcionários sem equipe</h1>
+                                <h3>Funcionários sem equipe</h3>
                             </div>
-                            <div style={{ marginTop: '5px' }} className="tabela">
+                            <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                                 <DataTable
                                     value={funcionariosSemEquipe}
                                     paginator={funcionariosSemEquipe.length > 10}
@@ -334,23 +366,23 @@ const GerenciadorView = props => {
                                         filter={true}
                                         field="nome"
                                         header="Nome"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         filter={true}
                                         field="cargo"
                                         header="Cargo"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         field="cpf"
                                         header="CPF"
-                                        style={{ textAlign: 'center', width: '100px' }}
+                                        style={{ textAlign: 'center', width: '150px' }}
                                     />
                                     <Column
                                         body={actionTemplateButtonAdicionar.bind(this)}
-                                        style={{ textAlign: 'center', width: '100px' }}
-                                    />
+                                        style={{ textAlign: 'center', width: '200px' }}
+                                        />
                                 </DataTable>
                             </div>
                         </ContainerGerenciadorFuncionarios>
@@ -359,11 +391,8 @@ const GerenciadorView = props => {
                     itemAtivo === "veiculo" ?
                         <>
                             <ContainerGerenciadorVeiculos>
-                                <div className="titulo">
-                                    <h1>Gerenciador de veículo</h1>
-                                </div>
                                 <div className="propriedades">
-                                    <div className="dados">
+                                    <div className="dados" style={{marginBottom: '10px'}}>
                                         {veiculo !== "" ? <strong>Placa: {veiculo}</strong> : <strong>Placa: -</strong>}
                                         {veiculo !== "" ? <strong>Numeração: {numeracao}</strong> : <strong>Numeração: -</strong>}
                                         {veiculo !== "" ? <strong>Modelo: {modelo}</strong> : <strong>Modelo: -</strong>}
@@ -381,9 +410,9 @@ const GerenciadorView = props => {
                             </ContainerGerenciadorVeiculos>
                             <ContainerVeiculos style={{ marginTop: '10px' }}>
                                 <div className="titulo">
-                                    <h1>Veículos sem equipe</h1>
+                                    <h3>Veículos sem equipe</h3>
                                 </div>
-                                <div style={{ marginTop: '5px' }} className="tabela">
+                                <div style={{ marginTop: '5px', overflowX: 'scroll' }} className="tabela">
                                     <DataTable
                                         value={veiculos}
                                         paginator={veiculos.length > 10}
@@ -403,11 +432,11 @@ const GerenciadorView = props => {
                                         <Column
                                             field="kilometragem"
                                             header="Kilometragem"
-                                            style={{ textAlign: 'center', width: '100px' }}
+                                            style={{ textAlign: 'center', width: '150px' }}
                                         />
                                         <Column
                                             body={actionTemplateButtonVeiculo.bind(this)}
-                                            style={{ textAlign: 'center', width: '100px' }}
+                                            style={{ textAlign: 'center', width: '200px' }}
                                         />
                                     </DataTable>
                                 </div>
