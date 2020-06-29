@@ -1,29 +1,39 @@
 import React, { Component } from "react";
 import UserNavbar from '../../view/barraNavegacao/View';
-import { getAuthenticate } from '../../service/LocalAuth';
 
-class UserNavbarController extends Component {
+class NavbarController extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isAdmin: false,
             isAuthenticate: false,
-            showMobileNavbar: false
+            showMobileNavbar: false,
+            clearNavbar: false,
         };
-
     }
 
-    goTo = path => {
+    onChangeMobileNavbar = () => {
+        this.setState({ showMobileNavbar: !this.state.showMobileNavbar });
+        console.log(this.state.showMobileNavbar)
+    };
+
+    goTo = (path) => {
         this.props.history.push(path);
     };
 
+    onChangeClearNavbar = (bool) => this.setState({ clearNavbar: bool });
+
     render() {
-        const { isAdmin, isAuthenticate, showMobileNavbar } = this.state;
+        const { showMobileNavbar, clearNavbar } = this.state;
 
         return (
             <>
                 <UserNavbar
                     goTo={this.goTo}
+                    showMobileNavbar={showMobileNavbar}
+                    onChangeMobileNavbar={this.onChangeMobileNavbar}
+                    onChangeClearNavbar={this.onChangeClearNavbar}
+                    clearNavbar={clearNavbar}
                 />
             </>
         );
@@ -31,4 +41,4 @@ class UserNavbarController extends Component {
     }
 }
 
-export default UserNavbarController;
+export default NavbarController;

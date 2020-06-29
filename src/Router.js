@@ -14,31 +14,45 @@ import VeiculoController from './controller/veiculo/VeiculoController';
 import ApontamentoController from './controller/apontamento/ApontamentoController';
 import VerApontamentoController from './controller/apontamento/VerApontamentoController';
 
-const RotaPrivada = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        getAuthenticate() ? (
-            <Component {...props} />
-        ) : (
-                <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-            )
-    )}
-    />
-)
+const RotaPrivada = ({ component: Component, title, ...rest }) => {
+    setDocumentTitle(title);
+    const { onChangeClearNavbar } = rest;
+    return (
+        <Route
+            {...rest}
+            render={(props) =>
+                getAuthenticate() ? (
+                    <Component {...props} onChangeClearNavbar={onChangeClearNavbar} />
+                ) : (
+                        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+                    )
+            }
+        />
+    );
+};
+
+const setDocumentTitle = (title) => {
+    if (title === "") {
+      document.title = "Energy";
+    } else {
+      document.title = `${title} | Energy`;
+    }
+  };
 
 export const RotasUsuario = () => (
 
     <Switch>
-        <RotaPrivada exact path="/usuario/almoxarifado" component={AlmoxarifadoController} />
-        <RotaPrivada exact path="/usuario/atividade" component={AtividadeController} />
-        <RotaPrivada exact path="/usuario/material" component={MaterialController} />
-        <RotaPrivada exact path="/usuario/estoque" component={EstoqueController} />
-        <RotaPrivada exact path="/usuario/relatorio" component={RelatorioController} />
-        <RotaPrivada exact path="/usuario/funcionario" component={FuncionarioController} />
-        <RotaPrivada exact path="/usuario/equipe" component={EquipeController} />
-        <RotaPrivada exact path="/usuario/equipe/gerenciar" component={GerenciadorEquipeController} />
-        <RotaPrivada exact path="/usuario/veiculo" component={VeiculoController} />
-        <RotaPrivada exact path="/usuario/apontamento" component={ApontamentoController} />
-        <RotaPrivada exact path="/usuario/apontamento/ver" component={VerApontamentoController} />
+        <RotaPrivada exact path="/usuario/almoxarifado" title={"Almoxarifados"} component={AlmoxarifadoController} />
+        <RotaPrivada exact path="/usuario/atividade" title={"Atividades"} component={AtividadeController} />
+        <RotaPrivada exact path="/usuario/material" title={"Materiais"} component={MaterialController} />
+        <RotaPrivada exact path="/usuario/estoque" title={"Almoxarifado"} component={EstoqueController} />
+        <RotaPrivada exact path="/usuario/relatorio" title={"Almoxarifado"} component={RelatorioController} />
+        <RotaPrivada exact path="/usuario/funcionario" title={"Funcionários"} component={FuncionarioController} />
+        <RotaPrivada exact path="/usuario/equipe" title={"Equipes"} component={EquipeController} />
+        <RotaPrivada exact path="/usuario/equipe/gerenciar" title={"Equipe"} component={GerenciadorEquipeController} />
+        <RotaPrivada exact path="/usuario/veiculo" title={"Veículos"} component={VeiculoController} />
+        <RotaPrivada exact path="/usuario/apontamento" title={"Apontamentos"} component={ApontamentoController} />
+        <RotaPrivada exact path="/usuario/apontamento/ver" title={"Apontamento"} component={VerApontamentoController} />
     </Switch>
 
 )

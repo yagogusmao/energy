@@ -47,6 +47,35 @@ export const Container = styled.div`
   /* overflow: visible; */
 `;
 
+export const NavbarListMobile = styled.div`
+  display: grid;
+  grid-template-rows: repeat(7, 50px);
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  a {
+    font-weight: normal;
+    color: #ffffff;
+    position: relative;
+    transition: all 0.4s;
+  }
+  a::after {
+    content: "";
+    display: flex;
+    width: 0px;
+    height: 1px;
+    transition: all 0.4s;
+  }
+  a:hover {
+    color: #ffffff;
+  }
+  a:hover::after {
+    width: 100%;
+    background: #ffffff;
+  }
+`;
+
 export const NavbarList = styled.div`
   display: grid;
   grid-template-columns: repeat(7, auto);
@@ -57,7 +86,7 @@ export const NavbarList = styled.div`
   border:none;
   @media (max-width: 880px) {
     grid-template-columns: auto;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(7, auto);
 
     a {
       display: none;
@@ -80,7 +109,7 @@ export const NavbarMobile = styled.div`
   padding: 50px 15px;
   top: 0;
   left: 0;
-  background: #313091;
+  background: #ce5f52;
   z-index: 999;
   animation: leftRight .7s;
   /* position: relative; */
