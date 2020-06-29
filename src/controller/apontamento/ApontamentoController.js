@@ -35,6 +35,15 @@ export default class ApontamentoController extends Component {
             tecnicoEnergisa: "",
             PgCp: "",
             veiculoKmFim: "",
+            subestacao: "",
+            area: "",
+            alimentador: "",
+            origemOS: "",
+            quantidadePlanejada: "",
+            quantidadeExecutada: "",
+            recolha: "",
+            observacao: "",
+            tensao: "",
             graficosConstrucao: [],
             graficosManutencao: [],
             graficosPoda: [],
@@ -266,28 +275,51 @@ export default class ApontamentoController extends Component {
     handleDropDownChangeCidade = e => this.setState({ cidade: e.value })
     handleDropDownChangeLocalSaida = e => this.setState({ localSaida: e.value })
 
+    handleRadioButtonArea = e => this.setState({ area: e.value })
+
     iniciarApontamento = () => {
         const { tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes, cidade, endereco,
             localSaida, codigoObra } = this.state;
-        if (this.validarInputs([tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes, cidade, endereco,
-            localSaida, codigoObra])) {
-            Api.iniciarApontamento({
-                tipo, pessoaSupervisor, pessoaEncarregado, pes, equipe, cidade, endereco,
-                localSaida, codigoObra
-            }).then(async res => {
-                this.setState({
-                    tipo: "", pessoaEncarregado: "", pessoaSupervisor: "", equipe: "", pes: "",
-                    cidade: "", endereco: "", localSaida: "", codigoObra: ""
-                }, async () => {
-                    await Promise.all([Api.listarApontamentosIniciados(), Api.listarApontamentosFinalizados()]).then(res1 =>
-                        this.setState({
-                            apontamentosIniciados: res1[0].data.apontamentos,
-                            apontamentosFinalizados: res1[1].data.apontamentos,
-                        }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+        if (tipo === "PODA") {
+            const { subestacao, area, alimentador, origemOS,
+                quantidadePlanejada, quantidadeExecutada, recolha, tensao } = this.state;
+            if (this.validarInputs([tipo, pessoaEncarregado, pessoaSupervisor, equipe, cidade, endereco,
+                localSaida, codigoObra, subestacao, area, alimentador, origemOS,
+                quantidadePlanejada, quantidadeExecutada, recolha, tensao])) {
+                Api.iniciarApontamento({
+                    tipo, pessoaSupervisor, pessoaEncarregado, pes, equipe, cidade, endereco,
+                    localSaida, codigoObra, subestacao, area, alimentador, origemOS,
+                    quantidadePlanejada, quantidadeExecutada, tensao, recolha
+                }).then(res => {
+                    this.setState({
+                        tipo: "", pessoaEncarregado: "", pessoaSupervisor: "", equipe: "", pes: "",
+                        cidade: "", endereco: "", localSaida: "", codigoObra: "", 
+                        subestacao: "", area: "", alimentador: "", origemOS: "",
+                        quantidadePlanejada: "", quantidadeExecutada: "", recolha: "", tensao: ""
+                    }, () =>
+                        Api.listarApontamentosIniciados()
+                            .then(res1 => this.setState({ apontamentosIniciados: res1[0].data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
                     )
-                })
-            }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
-        } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
+        } else if (tipo === "CONSTRUCAO" || tipo === "MANUTENCAO" || tipo === "LINHA VIVA") {
+            if (this.validarInputs([tipo, pessoaEncarregado, pessoaSupervisor, equipe, cidade, endereco,
+                localSaida, codigoObra])) {
+                Api.iniciarApontamento({
+                    tipo, pessoaSupervisor, pessoaEncarregado, pes, equipe, cidade, endereco,
+                    localSaida, codigoObra
+                }).then(res => {
+                    this.setState({
+                        tipo: "", pessoaEncarregado: "", pessoaSupervisor: "", equipe: "", pes: "",
+                        cidade: "", endereco: "", localSaida: "", codigoObra: ""
+                    }, () =>
+                        Api.listarApontamentosIniciados()
+                            .then(res1 =>
+                                this.setState({ apontamentosIniciados: res1[0].data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
+                    )
+                }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+            } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
+        }
     }
 
     validarInputs = (inputs) => {
@@ -437,7 +469,9 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDECPHoje, mostrarFinalizadosDECPSemana, mostrarFinalizadosDECPMes,
             mostrarFinalizadosDECPAno, mostrarFinalizadosDECP,
             mostrarFinalizadosDEOPHoje, mostrarFinalizadosDEOPSemana, mostrarFinalizadosDEOPMes,
-            mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP } = this.state;
+            mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP,
+            subestacao, area, alimentador, origemOS,
+            quantidadePlanejada, quantidadeExecutada, recolha, tensao } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -445,7 +479,16 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
-                        actionTemplateButtonVer={this.actionTemplateButtonVer}
+                            handleRadioButtonArea={this.handleRadioButtonArea}
+                            subestacao={subestacao}
+                            area={area}
+                            alimentador={alimentador}
+                            origemOS={origemOS}
+                            quantidadePlanejada={quantidadePlanejada}
+                            quantidadeExecutada={quantidadeExecutada}
+                            recolha={recolha}
+                            tensao={tensao}
+                            actionTemplateButtonVer={this.actionTemplateButtonVer}
                             onChangeMostrarFinalizadosConstrucaoHoje={this.onChangeMostrarFinalizadosConstrucaoHoje}
                             mostrarFinalizadosConstrucaoHoje={mostrarFinalizadosConstrucaoHoje}
                             onChangeMostrarFinalizadosConstrucaoSemana={this.onChangeMostrarFinalizadosConstrucaoSemana}

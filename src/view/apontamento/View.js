@@ -2,7 +2,7 @@ import React from 'react';
 import {
     ContainerPropriedades, MenuTab, ContainerCriar, ContainerTabelaFinalizar,
     ContainerFomularioFinalizacao, ContainerInputs, ContainerApontamentosFinalizados,
-    ContainerGrafico
+    ContainerGrafico, RadioButtonDiv
 } from './Style';
 import InputFloat from '../../component/input/InputFloat';
 import { Dropdown } from 'primereact/dropdown';
@@ -11,6 +11,7 @@ import { Column } from 'primereact/column';
 import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button';
 import { Chart } from 'primereact/chart';
+import { RadioButton } from 'primereact/radiobutton';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.css';
@@ -64,7 +65,10 @@ const GerenciadorView = props => {
         mostrarFinalizadosDEOPSemana, onChangeMostrarFinalizadosDEOPSemana,
         mostrarFinalizadosDEOPMes, onChangeMostrarFinalizadosDEOPMes,
         mostrarFinalizadosDEOPAno, onChangeMostrarFinalizadosDEOPAno,
-        mostrarFinalizadosDEOP, onChangeMostrarFinalizadosDEOP
+        mostrarFinalizadosDEOP, onChangeMostrarFinalizadosDEOP,
+        subestacao, area, alimentador, origemOS,
+        quantidadePlanejada, quantidadeExecutada, recolha, tensao,
+        handleRadioButtonArea
     } = props;
     const backgroundColor = [
         "#780000",
@@ -358,6 +362,18 @@ const GerenciadorView = props => {
                             <InputFloat name="pes" label="PES" value={pes} onChange={handleInputChange} />
                             <InputFloat name="endereco" label="Endereço" value={endereco} onChange={handleInputChange} />
                             <InputFloat name="codigoObra" label="Código da Obra" value={codigoObra} onChange={handleInputChange} />
+                            {tipo === "PODA" ? <>
+                                <InputFloat name="subestacao" label="Subestação" value={subestacao} onChange={handleInputChange} />
+                                <InputFloat name="alimentador" label="Alimentador" value={alimentador} onChange={handleInputChange} />
+                                <InputFloat name="quantidadePlanejada" label="Quantidade planejada" value={quantidadePlanejada} onChange={handleInputChange} />
+                                <InputFloat name="quantidadeExecutada" label="Quantidade executada" value={quantidadeExecutada} onChange={handleInputChange} />
+                                <RadioButtonDiv>
+                                    <RadioButton value="urbana" name="Area" onChange={handleRadioButtonArea} checked={area === 'urbana'} />
+                                    <label htmlFor="rb1" className="p-radiobutton-label">Urbana</label>
+                                    <RadioButton value="rural" name="Area" onChange={handleRadioButtonArea} checked={area === 'rural'} />
+                                    <label htmlFor="rb1" className="p-radiobutton-label">Rural</label>
+                                </RadioButtonDiv>
+                            </> : <></>}
                         </div>
                         <div className="botao">
                             <Button style={{

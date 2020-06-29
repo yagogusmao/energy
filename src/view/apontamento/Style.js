@@ -52,6 +52,11 @@ export const ContainerCriar = styled.div`
   }
 `;
 
+export const RadioButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const ContainerApontamentosFinalizados = styled.div`
   animation: up_down 1s;
   border-radius:5px;
