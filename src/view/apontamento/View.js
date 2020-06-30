@@ -2,7 +2,7 @@ import React from 'react';
 import {
     ContainerPropriedades, MenuTab, ContainerCriar, ContainerTabelaFinalizar,
     ContainerFomularioFinalizacao, ContainerInputs, ContainerApontamentosFinalizados,
-    ContainerGrafico, RadioButtonDiv
+    ContainerGrafico, RadioButtonDiv, RadioButtonLabel, Observacao
 } from './Style';
 import InputFloat from '../../component/input/InputFloat';
 import { Dropdown } from 'primereact/dropdown';
@@ -12,6 +12,7 @@ import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button';
 import { Chart } from 'primereact/chart';
 import { RadioButton } from 'primereact/radiobutton';
+import { InputTextarea } from 'primereact/inputtextarea';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.css';
@@ -68,7 +69,9 @@ const GerenciadorView = props => {
         mostrarFinalizadosDEOP, onChangeMostrarFinalizadosDEOP,
         subestacao, area, alimentador, origemOS,
         quantidadePlanejada, quantidadeExecutada, recolha, tensao,
-        handleRadioButtonArea
+        handleRadioButtonArea, handleRadioButtonAreaTensao,
+        handleRadioButtonRecolha, handleDropDownChangeOrigemOS, observacao, horarioInicio,
+        horarioFinal
     } = props;
     const backgroundColor = [
         "#780000",
@@ -365,14 +368,48 @@ const GerenciadorView = props => {
                             {tipo === "PODA" ? <>
                                 <InputFloat name="subestacao" label="Subestação" value={subestacao} onChange={handleInputChange} />
                                 <InputFloat name="alimentador" label="Alimentador" value={alimentador} onChange={handleInputChange} />
-                                <InputFloat name="quantidadePlanejada" label="Quantidade planejada" value={quantidadePlanejada} onChange={handleInputChange} />
-                                <InputFloat name="quantidadeExecutada" label="Quantidade executada" value={quantidadeExecutada} onChange={handleInputChange} />
-                                <RadioButtonDiv>
-                                    <RadioButton value="urbana" name="Area" onChange={handleRadioButtonArea} checked={area === 'urbana'} />
-                                    <label htmlFor="rb1" className="p-radiobutton-label">Urbana</label>
-                                    <RadioButton value="rural" name="Area" onChange={handleRadioButtonArea} checked={area === 'rural'} />
-                                    <label htmlFor="rb1" className="p-radiobutton-label">Rural</label>
-                                </RadioButtonDiv>
+                                <InputFloat name="quantidadePlanejada" label="Quantidade planejada" type="number" value={quantidadePlanejada} onChange={handleInputChange} />
+                                <InputFloat name="quantidadeExecutada" label="Quantidade executada" type="number" value={quantidadeExecutada} onChange={handleInputChange} />
+                                <div>
+                                    <RadioButtonLabel><strong>Área:</strong></RadioButtonLabel>
+                                    <RadioButtonDiv>
+                                        <RadioButton value="URBANA" name="area" onChange={handleRadioButtonArea} checked={area === 'URBANA'} />
+                                        <p>Urbana</p>
+                                        <RadioButton value="RURAL" name="area" onChange={handleRadioButtonArea} checked={area === 'RURAL'} />
+                                        <p>Rural</p>
+                                    </RadioButtonDiv>
+
+                                </div>
+                                <div>
+                                    <RadioButtonLabel><strong>Tensão:</strong></RadioButtonLabel>
+                                    <RadioButtonDiv>
+                                        <RadioButton value="BAIXA" name="tensao" onChange={handleRadioButtonAreaTensao} checked={tensao === 'BAIXA'} />
+                                        <p>Baixa</p>
+                                        <RadioButton value="MEDIA" name="tensao" onChange={handleRadioButtonAreaTensao} checked={tensao === 'MEDIA'} />
+                                        <p>Média</p>
+                                    </RadioButtonDiv>
+                                </div>
+                                <div>
+                                    <RadioButtonLabel><strong>Recolha:</strong></RadioButtonLabel>
+                                    <RadioButtonDiv>
+                                        <RadioButton value={true} name="recolha" onChange={handleRadioButtonRecolha} checked={recolha === true} />
+                                        <p>Sim</p>
+                                        <RadioButton value={false} name="recolha" onChange={handleRadioButtonRecolha} checked={recolha === false} />
+                                        <p>Não</p>
+                                    </RadioButtonDiv>
+                                </div>
+                                <div>
+                                    <div style={{ marginTop: '.5em', marginRight: '.5em', marginBottom: '.5em' }}>
+                                        {origemOS ? <p style={{ fontSize: '12px' }}>{'Origem da OS: '}</p> :
+                                            <p style={{ fontSize: '12px' }}>{'Selecione a origem da OS.'}</p>}
+                                    </div>
+                                    <Dropdown style={{ width: '100%' }} value={origemOS} options={[
+                                        { label: "Programada", value: "Programada" },
+                                        { label: "Reincidente", value: "Reincidente" },
+                                        { label: "Emergencial", value: "Emergencial" },
+                                    ]}
+                                        placeholder="Origem da OS" onChange={handleDropDownChangeOrigemOS} />
+                                </div>
                             </> : <></>}
                         </div>
                         <div className="botao">
@@ -462,6 +499,11 @@ const GerenciadorView = props => {
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
+                                        field="subtotal"
+                                        header="Subtotal"
+                                        style={{ textAlign: 'center', width: '100px' }}
+                                    />
+                                    <Column
                                         field="tipo"
                                         header="Tipo"
                                         style={{ textAlign: 'center', width: '100px' }}
@@ -476,8 +518,14 @@ const GerenciadorView = props => {
                                 <InputFloat name="tecnicoEnergisa" label="Técnico da Energisa" value={tecnicoEnergisa} onChange={handleInputChange} />
                                 <InputFloat name="veiculoKmFim" label="Kilometragem final do veículo" value={veiculoKmFim} onChange={handleInputChange} />
                                 <InputFloat name="PgCp" label="Componente" value={PgCp} onChange={handleInputChange} />
+                                <InputFloat name="horarioInicio" label="Data e horário de início" value={horarioInicio} onChange={handleInputChange} />
+                                <InputFloat name="horarioFinal" label="Data e horário de término" value={horarioFinal} onChange={handleInputChange} />
                             </div>
-                            <div style={{ marginBottom: '10px' }} className="titulo">
+                            <Observacao>
+                                <strong>Observações:</strong>
+                                <InputTextarea rows={5} cols={30} name="observacao" value={observacao} onChange={handleInputChange} autoResize={true} />
+                            </Observacao>
+                            <div style={{ marginBottom: '10px', marginTop: '10px' }} className="titulo">
                                 <h1>Apontamentos para finalizar</h1>
                             </div>
                             <div className="tabela" style={{ overflowX: 'scroll' }}>

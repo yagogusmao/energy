@@ -44,6 +44,7 @@ export default class ApontamentoController extends Component {
             recolha: "",
             observacao: "",
             tensao: "",
+            horarioInicio: "", horarioFinal: "",
             graficosConstrucao: [],
             graficosManutencao: [],
             graficosPoda: [],
@@ -276,6 +277,9 @@ export default class ApontamentoController extends Component {
     handleDropDownChangeLocalSaida = e => this.setState({ localSaida: e.value })
 
     handleRadioButtonArea = e => this.setState({ area: e.value })
+    handleRadioButtonAreaTensao = e => this.setState({ tensao: e.value })
+    handleRadioButtonRecolha = e => this.setState({ recolha: e.value })
+    handleDropDownChangeOrigemOS = e => this.setState({ origemOS: e.value })
 
     iniciarApontamento = () => {
         const { tipo, pessoaEncarregado, pessoaSupervisor, equipe, pes, cidade, endereco,
@@ -293,12 +297,12 @@ export default class ApontamentoController extends Component {
                 }).then(res => {
                     this.setState({
                         tipo: "", pessoaEncarregado: "", pessoaSupervisor: "", equipe: "", pes: "",
-                        cidade: "", endereco: "", localSaida: "", codigoObra: "", 
+                        cidade: "", endereco: "", localSaida: "", codigoObra: "",
                         subestacao: "", area: "", alimentador: "", origemOS: "",
                         quantidadePlanejada: "", quantidadeExecutada: "", recolha: "", tensao: ""
                     }, () =>
                         Api.listarApontamentosIniciados()
-                            .then(res1 => this.setState({ apontamentosIniciados: res1[0].data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
+                            .then(res1 => this.setState({ apontamentosIniciados: res1.data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
                     )
                 }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
             } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
@@ -343,35 +347,66 @@ export default class ApontamentoController extends Component {
                         return { _id: atividade._id, quantidade: Number(atividade.quantidade) }
                     }), tecnicoEnergisa, veiculoKmFim,
                     PgCp
-                }).then(res =>
-                    this.setState({ tecnicoEnergisa: "", veiculoKmFim: "", PgCp: "", atividadesSelecionadas: [] }
-                        , () =>
-                            Promise.all([Api.listarApontamentosIniciados(),
-                            Api.listarApontamentosFinalizados(),
-                            ApiEquipe.faturamentoConstrucao(),
-                            ApiEquipe.faturamentoManutencao(),
-                            ApiEquipe.faturamentoPoda(),
-                            ApiEquipe.faturamentoLinhaviva(),
-                            ApiEquipe.faturamentoDECP(),
-                            ApiEquipe.faturamentoDEOP(),
-                            ApiAtividade.listarAtividades()]).then(async res1 =>
+                }).then(res1 =>
+                    this.setState({
+                        tecnicoEnergisa: "", veiculoKmFim: "", PgCp: "", observacao: "",
+                        atividadesSelecionadas: [], horarioFinal: "", horarioInicio: ""
+                    }, () =>
+                            Promise.all([
+                                Api.listarApontamentosIniciados(),
+                                Api.listarApontamentosFinalizados(),
+                                ApiEquipe.listarEquipes(),
+                                ApiAtividade.listarAtividades(),
+                                Api.listarEncarregados(),
+                                Api.listarSupervisores(),
+                                ApiEquipe.faturamentoConstrucao(),
+                                ApiEquipe.faturamentoManutencao(),
+                                ApiEquipe.faturamentoPoda(),
+                                ApiEquipe.faturamentoLinhaviva(),
+                                ApiEquipe.faturamentoDECP(),
+                                ApiEquipe.faturamentoDEOP()
+                            ]).then(res =>
                                 this.setState({
-                                    apontamentosIniciados: res1[0].data.apontamentos,
-                                    apontamentosFinalizados: res1[1].data.apontamentos,
-                                    graficosConstrucao: res1[2].data.graficos,
-                                    graficosManutencao: res1[3].data.graficos,
-                                    graficosPoda: res1[4].data.graficos,
-                                    graficosLinhaviva: res1[5].data.graficos,
-                                    graficosDECP: res1[6].data.graficos,
-                                    graficosDEOP: res1[7].data.graficos,
-                                    faturamentoConstrucao: res1[1].data.construcao,
-                                    faturamentoManutencao: res1[1].data.manutencao,
-                                    faturamentoLinhaviva: res1[1].data.linhaviva,
-                                    faturamentoPoda: res1[1].data.poda,
-                                    faturamentoDEOP: res1[1].data.deop,
-                                    faturamentoDECP: res1[1].data.decp,
-                                    atividades: res1[8].data.atividades,
-                                }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }))
+                                    apontamentosIniciados: res[0].data.apontamentos,
+                                    apontamentosFinalizados: res[1].data.apontamentos,
+                                    atividades: res[3].data.atividades,
+                                    graficosConstrucao: res[6].data.graficos,
+                                    graficosManutencao: res[7].data.graficos,
+                                    graficosPoda: res[8].data.graficos,
+                                    graficosLinhaviva: res[9].data.graficos,
+                                    graficosDECP: res[10].data.graficos,
+                                    graficosDEOP: res[11].data.graficos,
+                                    faturamentoConstrucao: res[1].data.construcao,
+                                    faturamentoManutencao: res[1].data.manutencao,
+                                    faturamentoLinhaviva: res[1].data.linhaviva,
+                                    faturamentoPoda: res[1].data.poda,
+                                    faturamentoDEOP: res[1].data.deop,
+                                    faturamentoDECP: res[1].data.decp,
+                                    construcaoHoje: res[1].data.construcaoHoje,
+                                    construcaoSemana: res[1].data.construcaoSemana,
+                                    construcaoMes: res[1].data.construcaoMes,
+                                    construcaoAno: res[1].data.construcaoAno,
+                                    manutencaoHoje: res[1].data.manutencaoHoje,
+                                    manutencaoSemana: res[1].data.manutencaoSemana,
+                                    manutencaoMes: res[1].data.manutencaoMes,
+                                    manutencaoAno: res[1].data.manutencaoAno,
+                                    linhavivaHoje: res[1].data.linhavivaHoje,
+                                    linhavivaSemana: res[1].data.linhavivaSemana,
+                                    linhavivaMes: res[1].data.linhavivaMes,
+                                    linhavivaAno: res[1].data.linhavivaAno,
+                                    podaHoje: res[1].data.podaHoje,
+                                    podaSemana: res[1].data.podaSemana,
+                                    podaMes: res[1].data.podaMes,
+                                    podaAno: res[1].data.podaAno,
+                                    decpHoje: res[1].data.decpHoje,
+                                    decpSemana: res[1].data.decpSemana,
+                                    decpMes: res[1].data.decpMes,
+                                    decpAno: res[1].data.decpAno,
+                                    deopHoje: res[1].data.deopHoje,
+                                    deopSemana: res[1].data.deopSemana,
+                                    deopMes: res[1].data.deopMes,
+                                    deopAno: res[1].data.deopAno
+                                }, () => this.growl.show({ severity: 'success', summary: res1.data.mensagem }))
                             )
                     ), erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
                 )
@@ -399,7 +434,8 @@ export default class ApontamentoController extends Component {
                     nome: element.nome,
                     tipo: element.tipo,
                     valor: element.valor,
-                    quantidade: ""
+                    quantidade: "",
+                    subtotal: "0"
                 })
             }
         });
@@ -425,7 +461,10 @@ export default class ApontamentoController extends Component {
         const { name, value } = e.target;
         let newArray = this.state.atividadesSelecionadas;
         newArray.forEach((material, i) => {
-            if (material._id == name) newArray[i].quantidade = value;
+            if (material._id == name) {
+                newArray[i].quantidade = value;
+                newArray[i].subtotal = (value * newArray[i].valor).toFixed(2);
+            };
         })
         this.setState({ atividadesSelecionadas: newArray })
     }
@@ -471,7 +510,7 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPHoje, mostrarFinalizadosDEOPSemana, mostrarFinalizadosDEOPMes,
             mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP,
             subestacao, area, alimentador, origemOS,
-            quantidadePlanejada, quantidadeExecutada, recolha, tensao } = this.state;
+            quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -479,6 +518,12 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            horarioFinal={horarioFinal}
+                            horarioInicio={horarioInicio}
+                            observacao={observacao}
+                            handleDropDownChangeOrigemOS={this.handleDropDownChangeOrigemOS}
+                            handleRadioButtonRecolha={this.handleRadioButtonRecolha}
+                            handleRadioButtonAreaTensao={this.handleRadioButtonAreaTensao}
                             handleRadioButtonArea={this.handleRadioButtonArea}
                             subestacao={subestacao}
                             area={area}

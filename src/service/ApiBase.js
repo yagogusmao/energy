@@ -7,7 +7,7 @@ const [localhost, server] = [
 ]
 
 const ApiBase = axios.create({
-  baseURL: localhost
+  baseURL: server
 });
 
 

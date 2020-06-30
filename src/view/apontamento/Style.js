@@ -55,6 +55,22 @@ export const ContainerCriar = styled.div`
 export const RadioButtonDiv = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const RadioButtonLabel = styled.div`
+  display: flex;
+  margin-bottom: 5px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Observacao = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ContainerApontamentosFinalizados = styled.div`
