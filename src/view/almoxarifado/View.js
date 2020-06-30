@@ -19,7 +19,7 @@ const AlmoxarifadoView = props => {
                 >
                     <Column
                         field="_id"
-                        header="_id"
+                        header="Código"
                         style={{ textAlign: 'center', width: '100px' }}
                     />
                     <Column

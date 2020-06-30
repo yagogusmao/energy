@@ -17,7 +17,7 @@ const RelatorioView = props => {
                     <h1>Pesquisar materiais</h1>
                 </div>
                 <div className="inputs">
-                    <InputFloat name="_id" label="_id" value={_id} onChange={handleInputChange} />
+                    <InputFloat name="_id" label="Código" value={_id} onChange={handleInputChange} />
                     <InputFloat name="unidadeMedida" label="Unidade de Medida" value={unidadeMedida} onChange={handleInputChange} />
                     <InputFloat name="descricao" label="Descrição" value={descricao} onChange={handleInputChange} />
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
@@ -39,7 +39,7 @@ const RelatorioView = props => {
                         <Column
                             filter={true}
                             field="_id"
-                            header="_id"
+                            header="Código"
                             style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column
@@ -94,7 +94,7 @@ const RelatorioView = props => {
                                 <Column
                                     filter={true}
                                     field="_id"
-                                    header="_id"
+                                    header="Código"
                                     style={{ textAlign: 'center', width: '100px' }}
                                 />
                                 <Column
@@ -157,7 +157,7 @@ const RelatorioView = props => {
                                     <Column
                                         filter={true}
                                         field="_id"
-                                        header="_id"
+                                        header="Código"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
@@ -234,7 +234,7 @@ const RelatorioView = props => {
                                     <Column
                                         filter={true}
                                         field="_id"
-                                        header="_id"
+                                        header="Código"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
@@ -334,7 +334,7 @@ const RelatorioView = props => {
                                     <Column
                                         filter={true}
                                         field="_id"
-                                        header="_id"
+                                        header="Código"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column

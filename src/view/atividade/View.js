@@ -48,7 +48,7 @@ const AtividadeView = props => {
                     >
                         <Column
                             field="_id"
-                            header="_id"
+                            header="Código"
                             filter={true}
                             style={{ textAlign: 'center', width: '100px' }}
                         />

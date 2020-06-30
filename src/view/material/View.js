@@ -39,7 +39,7 @@ const MaterialView = props => {
                     <h1>Materiais</h1>
                 </div>
                 <div className="inputs">
-                    <InputFloat name="_id" label="_id" value={_id} onChange={handleInputChange} />
+                    <InputFloat name="_id" label="Matrícula" value={_id} onChange={handleInputChange} />
                     <InputFloat name="unidadeMedida" label="Unidade de Medida" value={unidadeMedida} onChange={handleInputChange} />
                     <InputFloat name="descricao" label="Descrição" value={descricao} onChange={handleInputChange} />
                     <InputFloat name="codigoClasse" label="Código de Classe" type="number" value={codigoClasse} onChange={handleInputChange} />
@@ -63,7 +63,7 @@ const MaterialView = props => {
                         <Column
                             filter={true}
                             field="_id"
-                            header="_id"
+                            header="Código"
                             style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column

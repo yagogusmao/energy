@@ -318,7 +318,7 @@ const GerenciadorView = props => {
                                 >
                                     <Column
                                         field="_id"
-                                        header="_id"
+                                        header="Matrícula"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
@@ -359,7 +359,7 @@ const GerenciadorView = props => {
                                 >
                                     <Column
                                         field="_id"
-                                        header="_id"
+                                        header="Matrícula"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column

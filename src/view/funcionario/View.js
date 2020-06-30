@@ -16,7 +16,7 @@ const FuncionarioView = props => {
                     <h1>Criar funcionário</h1>
                 </div>
                 <div className="inputs">
-                    <InputFloat name="_id" label="_id" type="text" value={_id} onChange={handleInputChange} />
+                    <InputFloat name="_id" label="Matrícula" type="text" value={_id} onChange={handleInputChange} />
                     <InputFloat name="nome" label="Nome" type="text" value={nome} onChange={handleInputChange} />
                     <InputFloat name="cpf" label="CPF" type="text" value={cpfFormatMask(cpf)} onChange={handleInputChange} />
                     <div className="dropdown">
@@ -177,7 +177,7 @@ const FuncionarioView = props => {
                     >
                         <Column
                             field="_id"
-                            header="_id"
+                            header="Matrícula"
                             style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column

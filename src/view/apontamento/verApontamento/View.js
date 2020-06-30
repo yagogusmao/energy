@@ -42,7 +42,7 @@ const VerApontamentoView = props => {
                         <Column
                             filter={true}
                             field="_id"
-                            header="_id"
+                            header="Código"
                             style={{ textAlign: 'center', width: '100px' }}
                         />
                         <Column

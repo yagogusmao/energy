@@ -443,7 +443,7 @@ const GerenciadorView = props => {
                                     />
                                     <Column
                                         field="_id"
-                                        header="_id"
+                                        header="Código"
                                         filter={true}
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
@@ -480,7 +480,7 @@ const GerenciadorView = props => {
                                 >
                                     <Column
                                         field="_id"
-                                        header="_id"
+                                        header="Código"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
