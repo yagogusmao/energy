@@ -176,6 +176,13 @@ export const ContainerTabelaFinalizar = styled.div`
   margin-bottom: 10px;
   background: white;
   padding: 20px;
+  .pesquisarAtividade {
+    .botao {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
   .inputs {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 200px));

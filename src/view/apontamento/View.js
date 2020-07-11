@@ -71,7 +71,7 @@ const GerenciadorView = props => {
         quantidadePlanejada, quantidadeExecutada, recolha, tensao,
         handleRadioButtonArea, handleRadioButtonAreaTensao,
         handleRadioButtonRecolha, handleDropDownChangeOrigemOS, observacao, horarioInicio,
-        horarioFinal
+        horarioFinal, atividadePesquisa, pesquisarAtividade, limparFiltroAtividades
     } = props;
     const backgroundColor = [
         "#780000",
@@ -427,7 +427,24 @@ const GerenciadorView = props => {
                     <>
                         <ContainerTabelaFinalizar>
                             <div style={{ marginBottom: '10px' }} className="titulo">
-                                <h1>Atividades disponíveis</h1>
+                                <h1>Pesquisar atividades</h1>
+                            </div>
+                            <div style={{ marginBottom: '10px' }} className="pesquisarAtividade">
+                                <InputFloat name="atividadePesquisa" label="Nome da atividade" value={atividadePesquisa} onChange={handleInputChange} />
+                                <div className="botao">
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Pesquisar atividade" onClick={pesquisarAtividade} className="p-button-raised p-button-rounded" />
+                                    <Button style={{
+                                        backgroundColor: '#ce5f52', borderColor: '#e57164',
+                                        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+                                        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)', marginTop: '10px'
+                                    }} label="Limpar filtros" onClick={limparFiltroAtividades} className="p-button-raised p-button-rounded" />
+                                </div>
                             </div>
                             <div className="tabela" style={{ overflowX: 'scroll' }}>
                                 <DataTable
@@ -443,24 +460,21 @@ const GerenciadorView = props => {
                                     />
                                     <Column
                                         field="_id"
-                                        header="Código"
                                         filter={true}
+                                        header="Código"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
-                                        filter={true}
                                         field="valor"
                                         header="Valor (R$)"
                                         style={{ textAlign: 'center', width: '100px' }}
                                     />
                                     <Column
-                                        filter={true}
                                         field="nome"
                                         header="Nome"
                                         style={{ textAlign: 'center', width: '300px' }}
                                     />
                                     <Column
-                                        filter={true}
                                         field="tipo"
                                         header="Tipo"
                                         style={{ textAlign: 'center', width: '120px' }}

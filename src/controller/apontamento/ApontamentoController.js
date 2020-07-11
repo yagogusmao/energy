@@ -117,7 +117,9 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPSemana: false,
             mostrarFinalizadosDEOPMes: false,
             mostrarFinalizadosDEOPAno: false,
-            mostrarFinalizadosDEOP: false
+            mostrarFinalizadosDEOP: false,
+
+            atividadePesquisa: ""
         }
     }
 
@@ -127,7 +129,7 @@ export default class ApontamentoController extends Component {
                 Api.listarApontamentosIniciados(),
                 Api.listarApontamentosFinalizados(),
                 ApiEquipe.listarEquipes(),
-                ApiAtividade.listarAtividades(),
+                ApiAtividade.listarAtividades("all"),
                 Api.listarEncarregados(),
                 Api.listarSupervisores(),
                 ApiEquipe.faturamentoConstrucao(),
@@ -352,62 +354,62 @@ export default class ApontamentoController extends Component {
                         tecnicoEnergisa: "", veiculoKmFim: "", PgCp: "", observacao: "",
                         atividadesSelecionadas: [], horarioFinal: "", horarioInicio: ""
                     }, () =>
-                            Promise.all([
-                                Api.listarApontamentosIniciados(),
-                                Api.listarApontamentosFinalizados(),
-                                ApiEquipe.listarEquipes(),
-                                ApiAtividade.listarAtividades(),
-                                Api.listarEncarregados(),
-                                Api.listarSupervisores(),
-                                ApiEquipe.faturamentoConstrucao(),
-                                ApiEquipe.faturamentoManutencao(),
-                                ApiEquipe.faturamentoPoda(),
-                                ApiEquipe.faturamentoLinhaviva(),
-                                ApiEquipe.faturamentoDECP(),
-                                ApiEquipe.faturamentoDEOP()
-                            ]).then(res =>
-                                this.setState({
-                                    apontamentosIniciados: res[0].data.apontamentos,
-                                    apontamentosFinalizados: res[1].data.apontamentos,
-                                    atividades: res[3].data.atividades,
-                                    graficosConstrucao: res[6].data.graficos,
-                                    graficosManutencao: res[7].data.graficos,
-                                    graficosPoda: res[8].data.graficos,
-                                    graficosLinhaviva: res[9].data.graficos,
-                                    graficosDECP: res[10].data.graficos,
-                                    graficosDEOP: res[11].data.graficos,
-                                    faturamentoConstrucao: res[1].data.construcao,
-                                    faturamentoManutencao: res[1].data.manutencao,
-                                    faturamentoLinhaviva: res[1].data.linhaviva,
-                                    faturamentoPoda: res[1].data.poda,
-                                    faturamentoDEOP: res[1].data.deop,
-                                    faturamentoDECP: res[1].data.decp,
-                                    construcaoHoje: res[1].data.construcaoHoje,
-                                    construcaoSemana: res[1].data.construcaoSemana,
-                                    construcaoMes: res[1].data.construcaoMes,
-                                    construcaoAno: res[1].data.construcaoAno,
-                                    manutencaoHoje: res[1].data.manutencaoHoje,
-                                    manutencaoSemana: res[1].data.manutencaoSemana,
-                                    manutencaoMes: res[1].data.manutencaoMes,
-                                    manutencaoAno: res[1].data.manutencaoAno,
-                                    linhavivaHoje: res[1].data.linhavivaHoje,
-                                    linhavivaSemana: res[1].data.linhavivaSemana,
-                                    linhavivaMes: res[1].data.linhavivaMes,
-                                    linhavivaAno: res[1].data.linhavivaAno,
-                                    podaHoje: res[1].data.podaHoje,
-                                    podaSemana: res[1].data.podaSemana,
-                                    podaMes: res[1].data.podaMes,
-                                    podaAno: res[1].data.podaAno,
-                                    decpHoje: res[1].data.decpHoje,
-                                    decpSemana: res[1].data.decpSemana,
-                                    decpMes: res[1].data.decpMes,
-                                    decpAno: res[1].data.decpAno,
-                                    deopHoje: res[1].data.deopHoje,
-                                    deopSemana: res[1].data.deopSemana,
-                                    deopMes: res[1].data.deopMes,
-                                    deopAno: res[1].data.deopAno
-                                }, () => this.growl.show({ severity: 'success', summary: res1.data.mensagem }))
-                            )
+                        Promise.all([
+                            Api.listarApontamentosIniciados(),
+                            Api.listarApontamentosFinalizados(),
+                            ApiEquipe.listarEquipes(),
+                            ApiAtividade.listarAtividades("all"),
+                            Api.listarEncarregados(),
+                            Api.listarSupervisores(),
+                            ApiEquipe.faturamentoConstrucao(),
+                            ApiEquipe.faturamentoManutencao(),
+                            ApiEquipe.faturamentoPoda(),
+                            ApiEquipe.faturamentoLinhaviva(),
+                            ApiEquipe.faturamentoDECP(),
+                            ApiEquipe.faturamentoDEOP()
+                        ]).then(res =>
+                            this.setState({
+                                apontamentosIniciados: res[0].data.apontamentos,
+                                apontamentosFinalizados: res[1].data.apontamentos,
+                                atividades: res[3].data.atividades,
+                                graficosConstrucao: res[6].data.graficos,
+                                graficosManutencao: res[7].data.graficos,
+                                graficosPoda: res[8].data.graficos,
+                                graficosLinhaviva: res[9].data.graficos,
+                                graficosDECP: res[10].data.graficos,
+                                graficosDEOP: res[11].data.graficos,
+                                faturamentoConstrucao: res[1].data.construcao,
+                                faturamentoManutencao: res[1].data.manutencao,
+                                faturamentoLinhaviva: res[1].data.linhaviva,
+                                faturamentoPoda: res[1].data.poda,
+                                faturamentoDEOP: res[1].data.deop,
+                                faturamentoDECP: res[1].data.decp,
+                                construcaoHoje: res[1].data.construcaoHoje,
+                                construcaoSemana: res[1].data.construcaoSemana,
+                                construcaoMes: res[1].data.construcaoMes,
+                                construcaoAno: res[1].data.construcaoAno,
+                                manutencaoHoje: res[1].data.manutencaoHoje,
+                                manutencaoSemana: res[1].data.manutencaoSemana,
+                                manutencaoMes: res[1].data.manutencaoMes,
+                                manutencaoAno: res[1].data.manutencaoAno,
+                                linhavivaHoje: res[1].data.linhavivaHoje,
+                                linhavivaSemana: res[1].data.linhavivaSemana,
+                                linhavivaMes: res[1].data.linhavivaMes,
+                                linhavivaAno: res[1].data.linhavivaAno,
+                                podaHoje: res[1].data.podaHoje,
+                                podaSemana: res[1].data.podaSemana,
+                                podaMes: res[1].data.podaMes,
+                                podaAno: res[1].data.podaAno,
+                                decpHoje: res[1].data.decpHoje,
+                                decpSemana: res[1].data.decpSemana,
+                                decpMes: res[1].data.decpMes,
+                                decpAno: res[1].data.decpAno,
+                                deopHoje: res[1].data.deopHoje,
+                                deopSemana: res[1].data.deopSemana,
+                                deopMes: res[1].data.deopMes,
+                                deopAno: res[1].data.deopAno
+                            }, () => this.growl.show({ severity: 'success', summary: res1.data.mensagem }))
+                        )
                     ), erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem })
                 )
             } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
@@ -469,6 +471,17 @@ export default class ApontamentoController extends Component {
         this.setState({ atividadesSelecionadas: newArray })
     }
 
+    pesquisarAtividade = async () => {
+        const { atividadePesquisa } = this.state;
+        const res = await ApiAtividade.listarAtividades(atividadePesquisa);
+        this.setState({ atividades: res.data.atividades });
+    }
+
+    limparFiltroAtividades = async () => {
+        const res = await ApiAtividade.listarAtividades("all");
+        this.setState({ atividades: res.data.atividades });
+    }
+
     actionTemplateButton = (rowData) => <Button style={{
         backgroundColor: '#f79c91', borderColor: '#f7b9b2',
         WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
@@ -510,7 +523,7 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPHoje, mostrarFinalizadosDEOPSemana, mostrarFinalizadosDEOPMes,
             mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP,
             subestacao, area, alimentador, origemOS,
-            quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal } = this.state;
+            quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal, atividadePesquisa } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -518,6 +531,9 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            limparFiltroAtividades={this.limparFiltroAtividades}
+                            pesquisarAtividade={this.pesquisarAtividade}
+                            atividadePesquisa={atividadePesquisa}
                             horarioFinal={horarioFinal}
                             horarioInicio={horarioInicio}
                             observacao={observacao}
