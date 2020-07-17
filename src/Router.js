@@ -13,6 +13,7 @@ import GerenciadorEquipeController from './controller/equipe/GerenciadorControll
 import VeiculoController from './controller/veiculo/VeiculoController';
 import ApontamentoController from './controller/apontamento/ApontamentoController';
 import VerApontamentoController from './controller/apontamento/VerApontamentoController';
+import HomePageController from './controller/usuario/HomePage';
 
 const RotaPrivada = ({ component: Component, title, ...rest }) => {
     setDocumentTitle(title);
@@ -49,6 +50,7 @@ export const RotasUsuario = () => (
         <RotaPrivada exact path="/usuario/relatorio" title={"Almoxarifado"} component={RelatorioController} />
         <RotaPrivada exact path="/usuario/funcionario" title={"Funcionários"} component={FuncionarioController} />
         <RotaPrivada exact path="/usuario/equipe" title={"Equipes"} component={EquipeController} />
+        <RotaPrivada exact path="/usuario/homepage" title={"Página inicial"} component={HomePageController} />
         <RotaPrivada exact path="/usuario/equipe/gerenciar" title={"Equipe"} component={GerenciadorEquipeController} />
         <RotaPrivada exact path="/usuario/veiculo" title={"Veículos"} component={VeiculoController} />
         <RotaPrivada exact path="/usuario/apontamento" title={"Apontamentos"} component={ApontamentoController} />

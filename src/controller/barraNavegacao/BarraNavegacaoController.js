@@ -14,7 +14,6 @@ class NavbarController extends Component {
 
     onChangeMobileNavbar = () => {
         this.setState({ showMobileNavbar: !this.state.showMobileNavbar });
-        console.log(this.state.showMobileNavbar)
     };
 
     goTo = (path) => {

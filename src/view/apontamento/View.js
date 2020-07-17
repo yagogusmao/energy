@@ -23,7 +23,7 @@ const GerenciadorView = props => {
         handleDropDownChangeSupervisor, handleDropDownChangeEncarregado, handleDropDownChangeCidade,
         handleDropDownChangeLocalSaida, iniciarApontamento, apontamentosIniciados, actionTemplateButtonFinalizar,
         atividades, actionTemplate, atividadesSelecionadas, actionTemplateInput, actionTemplateButton, actionTemplateButtonVer,
-        tecnicoEnergisa, PgCp, veiculoKmFim, apontamentosFinalizados, graficosConstrucao,
+        tecnicoEnergisa, PgCp, veiculoKmFim, actionTemplateButtonFaturar, graficosConstrucao,
         graficosManutencao, graficosPoda, graficosLinhaviva, graficosDECP, graficosDEOP, encarregados, supervisores,
         faturamentoConstrucao, faturamentoManutencao, faturamentoLinhaviva, faturamentoPoda, faturamentoDEOP,
         faturamentoDECP, construcaoHoje, construcaoSemana, construcaoMes, construcaoAno,
@@ -649,22 +649,39 @@ const GerenciadorView = props => {
                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                     >
                                                         <Column
-                                                            filter={true}
-                                                            field="dataFinal"
-                                                            header="Data"
-                                                            style={{ width: "100px" }}
+                                                            body={actionTemplateButtonVer.bind(this)}
+                                                            style={{ textAlign: 'center', width: '80px' }}
                                                         />
                                                         <Column
-                                                            filter={true}
-                                                            field="tipo"
-                                                            header="Tipo do serviço"
-                                                            style={{ width: "150px" }}
+                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                            style={{ textAlign: 'center', width: '110px' }}
                                                         />
                                                         <Column
                                                             filter={true}
                                                             field="codigoObra"
                                                             header="Código do serviço"
                                                             style={{ width: "150px" }}
+                                                        />
+                                                        <Column
+                                                            field="cidade"
+                                                            header="Cidade do serviço"
+                                                            style={{ width: "200px" }}
+                                                        />
+                                                        <Column
+                                                            field="equipe"
+                                                            header="Equipe"
+                                                            style={{ width: "150px" }}
+                                                        />
+                                                        <Column
+                                                            field="lucro"
+                                                            header="Lucro (R$)"
+                                                            style={{ width: "100px" }}
+                                                        />
+                                                        <Column
+                                                            filter={true}
+                                                            field="dataFinal"
+                                                            header="Data"
+                                                            style={{ width: "100px" }}
                                                         />
                                                         <Column
                                                             filter={true}
@@ -679,28 +696,9 @@ const GerenciadorView = props => {
                                                             style={{ width: "150px" }}
                                                         />
                                                         <Column
-                                                            field="cidade"
-                                                            header="Cidade do serviço"
-                                                            style={{ width: "200px" }}
-                                                        />
-                                                        <Column
-                                                            field="equipe"
-                                                            header="Equipe"
-                                                            style={{ width: "150px" }}
-                                                        />
-                                                        <Column
                                                             field="veiculo.placa"
                                                             header="Veículo"
                                                             style={{ width: "100px" }}
-                                                        />
-                                                        <Column
-                                                            field="lucro"
-                                                            header="Lucro (R$)"
-                                                            style={{ width: "100px" }}
-                                                        />
-                                                        <Column
-                                                            body={actionTemplateButtonVer.bind(this)}
-                                                            style={{ textAlign: 'center', width: '200px' }}
                                                         />
                                                     </DataTable>
                                                 </div>
@@ -728,22 +726,39 @@ const GerenciadorView = props => {
                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                         >
                                                             <Column
-                                                                filter={true}
-                                                                field="dataFinal"
-                                                                header="Data"
-                                                                style={{ width: "100px" }}
+                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                style={{ textAlign: 'center', width: '80px' }}
                                                             />
                                                             <Column
-                                                                filter={true}
-                                                                field="tipo"
-                                                                header="Tipo do serviço"
-                                                                style={{ width: "150px" }}
+                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                style={{ textAlign: 'center', width: '110px' }}
                                                             />
                                                             <Column
                                                                 filter={true}
                                                                 field="codigoObra"
                                                                 header="Código do serviço"
                                                                 style={{ width: "150px" }}
+                                                            />
+                                                            <Column
+                                                                field="cidade"
+                                                                header="Cidade do serviço"
+                                                                style={{ width: "200px" }}
+                                                            />
+                                                            <Column
+                                                                field="equipe"
+                                                                header="Equipe"
+                                                                style={{ width: "150px" }}
+                                                            />
+                                                            <Column
+                                                                field="lucro"
+                                                                header="Lucro (R$)"
+                                                                style={{ width: "100px" }}
+                                                            />
+                                                            <Column
+                                                                filter={true}
+                                                                field="dataFinal"
+                                                                header="Data"
+                                                                style={{ width: "100px" }}
                                                             />
                                                             <Column
                                                                 filter={true}
@@ -758,28 +773,9 @@ const GerenciadorView = props => {
                                                                 style={{ width: "150px" }}
                                                             />
                                                             <Column
-                                                                field="cidade"
-                                                                header="Cidade do serviço"
-                                                                style={{ width: "200px" }}
-                                                            />
-                                                            <Column
-                                                                field="equipe"
-                                                                header="Equipe"
-                                                                style={{ width: "150px" }}
-                                                            />
-                                                            <Column
                                                                 field="veiculo.placa"
                                                                 header="Veículo"
                                                                 style={{ width: "100px" }}
-                                                            />
-                                                            <Column
-                                                                field="lucro"
-                                                                header="Lucro (R$)"
-                                                                style={{ width: "100px" }}
-                                                            />
-                                                            <Column
-                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                style={{ textAlign: 'center', width: '200px' }}
                                                             />
                                                         </DataTable>
                                                     </div>
@@ -807,22 +803,39 @@ const GerenciadorView = props => {
                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                             >
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="dataFinal"
-                                                                    header="Data"
-                                                                    style={{ width: "100px" }}
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                 />
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="tipo"
-                                                                    header="Tipo do serviço"
-                                                                    style={{ width: "150px" }}
+                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
                                                                     style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                    style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                    style={{ width: "100px" }}
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="dataFinal"
+                                                                    header="Data"
+                                                                    style={{ width: "100px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
@@ -837,28 +850,9 @@ const GerenciadorView = props => {
                                                                     style={{ width: "150px" }}
                                                                 />
                                                                 <Column
-                                                                    field="cidade"
-                                                                    header="Cidade do serviço"
-                                                                    style={{ width: "200px" }}
-                                                                />
-                                                                <Column
-                                                                    field="equipe"
-                                                                    header="Equipe"
-                                                                    style={{ width: "150px" }}
-                                                                />
-                                                                <Column
                                                                     field="veiculo.placa"
                                                                     header="Veículo"
                                                                     style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    field="lucro"
-                                                                    header="Lucro (R$)"
-                                                                    style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                 />
                                                             </DataTable>
                                                         </div>
@@ -886,22 +880,39 @@ const GerenciadorView = props => {
                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                 >
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="dataFinal"
-                                                                        header="Data"
-                                                                        style={{ width: "100px" }}
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                     />
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="tipo"
-                                                                        header="Tipo do serviço"
-                                                                        style={{ width: "150px" }}
+                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
                                                                         style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="cidade"
+                                                                        header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="equipe"
+                                                                        header="Equipe"
+                                                                        style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="lucro"
+                                                                        header="Lucro (R$)"
+                                                                        style={{ width: "100px" }}
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="dataFinal"
+                                                                        header="Data"
+                                                                        style={{ width: "100px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
@@ -916,28 +927,9 @@ const GerenciadorView = props => {
                                                                         style={{ width: "150px" }}
                                                                     />
                                                                     <Column
-                                                                        field="cidade"
-                                                                        header="Cidade do serviço"
-                                                                        style={{ width: "200px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="equipe"
-                                                                        header="Equipe"
-                                                                        style={{ width: "150px" }}
-                                                                    />
-                                                                    <Column
                                                                         field="veiculo.placa"
                                                                         header="Veículo"
                                                                         style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="lucro"
-                                                                        header="Lucro (R$)"
-                                                                        style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                     />
                                                                 </DataTable>
                                                             </div>
@@ -965,22 +957,39 @@ const GerenciadorView = props => {
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     >
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -995,28 +1004,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -1160,22 +1150,39 @@ const GerenciadorView = props => {
                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                             >
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="dataFinal"
-                                                                    header="Data"
-                                                                    style={{ width: "100px" }}
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                 />
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="tipo"
-                                                                    header="Tipo do serviço"
-                                                                    style={{ width: "150px" }}
+                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
                                                                     style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                    style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                    style={{ width: "100px" }}
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="dataFinal"
+                                                                    header="Data"
+                                                                    style={{ width: "100px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
@@ -1190,28 +1197,9 @@ const GerenciadorView = props => {
                                                                     style={{ width: "150px" }}
                                                                 />
                                                                 <Column
-                                                                    field="cidade"
-                                                                    header="Cidade do serviço"
-                                                                    style={{ width: "200px" }}
-                                                                />
-                                                                <Column
-                                                                    field="equipe"
-                                                                    header="Equipe"
-                                                                    style={{ width: "150px" }}
-                                                                />
-                                                                <Column
                                                                     field="veiculo.placa"
                                                                     header="Veículo"
                                                                     style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    field="lucro"
-                                                                    header="Lucro (R$)"
-                                                                    style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                 />
                                                             </DataTable>
                                                         </div>
@@ -1239,22 +1227,39 @@ const GerenciadorView = props => {
                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                 >
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="dataFinal"
-                                                                        header="Data"
-                                                                        style={{ width: "100px" }}
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                     />
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="tipo"
-                                                                        header="Tipo do serviço"
-                                                                        style={{ width: "150px" }}
+                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
                                                                         style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="cidade"
+                                                                        header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="equipe"
+                                                                        header="Equipe"
+                                                                        style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="lucro"
+                                                                        header="Lucro (R$)"
+                                                                        style={{ width: "100px" }}
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="dataFinal"
+                                                                        header="Data"
+                                                                        style={{ width: "100px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
@@ -1269,28 +1274,9 @@ const GerenciadorView = props => {
                                                                         style={{ width: "150px" }}
                                                                     />
                                                                     <Column
-                                                                        field="cidade"
-                                                                        header="Cidade do serviço"
-                                                                        style={{ width: "200px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="equipe"
-                                                                        header="Equipe"
-                                                                        style={{ width: "150px" }}
-                                                                    />
-                                                                    <Column
                                                                         field="veiculo.placa"
                                                                         header="Veículo"
                                                                         style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="lucro"
-                                                                        header="Lucro (R$)"
-                                                                        style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                     />
                                                                 </DataTable>
                                                             </div>
@@ -1317,22 +1303,39 @@ const GerenciadorView = props => {
                                                                         rows={10}
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     ><Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -1347,28 +1350,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -1396,22 +1380,39 @@ const GerenciadorView = props => {
                                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                                         >
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="dataFinal"
-                                                                                header="Data"
-                                                                                style={{ width: "100px" }}
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '80px' }}
                                                                             />
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="tipo"
-                                                                                header="Tipo do serviço"
-                                                                                style={{ width: "150px" }}
+                                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '110px' }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
                                                                                 style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="cidade"
+                                                                                header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="equipe"
+                                                                                header="Equipe"
+                                                                                style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="lucro"
+                                                                                header="Lucro (R$)"
+                                                                                style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                filter={true}
+                                                                                field="dataFinal"
+                                                                                header="Data"
+                                                                                style={{ width: "100px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
@@ -1426,28 +1427,9 @@ const GerenciadorView = props => {
                                                                                 style={{ width: "150px" }}
                                                                             />
                                                                             <Column
-                                                                                field="cidade"
-                                                                                header="Cidade do serviço"
-                                                                                style={{ width: "200px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="equipe"
-                                                                                header="Equipe"
-                                                                                style={{ width: "150px" }}
-                                                                            />
-                                                                            <Column
                                                                                 field="veiculo.placa"
                                                                                 header="Veículo"
                                                                                 style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="lucro"
-                                                                                header="Lucro (R$)"
-                                                                                style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -1512,22 +1494,39 @@ const GerenciadorView = props => {
                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                             >
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="dataFinal"
-                                                                    header="Data"
-                                                                    style={{ width: "100px" }}
+                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                 />
                                                                 <Column
-                                                                    filter={true}
-                                                                    field="tipo"
-                                                                    header="Tipo do serviço"
-                                                                    style={{ width: "150px" }}
+                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
                                                                     field="codigoObra"
                                                                     header="Código do serviço"
                                                                     style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="cidade"
+                                                                    header="Cidade do serviço"
+                                                                    style={{ width: "200px" }}
+                                                                />
+                                                                <Column
+                                                                    field="equipe"
+                                                                    header="Equipe"
+                                                                    style={{ width: "150px" }}
+                                                                />
+                                                                <Column
+                                                                    field="lucro"
+                                                                    header="Lucro (R$)"
+                                                                    style={{ width: "100px" }}
+                                                                />
+                                                                <Column
+                                                                    filter={true}
+                                                                    field="dataFinal"
+                                                                    header="Data"
+                                                                    style={{ width: "100px" }}
                                                                 />
                                                                 <Column
                                                                     filter={true}
@@ -1542,28 +1541,9 @@ const GerenciadorView = props => {
                                                                     style={{ width: "150px" }}
                                                                 />
                                                                 <Column
-                                                                    field="cidade"
-                                                                    header="Cidade do serviço"
-                                                                    style={{ width: "200px" }}
-                                                                />
-                                                                <Column
-                                                                    field="equipe"
-                                                                    header="Equipe"
-                                                                    style={{ width: "150px" }}
-                                                                />
-                                                                <Column
                                                                     field="veiculo.placa"
                                                                     header="Veículo"
                                                                     style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    field="lucro"
-                                                                    header="Lucro (R$)"
-                                                                    style={{ width: "100px" }}
-                                                                />
-                                                                <Column
-                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                 />
                                                             </DataTable>
                                                         </div>
@@ -1591,22 +1571,39 @@ const GerenciadorView = props => {
                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                 >
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="dataFinal"
-                                                                        header="Data"
-                                                                        style={{ width: "100px" }}
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                     />
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="tipo"
-                                                                        header="Tipo do serviço"
-                                                                        style={{ width: "150px" }}
+                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
                                                                         style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="cidade"
+                                                                        header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="equipe"
+                                                                        header="Equipe"
+                                                                        style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="lucro"
+                                                                        header="Lucro (R$)"
+                                                                        style={{ width: "100px" }}
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="dataFinal"
+                                                                        header="Data"
+                                                                        style={{ width: "100px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
@@ -1621,28 +1618,9 @@ const GerenciadorView = props => {
                                                                         style={{ width: "150px" }}
                                                                     />
                                                                     <Column
-                                                                        field="cidade"
-                                                                        header="Cidade do serviço"
-                                                                        style={{ width: "200px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="equipe"
-                                                                        header="Equipe"
-                                                                        style={{ width: "150px" }}
-                                                                    />
-                                                                    <Column
                                                                         field="veiculo.placa"
                                                                         header="Veículo"
                                                                         style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="lucro"
-                                                                        header="Lucro (R$)"
-                                                                        style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                     />
                                                                 </DataTable>
                                                             </div>
@@ -1670,22 +1648,39 @@ const GerenciadorView = props => {
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     >
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -1700,28 +1695,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -1749,22 +1725,39 @@ const GerenciadorView = props => {
                                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                                         >
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="dataFinal"
-                                                                                header="Data"
-                                                                                style={{ width: "100px" }}
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '80px' }}
                                                                             />
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="tipo"
-                                                                                header="Tipo do serviço"
-                                                                                style={{ width: "150px" }}
+                                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '110px' }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
                                                                                 style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="cidade"
+                                                                                header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="equipe"
+                                                                                header="Equipe"
+                                                                                style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="lucro"
+                                                                                header="Lucro (R$)"
+                                                                                style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                filter={true}
+                                                                                field="dataFinal"
+                                                                                header="Data"
+                                                                                style={{ width: "100px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
@@ -1779,28 +1772,9 @@ const GerenciadorView = props => {
                                                                                 style={{ width: "150px" }}
                                                                             />
                                                                             <Column
-                                                                                field="cidade"
-                                                                                header="Cidade do serviço"
-                                                                                style={{ width: "200px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="equipe"
-                                                                                header="Equipe"
-                                                                                style={{ width: "150px" }}
-                                                                            />
-                                                                            <Column
                                                                                 field="veiculo.placa"
                                                                                 header="Veículo"
                                                                                 style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="lucro"
-                                                                                header="Lucro (R$)"
-                                                                                style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -1828,22 +1802,39 @@ const GerenciadorView = props => {
                                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                                             >
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="dataFinal"
-                                                                                    header="Data"
-                                                                                    style={{ width: "100px" }}
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                                 />
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="tipo"
-                                                                                    header="Tipo do serviço"
-                                                                                    style={{ width: "150px" }}
+                                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
                                                                                     style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="cidade"
+                                                                                    header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="equipe"
+                                                                                    header="Equipe"
+                                                                                    style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="lucro"
+                                                                                    header="Lucro (R$)"
+                                                                                    style={{ width: "100px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    filter={true}
+                                                                                    field="dataFinal"
+                                                                                    header="Data"
+                                                                                    style={{ width: "100px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
@@ -1858,28 +1849,9 @@ const GerenciadorView = props => {
                                                                                     style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
-                                                                                    field="cidade"
-                                                                                    header="Cidade do serviço"
-                                                                                    style={{ width: "200px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="equipe"
-                                                                                    header="Equipe"
-                                                                                    style={{ width: "150px" }}
-                                                                                />
-                                                                                <Column
                                                                                     field="veiculo.placa"
                                                                                     header="Veículo"
                                                                                     style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="lucro"
-                                                                                    header="Lucro (R$)"
-                                                                                    style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                                 />
                                                                             </DataTable>
                                                                         </div>
@@ -1944,22 +1916,39 @@ const GerenciadorView = props => {
                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                 >
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="dataFinal"
-                                                                        header="Data"
-                                                                        style={{ width: "100px" }}
+                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                     />
                                                                     <Column
-                                                                        filter={true}
-                                                                        field="tipo"
-                                                                        header="Tipo do serviço"
-                                                                        style={{ width: "150px" }}
+                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
                                                                         field="codigoObra"
                                                                         header="Código do serviço"
                                                                         style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="cidade"
+                                                                        header="Cidade do serviço"
+                                                                        style={{ width: "200px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="equipe"
+                                                                        header="Equipe"
+                                                                        style={{ width: "150px" }}
+                                                                    />
+                                                                    <Column
+                                                                        field="lucro"
+                                                                        header="Lucro (R$)"
+                                                                        style={{ width: "100px" }}
+                                                                    />
+                                                                    <Column
+                                                                        filter={true}
+                                                                        field="dataFinal"
+                                                                        header="Data"
+                                                                        style={{ width: "100px" }}
                                                                     />
                                                                     <Column
                                                                         filter={true}
@@ -1974,28 +1963,9 @@ const GerenciadorView = props => {
                                                                         style={{ width: "150px" }}
                                                                     />
                                                                     <Column
-                                                                        field="cidade"
-                                                                        header="Cidade do serviço"
-                                                                        style={{ width: "200px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="equipe"
-                                                                        header="Equipe"
-                                                                        style={{ width: "150px" }}
-                                                                    />
-                                                                    <Column
                                                                         field="veiculo.placa"
                                                                         header="Veículo"
                                                                         style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        field="lucro"
-                                                                        header="Lucro (R$)"
-                                                                        style={{ width: "100px" }}
-                                                                    />
-                                                                    <Column
-                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                     />
                                                                 </DataTable>
                                                             </div>
@@ -2023,22 +1993,39 @@ const GerenciadorView = props => {
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     >
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -2053,28 +2040,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -2102,22 +2070,39 @@ const GerenciadorView = props => {
                                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                                         >
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="dataFinal"
-                                                                                header="Data"
-                                                                                style={{ width: "100px" }}
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '80px' }}
                                                                             />
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="tipo"
-                                                                                header="Tipo do serviço"
-                                                                                style={{ width: "150px" }}
+                                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '110px' }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
                                                                                 style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="cidade"
+                                                                                header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="equipe"
+                                                                                header="Equipe"
+                                                                                style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="lucro"
+                                                                                header="Lucro (R$)"
+                                                                                style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                filter={true}
+                                                                                field="dataFinal"
+                                                                                header="Data"
+                                                                                style={{ width: "100px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
@@ -2132,28 +2117,9 @@ const GerenciadorView = props => {
                                                                                 style={{ width: "150px" }}
                                                                             />
                                                                             <Column
-                                                                                field="cidade"
-                                                                                header="Cidade do serviço"
-                                                                                style={{ width: "200px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="equipe"
-                                                                                header="Equipe"
-                                                                                style={{ width: "150px" }}
-                                                                            />
-                                                                            <Column
                                                                                 field="veiculo.placa"
                                                                                 header="Veículo"
                                                                                 style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="lucro"
-                                                                                header="Lucro (R$)"
-                                                                                style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -2181,22 +2147,39 @@ const GerenciadorView = props => {
                                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                                             >
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="dataFinal"
-                                                                                    header="Data"
-                                                                                    style={{ width: "100px" }}
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                                 />
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="tipo"
-                                                                                    header="Tipo do serviço"
-                                                                                    style={{ width: "150px" }}
+                                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
                                                                                     style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="cidade"
+                                                                                    header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="equipe"
+                                                                                    header="Equipe"
+                                                                                    style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="lucro"
+                                                                                    header="Lucro (R$)"
+                                                                                    style={{ width: "100px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    filter={true}
+                                                                                    field="dataFinal"
+                                                                                    header="Data"
+                                                                                    style={{ width: "100px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
@@ -2211,28 +2194,9 @@ const GerenciadorView = props => {
                                                                                     style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
-                                                                                    field="cidade"
-                                                                                    header="Cidade do serviço"
-                                                                                    style={{ width: "200px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="equipe"
-                                                                                    header="Equipe"
-                                                                                    style={{ width: "150px" }}
-                                                                                />
-                                                                                <Column
                                                                                     field="veiculo.placa"
                                                                                     header="Veículo"
                                                                                     style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="lucro"
-                                                                                    header="Lucro (R$)"
-                                                                                    style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                                 />
                                                                             </DataTable>
                                                                         </div>
@@ -2260,22 +2224,39 @@ const GerenciadorView = props => {
                                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                                 >
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="dataFinal"
-                                                                                        header="Data"
-                                                                                        style={{ width: "100px" }}
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                                     />
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="tipo"
-                                                                                        header="Tipo do serviço"
-                                                                                        style={{ width: "150px" }}
+                                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
                                                                                         style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="cidade"
+                                                                                        header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="equipe"
+                                                                                        header="Equipe"
+                                                                                        style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="lucro"
+                                                                                        header="Lucro (R$)"
+                                                                                        style={{ width: "100px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        filter={true}
+                                                                                        field="dataFinal"
+                                                                                        header="Data"
+                                                                                        style={{ width: "100px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
@@ -2290,28 +2271,9 @@ const GerenciadorView = props => {
                                                                                         style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
-                                                                                        field="cidade"
-                                                                                        header="Cidade do serviço"
-                                                                                        style={{ width: "200px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="equipe"
-                                                                                        header="Equipe"
-                                                                                        style={{ width: "150px" }}
-                                                                                    />
-                                                                                    <Column
                                                                                         field="veiculo.placa"
                                                                                         header="Veículo"
                                                                                         style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="lucro"
-                                                                                        header="Lucro (R$)"
-                                                                                        style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                                     />
                                                                                 </DataTable>
                                                                             </div>
@@ -2376,22 +2338,39 @@ const GerenciadorView = props => {
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     >
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -2406,28 +2385,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -2455,22 +2415,39 @@ const GerenciadorView = props => {
                                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                                         >
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="dataFinal"
-                                                                                header="Data"
-                                                                                style={{ width: "100px" }}
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '80px' }}
                                                                             />
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="tipo"
-                                                                                header="Tipo do serviço"
-                                                                                style={{ width: "150px" }}
+                                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '110px' }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
                                                                                 style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="cidade"
+                                                                                header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="equipe"
+                                                                                header="Equipe"
+                                                                                style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="lucro"
+                                                                                header="Lucro (R$)"
+                                                                                style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                filter={true}
+                                                                                field="dataFinal"
+                                                                                header="Data"
+                                                                                style={{ width: "100px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
@@ -2485,28 +2462,9 @@ const GerenciadorView = props => {
                                                                                 style={{ width: "150px" }}
                                                                             />
                                                                             <Column
-                                                                                field="cidade"
-                                                                                header="Cidade do serviço"
-                                                                                style={{ width: "200px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="equipe"
-                                                                                header="Equipe"
-                                                                                style={{ width: "150px" }}
-                                                                            />
-                                                                            <Column
                                                                                 field="veiculo.placa"
                                                                                 header="Veículo"
                                                                                 style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="lucro"
-                                                                                header="Lucro (R$)"
-                                                                                style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -2534,22 +2492,39 @@ const GerenciadorView = props => {
                                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                                             >
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="dataFinal"
-                                                                                    header="Data"
-                                                                                    style={{ width: "100px" }}
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                                 />
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="tipo"
-                                                                                    header="Tipo do serviço"
-                                                                                    style={{ width: "150px" }}
+                                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
                                                                                     style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="cidade"
+                                                                                    header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="equipe"
+                                                                                    header="Equipe"
+                                                                                    style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="lucro"
+                                                                                    header="Lucro (R$)"
+                                                                                    style={{ width: "100px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    filter={true}
+                                                                                    field="dataFinal"
+                                                                                    header="Data"
+                                                                                    style={{ width: "100px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
@@ -2564,28 +2539,9 @@ const GerenciadorView = props => {
                                                                                     style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
-                                                                                    field="cidade"
-                                                                                    header="Cidade do serviço"
-                                                                                    style={{ width: "200px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="equipe"
-                                                                                    header="Equipe"
-                                                                                    style={{ width: "150px" }}
-                                                                                />
-                                                                                <Column
                                                                                     field="veiculo.placa"
                                                                                     header="Veículo"
                                                                                     style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="lucro"
-                                                                                    header="Lucro (R$)"
-                                                                                    style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                                 />
                                                                             </DataTable>
                                                                         </div>
@@ -2613,22 +2569,39 @@ const GerenciadorView = props => {
                                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                                 >
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="dataFinal"
-                                                                                        header="Data"
-                                                                                        style={{ width: "100px" }}
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                                     />
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="tipo"
-                                                                                        header="Tipo do serviço"
-                                                                                        style={{ width: "150px" }}
+                                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
                                                                                         style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="cidade"
+                                                                                        header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="equipe"
+                                                                                        header="Equipe"
+                                                                                        style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="lucro"
+                                                                                        header="Lucro (R$)"
+                                                                                        style={{ width: "100px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        filter={true}
+                                                                                        field="dataFinal"
+                                                                                        header="Data"
+                                                                                        style={{ width: "100px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
@@ -2643,28 +2616,9 @@ const GerenciadorView = props => {
                                                                                         style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
-                                                                                        field="cidade"
-                                                                                        header="Cidade do serviço"
-                                                                                        style={{ width: "200px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="equipe"
-                                                                                        header="Equipe"
-                                                                                        style={{ width: "150px" }}
-                                                                                    />
-                                                                                    <Column
                                                                                         field="veiculo.placa"
                                                                                         header="Veículo"
                                                                                         style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="lucro"
-                                                                                        header="Lucro (R$)"
-                                                                                        style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                                     />
                                                                                 </DataTable>
                                                                             </div>
@@ -2692,22 +2646,39 @@ const GerenciadorView = props => {
                                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                                     >
                                                                                         <Column
-                                                                                            filter={true}
-                                                                                            field="dataFinal"
-                                                                                            header="Data"
-                                                                                            style={{ width: "100px" }}
+                                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                                         />
                                                                                         <Column
-                                                                                            filter={true}
-                                                                                            field="tipo"
-                                                                                            header="Tipo do serviço"
-                                                                                            style={{ width: "150px" }}
+                                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="codigoObra"
                                                                                             header="Código do serviço"
                                                                                             style={{ width: "150px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="cidade"
+                                                                                            header="Cidade do serviço"
+                                                                                            style={{ width: "200px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="equipe"
+                                                                                            header="Equipe"
+                                                                                            style={{ width: "150px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="lucro"
+                                                                                            header="Lucro (R$)"
+                                                                                            style={{ width: "100px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            filter={true}
+                                                                                            field="dataFinal"
+                                                                                            header="Data"
+                                                                                            style={{ width: "100px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
@@ -2722,28 +2693,9 @@ const GerenciadorView = props => {
                                                                                             style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
-                                                                                            field="cidade"
-                                                                                            header="Cidade do serviço"
-                                                                                            style={{ width: "200px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            field="equipe"
-                                                                                            header="Equipe"
-                                                                                            style={{ width: "150px" }}
-                                                                                        />
-                                                                                        <Column
                                                                                             field="veiculo.placa"
                                                                                             header="Veículo"
                                                                                             style={{ width: "100px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            field="lucro"
-                                                                                            header="Lucro (R$)"
-                                                                                            style={{ width: "100px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                                         />
                                                                                     </DataTable>
                                                                                 </div>
@@ -2807,22 +2759,39 @@ const GerenciadorView = props => {
                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                     >
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="dataFinal"
-                                                                            header="Data"
-                                                                            style={{ width: "100px" }}
+                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                         />
                                                                         <Column
-                                                                            filter={true}
-                                                                            field="tipo"
-                                                                            header="Tipo do serviço"
-                                                                            style={{ width: "150px" }}
+                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
                                                                             field="codigoObra"
                                                                             header="Código do serviço"
                                                                             style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="cidade"
+                                                                            header="Cidade do serviço"
+                                                                            style={{ width: "200px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="equipe"
+                                                                            header="Equipe"
+                                                                            style={{ width: "150px" }}
+                                                                        />
+                                                                        <Column
+                                                                            field="lucro"
+                                                                            header="Lucro (R$)"
+                                                                            style={{ width: "100px" }}
+                                                                        />
+                                                                        <Column
+                                                                            filter={true}
+                                                                            field="dataFinal"
+                                                                            header="Data"
+                                                                            style={{ width: "100px" }}
                                                                         />
                                                                         <Column
                                                                             filter={true}
@@ -2837,28 +2806,9 @@ const GerenciadorView = props => {
                                                                             style={{ width: "150px" }}
                                                                         />
                                                                         <Column
-                                                                            field="cidade"
-                                                                            header="Cidade do serviço"
-                                                                            style={{ width: "200px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="equipe"
-                                                                            header="Equipe"
-                                                                            style={{ width: "150px" }}
-                                                                        />
-                                                                        <Column
                                                                             field="veiculo.placa"
                                                                             header="Veículo"
                                                                             style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            field="lucro"
-                                                                            header="Lucro (R$)"
-                                                                            style={{ width: "100px" }}
-                                                                        />
-                                                                        <Column
-                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                         />
                                                                     </DataTable>
                                                                 </div>
@@ -2886,22 +2836,39 @@ const GerenciadorView = props => {
                                                                             emptyMessage={"Nenhum apontamento Finalizado."}
                                                                         >
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="dataFinal"
-                                                                                header="Data"
-                                                                                style={{ width: "100px" }}
+                                                                                body={actionTemplateButtonVer.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '80px' }}
                                                                             />
                                                                             <Column
-                                                                                filter={true}
-                                                                                field="tipo"
-                                                                                header="Tipo do serviço"
-                                                                                style={{ width: "150px" }}
+                                                                                body={actionTemplateButtonFaturar.bind(this)}
+                                                                                style={{ textAlign: 'center', width: '110px' }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
                                                                                 field="codigoObra"
                                                                                 header="Código do serviço"
                                                                                 style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="cidade"
+                                                                                header="Cidade do serviço"
+                                                                                style={{ width: "200px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="equipe"
+                                                                                header="Equipe"
+                                                                                style={{ width: "150px" }}
+                                                                            />
+                                                                            <Column
+                                                                                field="lucro"
+                                                                                header="Lucro (R$)"
+                                                                                style={{ width: "100px" }}
+                                                                            />
+                                                                            <Column
+                                                                                filter={true}
+                                                                                field="dataFinal"
+                                                                                header="Data"
+                                                                                style={{ width: "100px" }}
                                                                             />
                                                                             <Column
                                                                                 filter={true}
@@ -2916,28 +2883,9 @@ const GerenciadorView = props => {
                                                                                 style={{ width: "150px" }}
                                                                             />
                                                                             <Column
-                                                                                field="cidade"
-                                                                                header="Cidade do serviço"
-                                                                                style={{ width: "200px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="equipe"
-                                                                                header="Equipe"
-                                                                                style={{ width: "150px" }}
-                                                                            />
-                                                                            <Column
                                                                                 field="veiculo.placa"
                                                                                 header="Veículo"
                                                                                 style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                field="lucro"
-                                                                                header="Lucro (R$)"
-                                                                                style={{ width: "100px" }}
-                                                                            />
-                                                                            <Column
-                                                                                body={actionTemplateButtonVer.bind(this)}
-                                                                                style={{ textAlign: 'center', width: '200px' }}
                                                                             />
                                                                         </DataTable>
                                                                     </div>
@@ -2965,22 +2913,39 @@ const GerenciadorView = props => {
                                                                                 emptyMessage={"Nenhum apontamento Finalizado."}
                                                                             >
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="dataFinal"
-                                                                                    header="Data"
-                                                                                    style={{ width: "100px" }}
+                                                                                    body={actionTemplateButtonVer.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '80px' }}
                                                                                 />
                                                                                 <Column
-                                                                                    filter={true}
-                                                                                    field="tipo"
-                                                                                    header="Tipo do serviço"
-                                                                                    style={{ width: "150px" }}
+                                                                                    body={actionTemplateButtonFaturar.bind(this)}
+                                                                                    style={{ textAlign: 'center', width: '110px' }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
                                                                                     field="codigoObra"
                                                                                     header="Código do serviço"
                                                                                     style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="cidade"
+                                                                                    header="Cidade do serviço"
+                                                                                    style={{ width: "200px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="equipe"
+                                                                                    header="Equipe"
+                                                                                    style={{ width: "150px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    field="lucro"
+                                                                                    header="Lucro (R$)"
+                                                                                    style={{ width: "100px" }}
+                                                                                />
+                                                                                <Column
+                                                                                    filter={true}
+                                                                                    field="dataFinal"
+                                                                                    header="Data"
+                                                                                    style={{ width: "100px" }}
                                                                                 />
                                                                                 <Column
                                                                                     filter={true}
@@ -2995,28 +2960,9 @@ const GerenciadorView = props => {
                                                                                     style={{ width: "150px" }}
                                                                                 />
                                                                                 <Column
-                                                                                    field="cidade"
-                                                                                    header="Cidade do serviço"
-                                                                                    style={{ width: "200px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="equipe"
-                                                                                    header="Equipe"
-                                                                                    style={{ width: "150px" }}
-                                                                                />
-                                                                                <Column
                                                                                     field="veiculo.placa"
                                                                                     header="Veículo"
                                                                                     style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    field="lucro"
-                                                                                    header="Lucro (R$)"
-                                                                                    style={{ width: "100px" }}
-                                                                                />
-                                                                                <Column
-                                                                                    body={actionTemplateButtonVer.bind(this)}
-                                                                                    style={{ textAlign: 'center', width: '200px' }}
                                                                                 />
                                                                             </DataTable>
                                                                         </div>
@@ -3044,22 +2990,39 @@ const GerenciadorView = props => {
                                                                                     emptyMessage={"Nenhum apontamento Finalizado."}
                                                                                 >
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="dataFinal"
-                                                                                        header="Data"
-                                                                                        style={{ width: "100px" }}
+                                                                                        body={actionTemplateButtonVer.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '80px' }}
                                                                                     />
                                                                                     <Column
-                                                                                        filter={true}
-                                                                                        field="tipo"
-                                                                                        header="Tipo do serviço"
-                                                                                        style={{ width: "150px" }}
+                                                                                        body={actionTemplateButtonFaturar.bind(this)}
+                                                                                        style={{ textAlign: 'center', width: '110px' }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
                                                                                         field="codigoObra"
                                                                                         header="Código do serviço"
                                                                                         style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="cidade"
+                                                                                        header="Cidade do serviço"
+                                                                                        style={{ width: "200px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="equipe"
+                                                                                        header="Equipe"
+                                                                                        style={{ width: "150px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        field="lucro"
+                                                                                        header="Lucro (R$)"
+                                                                                        style={{ width: "100px" }}
+                                                                                    />
+                                                                                    <Column
+                                                                                        filter={true}
+                                                                                        field="dataFinal"
+                                                                                        header="Data"
+                                                                                        style={{ width: "100px" }}
                                                                                     />
                                                                                     <Column
                                                                                         filter={true}
@@ -3074,28 +3037,9 @@ const GerenciadorView = props => {
                                                                                         style={{ width: "150px" }}
                                                                                     />
                                                                                     <Column
-                                                                                        field="cidade"
-                                                                                        header="Cidade do serviço"
-                                                                                        style={{ width: "200px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="equipe"
-                                                                                        header="Equipe"
-                                                                                        style={{ width: "150px" }}
-                                                                                    />
-                                                                                    <Column
                                                                                         field="veiculo.placa"
                                                                                         header="Veículo"
                                                                                         style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        field="lucro"
-                                                                                        header="Lucro (R$)"
-                                                                                        style={{ width: "100px" }}
-                                                                                    />
-                                                                                    <Column
-                                                                                        body={actionTemplateButtonVer.bind(this)}
-                                                                                        style={{ textAlign: 'center', width: '200px' }}
                                                                                     />
                                                                                 </DataTable>
                                                                             </div>
@@ -3123,22 +3067,39 @@ const GerenciadorView = props => {
                                                                                         emptyMessage={"Nenhum apontamento Finalizado."}
                                                                                     >
                                                                                         <Column
-                                                                                            filter={true}
-                                                                                            field="dataFinal"
-                                                                                            header="Data"
-                                                                                            style={{ width: "100px" }}
+                                                                                            body={actionTemplateButtonVer.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '80px' }}
                                                                                         />
                                                                                         <Column
-                                                                                            filter={true}
-                                                                                            field="tipo"
-                                                                                            header="Tipo do serviço"
-                                                                                            style={{ width: "150px" }}
+                                                                                            body={actionTemplateButtonFaturar.bind(this)}
+                                                                                            style={{ textAlign: 'center', width: '110px' }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
                                                                                             field="codigoObra"
                                                                                             header="Código do serviço"
                                                                                             style={{ width: "150px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="cidade"
+                                                                                            header="Cidade do serviço"
+                                                                                            style={{ width: "200px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="equipe"
+                                                                                            header="Equipe"
+                                                                                            style={{ width: "150px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            field="lucro"
+                                                                                            header="Lucro (R$)"
+                                                                                            style={{ width: "100px" }}
+                                                                                        />
+                                                                                        <Column
+                                                                                            filter={true}
+                                                                                            field="dataFinal"
+                                                                                            header="Data"
+                                                                                            style={{ width: "100px" }}
                                                                                         />
                                                                                         <Column
                                                                                             filter={true}
@@ -3153,28 +3114,9 @@ const GerenciadorView = props => {
                                                                                             style={{ width: "150px" }}
                                                                                         />
                                                                                         <Column
-                                                                                            field="cidade"
-                                                                                            header="Cidade do serviço"
-                                                                                            style={{ width: "200px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            field="equipe"
-                                                                                            header="Equipe"
-                                                                                            style={{ width: "150px" }}
-                                                                                        />
-                                                                                        <Column
                                                                                             field="veiculo.placa"
                                                                                             header="Veículo"
                                                                                             style={{ width: "100px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            field="lucro"
-                                                                                            header="Lucro (R$)"
-                                                                                            style={{ width: "100px" }}
-                                                                                        />
-                                                                                        <Column
-                                                                                            body={actionTemplateButtonVer.bind(this)}
-                                                                                            style={{ textAlign: 'center', width: '200px' }}
                                                                                         />
                                                                                     </DataTable>
                                                                                 </div>

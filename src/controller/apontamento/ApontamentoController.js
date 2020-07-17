@@ -321,7 +321,7 @@ export default class ApontamentoController extends Component {
                     }, () =>
                         Api.listarApontamentosIniciados()
                             .then(res1 =>
-                                this.setState({ apontamentosIniciados: res1[0].data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
+                                this.setState({ apontamentosIniciados: res1.data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem })))
                     )
                 }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
             } else this.growl.show({ severity: 'error', summary: "Preencha todos os campos." })
@@ -456,7 +456,15 @@ export default class ApontamentoController extends Component {
         WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
         MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
         boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
-    }} label="Ver apontamento" onClick={() => this.props.history.push(`/usuario/apontamento/ver?_id=${rowData._id}`)}
+    }} label="Ver" onClick={() => this.props.history.push(`/usuario/apontamento/ver?_id=${rowData._id}`)}
+        className="p-button-raised p-button-rounded" />
+
+    actionTemplateButtonFaturar = (rowData) => <Button style={{
+        backgroundColor: '#f79c91', borderColor: '#f7b9b2',
+        WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
+    }} label="Faturar" onClick={() => Api.faturar({_id: rowData._id}).then(res => this.growl.show({ severity: 'success', summary: res.data.mensagem }))}
         className="p-button-raised p-button-rounded" />
 
     handleInputChangeTable = (e) => {
@@ -531,6 +539,7 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            actionTemplateButtonFaturar={this.actionTemplateButtonFaturar}
                             limparFiltroAtividades={this.limparFiltroAtividades}
                             pesquisarAtividade={this.pesquisarAtividade}
                             atividadePesquisa={atividadePesquisa}

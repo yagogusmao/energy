@@ -78,7 +78,7 @@ export const NavbarListMobile = styled.div`
 
 export const NavbarList = styled.div`
   display: grid;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(8, auto);
   width: calc(100% - 200px);
   align-items: center;
   justify-content: center;
@@ -86,7 +86,7 @@ export const NavbarList = styled.div`
   border:none;
   @media (max-width: 880px) {
     grid-template-columns: auto;
-    grid-template-rows: repeat(7, auto);
+    grid-template-rows: repeat(8, auto);
 
     a {
       display: none;

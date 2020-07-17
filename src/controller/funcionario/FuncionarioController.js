@@ -17,7 +17,8 @@ export default class FuncionarioController extends Component {
             cargo: "",
             telefone: "",
             dataInicio: "",
-            funcionarios: []
+            funcionarios: [],
+            carregando: false
         }
     }
 

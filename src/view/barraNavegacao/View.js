@@ -24,6 +24,7 @@ const UserNavbarHomeView = props => {
                 <MenuIcon fill="#ffffff" onClick={onChangeMobileNavbar} />
                 {!clearNavbar && (
                     <NavbarList>
+                        <Link to="/usuario/homepage" >Página inicial</Link>
                         <Link to="/usuario/equipe" >Equipes</Link>
                         <Link to="/usuario/almoxarifado" >Almoxarifados</Link>
                         <Link to="/usuario/apontamento" >Apontamentos</Link>
@@ -43,6 +44,7 @@ const UserNavbarHomeView = props => {
             <NavbarMobile show={showMobileNavbar}>
                 <CloseIcon fill="#ffffff" onClick={onChangeMobileNavbar} />
                 <NavbarListMobile>
+                    <Link to="/usuario/homepage" >Página inicial</Link>
                     <Link to="/usuario/equipe" >Equipes</Link>
                     <Link to="/usuario/almoxarifado" >Almoxarifados</Link>
                     <Link to="/usuario/apontamento" >Apontamentos</Link>
