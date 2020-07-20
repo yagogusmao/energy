@@ -19,7 +19,7 @@ const MaterialView = props => {
                     <div style={{ marginTop: '.5em' }}>{descricaoClasseCriar ? 'Código selecionado: ' : 'Nenhum código selecionado.'}</div>
                         <Dropdown title="titulo" optionLabel="descricaoClasseCriar" value={descricaoClasseCriar} options={opcoesCodigos} placeholder="Código da Classe" onChange={handleDropDownChange} />
                     </div>
-                    <InputFloat name="_idCriar" label="_id" value={_idCriar} onChange={handleInputChange} />
+                    <InputFloat name="_idCriar" label="Código" value={_idCriar} onChange={handleInputChange} />
                     <InputFloat name="unidadeMedidaCriar" label="Unidade de Medida" value={unidadeMedidaCriar} onChange={handleInputChange} />
                     <InputFloat name="descricaoCriar" label="Descrição" value={descricaoCriar} onChange={handleInputChange} />
                     <InputFloat name="codigoClasseCriar" disabled={true} label="Código de Classe" type="number" value={codigoClasseCriar} onChange={handleInputChange} />

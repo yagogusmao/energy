@@ -50,6 +50,11 @@ const HomePageView = props => {
                             header="Oportunidade"
                             style={{ textAlign: 'center', width: '150px' }}
                         />
+                        <Column
+                            field="faturado"
+                            header="Faturado"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
                     </DataTable>
                 </div>
                 <div className="graficoTabela">
@@ -62,7 +67,7 @@ const HomePageView = props => {
                             data={[
                                 ['Meta batida', 'Meta restante'],
                                 ['Meta batida', metaMensal],
-                                ['Meta restante', metaMensal - realizado],
+                                ['Meta restante', metaMensal - realizado > 0 ? metaMensal - realizado : 0],
                             ]}
                             rootProps={{ 'data-testid': '1' }}
                             options={{

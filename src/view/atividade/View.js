@@ -14,7 +14,7 @@ const AtividadeView = props => {
                     <h1>Criar atividade</h1>
                 </div>
                 <div className="inputs">
-                    <InputFloat name="_id" label="_id" type="text" value={_id} onChange={handleInputChange} />
+                    <InputFloat name="_id" label="Código" type="text" value={_id} onChange={handleInputChange} />
                     <InputFloat name="valor" label="Valor" type="number" value={valor} onChange={handleInputChange} />
                     <InputFloat name="nome" label="Nome" type="text" value={nome} onChange={handleInputChange} />
                     <div className="dropdown">

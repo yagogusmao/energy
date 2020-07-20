@@ -9,7 +9,9 @@ const ApiBaseAlmoxarifado = {
     listarEncarregados: () => ApiBase.get('/apontamento/listarEncarregados'),
     verApontamento: (_id) => ApiBase.get(`/apontamento?_id=${_id}`),
     verAtividades: (_id) => ApiBase.get(`/apontamento/verAtividades?_id=${_id}`),
-    faturar: (payload) => ApiBase.post(`/apontamento/faturar`, payload)
+    faturar: (payload) => ApiBase.post(`/apontamento/faturar`, payload),
+    pesquisarObra: (codigoObra) => ApiBase.get(`/apontamento/faturar/obra?codigoObra=${codigoObra}`),
+    faturarObra: (payload) => ApiBase.post(`/apontamento/faturar/obra`, payload),
 }
 
 export default ApiBaseAlmoxarifado;

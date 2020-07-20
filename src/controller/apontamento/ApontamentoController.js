@@ -119,7 +119,9 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPAno: false,
             mostrarFinalizadosDEOP: false,
 
-            atividadePesquisa: ""
+            atividadePesquisa: "",
+            apontamentosPesquisa: [],
+            obraPesquisa: ""
         }
     }
 
@@ -464,7 +466,7 @@ export default class ApontamentoController extends Component {
         WebkitBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
         MozBoxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)',
         boxShadow: '2px 2px 5px 0px rgba(0,0,0,0.75)'
-    }} label="Faturar" onClick={() => Api.faturar({_id: rowData._id}).then(res => this.growl.show({ severity: 'success', summary: res.data.mensagem }))}
+    }} label="Faturar" onClick={() => Api.faturar({ _id: rowData._id }).then(res => this.growl.show({ severity: 'success', summary: res.data.mensagem }))}
         className="p-button-raised p-button-rounded" />
 
     handleInputChangeTable = (e) => {
@@ -481,8 +483,24 @@ export default class ApontamentoController extends Component {
 
     pesquisarAtividade = async () => {
         const { atividadePesquisa } = this.state;
-        const res = await ApiAtividade.listarAtividades(atividadePesquisa);
-        this.setState({ atividades: res.data.atividades });
+        ApiAtividade.listarAtividades(atividadePesquisa).then(res => {
+            this.setState({ atividades: res.data.atividades }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+        }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+    }
+
+    faturarObra = async () => {
+        const { obraPesquisa } = this.state;
+        if (this.state.apontamentosPesquisa.length !== 0)
+            Api.faturarObra({ codigoObra: obraPesquisa }).then(res => this.growl.show({ severity: 'success', summary: res.data.mensagem })
+                , erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
+        else this.growl.show({ severity: 'error', summary: "Pesquisa a obra primeiro." })
+    }
+
+    pesquisarObra = async () => {
+        const { obraPesquisa } = this.state;
+        Api.pesquisarObra(obraPesquisa).then(res => {
+            this.setState({ apontamentosPesquisa: res.data.apontamentos }, () => this.growl.show({ severity: 'success', summary: res.data.mensagem }));
+        }, erro => this.growl.show({ severity: 'error', summary: erro.response.data.mensagem }))
     }
 
     limparFiltroAtividades = async () => {
@@ -531,7 +549,8 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPHoje, mostrarFinalizadosDEOPSemana, mostrarFinalizadosDEOPMes,
             mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP,
             subestacao, area, alimentador, origemOS,
-            quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal, atividadePesquisa } = this.state;
+            quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal, atividadePesquisa,
+            apontamentosPesquisa, obraPesquisa } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -539,6 +558,10 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            faturarObra={this.faturarObra}
+                            pesquisarObra={this.pesquisarObra}
+                            obraPesquisa={obraPesquisa}
+                            apontamentosPesquisa={apontamentosPesquisa}
                             actionTemplateButtonFaturar={this.actionTemplateButtonFaturar}
                             limparFiltroAtividades={this.limparFiltroAtividades}
                             pesquisarAtividade={this.pesquisarAtividade}

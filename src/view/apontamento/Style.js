@@ -208,3 +208,35 @@ export const ContainerTabelaFinalizar = styled.div`
     }
   }
 `;
+
+export const ContainerPesquisaApontamentos = styled.div`
+  animation: fadeIn 1s;
+  border-radius:5px;
+  border: 3px;
+  border-left-style: solid;
+  border-color: red;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  .inputs {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+  }
+  .tabela {
+    overflow-x: scroll
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
