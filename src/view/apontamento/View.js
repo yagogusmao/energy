@@ -537,11 +537,6 @@ const GerenciadorView = props => {
                                             style={{ textAlign: 'center', width: '100px' }}
                                         />
                                         <Column
-                                            field="valor"
-                                            header="Valor (R$)"
-                                            style={{ textAlign: 'center', width: '100px' }}
-                                        />
-                                        <Column
                                             field="nome"
                                             header="Nome"
                                             style={{ textAlign: 'center', width: '300px' }}
@@ -551,7 +546,11 @@ const GerenciadorView = props => {
                                             header="Tipo"
                                             style={{ textAlign: 'center', width: '120px' }}
                                         />
-
+                                        <Column
+                                            field="valor"
+                                            header="Valor (R$)"
+                                            style={{ textAlign: 'center', width: '100px' }}
+                                        />
                                     </DataTable>
                                 </div>
                                 <div style={{ marginTop: '10px', marginBottom: '10px' }} className="titulo">

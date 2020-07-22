@@ -47,7 +47,9 @@ export const ContainerTabelaGlobal = styled.div`
   border-color: red;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
   background: white;
   padding: 20px;
   .graficoTabela {

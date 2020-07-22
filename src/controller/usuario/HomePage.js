@@ -28,7 +28,10 @@ export default class HomePageController extends Component {
             graficoPoda: [],
             graficoDECP: [],
             graficoDEOP: [],
-            carregando: false
+            carregando: false,
+            supervisores: [],
+            gestores: [],
+            fiscaisTecnicos: []
         }
     }
 
@@ -41,7 +44,8 @@ export default class HomePageController extends Component {
                     metaMensal: res.data.metaMensal, metaAcumulada: res.data.metaAcumulada, diferenca: res.data.diferenca, global: res.data.global,
                     segmentos: res.data.segmentos,
                     graficoConstrucao: res.data.graficoConstrucao, graficoManutencao: res.data.graficoManutencao, graficoLinhaviva: res.data.graficoLinhaviva,
-                    graficoPoda: res.data.graficoPoda, graficoDECP: res.data.graficoDECP, graficoDEOP: res.data.graficoDEOP
+                    graficoPoda: res.data.graficoPoda, graficoDECP: res.data.graficoDECP, graficoDEOP: res.data.graficoDEOP,
+                    supervisores: res.data.supervisores, gestores: res.data.gestores, fiscaisTecnicos: res.data.fiscaisTecnicos,
                 })
             )
         )
@@ -51,13 +55,17 @@ export default class HomePageController extends Component {
         const { grafico, realizado, equipesApuradas,
             equipesAlcancandoMeta, realizadoEquipes, metaAcumuladaEquipes, oportunidade,
             metaMensal, metaAcumulada, diferenca, carregando, global, segmentos,
-            graficoConstrucao, graficoManutencao, graficoLinhaviva, graficoPoda, graficoDECP, graficoDEOP } = this.state;
+            graficoConstrucao, graficoManutencao, graficoLinhaviva, graficoPoda, graficoDECP, graficoDEOP,
+            supervisores, gestores, fiscaisTecnicos } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
                 {carregando ? <ProgressSpinner />
                     :
                     <HomePageView
+                        supervisores={supervisores}
+                        gestores={gestores}
+                        fiscaisTecnicos={fiscaisTecnicos}
                         graficoConstrucao={graficoConstrucao}
                         graficoManutencao={graficoManutencao}
                         graficoLinhaviva={graficoLinhaviva}

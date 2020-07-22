@@ -5,8 +5,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
 const HomePageView = props => {
-    const { grafico, realizado, metaMensal, global, segmentos, 
-        graficoConstrucao, graficoManutencao, graficoLinhaviva, graficoPoda, graficoDECP, graficoDEOP } = props;
+    const { grafico, realizado, metaMensal, global, segmentos,
+        graficoConstrucao, graficoManutencao, graficoLinhaviva, graficoPoda, graficoDECP, graficoDEOP, supervisores, gestores, fiscaisTecnicos } = props;
     return (
         <>
             <ContainerTabelaGlobal>
@@ -86,7 +86,7 @@ const HomePageView = props => {
                             value={segmentos.map(segmento => {
                                 return {
                                     ...segmento,
-                                    porcentagem: segmento.metaAcumulada !== 0 ? (segmento.realizado / segmento.metaAcumulada) * 100 : 0
+                                    porcentagem: Number(segmento.metaAcumulada) !== 0 ? ((Number(segmento.realizado) / Number(segmento.metaAcumulada)) * 100).toFixed(2) : 0
                                 }
                             })}
                             rows={10}
@@ -113,6 +113,149 @@ const HomePageView = props => {
                             />
                         </DataTable>
                     </div>
+                </div>
+            </ContainerTabelaGlobal>
+            <ContainerTabelaGlobal style={{ marginBottom: '10px' }}>
+                <div className="tabela" style={{ overflowX: 'scroll' }}>
+                    <DataTable
+                        value={gestores}
+                        rows={2}
+                    >
+                        <Column
+                            field="gestor"
+                            header="Gestor"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="metaMensal"
+                            header="Meta Mensal"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="metaAcumulada"
+                            header="Meta Acumulada"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="realizado"
+                            header="Realizado"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="equipesApuradas"
+                            header="Equipes Apuradas"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="equipesAlcancandoMeta"
+                            header="Equipes Alcançando Meta"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="diferenca"
+                            header="Diferença"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="oportunidade"
+                            header="Oportunidade"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                    </DataTable>
+                </div>
+                <div className="tabela" style={{ overflowX: 'scroll', marginTop: '10px' }}>
+                    <DataTable
+                        value={supervisores}
+                        rows={3}
+                    >
+                        <Column
+                            field="supervisor"
+                            header="Supervisor"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="metaMensal"
+                            header="Meta Mensal"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="metaAcumulada"
+                            header="Meta Acumulada"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="realizado"
+                            header="Realizado"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="equipesApuradas"
+                            header="Equipes Apuradas"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="equipesAlcancandoMeta"
+                            header="Equipes Alcançando Meta"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="diferenca"
+                            header="Diferença"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="oportunidade"
+                            header="Oportunidade"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                    </DataTable>
+                </div>
+                <div className="tabela" style={{ overflowX: 'scroll', marginTop: '10px' }}>
+                    <DataTable
+                        value={fiscaisTecnicos}
+                        rows={5}
+                    >
+                        <Column
+                            field="fiscalTecnico"
+                            header="Fiscal/Técnico"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="metaMensal"
+                            header="Meta Mensal"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="metaAcumulada"
+                            header="Meta Acumulada"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="realizado"
+                            header="Realizado"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="equipesApuradas"
+                            header="Equipes Apuradas"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="equipesAlcancandoMeta"
+                            header="Equipes Alcançando Meta"
+                            style={{ textAlign: 'center', width: '100px' }}
+                        />
+                        <Column
+                            field="diferenca"
+                            header="Diferença"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                        <Column
+                            field="oportunidade"
+                            header="Oportunidade"
+                            style={{ textAlign: 'center', width: '150px' }}
+                        />
+                    </DataTable>
                 </div>
             </ContainerTabelaGlobal>
             <ContainerForaGraficoEquipes>
