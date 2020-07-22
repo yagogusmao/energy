@@ -35,6 +35,7 @@ export default class ApontamentoController extends Component {
             tecnicoEnergisa: "",
             PgCp: "",
             veiculoKmFim: "",
+            veiculoKmInicio: "",
             subestacao: "",
             area: "",
             alimentador: "",
@@ -339,7 +340,7 @@ export default class ApontamentoController extends Component {
     }
 
     finalizarApontamento = (apontamento) => {
-        const { atividadesSelecionadas, tecnicoEnergisa, veiculoKmFim, PgCp } = this.state;
+        const { atividadesSelecionadas, tecnicoEnergisa, veiculoKmFim, PgCp, veiculoKmInicio } = this.state;
         let flag = true;
         atividadesSelecionadas.forEach(element => {
             if (element.quantidade === "") flag = false;
@@ -349,7 +350,7 @@ export default class ApontamentoController extends Component {
                 Api.finalizarApontamento({
                     _id: apontamento, atividades: atividadesSelecionadas.map(atividade => {
                         return { _id: atividade._id, quantidade: Number(atividade.quantidade) }
-                    }), tecnicoEnergisa, veiculoKmFim,
+                    }), tecnicoEnergisa, veiculoKmFim, veiculoKmInicio,
                     PgCp
                 }).then(res1 =>
                     this.setState({
@@ -550,7 +551,7 @@ export default class ApontamentoController extends Component {
             mostrarFinalizadosDEOPAno, mostrarFinalizadosDEOP,
             subestacao, area, alimentador, origemOS,
             quantidadePlanejada, quantidadeExecutada, recolha, tensao, observacao, horarioInicio, horarioFinal, atividadePesquisa,
-            apontamentosPesquisa, obraPesquisa } = this.state;
+            apontamentosPesquisa, obraPesquisa, veiculoKmInicio } = this.state;
         return (
             <>
                 <Growl ref={(el) => this.growl = el} />
@@ -558,6 +559,7 @@ export default class ApontamentoController extends Component {
                     :
                     <>
                         <ApontamentoView
+                            veiculoKmInicio={veiculoKmInicio}
                             faturarObra={this.faturarObra}
                             pesquisarObra={this.pesquisarObra}
                             obraPesquisa={obraPesquisa}

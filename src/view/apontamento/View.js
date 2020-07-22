@@ -72,7 +72,7 @@ const GerenciadorView = props => {
         handleRadioButtonArea, handleRadioButtonAreaTensao,
         handleRadioButtonRecolha, handleDropDownChangeOrigemOS, observacao, horarioInicio,
         horarioFinal, atividadePesquisa, pesquisarAtividade, limparFiltroAtividades,
-        apontamentosPesquisa, obraPesquisa, pesquisarObra, faturarObra
+        apontamentosPesquisa, obraPesquisa, pesquisarObra, faturarObra, veiculoKmInicio
     } = props;
     const backgroundColor = [
         "#780000",
@@ -600,8 +600,9 @@ const GerenciadorView = props => {
                                     </DataTable>
                                 </div>
                                 <div className="inputs">
-                                    <InputFloat name="tecnicoEnergisa" label="Técnico da Energisa" value={tecnicoEnergisa} onChange={handleInputChange} />
+                                    <InputFloat name="veiculoKmInicio" label="Kilometragem inicial do veículo" value={veiculoKmInicio} onChange={handleInputChange} />
                                     <InputFloat name="veiculoKmFim" label="Kilometragem final do veículo" value={veiculoKmFim} onChange={handleInputChange} />
+                                    <InputFloat name="tecnicoEnergisa" label="Técnico da Energisa" value={tecnicoEnergisa} onChange={handleInputChange} />
                                     <InputFloat name="PgCp" label="Componente" value={PgCp} onChange={handleInputChange} />
                                     <InputFloat name="horarioInicio" label="Data e horário de início" value={horarioInicio} onChange={handleInputChange} />
                                     <InputFloat name="horarioFinal" label="Data e horário de término" value={horarioFinal} onChange={handleInputChange} />
