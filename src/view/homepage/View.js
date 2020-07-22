@@ -65,9 +65,9 @@ const HomePageView = props => {
                             chartType="PieChart"
                             loader={<div>Carregando gráfico...</div>}
                             data={[
-                                ['Meta batida', 'Meta restante'],
-                                ['Meta batida', metaMensal],
-                                ['Meta restante', metaMensal - realizado > 0 ? metaMensal - realizado : 0],
+                                ['Meta restante', 'Meta batida'],
+                                ['Meta batida', realizado / metaMensal],
+                                ['Meta restante', metaMensal],
                             ]}
                             rootProps={{ 'data-testid': '1' }}
                             options={{
@@ -273,11 +273,13 @@ const HomePageView = props => {
                             },
                             vAxis: { title: 'Lucro' },
                             hAxis: { title: 'Equipes' },
+                            axisTitlesPosition: "in",
                             seriesType: 'bars',
                             series: {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            fontSize: 10,
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -308,6 +310,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -338,6 +341,8 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
+                            fontSize: 10,
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -368,6 +373,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
