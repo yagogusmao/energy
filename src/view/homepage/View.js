@@ -279,7 +279,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
-                            fontSize: 10,
+                            fontSize: 14,
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -342,7 +342,6 @@ const HomePageView = props => {
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
                             axisTitlesPosition: "in",
-                            fontSize: 10,
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -404,6 +403,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -434,6 +434,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,
@@ -464,6 +465,7 @@ const HomePageView = props => {
                                 1: { type: 'line', color: '#ff9000' },
                                 2: { type: 'line', color: 'yellow', lineDashStyle: [6, 2] }
                             },
+                            axisTitlesPosition: "in",
                             annotations: {
                                 textStyle: {
                                     fontSize: 18,

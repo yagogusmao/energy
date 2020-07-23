@@ -37,7 +37,7 @@ export default class HomePageController extends Component {
 
     componentDidMount = () => {
         this.setState({ carregando: true }, () =>
-            Api.listarApontamentosFinalizados().then(res =>
+            Api.dashboard().then(res =>
                 this.setState({
                     grafico: res.data.grafico, carregando: false, realizado: res.data.realizado, equipesApuradas: res.data.equipesApuradas,
                     equipesAlcancandoMeta: res.data.equipesAlcancandoMeta, realizadoEquipes: res.data.realizadoEquipes, metaAcumuladaEquipes: res.data.metaAcumuladaEquipes, oportunidade: res.data.oportunidade,

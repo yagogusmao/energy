@@ -1,6 +1,6 @@
 import ApiBase from './ApiBase';
 
-const ApiBaseAlmoxarifado = {
+const ApiBaseApontamento = {
     listarApontamentosIniciados: () => ApiBase.get('/apontamento?opcao=INICIADO'),
     listarApontamentosFinalizados: () => ApiBase.get('/apontamento?opcao=FINALIZADO'),
     iniciarApontamento: (payload) => ApiBase.post('/apontamento', payload),
@@ -12,6 +12,7 @@ const ApiBaseAlmoxarifado = {
     faturar: (payload) => ApiBase.post(`/apontamento/faturar`, payload),
     pesquisarObra: (codigoObra) => ApiBase.get(`/apontamento/faturar/obra?codigoObra=${codigoObra}`),
     faturarObra: (payload) => ApiBase.post(`/apontamento/faturar/obra`, payload),
+    dashboard: () => ApiBase.get('/apontamento/dashboard')
 }
 
-export default ApiBaseAlmoxarifado;
+export default ApiBaseApontamento;
